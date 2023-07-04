@@ -554,6 +554,12 @@ def format_sentence(subject_noun: Optional[str],
                     object_suffix: Optional[str]) -> List[Dict]:
     subject = Subject(subject_noun, subject_suffix)
     verb = Verb(verb_stem, verb_tense, object_pronoun)
+
+    # check object_pronoun and object_suffix match
+    if object_suffix is not None:
+        if object_pronoun not in Object.get_matching_pronouns(object_suffix):
+            raise ValueError("Object pronoun and suffix do not match")
+
     object = None
     try:
         object = Object(object_noun, object_suffix)
@@ -564,12 +570,12 @@ def format_sentence(subject_noun: Optional[str],
         if object:
             return [object.details, subject.details, verb.details]
         else:
-            return [subject.details, verb.details]
+            return [verb.details, subject.details]
     else:
         if object:
-            return [object.details, verb.details, subject.details]
+            return [subject.details, object.details, verb.details]
         else:
-             return [verb.details, subject.details]
+             return [subject.details, verb.details]
         
 def main():
     for i in range(1000):
