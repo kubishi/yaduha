@@ -1,7 +1,11 @@
 
 
+import json
+import pathlib
 import random
 from typing import Any, Callable, Dict, Iterable, List, Optional, Tuple
+
+import pandas as pd
 
 
 NOUNS = {
@@ -30,18 +34,18 @@ class Subject:
         'uu': 'distal',
     }
     PRONOUNS = {
-        "nüü": "I",
-        "uhu": "he/she/it (distal)",
-        "uhuw̃a": 'they (distal)',
-        "mahu": "he/she/it (proximal)",
-        "mahuw̃a": 'they (proximal)',
-        "ihi": "this",
-        "ihiw̃a": "these",
-        "taa": "we (dual), you and I",
-        "nüügwa": "we (plural, exclusive)",
-        "taagwa": "we (plural, inclusive)",
-        "üü": "you (singular)",
-        "üügwa": "you (plural), you all",
+        "nüü": "I (1st person singular)",
+        "uhu": "he/she/it (3rd person singular distal)",
+        "uhuw̃a": "they (3rd person plural distal)",
+        "mahu": "he/she/it (3rd person singular proximal)",
+        "mahuw̃a": "they (3rd person plural proximal)",
+        "ihi": "this (3rd person singular)",
+        "ihiw̃a": "these (3rd person plural)",
+        "taa": "we (1st person dual, you and I)",
+        "nüügwa": "we (1st person plural exclsive, we not including you)",
+        "taagwa": "we (1st person plural inclusive, we including you)",
+        "üü": "you (2nd person singular)",
+        "üügwa": "you (2nd person plural distal)",
     }
     def __init__(self, noun: str, subject_suffix: Optional[str]):
         self.noun = noun
@@ -108,20 +112,20 @@ def to_lenis(word: str) -> str:
 
 class Verb:
     TENSES = {
-        'ku': 'completive',
-        'ti': 'present ongoing',
+        'ku': 'completive (past)',
+        'ti': 'present ongoing (-ing)',
         'dü': 'agent nominalizer, present',
         'wei': 'future (will)',
         'gaa-wei': 'future (going to)',
         'pü': 'present perfect'
     }
     TRANSIITIVE_VERBS = {
-        'tüka': 'to eat',
-        'puni': 'to see',
+        'tüka': 'eat',
+        'puni': 'see',
     }
     INTRANSITIVE_VERBS = {
-        'katü': 'to sit',
-        'üwi': 'to sleep',
+        'katü': 'sit',
+        'üwi': 'sleep',
     }
     def __init__(self, 
                  verb_stem: str, 
@@ -288,121 +292,6 @@ class Object:
         })
         return data
 
-
-def get_choice(choices: Iterable[str], prompt: str = "Choose from the following: ") -> str:
-    """Get a choice from the user
-
-    Number the choices and print them out. The user inputs the number of their choice.
-    
-    If the user enters an invalid choice, ask them to try again.
-    """
-    choices = list(choices)
-    while True:
-        print(prompt)
-        for i, choice in enumerate(choices):
-            print(f"{i+1}. {choice}")
-        choice = input("Choice: ")
-        try:
-            choice = int(choice)
-        except ValueError:
-            print("Please enter a number")
-            continue
-        if choice < 1 or choice > len(choices):
-            print("Please enter a valid choice")
-            continue
-        return choices[choice-1]
-    
-def get_random_choice(choices: Iterable[str], *args, **kwargs) -> str:
-    """Get a random choice from the given choices"""
-    choices = list(choices)
-    return random.choice(choices)
-
-# def build_sentence(choice_func: Callable[[Iterable[str]], str] = get_choice) -> Tuple[Subject, Object, Verb]:
-#     """Sentences must have a subject, object, and verb in any order.
-    
-#     Let the user choose what they want to provide next.
-#     Depending on the current choices, their options may be restricted.
-#     For example, if they have already provided a subject, they cannot provide another subject.
-#     If they have provided an object, they must choose a *transitive* verb (and a marching object pronoun).
-#     If they have provided an intransitive verb, they cannot provide an object.
-#     And so on.
-#     """
-    
-#     subject: Subject = None
-#     object: Object = None
-#     verb: Verb = None
-#     while True:
-#         choices = []
-#         if subject is None:
-#             choices.append('subject')
-#         if object is None and (verb is None or (verb.is_transitive and Object.get_matching_suffix(verb.object_pronoun_prefix))):
-#             choices.append('object')
-#         if verb is None:
-#             choices.append('verb')
-#         if len(choices) == 0:
-#             print("You have provided a subject, object, and verb. You are done!")
-#             break
-        
-#         # choice = get_choice("What would you like to provide next?", choices)
-#         choice = choice_func(choices, prompt="What would you like to provide next?")
-#         if choice == 'subject':
-#             # subject_choice = get_choice("What is the subject?", [*Subject.PRONOUNS.keys(), *NOUNS.keys()])
-#             subject_choice = choice_func([*Subject.PRONOUNS.keys(), *NOUNS.keys()], prompt="What is the subject?")
-#             if subject_choice in Subject.PRONOUNS:
-#                 subject = Subject(subject_choice, subject_suffix=None)
-#             else:
-#                 # subject_suffix_choice = get_choice("What is the subject suffix?", Subject.SUFFIXES.keys())
-#                 subject_suffix_choice = choice_func(Subject.SUFFIXES.keys(), prompt="What is the subject suffix?")
-#                 subject = Subject(subject_choice, subject_suffix_choice)
-#         elif choice == 'object':
-#             if verb is not None and (not verb.is_transitive or Object.get_matching_suffix(verb.object_pronoun_prefix)):
-#                 raise ValueError("Cannot provide an object for an intransitive verb")
-            
-#             # object_choice = get_choice("What is the object?", NOUNS.keys())
-#             object_choice = choice_func(NOUNS.keys(), prompt="What is the object?")
-#             if verb is not None: # must be transitive
-#                 object_suffix_choice = Object.get_matching_suffix(verb.object_pronoun_prefix)
-#             else:
-#                 # object_suffix_choice = get_choice("What is the object suffix?", Object.SUFFIXES.keys())
-#                 object_suffix_choice = choice_func(Object.SUFFIXES.keys(), prompt="What is the object suffix?")
-#             object = Object(object_choice, object_suffix_choice)
-#         elif choice == 'verb':
-#             if object is not None: # verb must be transitive
-#                 # verb_choice = get_choice("What is the verb?", Verb.TRANSIITIVE_VERBS.keys())
-#                 verb_choice = choice_func(Verb.TRANSIITIVE_VERBS.keys(), prompt="What is the verb?")
-#             else:
-#                 # verb_choice = get_choice("What is the verb?", [*Verb.TRANSIITIVE_VERBS.keys(), *Verb.INTRANSITIVE_VERBS.keys()])
-#                 verb_choice = choice_func([*Verb.TRANSIITIVE_VERBS.keys(), *Verb.INTRANSITIVE_VERBS.keys()], prompt="What is the verb?")
-
-#             object_pronoun_choice = None
-#             if verb_choice in Verb.TRANSIITIVE_VERBS: # transitive - choose object pronoun
-#                 if object is not None:
-#                     # object_pronoun_choice = get_choice("What is the object pronoun?", Object.get_matching_pronouns(object.object_suffix))
-#                     object_pronoun_choice = choice_func(Object.get_matching_pronouns(object.object_suffix), prompt="What is the object pronoun?")
-#                 else:
-#                     # object_pronoun_choice = get_choice("What is the object pronoun?", Object.PRONOUNS.keys())
-#                     object_pronoun_choice = choice_func(Object.PRONOUNS.keys(), prompt="What is the object pronoun?")
-                
-#             # get verb tense
-#             # verb_tense_choice = get_choice("What is the verb tense?", Verb.TENSES.keys())
-#             verb_tense_choice = choice_func(Verb.TENSES.keys(), prompt="What is the verb tense?")
-
-#             verb = Verb(verb_choice, verb_tense_choice, object_pronoun_choice)
-
-#     return subject, verb, object
-
-def print_sentence(subject: Subject, verb: Verb, object: Object = None):
-    if subject.noun in Subject.PRONOUNS:
-        if object:
-            print(f"{object} {subject} {verb}")
-        else:
-            print(f"{subject} {verb}")
-    else:
-        if object:
-            print(f"{object} {verb} {subject}")
-        else:
-            print(f"{verb} {subject}")
-
 def get_all_choices(subject_noun: Optional[str],
                     subject_suffix: Optional[str],
                     verb: Optional[str],
@@ -530,7 +419,6 @@ def get_all_choices(subject_noun: Optional[str],
             'requirement': "disabled"
         }
     elif object_pronoun is not None:
-        print("Object pronoun is not None", object_pronoun, Object.get_matching_suffix(object_pronoun))
         choices['object_suffix'] = {
             'choices': [] if Object.get_matching_suffix(object_pronoun) is None else [Object.get_matching_suffix(object_pronoun)],
             'value': Object.get_matching_suffix(object_pronoun) or "",
@@ -547,13 +435,13 @@ def get_all_choices(subject_noun: Optional[str],
 
 def format_sentence(subject_noun: Optional[str],
                     subject_suffix: Optional[str],
-                    verb_stem: Optional[str],
+                    verb: Optional[str],
                     verb_tense: Optional[str],
                     object_pronoun: Optional[str],
                     object_noun: Optional[str],
                     object_suffix: Optional[str]) -> List[Dict]:
     subject = Subject(subject_noun, subject_suffix)
-    verb = Verb(verb_stem, verb_tense, object_pronoun)
+    _verb = Verb(verb, verb_tense, object_pronoun)
 
     # check object_pronoun and object_suffix match
     if object_suffix is not None:
@@ -564,29 +452,65 @@ def format_sentence(subject_noun: Optional[str],
     try:
         object = Object(object_noun, object_suffix)
     except ValueError as e:
-        print(e)
+        pass
     
     if subject.noun in Subject.PRONOUNS:
         if object:
-            return [object.details, subject.details, verb.details]
+            return [object.details, subject.details, _verb.details]
         else:
-            return [verb.details, subject.details]
+            return [_verb.details, subject.details]
     else:
         if object:
-            return [subject.details, object.details, verb.details]
+            return [subject.details, object.details, _verb.details]
         else:
-             return [subject.details, verb.details]
+             return [subject.details, _verb.details]
         
+
+def get_random_sentence():
+    choices = get_all_choices(None, None, None, None, None, None, None)
+    all_keys = list(choices.keys())
+    while True:
+        random.shuffle(all_keys)
+        for key in all_keys:
+            if not choices[key]['choices']:
+                continue
+            choices[key]['value'] = random.choice(choices[key]['choices'])
+            choices = get_all_choices(**{k: v['value'] for k, v in choices.items()})
+
+        try:
+            return format_sentence(**{k: v['value'] for k, v in choices.items()})
+        except ValueError as e:
+            continue
+
+def sentence_to_str(sentence: List[Dict]):
+    text = ""
+    for word in sentence:
+        text += word['text'] + " "
+    return text
+
+def print_sentence(sentence: List[Dict]):
+    print(sentence_to_str(sentence))
+
 def main():
-    for i in range(1000):
-        # subject, verb, object = build_sentence(choice_func=get_random_choice)
-        # print_sentence(subject, verb, object)
-        pass
+    thisdir = pathlib.Path(__file__).parent.absolute()
+    sentences_path = thisdir.joinpath("sentences.csv")
+    rows = []
+    if sentences_path.exists():
+        df = pd.read_csv(sentences_path, encoding='utf-8')
+        rows = df.to_dict('records')
+    while True:
+        sentence = get_random_sentence()
+        translation = input(f"{sentence_to_str(sentence)}\nTranslate: ")
 
-if __name__ == '__main__':
+        rows.append({
+            'sentence': sentence_to_str(sentence),
+            'details': json.dumps(sentence),
+            'translation': translation
+        })
+
+        df = pd.DataFrame(rows)
+        df.to_csv(sentences_path, index=False, encoding='utf-8')
+
+if __name__ == "__main__":
     main()
-
-
-
-
     
