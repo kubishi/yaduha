@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, jsonify
 app = Flask(__name__)
 
 from main import get_all_choices, format_sentence
+from translate import translate
 
 @app.route('/')
 def index():
@@ -32,7 +33,7 @@ def get_choices():
         sentence = format_sentence(
             subject_noun=data.get('subject_noun') or None,
             subject_suffix=data.get('subject_suffix') or None,
-            verb_stem=data.get('verb') or None,
+            verb=data.get('verb') or None,
             verb_tense=data.get('verb_tense') or None,
             object_pronoun=data.get('object_pronoun') or None,
             object_noun=data.get('object_noun') or None,
@@ -64,6 +65,24 @@ def build_sentence():
     except Exception as e:
         return jsonify(sentence=[], error=str(e))
     
+
+@app.route('/api/translate', methods=['POST'])
+def get_translation():
+    data: Dict = request.get_json()
+    try:
+        sentence = format_sentence(
+            subject_noun=data.get('subject_noun') or None,
+            subject_suffix=data.get('subject_suffix') or None,
+            verb=data.get('verb') or None,
+            verb_tense=data.get('verb_tense') or None,
+            object_pronoun=data.get('object_pronoun') or None,
+            object_noun=data.get('object_noun') or None,
+            object_suffix=data.get('object_suffix') or None,
+        )
+        translation = translate(sentence)
+        return jsonify(translation=translation)
+    except Exception as e:
+        return jsonify(sentence=[], error=str(e))
 
 if __name__ == '__main__':
     app.run(debug=True)

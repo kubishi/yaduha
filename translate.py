@@ -1,4 +1,5 @@
 import os
+from typing import Dict
 import pandas as pd
 
 from main import get_random_sentence, sentence_to_str
@@ -11,9 +12,10 @@ dotenv.load_dotenv()
 openai.api_key = os.getenv('OPENAI_API_KEY')
 thisdir = pathlib.Path(__file__).parent.absolute()
 
-def main():
+def translate(sentence_details: Dict) -> str:
+    sentence = sentence_to_str(sentence_details)
+    
     df = pd.read_csv(thisdir.joinpath('sentences.csv'))
-
     messages = [{'role': 'system', 'content': 'You are a Paiute to English Translator'}]
     # iterate through the rows of the dataframe
     for index, row in df.iterrows():
@@ -22,16 +24,19 @@ def main():
         messages.append({'role': 'user', 'content': user_message})
         messages.append({'role': 'assistant', 'content': bot_message})
 
-    details = get_random_sentence()
-    sentence = sentence_to_str(details)
-    messages.append({'role': 'user', 'content': f"sentence={sentence}\ndetails={details}"})
+    messages.append({'role': 'user', 'content': f"sentence={sentence}\ndetails={sentence_details}"})
 
-    print(f"Sentence: {sentence}")
     response = openai.ChatCompletion.create(
         model='gpt-3.5-turbo',
         messages=messages
     )
     translation = response['choices'][0]['message']['content']
+    return translation
+
+def main():
+    sentence_details = get_random_sentence()
+    print(f"Sentence: {sentence_to_str(sentence_details)}")
+    translation = translate(sentence_details)
     print(f"Translation: {translation}")
 
 

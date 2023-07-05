@@ -71,6 +71,13 @@
                         <h3 style="text-align: center;" id="sentence"></h3>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col text-center">
+                        <!-- centered wide button -->
+                        <h3 style="text-align: center;" id="translation"></h3>
+                        <button type="button" class="btn btn-secondary mt-3" id="btn-translate">Translate</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -217,12 +224,62 @@
 
                     // Set contents of #sentence to formattedSentence
                     $('#sentence').html(formattedSentence.join(" "))
+                    // make btn-translate visible
+                    $('#btn-translate').css('visibility', 'visible')
+                    // enable btn-translate
+                    $('#btn-translate').prop('disabled', false)
+                    // remove translation 
+                    $('#translation').html("")
                 } else {
                     // if sentence is empty, set contents of #sentence to "..."
                     $('#sentence').html("...")
+                    // make btn-translate invisible
+                    $('#btn-translate').css('visibility', 'hidden')
                 }
             });
         }
+
+        // implement translate button
+        $('#btn-translate').click(function() {
+            // get the current values of all dropdowns
+            subject_noun = $('#subject-noun').val()
+            subject_suffix = $('#subject-suffix').val()
+            verb = $('#verb').val()
+            verb_tense = $('#verb-tense').val()
+            object_pronoun = $('#object-pronoun').val()
+            object_noun = $('#object-noun').val()
+            object_suffix = $('#object-suffix').val()
+
+            // disable btn-translate
+            $('#btn-translate').prop('disabled', true)
+
+            // call /api/translate with the current values of all dropdowns
+            fetch('/api/translate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "subject_noun": subject_noun,
+                    "subject_suffix": subject_suffix,
+                    "verb": verb,
+                    "verb_tense": verb_tense,
+                    "object_pronoun": object_pronoun,
+                    "object_noun": object_noun,
+                    "object_suffix": object_suffix
+                })
+            }).catch(err => {
+                console.error(err);
+                // enable btn-translate
+                $('#btn-translate').prop('disabled', false)
+            }).then(response => response.json()).then(res => {
+                console.log(res);
+                // set the contents of #translation to the returned translation
+                $('#translation').html(res.translation)
+                // make btn-translate invisible
+                $('#btn-translate').css('visibility', 'hidden')
+            });
+        })
         
         // call updateDropdowns() when the page loads
         $(document).ready(function() {
