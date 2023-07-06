@@ -1,0 +1,3 @@
+.choices[data-type*="select-one"] .choices__list--dropdown {
+    min-width: 200px;
+}

@@ -189,7 +189,6 @@ class Object:
     SUFFIXES = {
         'eika': 'proximal',
         'oka': 'distal',
-        'aa': 'unspecified'
     }
     PRONOUNS = {
         'i': 'me',
@@ -221,8 +220,6 @@ class Object:
                 object_suffix = 'neika'
             elif object_suffix == 'oka':
                 object_suffix = 'noka'
-            elif object_suffix == 'aa':
-                object_suffix = 'na'
         return f"{self.noun}-{object_suffix}"
     
     @classmethod
@@ -248,7 +245,7 @@ class Object:
         If the object pronoun is distal, return the distal suffix.
         """
         if object_pronoun is None:
-            return 'aa'
+            return None
         elif 'proximal' in Object.PRONOUNS[object_pronoun]:
             return 'eika'
         elif 'distal' in Object.PRONOUNS[object_pronoun]:
@@ -269,9 +266,6 @@ class Object:
             return [pronoun for pronoun in self.PRONOUNS if 'proximal' in self.PRONOUNS[pronoun]]
         elif object_suffix == 'oka':
             return [pronoun for pronoun in self.PRONOUNS if 'distal' in self.PRONOUNS[pronoun]]
-        elif object_suffix == 'aa':
-            return []
-            # return [pronoun for pronoun in self.PRONOUNS if 'it' in self.PRONOUNS[pronoun] or 'them' in self.PRONOUNS[pronoun]]
         
     @property
     def details(self) -> Dict:
@@ -334,7 +328,13 @@ def get_all_choices(subject_noun: Optional[str],
         'value': subject_noun,
         'requirement': "required"
     }
-    if subject_noun in Subject.PRONOUNS:
+    if subject_noun is None:
+        choices['subject_suffix'] = {
+            'choices': [],
+            'value': None,
+            'requirement': "disabled"
+        }
+    elif subject_noun in Subject.PRONOUNS:
         choices['subject_suffix'] = {
             'choices': [],
             'value': None,

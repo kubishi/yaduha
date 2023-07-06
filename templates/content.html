@@ -1,0 +1,75 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col p-3" style="border: 1px dashed red; border-radius: 5px;">
+            <h2 style="text-align: center;">Subject</h2>
+            <div class="row">
+                <div class="col">
+                    <select id="subject-noun" aria-label="subject-noun" onchange="updateDropdowns()">
+                        <option value="" selected disabled>Subject</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <select class="form-select mt-1" id="subject-suffix" aria-label="subject-suffix" onchange="updateDropdowns()">
+                        <option value="" selected disabled>Subject Suffix</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col mx-2 p-3" style="border: 1px dashed green; border-radius: 5px;">
+            <h2 style="text-align: center;">Object</h2>
+            <!-- Object Dropdown -->
+            <div class="row">
+                <div class="col">
+                    <select class="form-select mt-1" id="object-noun" aria-label="object-noun" onchange="updateDropdowns()">
+                        <option value="" selected disabled>Object</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <select class="form-select mt-1" id="object-suffix" aria-label="object-suffix" onchange="updateDropdowns()">
+                        <option value="" selected disabled>Object Suffix</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col p-3" style="border: 1px dashed blue; border-radius: 5px;">
+            <h2 style="text-align: center;">Verb</h2>
+            <!-- Verb Dropdown -->
+            <div class="row">
+                <!-- object pronoun -->
+                <div class="col">
+                    <select class="form-select mt-1" id="object-pronoun" aria-label="object-pronoun" onchange="updateDropdowns()">
+                        <option value="" selected disabled>Object Pronoun</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <select class="form-select mt-1" id="verb" aria-label="verb" onchange="updateDropdowns()">
+                        <option value="" selected disabled>Verb</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <select class="form-select mt-1" id="verb-tense" aria-label="verb-tense" onchange="updateDropdowns()">
+                        <option value="" selected disabled>Verb Tense</option>
+                        <option value="present">Present</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col">
+            <div class="row">
+                <div class="col">
+                    <h3 style="text-align: center;" id="sentence"></h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col text-center">
+                    <!-- centered wide button -->
+                    <button type="button" class="btn btn-secondary mt-3" id="btn-translate" style="display: none;">Translate</button>
+                    <h3 style="text-align: center;" id="translation"></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

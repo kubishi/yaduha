@@ -27,7 +27,7 @@ def translate(sentence_details: Dict) -> str:
     messages.append({'role': 'user', 'content': f"sentence={sentence}\ndetails={sentence_details}"})
 
     response = openai.ChatCompletion.create(
-        model='gpt-3.5-turbo',
+        model='gpt-4',
         messages=messages
     )
     translation = response['choices'][0]['message']['content']
