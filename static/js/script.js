@@ -10,13 +10,12 @@ dropdownIDs.forEach((id, index) => {
 
 function setChoices(dropdownID, choices, value, requirement) {
     $(dropdownID).empty()
-    console.log(dropdownID);
     // var element = document.getElementById(dropdownID);
     const choicesDropdown = dropdowns[dropdownID];
 
     // disable if there are no choices
     if (choices.length == 0) {
-        console.log("Disabling", dropdownID);
+
     } else {
         choicesDropdown.setChoices(choices.map(choice => {
             return {
@@ -29,6 +28,9 @@ function setChoices(dropdownID, choices, value, requirement) {
     // set the value
     if (value != null) {
         choicesDropdown.setValue([value])
+    } else {
+        choicesDropdown.removeActiveItems()
+        console.log(`Clearing ${dropdownID}...`)
     }
 
     // set the requirement
@@ -116,6 +118,8 @@ function updateDropdowns() {
             $('#sentence').html("...")
             // make btn-translate invisible
             $('#btn-translate').css('display', 'none')
+            // remove translation 
+            $('#translation').html("")
         }
     });
 }
@@ -154,7 +158,6 @@ $('#btn-translate').click(function() {
         // enable btn-translate
         $('#btn-translate').prop('disabled', false)
     }).then(response => response.json()).then(res => {
-        console.log(res);
         // set the contents of #translation to the returned translation
         $('#translation').html(res.translation)
         // make btn-translate invisible

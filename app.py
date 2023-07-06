@@ -36,6 +36,8 @@ def get_choices():
     except Exception as e:
         print(e) 
 
+    print(choices)
+
     # here you can call your functions and build the sentence
     return jsonify(choices=choices, sentence=sentence)
 
