@@ -439,9 +439,8 @@ def get_all_choices(subject_noun: Optional[str],
     elif object_pronoun is not None:
         matching_suffix = Object.get_matching_suffix(object_pronoun)
         choices['object_suffix'] = {
-            # 'choices': [] if Object.get_matching_suffix(object_pronoun) is None else [Object.get_matching_suffix(object_pronoun)],
             'choices': [] if matching_suffix is None else [to_choice(matching_suffix, Object.SUFFIXES[matching_suffix])],
-            'value': Object.get_matching_suffix(object_pronoun) or "",
+            'value': None if object_suffix != Object.get_matching_suffix(object_pronoun) else object_suffix,
             'requirement': "required"
         }
     else:
