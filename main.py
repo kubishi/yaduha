@@ -27,6 +27,8 @@ NOUNS = {
     "apo": "cup",
     "küna": "wood",
     "tübbi": "rock",
+    "tabuutsi'": "cottontail",
+    "kamü": "jackrabbit",
 }
 
 class Subject:
@@ -115,18 +117,30 @@ class Verb:
     TENSES = {
         'ku': 'completive (past)',
         'ti': 'present ongoing (-ing)',
-        'dü': 'agent nominalizer, present',
+        'dü': 'present',
         'wei': 'future (will)',
         'gaa-wei': 'future (going to)',
-        'pü': 'present perfect'
+        'pü': 'have x-ed, am x-ed',
     }
     TRANSIITIVE_VERBS = {
         'tüka': 'eat',
         'puni': 'see',
+        'hibi': 'drink',
+        'naka': 'hear',
+        'kwana': 'smell',
+        'kwati': 'hit',
+        'yadohi': 'talk to',
     }
     INTRANSITIVE_VERBS = {
         'katü': 'sit',
         'üwi': 'sleep',
+        'kwisha\'i': 'sneeze',
+        'poyoha': 'run',
+        'mia': 'go',
+        'hukaw̃ia': 'walk',
+        'wünü': 'stand',
+        'habi': 'lie down',
+        'yadoha': 'talk',
     }
     def __init__(self, 
                  verb_stem: str, 
