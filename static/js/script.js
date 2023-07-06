@@ -4,6 +4,7 @@ const dropdowns = {};
 dropdownIDs.forEach((id, index) => {
     dropdowns[id] = new Choices(id, {
         itemSelectText: '',
+        removeItemButton: true
     });
 });
 
@@ -19,8 +20,8 @@ function setChoices(dropdownID, choices, value, requirement) {
     } else {
         choicesDropdown.setChoices(choices.map(choice => {
             return {
-                value: choice,
-                label: choice
+                value: choice[0],
+                label: choice[1]
             }
         }), 'value', 'label', true);
     }
