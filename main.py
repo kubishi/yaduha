@@ -37,18 +37,18 @@ class Subject:
         'uu': 'distal',
     }
     PRONOUNS = {
-        "nüü": "I (1st person singular)",
-        "uhu": "he/she/it (3rd person singular distal)",
-        "uhuw̃a": "they (3rd person plural distal)",
-        "mahu": "he/she/it (3rd person singular proximal)",
-        "mahuw̃a": "they (3rd person plural proximal)",
-        "ihi": "this (3rd person singular)",
-        "ihiw̃a": "these (3rd person plural)",
-        "taa": "we (1st person dual, you and I)",
-        "nüügwa": "we (1st person plural exclsive, we not including you)",
-        "taagwa": "we (1st person plural inclusive, we including you)",
-        "üü": "you (2nd person singular)",
-        "üügwa": "you (2nd person plural distal)",
+        "nüü": "I",
+        "uhu": "he/she/it",
+        "uhuw̃a": "they",
+        "mahu": "he/she/it",
+        "mahuw̃a": "they",
+        "ihi": "this",
+        "ihiw̃a": "these",
+        "taa": "you and I",
+        "nüügwa": "we (exclusive)",
+        "taagwa": "we (inclusive)",
+        "üü": "you",
+        "üügwa": "you (plural)",
     }
     def __init__(self, noun: str, subject_suffix: Optional[str]):
         self.noun = noun
