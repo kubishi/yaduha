@@ -65,7 +65,6 @@ function setChoices(dropdownID, choices, value, requirement) {
         choicesDropdown.setChoiceByValue(value)
     } else {
         // choicesDropdown.setValue([{value: null, label: dropdownIDLabels[dropdownID]}])
-        console.log("setting value to null")
         choicesDropdown.setChoiceByValue('')
     }
 
@@ -205,6 +204,15 @@ $(function () {
     $('[data-toggle="help-verb-popover"]').popover()
     $('[data-toggle="help-object-popover"]').popover()
 })
+
+$('body').on('click', function (e) {
+    //did not click a popover toggle or popover
+    if (!$(e.target).hasClass('popover') && !$(e.target).hasClass('popover-header') && !$(e.target).hasClass('popover-body')) {
+        $('#help-subject-popover').popover('hide');
+        $('#help-verb-popover').popover('hide');
+        $('#help-object-popover').popover('hide');
+    }
+});
 
 // call updateDropdowns() when the page loads
 $(document).ready(function() {
