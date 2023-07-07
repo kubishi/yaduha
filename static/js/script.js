@@ -30,7 +30,6 @@ function setChoices(dropdownID, choices, value, requirement) {
         choicesDropdown.setValue([value])
     } else {
         choicesDropdown.removeActiveItems()
-        console.log(`Clearing ${dropdownID}...`)
     }
 
     // set the requirement
@@ -114,8 +113,7 @@ function updateDropdowns() {
             // remove translation 
             $('#translation').html("")
         } else {
-            // if sentence is empty, set contents of #sentence to "..."
-            $('#sentence').html("...")
+            $('#sentence').html("Your sentence isn't valid yet, please select more words.")
             // make btn-translate invisible
             $('#btn-translate').css('display', 'none')
             // remove translation 
@@ -165,7 +163,31 @@ $('#btn-translate').click(function() {
     });
 })
 
+$(function () {
+    $('[data-toggle="help-subject-popover"]').popover()
+    $('[data-toggle="help-verb-popover"]').popover()
+    $('[data-toggle="help-object-popover"]').popover()
+})
+
 // call updateDropdowns() when the page loads
 $(document).ready(function() {
+    $('#help-subject-popover').popover({
+        title: 'What is a subject?',
+        content: $('#help-subject').html(),
+        html: true
+    });
+
+    $('#help-verb-popover').popover({
+        title: 'What is a verb?',
+        content: $('#help-verb').html(),
+        html: true
+    });
+
+    $('#help-object-popover').popover({
+        title: 'What is an object?',
+        content: $('#help-object').html(),
+        html: true
+    });
+
     updateDropdowns()
 })

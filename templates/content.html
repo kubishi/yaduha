@@ -1,8 +1,20 @@
-<div class="container mt-5">
+<div class="container">
+    {% include 'help_subject.html' %}
+    {% include 'help_object.html' %}
+    {% include 'help_verb.html' %}
+    <div class="row mb-4">
+        <div class="col">
+            <h1 style="text-align: center;">Owens Valley Paiute Sentence Builder</h1>
+        </div>
+    </div>
     <div class="row">
         <div class="col col-12 col-md-4 p-1">
-            <div style="border: 1px dashed red; border-radius: 5px; padding: 10px;">
-                <h2 style="text-align: center;">Subject</h2>
+            <div class="position-relative" style="border: 1px dashed red; border-radius: 5px; padding: 10px;">
+                <!-- add ? icon popover -->
+                <h2 class="text-center">Subject</h2>
+                <button type="button" class="icon-button" id="help-subject-popover" data-toggle="popover">
+                    <i class="fas fa-question-circle"></i>
+                </button>
                 <div class="row">
                     <div class="col">
                         <select id="subject-noun" aria-label="subject-noun" onchange="updateDropdowns()">
@@ -18,8 +30,11 @@
             </div>
         </div>
         <div class="col col-12 col-md-4 p-1">
-            <div style="border: 1px dashed green; border-radius: 5px; padding: 10px;">
+            <div class="position-relative" style="border: 1px dashed green; border-radius: 5px; padding: 10px;">
                 <h2 style="text-align: center;">Object</h2>
+                <button type="button" class="icon-button" id="help-object-popover" data-toggle="popover">
+                    <i class="fas fa-question-circle"></i>
+                </button>
                 <!-- Object Dropdown -->
                 <div class="row">
                     <div class="col">
@@ -36,8 +51,11 @@
             </div>
         </div>
         <div class="col col-12 col-md-4 p-1">
-            <div style="border: 1px dashed blue; border-radius: 5px; padding: 10px;">
+            <div class="position-relative" style="border: 1px dashed blue; border-radius: 5px; padding: 10px;">
                 <h2 style="text-align: center;">Verb</h2>
+                <button type="button" class="icon-button" id="help-verb-popover" data-toggle="popover">
+                    <i class="fas fa-question-circle"></i>
+                </button>
                 <!-- Verb Dropdown -->
                 <div class="row">
                     <!-- object pronoun -->

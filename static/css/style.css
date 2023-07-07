@@ -12,3 +12,18 @@
         padding-right: 0px !important;
     }
 }
+
+
+.icon-button {
+    background: none;
+    border: none;
+    color: #000;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 10;
+}
+
+.icon-button:hover {
+    color: #555555;
+}
