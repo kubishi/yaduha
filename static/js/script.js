@@ -1,10 +1,22 @@
-// initialize the dropdowns - store in a map for easy access
-const dropdownIDs = ['#subject-noun', '#subject-suffix', '#object-noun', '#object-suffix', '#object-pronoun', '#verb', '#verb-tense'];
+const dropdownIDLabels = {
+    '#subject-noun': 'Subject',
+    '#subject-suffix': 'Suffix',
+    '#object-noun': 'Object',
+    '#object-suffix': 'Suffix',
+    '#object-pronoun': 'Object Pronoun',
+    '#verb': 'Verb',
+    '#verb-tense': 'Tense'
+}
+
 const dropdowns = {};
-dropdownIDs.forEach((id, index) => {
+Object.keys(dropdownIDLabels).forEach((id, index) => {
     dropdowns[id] = new Choices(id, {
         itemSelectText: '',
-        removeItemButton: true
+        removeItems: true,
+        removeItemButton: true,
+        placeholder: true,
+        placeholderValue: '',
+        shouldSort: false,
     });
 });
 
@@ -13,23 +25,48 @@ function setChoices(dropdownID, choices, value, requirement) {
     // var element = document.getElementById(dropdownID);
     const choicesDropdown = dropdowns[dropdownID];
 
-    // disable if there are no choices
     if (choices.length == 0) {
-
+        choicesDropdown.setChoices([{
+            value: '',
+            label: dropdownIDLabels[dropdownID]
+        }], 'value', 'label', true);
     } else {
-        choicesDropdown.setChoices(choices.map(choice => {
+        // choicesDropdown.setChoices(choices.map(choice => {
+        //     return {
+        //         value: choice[0],
+        //         label: choice[1]
+        //     }
+        // }), 'value', 'label', true);
+        // include the placeholder
+        choicesDropdown.setChoices([{
+            value: '',
+            label: dropdownIDLabels[dropdownID]
+        }].concat(choices.map(choice => {
             return {
                 value: choice[0],
                 label: choice[1]
             }
-        }), 'value', 'label', true);
+        }
+        )), 'value', 'label', true);
+    }
+
+    // get label for value from choices
+    var label = value;
+    for (var i = 0; i < choices.length; i++) {
+        if (choices[i][0] == value) {
+            label = choices[i][1]
+            break
+        }
     }
 
     // set the value
     if (value != null) {
-        choicesDropdown.setValue([value])
+        // choicesDropdown.setValue([{value: value, label: label}])
+        choicesDropdown.setChoiceByValue(value)
     } else {
-        choicesDropdown.removeActiveItems()
+        // choicesDropdown.setValue([{value: null, label: dropdownIDLabels[dropdownID]}])
+        console.log("setting value to null")
+        choicesDropdown.setChoiceByValue('')
     }
 
     // set the requirement

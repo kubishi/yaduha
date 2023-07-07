@@ -16,12 +16,12 @@
                     <i class="fas fa-question-circle"></i>
                 </button>
                 <div class="row">
-                    <div class="col" style="padding-right: 6px;">
+                    <div class="col-6" style="padding-right: 6px;">
                         <select id="subject-noun" aria-label="subject-noun" onchange="updateDropdowns()">
-                            <option value="" selected disabled>Subject</option>
+                            <!-- <option value="" selected disabled>Subject</option> -->
                         </select>
                     </div>
-                    <div class="col" style="padding-left: 6px;">
+                    <div class="col-6" style="padding-left: 6px;">
                         <select class="form-select mt-1" id="subject-suffix" aria-label="subject-suffix" onchange="updateDropdowns()">
                             <option value="" selected disabled>Suffix</option>
                         </select>
@@ -37,12 +37,12 @@
                 </button>
                 <!-- Object Dropdown -->
                 <div class="row equal-spacing">
-                    <div class="col" style="padding-right: 6px;">
+                    <div class="col-6" style="padding-right: 6px;">
                         <select class="form-select mt-1" id="object-noun" aria-label="object-noun" onchange="updateDropdowns()">
                             <option value="" selected disabled>Object</option>
                         </select>
                     </div>
-                    <div class="col" style="padding-left: 6px;">
+                    <div class="col-6" style="padding-left: 6px;">
                         <select class="form-select mt-1" id="object-suffix" aria-label="object-suffix" onchange="updateDropdowns()">
                             <option value="" selected disabled>Suffix</option>
                         </select>
@@ -59,17 +59,17 @@
                 <!-- Verb Dropdown -->
                 <div class="row">
                     <!-- object pronoun -->
-                    <div class="col" style="padding-right: 6px;">
+                    <div class="col-4" style="padding-right: 6px;">
                         <select class="form-select mt-1" id="object-pronoun" aria-label="object-pronoun" onchange="updateDropdowns()">
                             <option value="" selected disabled>Pronoun</option>
                         </select>
                     </div>
-                    <div class="col" style="padding-right: 6px; padding-left: 6px;">
+                    <div class="col-4" style="padding-right: 6px; padding-left: 6px;">
                         <select class="form-select mt-1" id="verb" aria-label="verb" onchange="updateDropdowns()">
                             <option value="" selected disabled>Verb</option>
                         </select>
                     </div>
-                    <div class="col" style="padding-left: 6px;">
+                    <div class="col-4" style="padding-left: 6px;">
                         <select class="form-select mt-1" id="verb-tense" aria-label="verb-tense" onchange="updateDropdowns()">
                             <option value="" selected disabled>Tense</option>
                             <option value="present">Present</option>
