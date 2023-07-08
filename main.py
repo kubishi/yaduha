@@ -433,7 +433,8 @@ def get_all_choices(subject_noun: Optional[str],
 
     # Object noun
     # if verb is intransitive, object noun must be None
-    if verb in Verb.INTRANSITIVE_VERBS or object_pronoun not in Object.get_matching_third_person_pronouns(None):
+    # if verb in Verb.INTRANSITIVE_VERBS or object_pronoun not in Object.get_matching_third_person_pronouns(None):
+    if verb in Verb.INTRANSITIVE_VERBS or object_pronoun not in [None, *Object.get_matching_third_person_pronouns(None)]:
         choices['object_noun'] = {
             'choices': [],
             'value': None,
