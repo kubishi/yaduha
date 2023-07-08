@@ -39,12 +39,12 @@
                 </button>
                 <div class="row">
                     <div class="col-6" style="padding-right: 6px;" id="subject-noun-choice">
-                        <select id="subject-noun" aria-label="subject-noun" onchange="updateDropdowns('/api/choices')">
+                        <select id="subject-noun" aria-label="subject-noun" onchange="updateUI('/api/choices')">
                             <option value="" selected disabled>Subject</option>
                         </select>
                     </div>
                     <div class="col-6" style="padding-left: 6px;" id="subject-suffix-choice">
-                        <select class="form-select mt-1" id="subject-suffix" aria-label="subject-suffix" onchange="updateDropdowns('/api/choices')">
+                        <select class="form-select mt-1" id="subject-suffix" aria-label="subject-suffix" onchange="updateUI('/api/choices')">
                             <option value="" selected disabled>Suffix</option>
                         </select>
                     </div>
@@ -60,12 +60,12 @@
                 <!-- Object Dropdown -->
                 <div class="row equal-spacing">
                     <div class="col-6" style="padding-right: 6px;" id="object-noun-choice">
-                        <select class="form-select mt-1" id="object-noun" aria-label="object-noun" onchange="updateDropdowns('/api/choices')">
+                        <select class="form-select mt-1" id="object-noun" aria-label="object-noun" onchange="updateUI('/api/choices')">
                             <option value="" selected disabled>Object</option>
                         </select>
                     </div>
                     <div class="col-6" style="padding-left: 6px;" id="object-suffix-choice">
-                        <select class="form-select mt-1" id="object-suffix" aria-label="object-suffix" onchange="updateDropdowns('/api/choices')">
+                        <select class="form-select mt-1" id="object-suffix" aria-label="object-suffix" onchange="updateUI('/api/choices')">
                             <option value="" selected disabled>Suffix</option>
                         </select>
                     </div>
@@ -82,17 +82,17 @@
                 <div class="row">
                     <!-- object pronoun -->
                     <div class="col-4" style="padding-right: 6px;" id="object-pronoun-choice">
-                        <select class="form-select mt-1" id="object-pronoun" aria-label="object-pronoun" onchange="updateDropdowns('/api/choices')">
+                        <select class="form-select mt-1" id="object-pronoun" aria-label="object-pronoun" onchange="updateUI('/api/choices')">
                             <option value="" selected disabled>Pronoun</option>
                         </select>
                     </div>
                     <div class="col-4" style="padding-right: 6px; padding-left: 6px;" id="verb-choice">
-                        <select class="form-select mt-1" id="verb" aria-label="verb" onchange="updateDropdowns('/api/choices')">
+                        <select class="form-select mt-1" id="verb" aria-label="verb" onchange="updateUI('/api/choices')">
                             <option value="" selected disabled>Verb</option>
                         </select>
                     </div>
                     <div class="col-4" style="padding-left: 6px;" id="verb-tense-choice">
-                        <select class="form-select mt-1" id="verb-tense" aria-label="verb-tense" onchange="updateDropdowns('/api/choices')">
+                        <select class="form-select mt-1" id="verb-tense" aria-label="verb-tense" onchange="updateUI('/api/choices')">
                             <option value="" selected disabled>Tense</option>
                             <option value="present">Present</option>
                         </select>
@@ -106,11 +106,11 @@
             <div class="row mt-3">
                 <div class="col text-center">
                     <h3 style="text-align: center;" id="sentence"></h3>
-                    <button type="button" class="btn btn-outline-dark mt-3" id="btn-randomize" onclick="updateDropdowns('/api/random')">Randomize Choices</button>
+                    <button type="button" class="btn btn-outline-dark mt-3" id="btn-randomize" onclick="updateUI('/api/random')">Randomize Choices</button>
                 </div>
             </div>
             <div class="row">
-                <div class="col text-center">
+                <div class="col text-center" id="translation-section">
                     <!-- centered wide button -->
                     <button type="button" class="btn btn-outline-dark mt-3" id="btn-translate" style="display: none;">Translate</button>
                     <h3 style="text-align: center;" id="translation"></h3>

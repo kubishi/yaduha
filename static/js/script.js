@@ -78,7 +78,73 @@ function setChoices(dropdownID, choices, value, requirement) {
     }
 }
 
-function updateDropdowns(url) {
+function doUpdate(res) {
+    choices = res.choices
+    setChoices(
+        '#subject-noun', 
+        choices.subject_noun.choices, choices.subject_noun.value, choices.subject_noun.requirement
+    )
+    setChoices(
+        '#subject-suffix',
+        choices.subject_suffix.choices, choices.subject_suffix.value, choices.subject_suffix.requirement
+    )
+    setChoices(
+        '#verb', 
+        choices.verb.choices, choices.verb.value, choices.verb.requirement
+    )
+    setChoices(
+        '#verb-tense', 
+        choices.verb_tense.choices, choices.verb_tense.value, choices.verb_tense.requirement
+    )
+    setChoices(
+        '#object-pronoun', 
+        choices.object_pronoun.choices, choices.object_pronoun.value, choices.object_pronoun.requirement
+    )
+    setChoices(
+        '#object-noun', 
+        choices.object_noun.choices, choices.object_noun.value, choices.object_noun.requirement
+    )
+    setChoices(
+        '#object-suffix', 
+        choices.object_suffix.choices, choices.object_suffix.value, choices.object_suffix.requirement
+    )
+
+    // Update sentence if it exists
+    if (res.sentence.length > 0) {
+        formattedSentence = res.sentence.map(word => {
+            if (word.type == "subject") {
+                return `<span class="text-danger">${word.text}</span>`
+            } else if (word.type == "verb") {
+                return `<span class="text-primary">${word.text}</span>`
+            } else if (word.type == "object") {
+                return `<span class="text-success">${word.text}</span>`
+            } else {
+                return word.text
+            }
+        })
+
+        // Set contents of #sentence to formattedSentence
+        $('#sentence').html(formattedSentence.join(" "))
+        // make btn-translate visible by removing display: none
+        $('#btn-translate').css('display', '')
+        // enable btn-translate
+        $('#btn-translate').prop('disabled', false)
+        // remove translation 
+        $('#translation').html("")
+        // set btn-randomize to invisible
+        $('#btn-randomize').css('display', 'none')
+    } else {
+        $('#sentence').html("Your sentence isn't valid yet, please select more words.")
+        // make btn-translate invisible
+        $('#btn-translate').css('display', 'none')
+        // remove translation 
+        $('#translation').html("")
+        // set btn-random to default display
+        $('#btn-randomize').css('display', '')
+    }
+}
+
+function updateUI(url) {
     fetch(url, {
         method: 'POST',
         headers: {
@@ -95,70 +161,109 @@ function updateDropdowns(url) {
         })
     }).catch(err => {
         console.error(err);
+    }).then(response => response.json()).then(res => doUpdate(res));
+}
+
+function startIntro() {
+    fetch('/api/random-example', {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json'}
+    }).catch(err => {
+        console.error(err);
     }).then(response => response.json()).then(res => {
-        choices = res.choices
-        setChoices(
-            '#subject-noun', 
-            choices.subject_noun.choices, choices.subject_noun.value, choices.subject_noun.requirement
-        )
-        setChoices(
-            '#subject-suffix',
-            choices.subject_suffix.choices, choices.subject_suffix.value, choices.subject_suffix.requirement
-        )
-        setChoices(
-            '#verb', 
-            choices.verb.choices, choices.verb.value, choices.verb.requirement
-        )
-        setChoices(
-            '#verb-tense', 
-            choices.verb_tense.choices, choices.verb_tense.value, choices.verb_tense.requirement
-        )
-        setChoices(
-            '#object-pronoun', 
-            choices.object_pronoun.choices, choices.object_pronoun.value, choices.object_pronoun.requirement
-        )
-        setChoices(
-            '#object-noun', 
-            choices.object_noun.choices, choices.object_noun.value, choices.object_noun.requirement
-        )
-        setChoices(
-            '#object-suffix', 
-            choices.object_suffix.choices, choices.object_suffix.value, choices.object_suffix.requirement
-        )
+        doUpdate(res);
 
-        // Update sentence if it exists
-        if (res.sentence.length > 0) {
-            formattedSentence = res.sentence.map(word => {
-                if (word.type == "subject") {
-                    return `<span class="text-danger">${word.text}</span>`
-                } else if (word.type == "verb") {
-                    return `<span class="text-primary">${word.text}</span>`
-                } else if (word.type == "object") {
-                    return `<span class="text-success">${word.text}</span>`
-                } else {
-                    return word.text
+        const subjectNoun = $('#subject-noun').val()
+        const subjectSuffix = $('#subject-suffix').val()
+        const objectNoun = $('#object-noun').val()
+        const objectSuffix = $('#object-suffix').val()
+        const verb = $('#verb').val()
+        const verbTense = $('#verb-tense').val()
+        const objectPronoun = $('#object-pronoun').val()
+
+
+        const steps = [
+            {
+                intro: "Welcome to the Owens Valley Paiute Sentence Builder. Let's build our first sentence together! Click 'Next' to continue."
+            },
+            {
+                element: '#subject-noun-choice',
+                intro: `The subject is the doer of the action in a sentence. In this example, we've selected the word ${subjectNoun}`
+            },
+            {
+                element: '#subject-suffix-choice',
+                intro: `The subject suffix tells us whether the subject is nearby/visible (-ii) or far away (-uu). In this example, we've selected the suffix ${subjectSuffix}`,
+            },
+            {
+                element: '#object-noun-choice',
+                intro: `The object is the receiver of the action in a sentence. In this example, we've selected the word ${objectNoun}`,
+            },
+            {
+                element: '#object-suffix-choice',
+                intro: `The object suffix tells us whether the object is nearby/visible (-eika) or far away (-oka). In this example, we've selected the suffix ${objectSuffix}`,
+            },
+            {
+                element: '#verb-choice',
+                intro: `The verb describes the action that the subject is taking. In this example, we've selected the word ${verb}`,
+            },
+            {
+                element: '#verb-tense-choice',
+                intro: `The verb tense indicates the time when the action is taking place. In this example, we've selected the tense ${verbTense}`,
+            },
+            {
+                element: '#object-pronoun-choice',
+                intro: `The object pronoun matches the object suffix (nearby or far away). In this example, we've selected the pronoun ${objectPronoun}`,
+            },
+            {
+                element: '#sentence',
+                intro: "Now that we've selected enough elements to create a sentence, our sentence has appeared here!",
+            },
+            {
+                element: '#translation-section',
+                intro: "Press the 'Translate' button to translate our sentence into English! The sentence might be very strange, like 'the dog will drink the house', and that's okay! The sentence might sound weird, but it's completely grammatically correct! Also, keep in mind that translation is a new feature and may not always be 100% accurate.",
+            },
+            {
+                intro: "That's it! You can now create your own sentences in Owens Valley Paiute. You don't always need to select a value for each dropdown. For example, I am running (poyoha-ti nüü) has no object! Try out a bunch of sentences and see if you can make out the patterns!",
+            }
+        ];
+
+        const driverSteps = steps.map(step => {
+            return {
+                element: step.element,
+                popover: {
+                    title: "",
+                    description: step.intro,
                 }
-            })
+            }
+        });
 
-            // Set contents of #sentence to formattedSentence
-            $('#sentence').html(formattedSentence.join(" "))
-            // make btn-translate visible by removing display: none
-            $('#btn-translate').css('display', '')
-            // enable btn-translate
-            $('#btn-translate').prop('disabled', false)
-            // remove translation 
-            $('#translation').html("")
-            // set btn-randomize to invisible
-            $('#btn-randomize').css('display', 'none')
-        } else {
-            $('#sentence').html("Your sentence isn't valid yet, please select more words.")
-            // make btn-translate invisible
-            $('#btn-translate').css('display', 'none')
-            // remove translation 
-            $('#translation').html("")
-            // set btn-random to default display
-            $('#btn-randomize').css('display', '')
-        }
+        Object.keys(dropdownIDLabels).forEach((id, index) => {
+            dropdowns[id].disable()
+        });
+
+        const Driver = window.driver.js.driver;
+        const driver = new Driver({
+            className: 'custom-bottom-tooltip',
+            animate: true,
+            opacity: 0.75,
+            padding: 10,
+            allowClose: true,
+            overlayClickNext: true,
+            doneBtnText: 'Done', 
+            closeBtnText: 'Close', 
+            nextBtnText: 'Next', 
+            prevBtnText: 'Previous',
+            stageBackground: '#ffffff',
+            steps: driverSteps,
+            // disable buttons on start of tour
+            onDestroyStarted: () => {
+                // update UI to re-enable buttons
+                updateUI('/api/choices')
+                driver.destroy();
+            }
+        });
+
+        driver.drive();
     });
 }
 
@@ -218,7 +323,7 @@ $('body').on('click', function (e) {
     }
 });
 
-// call updateDropdowns() when the page loads
+// call updateUI() when the page loads
 $(document).ready(function() {
     $('#help-subject-popover').popover({
         title: 'What is a subject?',
@@ -238,5 +343,5 @@ $(document).ready(function() {
         html: true
     });
 
-    updateDropdowns('/api/choices')
+    updateUI('/api/choices')
 })

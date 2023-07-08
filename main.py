@@ -433,7 +433,7 @@ def get_all_choices(subject_noun: Optional[str],
 
     # Object noun
     # if verb is intransitive, object noun must be None
-    if verb in Verb.INTRANSITIVE_VERBS:
+    if verb in Verb.INTRANSITIVE_VERBS or object_pronoun not in Object.get_matching_third_person_pronouns(None):
         choices['object_noun'] = {
             'choices': [],
             'value': None,
@@ -511,6 +511,7 @@ def get_random_sentence(choices: Dict[str, Dict[str, Any]] = {}):
     if not choices:
         choices = get_all_choices(None, None, None, None, None, None, None)
     all_keys = list(choices.keys())
+    i = 0
     while True:
         random.shuffle(all_keys)
         for key in all_keys:
@@ -518,12 +519,28 @@ def get_random_sentence(choices: Dict[str, Dict[str, Any]] = {}):
                 continue
             choices[key]['value'], _ = random.choice(choices[key]['choices'])
             choices = get_all_choices(**{k: v['value'] for k, v in choices.items()})
+            i = 0
 
         try:
             format_sentence(**{k: v['value'] for k, v in choices.items()})
             return choices
         except ValueError as e:
+            i += 1
+            if i > 20:
+                raise e
             continue
+
+def get_random_sentence_big():
+    subject_noun = random.choice(list(NOUNS.keys()))
+    subject_suffix = random.choice(list(Subject.SUFFIXES.keys()))
+    verb = random.choice(list(Verb.TRANSIITIVE_VERBS.keys()))
+    verb_tense = random.choice(list(Verb.TENSES.keys()))
+    object_pronoun = random.choice(list(Object.get_matching_third_person_pronouns(None)))
+    object_noun = random.choice(list(NOUNS.keys()))
+    object_suffix = Object.get_matching_suffix(object_pronoun)
+
+    choices = get_all_choices(subject_noun, subject_suffix, verb, verb_tense, object_pronoun, object_noun, object_suffix)
+    return choices
 
 def sentence_to_str(sentence: List[Dict]):
     text = ""
@@ -535,24 +552,10 @@ def print_sentence(sentence: List[Dict]):
     print(sentence_to_str(sentence))
 
 def main():
-    thisdir = pathlib.Path(__file__).parent.absolute()
-    sentences_path = thisdir.joinpath("sentences.csv")
-    rows = []
-    if sentences_path.exists():
-        df = pd.read_csv(sentences_path, encoding='utf-8')
-        rows = df.to_dict('records')
-    while True:
-        sentence = format_sentence(**{key: value['value'] for key, value in get_random_sentence().items()})
-        translation = input(f"{sentence_to_str(sentence)}\nTranslate: ")
-
-        rows.append({
-            'sentence': sentence_to_str(sentence),
-            'details': json.dumps(sentence),
-            'translation': translation
-        })
-
-        df = pd.DataFrame(rows)
-        df.to_csv(sentences_path, index=False, encoding='utf-8')
+    for _ in range(100):
+        choices = get_random_sentence()
+        sentence = format_sentence(**{k: v['value'] for k, v in choices.items()})
+        print_sentence(sentence)
 
 if __name__ == "__main__":
     main()

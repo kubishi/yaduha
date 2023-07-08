@@ -16,7 +16,13 @@
     .choices__list--dropdown .choices__item--selectable, 
     .choices__list[aria-expanded] .choices__item--selectable {
         padding-right: 0px !important;
+        z-index: 1000000000;
     }
+}
+
+
+.choices__list {
+    z-index: 1000000000 !important;
 }
 
 .choices__item {
@@ -24,4 +30,14 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     padding-right: 20px;
+}
+
+
+@media (max-width: 600px) {
+    .introjs-tooltip {
+        position: absolute !important;
+        transform: translateY(100%) !important;
+        /* Add a bottom margin if you want some space between the tooltip and the highlighted element. */
+        margin-bottom: 10px !important;
+    }
 }
