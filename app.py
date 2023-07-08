@@ -2,7 +2,7 @@ from typing import Dict
 from flask import Flask, render_template, request, jsonify
 app = Flask(__name__)
 
-from main import get_all_choices, format_sentence
+from main import get_all_choices, format_sentence, get_random_sentence
 from translate import translate
 
 @app.route('/')
@@ -73,6 +73,29 @@ def get_translation():
             object_suffix=data.get('object_suffix') or None
         )
         return jsonify(translation=translation)
+    except Exception as e:
+        return jsonify(sentence=[], error=str(e))
+    
+
+# route to get random sentence
+@app.route('/api/random', methods=['POST'])
+def get_random():
+    data: Dict = request.get_json() 
+    try:
+        choices = get_all_choices(
+            subject_noun=data.get('subject_noun') or None,
+            subject_suffix=data.get('subject_suffix') or None,
+            verb=data.get('verb') or None,
+            verb_tense=data.get('verb_tense') or None,
+            object_pronoun=data.get('object_pronoun') or None,
+            object_noun=data.get('object_noun') or None,
+            object_suffix=data.get('object_suffix') or None,
+        )
+
+        choices = get_random_sentence(choices)
+        sentence = format_sentence(**{k: v['value'] for k, v in choices.items()})
+
+        return jsonify(choices=choices, sentence=sentence)
     except Exception as e:
         return jsonify(sentence=[], error=str(e))
 

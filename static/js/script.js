@@ -78,8 +78,8 @@ function setChoices(dropdownID, choices, value, requirement) {
     }
 }
 
-function updateDropdowns() {
-    fetch('/api/choices', {
+function updateDropdowns(url) {
+    fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -148,12 +148,16 @@ function updateDropdowns() {
             $('#btn-translate').prop('disabled', false)
             // remove translation 
             $('#translation').html("")
+            // set btn-randomize to invisible
+            $('#btn-randomize').css('display', 'none')
         } else {
             $('#sentence').html("Your sentence isn't valid yet, please select more words.")
             // make btn-translate invisible
             $('#btn-translate').css('display', 'none')
             // remove translation 
             $('#translation').html("")
+            // set btn-random to default display
+            $('#btn-randomize').css('display', '')
         }
     });
 }
@@ -234,5 +238,5 @@ $(document).ready(function() {
         html: true
     });
 
-    updateDropdowns()
+    updateDropdowns('/api/choices')
 })

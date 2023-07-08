@@ -500,13 +500,14 @@ def format_sentence(subject_noun: Optional[str],
              return [subject.details, _verb.details]
         
 
-def get_random_sentence():
-    choices = get_all_choices(None, None, None, None, None, None, None)
+def get_random_sentence(choices: Dict[str, Dict[str, Any]] = {}):
+    if not choices:
+        choices = get_all_choices(None, None, None, None, None, None, None)
     all_keys = list(choices.keys())
     while True:
         random.shuffle(all_keys)
         for key in all_keys:
-            if not choices[key]['choices']:
+            if not choices[key]['choices'] or choices[key]['value']:
                 continue
             choices[key]['value'], _ = random.choice(choices[key]['choices'])
             choices = get_all_choices(**{k: v['value'] for k, v in choices.items()})
