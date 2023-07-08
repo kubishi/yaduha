@@ -485,8 +485,11 @@ def format_sentence(subject_noun: Optional[str],
     object = None
     try:
         object = Object(object_noun, object_suffix)
-    except ValueError as e:
-        pass
+    except ValueError as e: # could not create object
+        if object_noun is not None:
+            raise e
+        else: # okay, since object is optional
+            pass
     
     if subject.noun in Subject.PRONOUNS:
         if object:
