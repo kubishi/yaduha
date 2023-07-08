@@ -269,18 +269,23 @@ class Object:
             return None
         
     @classmethod
-    def get_matching_pronouns(self, object_suffix: str) -> List[str]:
+    def get_matching_third_person_pronouns(self, object_suffix: str) -> List[str]:
         """Get the object pronouns that match the object suffix
         
         If the object suffix is proximal, return the proximal pronouns.
         If the object suffix is distal, return the distal pronouns.
         """
-        if object_suffix not in self.SUFFIXES:
-            raise ValueError(f"Object suffix must be one of {self.SUFFIXES}")
+        proximal_pronouns = [pronoun for pronoun in self.PRONOUNS if 'proximal' in self.PRONOUNS[pronoun]]
+        distal_pronouns = [pronoun for pronoun in self.PRONOUNS if 'distal' in self.PRONOUNS[pronoun]]
+        third_person_pronouns = [*proximal_pronouns, *distal_pronouns]
+        if not object_suffix:
+            return third_person_pronouns
         elif object_suffix == 'eika':
-            return [pronoun for pronoun in self.PRONOUNS if 'proximal' in self.PRONOUNS[pronoun]]
+            return proximal_pronouns
         elif object_suffix == 'oka':
-            return [pronoun for pronoun in self.PRONOUNS if 'distal' in self.PRONOUNS[pronoun]]
+            return distal_pronouns
+        else:
+            raise ValueError(f"Object suffix must be one of {self.SUFFIXES}")
         
     @property
     def details(self) -> Dict:
@@ -334,7 +339,7 @@ def get_all_choices(subject_noun: Optional[str],
     # Check object_pronoun and object_suffix match
     # if mismatch, set to None (will be corrected below)
     if object_pronoun is not None and object_suffix is not None:
-        if object_pronoun not in Object.get_matching_pronouns(object_suffix):
+        if object_pronoun not in Object.get_matching_third_person_pronouns(object_suffix):
             object_suffix = None
 
     def to_choice(word: str, trans: str) -> Tuple[str, str]:
@@ -411,10 +416,9 @@ def get_all_choices(subject_noun: Optional[str],
             'value': None,
             'requirement': "disabled"
         }
-    elif object_suffix is not None: # object pronoun must match object suffix
+    elif object_noun is not None: # object pronoun must match object suffix
         choices['object_pronoun'] = {
-            # 'choices': Object.get_matching_pronouns(object_suffix),
-            'choices': [to_choice(pronoun, Object.PRONOUNS[pronoun]) for pronoun in Object.get_matching_pronouns(object_suffix)],
+            'choices': [to_choice(pronoun, Object.PRONOUNS[pronoun]) for pronoun in Object.get_matching_third_person_pronouns(object_suffix)],
             'value': object_pronoun,
             'requirement': "required"
         }
@@ -479,7 +483,7 @@ def format_sentence(subject_noun: Optional[str],
 
     # check object_pronoun and object_suffix match
     if object_suffix is not None:
-        if object_pronoun not in Object.get_matching_pronouns(object_suffix):
+        if object_pronoun not in Object.get_matching_third_person_pronouns(object_suffix):
             raise ValueError("Object pronoun and suffix do not match")
 
     object = None
