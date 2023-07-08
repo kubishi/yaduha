@@ -99,5 +99,10 @@ def get_random():
     except Exception as e:
         return jsonify(sentence=[], error=str(e))
 
+# health check
+@app.route('/api/healthz', methods=['GET'])
+def health_check():
+    return jsonify(status='ok')
+
 if __name__ == '__main__':
     app.run(debug=True)
