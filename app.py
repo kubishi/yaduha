@@ -1,6 +1,12 @@
 from typing import Dict
 from flask import Flask, render_template, request, jsonify
+from flask_talisman import Talisman
+import os
+
 app = Flask(__name__)
+
+if os.getenv('FLASK_ENV') == 'production':
+    Talisman(app, content_security_policy=None)
 
 from main import get_all_choices, format_sentence, get_random_sentence, get_random_sentence_big
 from translate import translate
