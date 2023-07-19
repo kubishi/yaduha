@@ -29,8 +29,8 @@ SUBJECT_PRONOUNS = {
     "first_person_plural_exclusive": "nüügwa",
     "first_person_plural_inclusive": "taagwa",
     "first_person_plural_inclusive_dual": "taa",
-    "third_person_proximal": "mahu",
-    "third_person_distal": "uhu",
+    "third_person_singular_proximal": "mahu",
+    "third_person_singular_distal": "uhu",
     "third_person_plural_proximal": "mahuw̃a",
     "third_person_plural_distal": "uhuw̃a",
     "second_person_singular": "üü",
@@ -42,8 +42,8 @@ OBJECT_PRONOUNS = {
     "first_person_plural_exclusive": "ni",
     "first_person_plural_inclusive": "tei",
     "first_person_plural_inclusive_dual": "ta",
-    "third_person_proximal": "ma",
-    "third_person_distal": "u",
+    "third_person_singular_proximal": "ma",
+    "third_person_singular_distal": "u",
     "third_person_plural_proximal": "mai",
     "third_person_plural_distal": "ui",
     "second_person_singular": "ü",
@@ -129,6 +129,46 @@ sentence_schema = {
   "required": ["subject", "verb"]
 }
 
+be_sentence_schema = {
+    "type": "object",
+    "properties": {
+        "subject": {
+            "oneOf": [subject_pronoun_schema, noun_schema]
+        },
+        "object": noun_schema
+    },        
+}
+
+unknown_sentence_schema = {
+    "type": "object",
+    "properties": {
+        "subject_nouns": {
+            "type": "array",
+            "items": noun_schema
+        },
+        "object_nouns": {
+            "type": "array",
+            "items": noun_schema
+        },
+        "subject_pronouns": {
+            "type": "array",
+            "items": subject_pronoun_schema
+        },
+        "object_pronouns": {
+            "type": "array",
+            "items": object_pronoun_schema
+        },
+        "verb_stems": {
+            "type": "array",
+            "items": verb_stem_schema
+        },
+        "verb_tenses": {
+            "type": "array",
+            "items": verb_tense_schema
+        }
+    }
+}
+
 LENIS_MAP = {
     'p': 'b',
     't': 'd',
@@ -150,7 +190,6 @@ build_sentence_func = {
     "description": "Build a sentence from a subject, verb, and object.",
     "parameters": sentence_schema
 }
-
 def build_sentence(subject: dict, verb: dict, object: dict = None) -> str:
     subject_noun = subject["value"].lower().strip()
     subject_proximal = subject.get("proximal", False)
@@ -184,7 +223,7 @@ def build_sentence(subject: dict, verb: dict, object: dict = None) -> str:
         _object_noun = NOUNS.get(object_noun, f"[{object_noun}]")
         object_text = f"{_object_noun}-{object_suffix}"
 
-        _pronoun = OBJECT_PRONOUNS["third_person_proximal"] if object_proximal else OBJECT_PRONOUNS["third_person_distal"]
+        _pronoun = OBJECT_PRONOUNS["third_person_singular_proximal"] if object_proximal else OBJECT_PRONOUNS["third_person_singular_distal"]
         verb_text = f"{_pronoun}-{to_lenis(verb_text)}"
     else:
         object_text = ""
@@ -200,6 +239,68 @@ def build_sentence(subject: dict, verb: dict, object: dict = None) -> str:
         else:
             return f"{subject_text} {verb_text}"
 
+
+build_be_sentence_func = {
+    "name": "build_be_sentence",
+    "description": "Build a sentence with the verb 'to be', of the form '[x] is [y]', '[x] are [y]', '[x] was [y]', '[x] will be [y]', and so on.",
+    "parameters": be_sentence_schema
+}
+def build_be_sentence(subject: dict, object: dict = None) -> str:
+    subject_noun = subject["value"].lower().strip()
+    subject_proximal = subject.get("proximal", False)
+
+    object_noun = object["value"].lower().strip()
+    object_proximal = object.get("proximal", False)
+
+    if subject_noun in SUBJECT_PRONOUNS:
+        subject_text = SUBJECT_PRONOUNS[subject_noun]
+    else:
+        subject_suffix = "ii" if subject_proximal else "uu"
+        _subject_noun = NOUNS.get(subject_noun, f"[{subject_noun}]")
+        subject_text = f"{_subject_noun}-{subject_suffix}"
+
+    if object_noun in OBJECT_PRONOUNS:
+        object_text = OBJECT_PRONOUNS[object_noun]
+    else: # no object suffixes here
+        object_text = NOUNS.get(object_noun, f"[{object_noun}]")
+
+    if subject_noun in SUBJECT_PRONOUNS:
+        return f"{object_text} {subject_text}"
+    else:
+        return f"{subject_text} {object_text}"
+        
+
+build_unknown_sentence_func = {
+    "name": "build_unknown_sentence",
+    "description": "Build a sentence from a list of subject nouns, object nouns, subject pronouns, object pronouns, verb stems, and verb tenses.",
+    "parameters": unknown_sentence_schema
+}
+def build_unknown_sentence(subject_nouns: list, 
+                           object_nouns: list, 
+                           subject_pronouns: list, 
+                           object_pronouns: list, 
+                           verb_stems: list, 
+                           verb_tenses: list) -> str:
+    data = {}
+    for noun in (subject_nouns or []):
+        data.setdefault("subject", {}).setdefault("nouns", {})[noun["value"]] = NOUNS.get(noun["value"], f"Unknown")
+
+    for noun in (object_nouns or []):
+        data.setdefault("object", {}).setdefault("nouns", {})[noun["value"]] = NOUNS.get(noun["value"], f"Unknown")
+
+    for pronoun in (subject_pronouns or []):
+        data.setdefault("subject", {}).setdefault("pronouns", {})[pronoun["value"]] = SUBJECT_PRONOUNS.get(pronoun["value"], f"Unknown")
+
+    for pronoun in (object_pronouns or []):
+        data.setdefault("object", {}).setdefault("pronouns", {})[pronoun["value"]] = OBJECT_PRONOUNS.get(pronoun["value"], f"Unknown")
+
+    for verb in (verb_stems or []):
+        data.setdefault("verb", {}).setdefault("stems", {})[verb["value"]] = VERBS.get(verb["value"], f"Unknown")
+
+    for tense in (verb_tenses or []):
+        data.setdefault("verb", {}).setdefault("tenses", {})[tense["value"]] = VERB_TENSES.get(tense["value"], f"Unknown")
+
+    return json.dumps(data)
 
 def to_english(structured_sentence: dict) -> str:
     logging.info(structured_sentence)
@@ -241,6 +342,17 @@ def to_english(structured_sentence: dict) -> str:
     return response_message
 
 def translate(query: str) -> Tuple[str, str]:
+    """Translate a query into a structured sentence and its English translation.
+
+    The translator may not be able to translate the exact query, but it will translate 
+    as similar a query as possible.
+
+    Args:
+        query (str): The query to translate.
+
+    Returns:
+        Tuple[str, str]: An english sentence and its translation
+    """
     examples = [
         {"role": "user", "content": "I like Beyonce."},
         {
@@ -266,11 +378,18 @@ def translate(query: str) -> Tuple[str, str]:
             "content": query
         }
     ]
+
+    functions = {
+        "build_sentence": (build_sentence_func, build_sentence),
+        "build_be_sentence": (build_be_sentence_func, build_be_sentence),
+        "build_unknown_sentence": (build_unknown_sentence_func, build_unknown_sentence)
+    }
+
     response = openai.ChatCompletion.create(
         model=MODEL,
         messages=messages,
-        functions=[build_sentence_func],
-        function_call={'name': 'build_sentence'}
+        functions=[func_schema for func_schema, _ in functions.values()],
+        function_call='auto' # {'name': 'build_sentence'}
     )
 
     response_message = response["choices"][0]["message"]
@@ -278,18 +397,21 @@ def translate(query: str) -> Tuple[str, str]:
     
     if response_message.get("function_call"):
         function_name = response_message["function_call"]["name"]
+        function_schema, _build = functions[function_name]
         function_args = json.loads(response_message["function_call"]["arguments"])
 
         logging.info(f"{function_name}({', '.join(f'{k}={v}' for k, v in function_args.items())})")
-        sentence = build_sentence(**function_args)
+        sentence = _build(**function_args)
 
         sentence_data = {', '.join(f'{k}={v}' for k, v in function_args.items())}
         english = to_english(function_args)
         return english, sentence
+    else: 
+        return None, None
 
 
 def main():
-    logging.basicConfig(level=logging.WARNING)
+    logging.basicConfig(level=logging.INFO)
 
     while True:
         query = input("Enter an English sentence: ")

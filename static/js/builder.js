@@ -165,7 +165,7 @@ function updateUI(url) {
 }
 
 function startIntro() {
-    fetch('/api/random-example', {
+    fetch('/api/builder/random-example', {
         method: 'GET',
         headers: {'Content-Type': 'application/json'}
     }).catch(err => {
@@ -258,7 +258,7 @@ function startIntro() {
             // disable buttons on start of tour
             onDestroyStarted: () => {
                 // update UI to re-enable buttons
-                updateUI('/api/choices')
+                updateUI('/api/builder/choices')
                 driver.destroy();
             }
         });
@@ -281,8 +281,8 @@ $('#btn-translate').click(function() {
     // disable btn-translate
     $('#btn-translate').prop('disabled', true)
 
-    // call /api/translate with the current values of all dropdowns
-    fetch('/api/translate', {
+    // call /api/builder/translate with the current values of all dropdowns
+    fetch('/api/builder/translate', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -343,5 +343,5 @@ $(document).ready(function() {
         html: true
     });
 
-    updateUI('/api/choices')
+    updateUI('/api/builder/choices')
 })

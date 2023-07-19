@@ -1,5 +1,5 @@
 from typing import Dict
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect, url_for
 from flask_talisman import Talisman
 import os
 
@@ -10,12 +10,21 @@ if os.getenv('FLASK_ENV') == 'production':
 
 from main import get_all_choices, format_sentence, get_random_sentence, get_random_sentence_big
 from translate import translate
+from translator import translate as translate_english_to_paiute
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return redirect(url_for('builder'))
 
-@app.route('/api/choices', methods=['POST'])
+@app.route('/builder')
+def builder():
+    return render_template('builder.html')
+
+@app.route('/translator')
+def translator():
+    return render_template('translator.html')
+
+@app.route('/api/builder/choices', methods=['POST'])
 def get_choices():
     data: Dict = request.get_json()
     choices = get_all_choices(
@@ -47,7 +56,7 @@ def get_choices():
     # here you can call your functions and build the sentence
     return jsonify(choices=choices, sentence=sentence)
 
-@app.route('/api/sentence', methods=['POST'])
+@app.route('/api/builder/sentence', methods=['POST'])
 def build_sentence():
     data: Dict = request.get_json()
     try:
@@ -65,7 +74,7 @@ def build_sentence():
         return jsonify(sentence=[], error=str(e))
     
 
-@app.route('/api/translate', methods=['POST'])
+@app.route('/api/builder/translate', methods=['POST'])
 def get_translation():
     data: Dict = request.get_json()
     try:
@@ -84,7 +93,7 @@ def get_translation():
     
 
 # route to get random sentence
-@app.route('/api/random', methods=['POST'])
+@app.route('/api/builder/random', methods=['POST'])
 def get_random():
     data: Dict = request.get_json() 
     try:
@@ -104,7 +113,7 @@ def get_random():
     except Exception as e:
         return jsonify(sentence=[], error=str(e))
 
-@app.route('/api/random-example', methods=['GET'])
+@app.route('/api/builder/random-example', methods=['GET'])
 def get_random_example():
     try:
         choices = get_random_sentence_big()
@@ -112,6 +121,15 @@ def get_random_example():
         return jsonify(choices=choices, sentence=sentence)
     except Exception as e:
         return jsonify(sentence=[], error=str(e))
+    
+@app.route('/api/translator/translate', methods=['POST'])
+def translate_sentence():
+    data: Dict = request.get_json()
+    try:
+        english, paiute = translate_english_to_paiute(data.get('english'))
+        return jsonify(english=english, paiute=paiute)
+    except Exception as e:
+        return jsonify(error=str(e))
 
 # health check
 @app.route('/api/healthz', methods=['GET'])
