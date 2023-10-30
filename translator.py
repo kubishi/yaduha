@@ -353,6 +353,7 @@ def translate(query: str) -> Tuple[str, str]:
     Returns:
         Tuple[str, str]: An english sentence and its translation
     """
+    logging.info("Building structured sentence")
     examples = [
         {"role": "user", "content": "I like Beyonce."},
         {
@@ -378,6 +379,8 @@ def translate(query: str) -> Tuple[str, str]:
             "content": query
         }
     ]
+
+    logging.info("messages: %s", messages)
 
     functions = {
         "build_sentence": (build_sentence_func, build_sentence),
@@ -419,6 +422,17 @@ def main():
         print(f"{english} -> {paiute}")
         print()
 
+
+def test():
+    sentences = [
+        "I like Beyonce.",
+        "The dog sees the cat.",
+        "I am eating that fish.",
+        "The jackrabbit is eating the rice.",
+    ]
+    for sentence in sentences:
+        english, paiute = translate(sentence)
+        print(f"{english} -> {paiute}")
 
 if __name__ == '__main__':
     main()
