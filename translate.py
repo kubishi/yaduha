@@ -149,4 +149,4 @@ def evaluate(num: int, savepath: pathlib.Path):
 
 if __name__ == '__main__':
     main()
-    # evaluate(100, thisdir / 'translations.csv')
+    # evaluate(100, thisdir / '.data' / 'translations.csv')
