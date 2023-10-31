@@ -1,3 +1,4 @@
+from functools import lru_cache
 import json
 import logging
 import os
@@ -63,6 +64,7 @@ def get_english_structure(subject_noun: str,
 
     return sentence_details
 
+@lru_cache(maxsize=1000)
 def translate(subject_noun: str,
               subject_suffix: Optional[str],
               verb: Optional[str],
@@ -112,7 +114,8 @@ def translate(subject_noun: str,
     ]
     res = openai.ChatCompletion.create(
         model='gpt-3.5-turbo',
-        messages=messages
+        messages=messages,
+        request_timeout=10,
     )
 
     # pprint.pprint(messages)

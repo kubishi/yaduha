@@ -1,21 +1,30 @@
 """Functions for segmenting complex sentences into sets of simple SVO or SV sentences."""
+import functools
 import json
 import os
+import pathlib
 import pprint
 from typing import Dict, List
 
 import dotenv
+import numpy as np
 import openai
+import pandas as pd
 import spacy
+import torch
+from sentence_transformers import SentenceTransformer, util
+from transformers import BertModel, BertTokenizer
 
 dotenv.load_dotenv()
 
-# Load the medium English model with word vectors
-nlp = spacy.load("en_core_web_md")
+thisdir = pathlib.Path(__file__).parent.absolute()
+
 
 openai.api_key = os.getenv('OPENAI_API_KEY')
 MODEL = os.getenv('OPENAI_MODEL', 'gpt-3.5-turbo')
 
+nlp = spacy.load("en_core_web_md")
+@functools.lru_cache(maxsize=1000)
 def semantic_similarity_spacy(sentence1: str, sentence2: str) -> float:
     """Compute the semantic similarity between two sentences using spaCy.
 
@@ -30,6 +39,32 @@ def semantic_similarity_spacy(sentence1: str, sentence2: str) -> float:
     doc2 = nlp(sentence2)
     similarity = doc1.similarity(doc2)
     return similarity
+
+tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+model = BertModel.from_pretrained('bert-base-uncased', return_dict=True)
+@functools.lru_cache(maxsize=1000)
+def semantic_similarity_bert(sentence1: str, sentence2: str) -> float:
+    with torch.no_grad():
+        inputs1 = tokenizer(sentence1, return_tensors='pt', padding=True, truncation=True, max_length=512)
+        outputs1 = model(**inputs1)
+        inputs2 = tokenizer(sentence2, return_tensors='pt', padding=True, truncation=True, max_length=512)
+        outputs2 = model(**inputs2)
+        
+        # Use the average of the last hidden states as sentence embeddings
+        emb1 = outputs1.last_hidden_state.mean(dim=1)
+        emb2 = outputs2.last_hidden_state.mean(dim=1)
+        
+        # Compute cosine similarity
+        similarity = torch.nn.functional.cosine_similarity(emb1, emb2).item()
+        return (similarity + 1) / 2  # Scale to 0-1 range
+
+embedder = SentenceTransformer('paraphrase-MiniLM-L6-v2')
+def semantic_similarity_sentence_transformers(sentence1: str, sentence2: str) -> float:
+    emb1 = embedder.encode(sentence1, convert_to_tensor=True)
+    emb2 = embedder.encode(sentence2, convert_to_tensor=True)
+    similarity = util.pytorch_cos_sim(emb1, emb2).item()
+    return (similarity + 1) / 2  # Scale to 0-1 range
+
 
 sentence_schema = {
   "type": "object",
@@ -55,6 +90,7 @@ sentence_schema = {
   "required": ["subject", "verb", "verb_tense"]
 }
 
+@functools.lru_cache(maxsize=1000)
 def split_sentence(sentence: str) -> List[Dict[str, str]]:
     """Split a sentence into a set of simple SVO or SV sentences.
 
@@ -121,11 +157,30 @@ def split_sentence(sentence: str) -> List[Dict[str, str]]:
         functions=functions,
         function_call={'name': 'set_sentences'},
         temperature=0.0,
+        request_timeout=10,
     )
     response_message = response["choices"][0]["message"]
     function_args = json.loads(response_message["function_call"]["arguments"])
     return function_args.get('sentences')
 
+def hash_dict(func):
+    """Transform mutable dictionnary
+    Into immutable
+    Useful to be compatible with cache
+    """
+    class HDict(dict):
+        def __hash__(self):
+            return hash(frozenset(self.items()))
+
+    @functools.wraps(func)
+    def wrapped(*args, **kwargs):
+        args = tuple([HDict(arg) if isinstance(arg, dict) else arg for arg in args])
+        kwargs = {k: HDict(v) if isinstance(v, dict) else v for k, v in kwargs.items()}
+        return func(*args, **kwargs)
+    return wrapped
+
+@hash_dict
+@functools.lru_cache(maxsize=1000)
 def make_sentence(sentence: Dict) -> str:
     """Generate a simple SVO or SV sentence from a schema.
 
@@ -176,6 +231,7 @@ def make_sentence(sentence: Dict) -> str:
         functions=functions,
         function_call={'name': 'make_sentence'},
         temperature=0.0,
+        request_timeout=10,
     )
     response_message = response["choices"][0]["message"]
     function_args = json.loads(response_message["function_call"]["arguments"])
@@ -203,5 +259,29 @@ def main(): # pylint: disable=missing-function-docstring
         print(f"Semantic similarity: {similarity:0.3f}")
         print()
 
+def test_similarity():
+    base_sentence = "She sings."
+    sentences = [
+        "He/she/it sings.",
+        "She eats.",
+        "He sings.",
+    ]
+
+    similarity_funcs = [
+        semantic_similarity_spacy,
+        semantic_similarity_bert,
+        semantic_similarity_sentence_transformers,
+    ]
+    rows = []
+    for similarity_func in similarity_funcs:
+        for sentence in sentences:
+            sim = similarity_func(base_sentence, sentence)
+            rows.append([similarity_func.__name__, sentence, sim])
+    
+    df = pd.DataFrame(rows, columns=['similarity_func', 'sentence', 'similarity'])
+    df = df.pivot(index='sentence', columns='similarity_func', values='similarity')
+    print(df)
+
 if __name__ == '__main__':
-    main()
+    # main()
+    test_similarity()

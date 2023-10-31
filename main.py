@@ -37,6 +37,13 @@ NOUNS = {
     "wo'ada": "mosquito",
     "wükada": "bird snake",
     "wo'abi": "worm",
+    "aingwü": "squirrel",
+    "tsiipa": "bird",
+    "tüwoobü": "earth",
+    "koopi'": "coffee",
+    "pahabichi": "bear",
+    "pagwi": "fish",
+    "kwadzi": "tail",
 }
 
 class Subject:
@@ -139,6 +146,12 @@ class Verb:
         'kwati': 'hit',
         'yadohi': 'talk to',
         'naki': 'chase',
+        'tsibui': 'climb',
+        'sawa': 'cook',
+        'tama\'i': 'find',
+        'nia': 'read',
+        'mui': 'write',
+        'nobini': 'visit',
     }
     INTRANSITIVE_VERBS = {
         'katü': 'sit',
@@ -151,6 +164,18 @@ class Verb:
         'habi': 'lie down',
         'yadoha': 'talk',
         'kwatsa\'i': 'fall',
+        'waakü': 'work',
+        'wükihaa': 'smile',
+        'hubiadu': 'sing',
+        'nishua\'i': 'laugh',
+        'tsibui': 'climb',
+        'tübinohi': 'play',
+        'yotsi': 'fly',
+        'nüga': 'dance',
+        'pahabi': 'swim',
+        'tünia': 'read',
+        'tümui': 'write',
+        'tsiipe\'i': 'chirp',
     }
     def __init__(self, 
                  verb_stem: str, 
