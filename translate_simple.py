@@ -1,5 +1,6 @@
 """Functions for translating simple sentences from English to Paiute."""
 import json
+import logging
 import os
 import pathlib
 import random
@@ -12,7 +13,8 @@ import openai
 import pandas as pd
 
 from main import NOUNS, Object, Subject, Verb
-from segment import make_sentence, semantic_similarity_spacy, split_sentence
+from segment import make_sentence, split_sentence
+from segment import semantic_similarity_sentence_transformers as semantic_similarity
 from translate import translate as translate_paiute_to_english
 
 dotenv.load_dotenv()
@@ -120,49 +122,53 @@ def comparator_sentence(simple_sentence: Dict[str, str]) -> str:
     return simple_sentence
     
 def main():
-    sentence = "The dog was running yesterday and fell while watching an armadillo."
-    simple_sentences = split_sentence(sentence)
-    comparator_sentences = []
-    target_simple_sentences = []
-    backwards_translations = []
-    for simple_sentence in simple_sentences:
-        comparator_sentences.append(comparator_sentence(simple_sentence))
-        subject, verb, _object = translate_simple(simple_sentence)
-        target_simple_sentence = order_sentence(subject, verb, _object)
-        target_simple_sentences.append(" ".join(map(str, target_simple_sentence)))
-        backwards_translations.append(
-            translate_paiute_to_english(
-                subject_noun=subject.noun,
-                subject_suffix=subject.subject_suffix,
-                verb=verb.verb_stem,
-                verb_tense=verb.tense_suffix,
-                object_pronoun=verb.object_pronoun_prefix,
-                object_noun=_object.noun if _object else None,
-                object_suffix=_object.object_suffix if _object else None
-            ).strip(".")
-        )
-        # compare source sentence and com
+    # set log level to error
+    logging.getLogger().setLevel(logging.ERROR)
+    while True:
+        sentence = input("Enter a sentence: ")
+        simple_sentences = split_sentence(sentence)
+        comparator_sentences = []
+        target_simple_sentences = []
+        backwards_translations = []
+        for simple_sentence in simple_sentences:
+            comparator_sentences.append(comparator_sentence(simple_sentence))
+            subject, verb, _object = translate_simple(simple_sentence)
+            target_simple_sentence = order_sentence(subject, verb, _object)
+            target_simple_sentences.append(" ".join(map(str, target_simple_sentence)))
+            backwards_translations.append(
+                translate_paiute_to_english(
+                    subject_noun=subject.noun,
+                    subject_suffix=subject.subject_suffix,
+                    verb=verb.verb_stem,
+                    verb_tense=verb.tense_suffix,
+                    object_pronoun=verb.object_pronoun_prefix,
+                    object_noun=_object.noun if _object else None,
+                    object_suffix=_object.object_suffix if _object else None
+                ).strip(".")
+            )
+            # compare source sentence and com
 
-    simple_sentences_nl = ". ".join([make_sentence(sentence) for sentence in simple_sentences]) + '.'
-    comparator_sentence_nl = ". ".join([make_sentence(sentence) for sentence in comparator_sentences]) + '.'
-    target_simple_sentence_nl = ". ".join(target_simple_sentences) + '.'
-    backwards_translation_nl = ". ".join(backwards_translations) + '.'
+        simple_sentences_nl = ". ".join([make_sentence(sentence) for sentence in simple_sentences]) + '.'
+        comparator_sentence_nl = ". ".join([make_sentence(sentence) for sentence in comparator_sentences]) + '.'
+        target_simple_sentence_nl = ". ".join(target_simple_sentences) + '.'
+        backwards_translation_nl = ". ".join(backwards_translations) + '.'
 
-    print(f"Source: {sentence}")
-    print(f"Simple: {simple_sentences_nl}")
-    print(f"Comparator: {comparator_sentence_nl}")
-    print(f"Target: {target_simple_sentence_nl}")
-    print(f"BackTrans: {backwards_translation_nl}")
+        print(f"Source: {sentence}")
+        print(f"Simple: {simple_sentences_nl}")
+        print(f"Comparator: {comparator_sentence_nl}")
+        print(f"Target: {target_simple_sentence_nl}")
+        print(f"BackTrans: {backwards_translation_nl}")
 
-    # source/simple similarity
-    sim_source_simple = semantic_similarity_spacy(sentence, simple_sentences_nl)
-    print(f"Source/Simple similarity: {sim_source_simple:0.3f}")
-    # source/comparator similarity
-    sim_source_comparator = semantic_similarity_spacy(sentence, comparator_sentence_nl)
-    print(f"Source/Comparator similarity: {sim_source_comparator:0.3f}")
-    # source/backwards similarity
-    sim_source_backwards = semantic_similarity_spacy(sentence, backwards_translation_nl)
-    print(f"Source/Backwards similarity: {sim_source_backwards:0.3f}")
+        
+        sim_source_simple = semantic_similarity(sentence, simple_sentences_nl)
+        print(f"Source/Simple similarity: {sim_source_simple:0.3f}")
+        # source/comparator similarity
+        sim_source_comparator = semantic_similarity(sentence, comparator_sentence_nl)
+        print(f"Source/Comparator similarity: {sim_source_comparator:0.3f}")
+        # source/backwards similarity
+        sim_source_backwards = semantic_similarity(sentence, backwards_translation_nl)
+        print(f"Source/Backwards similarity: {sim_source_backwards:0.3f}")
+        print("--------")
 
 def evaluate():
     path = thisdir / '.data' / 'sentences.csv'
@@ -174,7 +180,7 @@ def evaluate():
     # get 100 random pairs of lines
     baseline_similarities = []
     for line1, line2 in zip(df.sample(100)['sentence'].values, df.sample(100)['sentence'].values):
-        baseline_similarities.append(semantic_similarity_spacy(line1, line2))
+        baseline_similarities.append(semantic_similarity(line1, line2))
         
     print(f"Mean baseline similarity: {np.mean(baseline_similarities):0.3f}")
     print(f"Variance: {np.var(baseline_similarities):0.3f}")
@@ -235,9 +241,9 @@ def evaluate():
                 df_similarity.loc[df_similarity['sentence'] == sentence, 'target'] = target_simple_sentence_nl
                 df_similarity.loc[df_similarity['sentence'] == sentence, 'backwards'] = backwards_translation_nl
 
-                similarity_simple = semantic_similarity_spacy(sentence, simple_sentences_nl)
-                similarity_comparator = semantic_similarity_spacy(sentence, comparator_sentence_nl)
-                similarity_backwards = semantic_similarity_spacy(sentence, backwards_translation_nl)
+                similarity_simple = semantic_similarity(sentence, simple_sentences_nl)
+                similarity_comparator = semantic_similarity(sentence, comparator_sentence_nl)
+                similarity_backwards = semantic_similarity(sentence, backwards_translation_nl)
                 df_similarity.loc[df_similarity['sentence'] == sentence, 'sim_simple'] = similarity_simple
                 df_similarity.loc[df_similarity['sentence'] == sentence, 'sim_comparator'] = similarity_comparator
                 df_similarity.loc[df_similarity['sentence'] == sentence, 'sim_backwards'] = similarity_backwards

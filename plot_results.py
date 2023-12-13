@@ -42,6 +42,10 @@ def main():
         # make the bars gray
         color_discrete_sequence=['gray'],
     )
+    # add x and y axis labels
+    fig.update_xaxes(title_text='semantic similarity')
+    fig.update_yaxes(title_text='count')
+    
     fig.write_html(thisdir / '.output' / 'baseline_similarities.html')
     fig.write_image(thisdir / '.output' / 'baseline_similarities.pdf')
     time.sleep(1)
@@ -181,7 +185,7 @@ def main():
         # add data to hover data
         fig.for_each_trace(set_hoverdata)
         fig.update_xaxes(tickangle=45)
-        fig.update_yaxes(range=[-0.4, 1.1])
+        fig.update_yaxes(range=[0, 1.05])
 
         fig.add_hrect(
             y0=sim_mean - sim_std, y1=sim_mean + sim_std,
@@ -206,8 +210,8 @@ def main():
         # make figure narrower
         fig.update_layout(
             autosize=False,
-            width=1650,
-            height=2500,
+            width=1000,
+            height=500,
         )
         fig.write_image(thisdir / '.output' / f'translation_quality_{sim_type}.pdf')
 

@@ -112,6 +112,8 @@ def translate(subject_noun: str,
         *examples,
         {'role': 'user', 'content': json.dumps(structure)}
     ]
+
+    pprint.pprint(messages)
     res = openai.ChatCompletion.create(
         model='gpt-3.5-turbo',
         messages=messages,
@@ -128,6 +130,7 @@ def translate(subject_noun: str,
 def main():
     choices = get_random_sentence()
     sentence_details = format_sentence(**{key: value['value'] for key, value in choices.items()})
+    print(sentence_details)
     print(f"Sentence: {sentence_to_str(sentence_details)}")
     translation = translate(**{key: value['value'] for key, value in choices.items()})
     print(f"Translation: {translation}")

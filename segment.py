@@ -71,7 +71,7 @@ sentence_schema = {
   "properties": {
     "subject": {
       "type": "string",
-      "description": "The subject of the sentence. Must be a single word."
+      "description": "The subject of the sentence. Must be a single word and singular (not plural)."
     },
     "verb": {
       "type": "string",
@@ -84,7 +84,7 @@ sentence_schema = {
     },
     "object": {
       "type": "string",
-      "description": "The object of the sentence (optional). Must be a single word."
+      "description": "The object of the sentence (optional). Must be a single word and singular (not plural)."
     }
   },
   "required": ["subject", "verb", "verb_tense"]
@@ -134,7 +134,20 @@ def split_sentence(sentence: str) -> List[Dict[str, str]]:
                 "name": "set_sentences"
             },
         },
-        {'role': 'user', 'content': 'I saw a man walking his dog yesterday at Starbucks while drinking a cup of coffee'},
+        {'role': 'user', 'content': 'The dogs were chasing their tails.'},
+        {
+            "role": "assistant",
+            "content": None,
+            "function_call": {
+                "arguments": json.dumps({
+                    'sentences': [
+                        {'subject': 'dog', 'verb': 'chase', 'verb_tense': 'past_continuous', 'object': 'tail'},
+                    ]
+                }),
+                "name": "set_sentences"
+            },
+        },
+        {'role': 'user', 'content': 'I saw two men walking their dogs yesterday at Starbucks while drinking a cup of coffee'},
         {
             "role": "assistant",
             "content": None,
