@@ -58,8 +58,12 @@ def semantic_similarity_bert(sentence1: str, sentence2: str) -> float:
         similarity = torch.nn.functional.cosine_similarity(emb1, emb2).item()
         return (similarity + 1) / 2  # Scale to 0-1 range
 
-embedder = SentenceTransformer('paraphrase-MiniLM-L6-v2')
-def semantic_similarity_sentence_transformers(sentence1: str, sentence2: str) -> float:
+@functools.lru_cache(maxsize=1000)
+def get_model(model: str) -> SentenceTransformer:
+    return SentenceTransformer(model)
+
+def semantic_similarity_sentence_transformers(sentence1: str, sentence2: str, model: str) -> float:
+    embedder = get_model(model)
     emb1 = embedder.encode(sentence1, convert_to_tensor=True)
     emb2 = embedder.encode(sentence2, convert_to_tensor=True)
     similarity = util.pytorch_cos_sim(emb1, emb2).item()
@@ -273,27 +277,46 @@ def main(): # pylint: disable=missing-function-docstring
         print()
 
 def test_similarity():
-    base_sentence = "She sings."
     sentences = [
-        "He/she/it sings.",
-        "She eats.",
-        "He sings.",
+        {
+            "base": "She sings.",
+            "sentences": [
+                "He sings.",
+                "He/she/it sings.",
+                "She eats.",
+            ]
+        },
+        {
+            "base": "The dog fell.",
+            "sentences": [
+                "The dog fell yesterday.",
+                "The cat is running.",
+                "Apples on the moon are hungry.",
+            ]
+        },
+        {
+            "base": "The man ate an apple.",
+            "sentences": [
+                "The apple was eaten by the man.",
+                "The woman ate a pie.",
+            ]
+        }
     ]
+    similarity_funcs = {
+        "spacy": semantic_similarity_spacy,
+        "bert": semantic_similarity_bert,
+        "all-MiniLM-L6-v2": functools.partial(semantic_similarity_sentence_transformers, model='all-MiniLM-L6-v2'),
+        "paraphrase-MiniLM-L6-v2": functools.partial(semantic_similarity_sentence_transformers, model='paraphrase-MiniLM-L6-v2'),
+    }
 
-    similarity_funcs = [
-        semantic_similarity_spacy,
-        semantic_similarity_bert,
-        semantic_similarity_sentence_transformers,
-    ]
-    rows = []
-    for similarity_func in similarity_funcs:
-        for sentence in sentences:
-            sim = similarity_func(base_sentence, sentence)
-            rows.append([similarity_func.__name__, sentence, sim])
-    
-    df = pd.DataFrame(rows, columns=['similarity_func', 'sentence', 'similarity'])
-    df = df.pivot(index='sentence', columns='similarity_func', values='similarity')
-    print(df)
+    for sentence in sentences:
+        base_sentence = sentence['base']
+        sentences = sentence['sentences']
+        print(base_sentence, sentences)
+        for similarity_func_name, similarity_func in similarity_funcs.items():
+            sorted_sentences = sorted(sentences, key=lambda s: similarity_func(base_sentence, s), reverse=True)
+            print(similarity_func_name, sorted_sentences)
+        print()
 
 if __name__ == '__main__':
     # main()
