@@ -14,6 +14,7 @@ import spacy
 import torch
 from sentence_transformers import SentenceTransformer, util
 from transformers import BertModel, BertTokenizer
+import numpy as np
 
 dotenv.load_dotenv()
 
@@ -276,47 +277,39 @@ def main(): # pylint: disable=missing-function-docstring
         print(f"Semantic similarity: {similarity:0.3f}")
         print()
 
+def avg_displacement(truth: np.ndarray, arr: np.ndarray) -> float:
+    """Compute the average displacement between two arrays.
+    
+    Computes the distance of each element to its proper position in the truth array
+    and returns the average of these distances.
+    """
+    return np.mean(np.abs(np.argsort(truth) - np.argsort(arr)))    
+
 def test_similarity():
-    sentences = [
-        {
-            "base": "She sings.",
-            "sentences": [
-                "He sings.",
-                "He/she/it sings.",
-                "She eats.",
-            ]
-        },
-        {
-            "base": "The dog fell.",
-            "sentences": [
-                "The dog fell yesterday.",
-                "The cat is running.",
-                "Apples on the moon are hungry.",
-            ]
-        },
-        {
-            "base": "The man ate an apple.",
-            "sentences": [
-                "The apple was eaten by the man.",
-                "The woman ate a pie.",
-            ]
-        }
-    ]
+    sentences = json.loads((thisdir / '.data' / 'semantic_sentences.json').read_text())
     similarity_funcs = {
         "spacy": semantic_similarity_spacy,
         "bert": semantic_similarity_bert,
         "all-MiniLM-L6-v2": functools.partial(semantic_similarity_sentence_transformers, model='all-MiniLM-L6-v2'),
         "paraphrase-MiniLM-L6-v2": functools.partial(semantic_similarity_sentence_transformers, model='paraphrase-MiniLM-L6-v2'),
     }
-
+    
+    rows = []
     for sentence in sentences:
         base_sentence = sentence['base']
         sentences = sentence['sentences']
-        print(base_sentence, sentences)
         for similarity_func_name, similarity_func in similarity_funcs.items():
-            sorted_sentences = sorted(sentences, key=lambda s: similarity_func(base_sentence, s), reverse=True)
-            print(similarity_func_name, sorted_sentences)
-        print()
+            similarities = np.array([similarity_func(base_sentence, s) for s in sentences])
+            dist = np.mean(np.abs(np.argsort(-similarities) - np.arange(len(similarities))))
+            rows.append([base_sentence, similarity_func_name, dist])
+
+    df = pd.DataFrame(rows, columns=['sentence', 'similarity_func', 'avg_displacement'])
+    print(df)
+
+    # compute stats for each similarity function
+    stats = df.groupby('similarity_func')['avg_displacement'].agg(['mean', 'std'])
+    print(stats)
+        
 
 if __name__ == '__main__':
     # main()
