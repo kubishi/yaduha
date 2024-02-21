@@ -18,6 +18,8 @@ dotenv.load_dotenv()
 openai.api_key = os.getenv('OPENAI_API_KEY')
 thisdir = pathlib.Path(__file__).parent.absolute()
 
+MODEL = os.getenv('OPENAI_MODEL', 'gpt-3.5-turbo')
+
 def get_english_structure(subject_noun: str,
                           subject_suffix: Optional[str],
                           verb: Optional[str],
@@ -115,7 +117,7 @@ def translate(subject_noun: str,
 
     pprint.pprint(messages)
     res = openai.ChatCompletion.create(
-        model='gpt-3.5-turbo',
+        model=MODEL,
         messages=messages,
         request_timeout=10,
     )

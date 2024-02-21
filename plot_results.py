@@ -1,3 +1,4 @@
+from functools import partial
 from typing import Tuple
 import matplotlib.pyplot as plt
 import numpy as np
@@ -6,15 +7,21 @@ import pathlib
 from segment import semantic_similarity_spacy, semantic_similarity_bert, semantic_similarity_sentence_transformers
 import plotly.express as px
 import time
+import numpy as np
+import random
 
+np.random.seed(0)
+random.seed(0)
 
 thisdir = pathlib.Path(__file__).parent.absolute()
 
 
 def main():
-    thisdir.joinpath('.output').mkdir(exist_ok=True, parents=True)
+    path = thisdir / '.data' / 'sentences-translated.csv'
+    savedir = thisdir.joinpath('.output')
+    savedir.mkdir(exist_ok=True, parents=True)
 
-    df = pd.read_csv(thisdir / '.data' / 'sentences-translated.csv', index_col=0)
+    df = pd.read_csv(path, index_col=0)
     df = df.dropna()
 
     # replace "he/she/it" (not case-sensitive) with "he"
@@ -22,7 +29,7 @@ def main():
 
     # semantic_similarity = semantic_similarity_spacy
     # semantic_similarity = semantic_similarity_bert
-    semantic_similarity = semantic_similarity_sentence_transformers
+    semantic_similarity = partial(semantic_similarity_sentence_transformers, model='all-MiniLM-L6-v2')
 
     # compute similarity metrics
     df['sim_simple'] = df.apply(lambda row: semantic_similarity(row['sentence'], row['simple']), axis=1)
@@ -46,10 +53,10 @@ def main():
     fig.update_xaxes(title_text='semantic similarity')
     fig.update_yaxes(title_text='count')
     
-    fig.write_html(thisdir / '.output' / 'baseline_similarities.html')
-    fig.write_image(thisdir / '.output' / 'baseline_similarities.pdf')
+    fig.write_html(savedir / 'baseline_similarities.html')
+    fig.write_image(savedir / 'baseline_similarities.pdf')
     time.sleep(1)
-    fig.write_image(thisdir / '.output' / 'baseline_similarities.pdf') # do twice because of bug
+    fig.write_image(savedir / 'baseline_similarities.pdf') # do twice because of bug
         
     sim_mean = np.mean(baseline_similarities)
     sim_std = np.std(baseline_similarities)
@@ -57,11 +64,23 @@ def main():
     print(f"Mean: {sim_mean}")
     print(f"Std: {sim_std}")
 
-    band_lower, band_upper = sim_mean - 1 * sim_std, sim_mean + 1 * sim_std
     sim_metrics = ['sim_simple', 'sim_comparator', 'sim_backwards']
     df['translation_quality'] = df.apply(lambda row: row[sim_metrics].mean(), axis=1)
     # sort by translation_quality
     df = df.sort_values(by='translation_quality', ascending=False, ignore_index=True)
+
+    threshold = sim_mean + 3*sim_std
+    df['quality'] = 'Bad'
+    df.loc[(df['sim_simple'] > threshold) & (df['sim_comparator'] > threshold) & (df['sim_backwards'] > threshold), 'quality'] = 'Good'
+    df.loc[(df['sim_simple'] > threshold) & (df['sim_comparator'] < threshold) & (df['sim_backwards'] > threshold), 'quality'] = 'Good given vocab'
+
+    # compute frequencies for each type and quality
+    freqs = df.groupby(['type', 'quality']).size().unstack(fill_value=0)
+    freqs = freqs.div(freqs.sum(axis=1), axis=0)
+
+    # write summary to table
+    freqs.to_csv(savedir / 'translation_quality_summary.csv')
+    freqs.to_html(savedir / 'translation_quality_summary.html')
 
     # rename types
     df['type'] = df['type'].replace({
@@ -72,7 +91,6 @@ def main():
         '2c': 'two-clause',
     })
 
-    
     df = df.melt(
         id_vars=['sentence', 'type', 'simple', 'comparator', 'target', 'backwards'],
         value_vars=sim_metrics,
@@ -139,8 +157,8 @@ def main():
         opacity=0.1, layer='below',
         row='all', col='all'
     )
-    fig.write_html(thisdir / '.output' / 'translation_quality.html')
-    fig.write_image(thisdir / '.output' / 'translation_quality.pdf')
+    fig.write_html(savedir / 'translation_quality.html')
+    fig.write_image(savedir / 'translation_quality.pdf')
 
     # generate same plot for each type separately
     for sim_type in df['type'].unique():
@@ -206,14 +224,14 @@ def main():
             row='all', col='all'
         )
 
-        fig.write_html(thisdir / '.output' / f'translation_quality_{sim_type}.html')
+        fig.write_html(savedir / f'translation_quality_{sim_type}.html')
         # make figure narrower
         fig.update_layout(
             autosize=False,
             width=1000,
             height=500,
         )
-        fig.write_image(thisdir / '.output' / f'translation_quality_{sim_type}.pdf')
+        fig.write_image(savedir / f'translation_quality_{sim_type}.pdf')
 
 
 if __name__ == '__main__':

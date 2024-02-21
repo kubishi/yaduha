@@ -1,4 +1,5 @@
 """Functions for translating simple sentences from English to Paiute."""
+from functools import partial
 import json
 import logging
 import os
@@ -14,13 +15,15 @@ import pandas as pd
 
 from main import NOUNS, Object, Subject, Verb
 from segment import make_sentence, split_sentence
-from segment import semantic_similarity_sentence_transformers as semantic_similarity
+from segment import semantic_similarity_sentence_transformers
 from translate import translate as translate_paiute_to_english
 
 dotenv.load_dotenv()
 
 openai.api_key = os.getenv('OPENAI_API_KEY')
-MODEL = os.getenv('OPENAI_MODEL', 'gpt-3.5-turbo')
+MODEL = os.getenv('OPENAI_MODEL', 'gpt-4')
+
+semantic_similarity = partial(semantic_similarity_sentence_transformers, model='all-MiniLM-L6-v2')
 
 thisdir = pathlib.Path(__file__).parent.absolute()
 
