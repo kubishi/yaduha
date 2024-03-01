@@ -2,15 +2,14 @@ from typing import Dict
 from flask import Flask, render_template, request, jsonify, redirect, url_for
 from flask_talisman import Talisman
 import os
+from translate_eng2ovp import translate_ovp_to_english, translate_english_to_ovp
 
 app = Flask(__name__)
 
 if os.getenv('FLASK_ENV') == 'production':
     Talisman(app, content_security_policy=None)
 
-from main import get_all_choices, format_sentence, get_random_sentence, get_random_sentence_big
-from translate import translate
-from translator import translate as translate_english_to_paiute
+from sentence_builder import get_all_choices, format_sentence, get_random_sentence, get_random_sentence_big
 
 @app.route('/')
 def index():
@@ -78,7 +77,7 @@ def build_sentence():
 def get_translation():
     data: Dict = request.get_json()
     try:
-        translation = translate(
+        translation = translate_ovp_to_english(
             subject_noun=data.get('subject_noun') or None,
             subject_suffix=data.get('subject_suffix') or None,
             verb=data.get('verb') or None,
@@ -126,8 +125,8 @@ def get_random_example():
 def translate_sentence():
     data: Dict = request.get_json()
     try:
-        english, paiute = translate_english_to_paiute(data.get('english'))
-        return jsonify(english=english, paiute=paiute)
+        response = translate_english_to_ovp(data.get('english'))
+        return jsonify(english=response['backwards'], paiute=response['target'])
     except Exception as e:
         return jsonify(error=str(e))
 

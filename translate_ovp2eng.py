@@ -1,24 +1,22 @@
+import argparse
 from functools import lru_cache
 import json
 import logging
 import os
 import pathlib
 import pprint
-from typing import Optional
+from typing import Callable, Optional
 
 import dotenv
 import openai
 import pandas as pd
 
-from main import (NOUNS, Object, Subject, Verb, format_sentence,
+from sentence_builder import (NOUNS, Object, Subject, Verb, format_sentence,
                   get_random_sentence, sentence_to_str)
 
 dotenv.load_dotenv()
 
-openai.api_key = os.getenv('OPENAI_API_KEY')
 thisdir = pathlib.Path(__file__).parent.absolute()
-
-MODEL = os.getenv('OPENAI_MODEL', 'gpt-3.5-turbo')
 
 def get_english_structure(subject_noun: str,
                           subject_suffix: Optional[str],
@@ -66,14 +64,19 @@ def get_english_structure(subject_noun: str,
 
     return sentence_details
 
-@lru_cache(maxsize=1000)
+from openai.types.chat import ChatCompletion
+# @lru_cache(maxsize=1000)
 def translate(subject_noun: str,
               subject_suffix: Optional[str],
               verb: Optional[str],
               verb_tense: Optional[str],
               object_pronoun: Optional[str],
               object_noun: Optional[str],
-              object_suffix: Optional[str]) -> str:
+              object_suffix: Optional[str],
+              model = None,
+              res_callback: Optional[Callable[[ChatCompletion], None]] = None) -> str:
+    if model is None:
+        model = os.environ['OPENAI_MODEL']
     structure = get_english_structure(
         subject_noun, subject_suffix,
         verb, verb_tense,
@@ -114,25 +117,20 @@ def translate(subject_noun: str,
         *examples,
         {'role': 'user', 'content': json.dumps(structure)}
     ]
-
-    pprint.pprint(messages)
-    res = openai.ChatCompletion.create(
-        model=MODEL,
+    res = openai.chat.completions.create(
+        model=model,
         messages=messages,
-        request_timeout=10,
+        timeout=10,
+        temperature=0.0
     )
+    if res_callback:
+        res_callback(res)
+    return res.choices[-1].message.content
 
-    # pprint.pprint(messages)
-
-    num_tokens = res['usage']['total_tokens']
-    logging.info(f"Used {num_tokens} tokens")
-    translation = res['choices'][0]['message']['content']
-    return translation
-
-def main():
+def translate_random():
     choices = get_random_sentence()
     sentence_details = format_sentence(**{key: value['value'] for key, value in choices.items()})
-    print(sentence_details)
+    # print(sentence_details)
     print(f"Sentence: {sentence_to_str(sentence_details)}")
     translation = translate(**{key: value['value'] for key, value in choices.items()})
     print(f"Translation: {translation}")
@@ -155,6 +153,26 @@ def evaluate(num: int, savepath: pathlib.Path):
         df = pd.DataFrame(rows)
         df.to_csv(savepath, index=False, encoding='utf-8')
 
+def main():
+    parser = argparse.ArgumentParser(description='Translate OVP sentences to English')
+    subparsers = parser.add_subparsers(dest='subparser_name')
+
+    translate_parser = subparsers.add_parser('translate-random', help='Translate a randomly generated sentence')
+    translate_parser.set_defaults(func='translate-random')
+
+    evaluate_parser = subparsers.add_parser('evaluate', help='Evaluate the translation of a number of randomly generated sentences')
+    evaluate_parser.add_argument('num', type=int, help='Number of sentences to evaluate')
+    evaluate_parser.add_argument('savepath', type=pathlib.Path, help='Path to save the evaluation results')
+    evaluate_parser.set_defaults(func='evaluate')
+    
+    args = parser.parse_args()
+    if args.func is None:
+        parser.print_help()
+        return
+    elif args.func == 'translate-random':
+        translate_random()
+    elif args.func == 'evaluate':
+        evaluate(args.num, args.savepath)
+
 if __name__ == '__main__':
     main()
-    # evaluate(100, thisdir / '.data' / 'translations.csv')

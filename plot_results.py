@@ -1,4 +1,5 @@
 from functools import partial
+from itertools import combinations
 from typing import Tuple
 import matplotlib.pyplot as plt
 import numpy as np
@@ -17,11 +18,17 @@ thisdir = pathlib.Path(__file__).parent.absolute()
 
 
 def main():
-    path = thisdir / '.data' / 'sentences-translated.csv'
+    path = thisdir / '.results' / 'sentences-translated'
     savedir = thisdir.joinpath('.output')
     savedir.mkdir(exist_ok=True, parents=True)
 
-    df = pd.read_csv(path, index_col=0)
+    dfs = []
+    for file in path.glob('*.csv'):
+        df = pd.read_csv(file, index_col=0)
+        df['model'] = file.stem
+        dfs.append(df)
+
+    df = pd.concat(dfs, ignore_index=True)
     df = df.dropna()
 
     # replace "he/she/it" (not case-sensitive) with "he"
@@ -38,7 +45,8 @@ def main():
 
     n_samples = 200
     baseline_similarities = []
-    for line1, line2 in zip(df.sample(n_samples, replace=True)['sentence'].values, df.sample(n_samples, replace=True)['sentence'].values):
+    all_combos = combinations(df['sentence'].values, 2)
+    for line1, line2 in random.sample(list(all_combos), n_samples):
         bsim = semantic_similarity(line1, line2)
         baseline_similarities.append(bsim)
 
@@ -57,12 +65,11 @@ def main():
     fig.write_image(savedir / 'baseline_similarities.pdf')
     time.sleep(1)
     fig.write_image(savedir / 'baseline_similarities.pdf') # do twice because of bug
+
         
     sim_mean = np.mean(baseline_similarities)
     sim_std = np.std(baseline_similarities)
 
-    print(f"Mean: {sim_mean}")
-    print(f"Std: {sim_std}")
 
     sim_metrics = ['sim_simple', 'sim_comparator', 'sim_backwards']
     df['translation_quality'] = df.apply(lambda row: row[sim_metrics].mean(), axis=1)
@@ -70,17 +77,35 @@ def main():
     df = df.sort_values(by='translation_quality', ascending=False, ignore_index=True)
 
     threshold = sim_mean + 3*sim_std
+    print(f'threshold: {threshold}')
     df['quality'] = 'Bad'
     df.loc[(df['sim_simple'] > threshold) & (df['sim_comparator'] > threshold) & (df['sim_backwards'] > threshold), 'quality'] = 'Good'
     df.loc[(df['sim_simple'] > threshold) & (df['sim_comparator'] < threshold) & (df['sim_backwards'] > threshold), 'quality'] = 'Good given vocab'
 
     # compute frequencies for each type and quality
-    freqs = df.groupby(['type', 'quality']).size().unstack(fill_value=0)
+    freqs = df.groupby(['model', 'type', 'quality']).size().unstack(fill_value=0)
     freqs = freqs.div(freqs.sum(axis=1), axis=0)
+
+    freqs = freqs.sort_index(level=[0, 1], key=lambda x: x.map({
+        'gpt-3.5-turbo': 0, 'gpt-4': 1,
+        'subject-verb': 0, 'subject-verb-object': 1, 'two-verb': 2, 'two-clause': 3, 'complex': 4
+    }))
 
     # write summary to table
     freqs.to_csv(savedir / 'translation_quality_summary.csv')
     freqs.to_html(savedir / 'translation_quality_summary.html')
+    # convert to percentages
+    print(freqs.to_latex(float_format=lambda x: f"{int(x*100)}\%"))
+
+    # compute min, max, mean, std for prompt_tokens and completion_tokens
+    tokens_summary = df.agg({
+        'prompt_tokens': ['min', 'max', 'mean', 'std'],
+        'completion_tokens': ['min', 'max', 'mean', 'std'],
+    })
+    tokens_summary.to_csv(savedir / 'translation_quality_tokens_summary.csv')
+    tokens_summary.to_html(savedir / 'translation_quality_tokens_summary.html')
+    print(tokens_summary.to_string())
+    print(tokens_summary.to_latex(float_format=lambda x: f"{int(x)}"))
 
     # rename types
     df['type'] = df['type'].replace({
@@ -92,7 +117,7 @@ def main():
     })
 
     df = df.melt(
-        id_vars=['sentence', 'type', 'simple', 'comparator', 'target', 'backwards'],
+        id_vars=['model', 'sentence', 'type', 'simple', 'comparator', 'target', 'backwards'],
         value_vars=sim_metrics,
         var_name='similarity_metric',
         value_name='similarity'
@@ -102,6 +127,7 @@ def main():
         df,
         x='sentence',
         y='similarity',
+        symbol='model',
         color='similarity_metric',
         facet_col='type',
         facet_col_wrap=2,
@@ -167,6 +193,7 @@ def main():
             df_type,
             x='sentence',
             y='similarity',
+            symbol='model',
             color='similarity_metric',
             facet_col='type',
             facet_col_wrap=2,
