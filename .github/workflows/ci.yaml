@@ -4,6 +4,9 @@ on: [push]
 
 jobs:
   build:
+    defaults:
+      run:
+        working-directory: ./kubishi_sentences
     name: Regression Tests
     runs-on: ubuntu-latest
     steps:
