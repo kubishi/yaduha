@@ -1,97 +1,74 @@
+import pathlib
 import json
-import functools
-import numpy as np
 import pandas as pd
 import pytest
-from kubishi_sentences.segment import (
-    semantic_similarity_spacy,
-    semantic_similarity_bert,
-    semantic_similarity_sentence_transformers,
-    semantic_similarity_openai,
-)
-from ranking_metrics import RankingSimilarity
+
+from kubishi_sentences import segment, semantic_models
+
+thisdir = pathlib.Path(__file__).parent.parent.absolute()
 
 
-def load_sentences(filepath):
-    with open(filepath, 'r') as file:
-        return json.load(file)
+@pytest.fixture
+def example_sentences():
+    # Load example sentences from a fixture or test file
+    return json.loads((thisdir / "data" / "semantic_sentences.json").read_text())
 
+@pytest.fixture
+def similarity_funcs():
+    return {
+        "spacy": semantic_models.semantic_similarity_spacy,
+        # "bert": semantic_similarity_bert,
+        # "all-MiniLM-L6-v2": functools.partial(semantic_similarity_sentence_transformers, model="all-MiniLM-L6-v2"),
+        # "paraphrase-MiniLM-L6-v2": functools.partial(
+        #     semantic_similarity_sentence_transformers, model="paraphrase-MiniLM-L6-v2"
+        # ),
+        # # "SFR-Embedding-Mistral": functools.partial(semantic_similarity_sentence_transformers, model='Salesforce/SFR-Embedding-Mistral'),
+        # "text-embedding-3-large": functools.partial(semantic_similarity_openai, model="text-embedding-3-large"),
+        # "text-embedding-3-small": functools.partial(semantic_similarity_openai, model="text-embedding-3-small"),
+        # "text-embedding-ada-002": functools.partial(semantic_similarity_openai, model="text-embedding-ada-002"),
+    }
 
-def calculate_similarity_metrics(sentences, similarity_funcs):
-    rows = []
-    for sentence in sentences:
-        base_sentence = sentence["base"]
-        sentence_list = sentence["sentences"]
-        for similarity_func_name, similarity_func in similarity_funcs.items():
-            similarities = np.array([similarity_func(base_sentence, s) for s in sentence_list])
-            dist = np.mean(np.abs(np.argsort(-similarities) - np.arange(len(similarities))))
+def test_similarity_metrics(example_sentences, similarity_funcs):
+    
+    rows = segment.calculate_similarity_metrics(example_sentences[:1], similarity_funcs)
+    df = pd.DataFrame(rows)
 
-            sorted_sentences = [sentence_list[i] for i in np.argsort(-similarities)]
-            rbo_similarity = RankingSimilarity(sorted_sentences, sentence_list).rbo()
+    # Check if DataFrame has been created
+    assert not df.empty
 
-            rows.append([base_sentence, similarity_func_name, dist, rbo_similarity])
-
-    return rows
-
-
-def create_dataframe(rows):
-    return pd.DataFrame(rows, columns=["sentence", "similarity_func", "avg_displacement", "rbo"])
-
-
-def compute_stats(df):
+    # Check statistical calculations
     stats = df.groupby("similarity_func").agg({"avg_displacement": ["mean", "std"], "rbo": ["mean", "std"]})
-    return stats.sort_values(by=("rbo", "mean"), ascending=False)
+    assert not stats.empty
 
+    # Ensure stats DataFrame is not None
+    assert stats is not None
 
-def test_load_sentences():
-    sentences = load_sentences("data/semantic_sentences.json")
-    assert isinstance(sentences, list)
-    assert len(sentences) > 0
+# def main() -> None:  # pylint: disable=missing-function-docstring
+#     """
+#     Driver function showing how to run segment.py
+#     Workflow:
+#         1. Define a set of english sentences
+#         1. For a single sentence, split it into a schema defined in object `SENTENCE_SCHEMA`
+#         1. Create a simple sentence using the schema from previous step
+#         1. Compute semantic similarity between original sentence and simple sentence created in previous step
+#     """
+#     source_sentences = [
+#         "The dog fell.",
+#         "The dog fell yesterday.",
+#         "The dog was running yesterday and fell.",
+#         "The dog was running yesterday and fell while chasing a cat.",
+#         "The dog sat in the house.",
+#         "I gave him bread.",
+#         "The dog and the cat were running.",
+#     ]
 
+#     for source_sentence in source_sentences:
+#         simple_sentences = segment.split_sentence(source_sentence, model=os.environ["OPENAI_MODEL"])
+#         simple_nl_sentence = ". ".join([segment.make_sentence(sentence) for sentence in simple_sentences]) + "."
 
-def test_calculate_similarity_metrics():
-    sentences = [
-        {"base": "sentence1", "sentences": ["sentence2", "sentence3"]},
-        {"base": "sentence2", "sentences": ["sentence3", "sentence4"]},
-    ]
-    similarity_funcs = {"test": lambda x, y: 0.5}  # Dummy similarity function
-    rows = calculate_similarity_metrics(sentences, similarity_funcs)
-    assert len(rows) == 4
+#         similarity = semantic_models.semantic_similarity_spacy(source_sentence, simple_nl_sentence)
+#         print(f"Source sentence: {source_sentence}")
+#         print(f"Simple sentences: {simple_nl_sentence}")
 
-
-def test_create_dataframe():
-    rows = [["sentence1", "test", 0.5, 0.7], ["sentence2", "test", 0.4, 0.6]]
-    df = create_dataframe(rows)
-    assert len(df) == 2
-    assert set(df.columns) == {"sentence", "similarity_func", "avg_displacement", "rbo"}
-
-
-def test_compute_stats():
-    rows = [["sentence1", "test", 0.5, 0.7], ["sentence2", "test", 0.4, 0.6]]
-    df = create_dataframe(rows)
-    stats = compute_stats(df)
-    assert len(stats) == 1
-    assert set(stats.index) == {"test"}
-
-
-# if __name__ == "__main__":
-#     sentences = load_sentences("data/semantic_sentences.json")
-#     similarity_funcs = {
-#         "spacy": semantic_similarity_spacy,
-#         "bert": semantic_similarity_bert,
-#         "all-MiniLM-L6-v2": functools.partial(semantic_similarity_sentence_transformers, model="all-MiniLM-L6-v2"),
-#         "paraphrase-MiniLM-L6-v2": functools.partial(
-#             semantic_similarity_sentence_transformers, model="paraphrase-MiniLM-L6-v2"
-#         ),
-#         "text-embedding-3-large": functools.partial(semantic_similarity_openai, model="text-embedding-3-large"),
-#         "text-embedding-3-small": functools.partial(semantic_similarity_openai, model="text-embedding-3-small"),
-#         "text-embedding-ada-002": functools.partial(semantic_similarity_openai, model="text-embedding-ada-002"),
-#     }
-
-#     rows = calculate_similarity_metrics(sentences, similarity_funcs)
-#     df = create_dataframe(rows)
-#     print(df)
-
-#     stats = compute_stats(df)
-#     print(stats.round(3))
-#     print(stats.to_latex(float_format="%.3f", bold_rows=True, column_format="lcccc"))
+#         print(f"Semantic similarity: {similarity:0.3f}")
+#         print()

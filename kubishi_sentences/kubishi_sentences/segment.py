@@ -237,19 +237,30 @@ def make_sentence(
 
 def calculate_semantic_similarity_metrics_helper(base_sentence, comparison_sentences, similarity_func, ranking_algorithm):
     """
+    Calculate semantic similarity and ranking for a base sentence and comparison sentences.
+
+    This function calculates the semantic similarity between a base sentence and a list 
+    of comparison sentences using a provided semantic similarity function. It also computes 
+    the ranking similarity using the given ranking algorithm.
+
     Args:
-        base_sentence (str): Original sentence
-        comparison_sentences: Sentences created from base_sentence 
-        similarity_func: semantic similarity function
-        ranking_algorithm: 
+        base_sentence (str): The original sentence against which comparison is made.
+        comparison_sentences (list of str): List of sentences created from the base_sentence for comparison.
+        similarity_func (callable): A function that computes semantic similarity between two sentences.
+        ranking_algorithm (callable): A function or object capable of computing ranking similarity between sentences.
+
+    Returns:
+        tuple: A tuple containing two elements:
+            - avg_displacement (float): The average displacement between sorted and original indices of similarities.
+            - rbo_similarity (float): The Rank Biased Overlap similarity between the sorted and original lists of sentences.
     """
 
     similarities = np.array([similarity_func(base_sentence, s) for s in comparison_sentences])
     dist = np.mean(np.abs(np.argsort(-similarities) - np.arange(len(similarities))))
 
-    sorted_sentences = [sentences[i] for i in np.argsort(-similarities)]
+    sorted_sentences = [comparison_sentences[i] for i in np.argsort(-similarities)]
     
-    rbo_similarity = ranking_algorithm(sorted_sentences, sentences).rbo()
+    rbo_similarity = ranking_algorithm(sorted_sentences, comparison_sentences).rbo()
 
     return dist, rbo_similarity
 
@@ -262,11 +273,11 @@ def calculate_similarity_metrics(sentences, similarity_funcs, ranking_algorithm 
 
         for similarity_func_name, similarity_func in similarity_funcs.items():
 
-            ranking_similarity, avg_displacement = calculate_semantic_similarity_metrics_helper(base_sentence, comparison_sentences, similarity_func, ranking_algorithm)
+            ranking_similarity, avg_displacement = calculate_semantic_similarity_metrics_helper(base_sentence, sentences, similarity_func, ranking_algorithm)
 
             row = {
                 'sentence': base_sentence,
-                'similarity_fun': similarity_func_name,
+                'similarity_func': similarity_func_name,
                 'avg_displacement': avg_displacement,
                 'rbo': ranking_similarity,
             }

@@ -23,9 +23,8 @@ dotenv.load_dotenv()
 thisdir = pathlib.Path(__file__).parent.absolute()
 cache = FanoutCache(thisdir / ".cache", shards=64)
 
-oai_client = openai.Client(api_key=os.environ["OPENAI_API_KEY"])
+# oai_client = openai.Client(api_key=os.environ["OPENAI_API_KEY"])
 
-nlp = spacy.load("en_core_web_md")
 
 @functools.lru_cache(maxsize=1000)
 def get_model(model: str) -> SentenceTransformer:
@@ -43,6 +42,8 @@ def semantic_similarity_spacy(sentence1: str, sentence2: str) -> float:
     Returns:
         float: The semantic similarity between the two sentences.
     """
+    nlp = spacy.load("en_core_web_md")
+
     doc1 = nlp(sentence1)
     doc2 = nlp(sentence2)
     similarity = doc1.similarity(doc2)

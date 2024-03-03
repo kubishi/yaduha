@@ -1,0 +1,182 @@
+[
+    {
+        "base": "She sings.",
+        "sentences": [
+            "He sings.",
+            "He/she/it sings.",
+            "She performs a song.",
+            "A song is being sung by her.",
+            "She hums a tune.",
+            "She listens to music.",
+            "She dances.",
+            "She eats.",
+            "The cat sleeps.",
+            "Mountains echo silently."
+        ]
+    },
+    {
+        "base": "The dog fell.",
+        "sentences": [
+            "The dog fell yesterday.",
+            "A dog stumbled.",
+            "The puppy tripped over.",
+            "The cat is running.",
+            "An animal is in motion.",
+            "The bird flies.",
+            "Leaves fall in autumn.",
+            "He reads a book.",
+            "Clouds cover the sky.",
+            "Apples on the moon are hungry."
+        ]
+    },
+    {
+        "base": "The man ate an apple.",
+        "sentences": [
+            "The apple was eaten by the man.",
+            "A man consumes a fruit.",
+            "The boy nibbles on an apple.",
+            "Someone is eating.",
+            "He drinks water.",
+            "The woman ate a pie.",
+            "A cat chases a mouse.",
+            "Trees grow in the forest.",
+            "The car is red.",
+            "Stars twinkle at night."
+        ]
+    },
+    {
+        "base": "The sun rises in the east.",
+        "sentences": [
+            "The east welcomes the sunrise.",
+            "Sunrise occurs in the east.",
+            "Day breaks in the east.",
+            "The moon sets in the west.",
+            "The stars shine at night.",
+            "Clouds gather before rain.",
+            "The wind changes direction.",
+            "Leaves fall in autumn.",
+            "Snow covers the mountains.",
+            "A book rests on the table."
+        ]
+    },
+    {
+        "base": "Birds fly south for the winter.",
+        "sentences": [
+            "For winter, birds head south.",
+            "Migratory birds travel south when it gets cold.",
+            "Birds migrate to warmer climates during winter.",
+            "Fish swim upstream.",
+            "Bears hibernate in winter.",
+            "Flowers bloom in spring.",
+            "The earth orbits the sun.",
+            "Trees lose their leaves in fall.",
+            "The sky is blue.",
+            "A cat sleeps on the couch."
+        ]
+    },
+    {
+        "base": "I read a book yesterday.",
+        "sentences": [
+            "Yesterday, I finished reading a book.",
+            "A book was read by me yesterday.",
+            "I watched a movie last night.",
+            "I'll visit the library tomorrow.",
+            "She writes a letter.",
+            "He cooks dinner.",
+            "They are painting a house.",
+            "The sun sets in the evening.",
+            "A dog barks at night.",
+            "The car needs fuel."
+        ]
+    },
+    {
+        "base": "The cake was delicious.",
+        "sentences": [
+            "Delicious was the cake.",
+            "The dessert tasted great.",
+            "We enjoyed the tasty cake.",
+            "The pie is sour.",
+            "Coffee complements breakfast.",
+            "Leaves rustle in the wind.",
+            "A bird sings outside.",
+            "Children play in the park.",
+            "Traffic is heavy today.",
+            "The phone is ringing."
+        ]
+    },
+    {
+        "base": "Lightning precedes thunder.",
+        "sentences": [
+            "Thunder follows lightning.",
+            "First comes lightning, then comes thunder.",
+            "The storm brings lightning and thunder.",
+            "Rain refreshes the earth.",
+            "The sun warms the ground.",
+            "A river flows to the sea.",
+            "Mountains reach towards the sky.",
+            "A cat chases a mouse.",
+            "Books fill the shelf.",
+            "The clock ticks steadily."
+        ]
+    },
+    {
+        "base": "She painted a beautiful picture.",
+        "sentences": [
+            "A beautiful picture was painted by her.",
+            "The painting she created is beautiful.",
+            "She sketches a portrait.",
+            "He writes a poem.",
+            "They are filming a movie.",
+            "Birds nest in spring.",
+            "Flowers wilt in the heat.",
+            "Kids play video games.",
+            "Cars fill the parking lot.",
+            "The sun sets late in summer."
+        ]
+    },
+    {
+        "base": "The computer is broken.",
+        "sentences": [
+            "A broken state afflicts the computer.",
+            "The machine isn't working.",
+            "We need to repair the computer.",
+            "The phone's battery is dead.",
+            "Lights flicker during a power outage.",
+            "A book lies open on the desk.",
+            "Water boils at 100 degrees Celsius.",
+            "A cat purrs contentedly.",
+            "The door creaks when opened.",
+            "Birds migrate in autumn."
+        ]
+    },
+    {
+        "base": "He solved the puzzle quickly.",
+        "sentences": [
+            "The puzzle was quickly solved by him.",
+            "Quickly, he found the solution to the puzzle.",
+            "She completes the crossword.",
+            "The mystery remains unsolved.",
+            "A race against time.",
+            "Flowers are sold at the market.",
+            "The river cuts through the valley.",
+            "A key unlocks the door.",
+            "Leaves turn red in autumn.",
+            "The train arrives at noon."
+        ]
+    },
+    {
+        "base": "The stars twinkle at night.",
+        "sentences": [
+            "At night, the stars shimmer.",
+            "Twinkling stars fill the night sky.",
+            "Night unveils a sky full of stars.",
+            "The moon glows brightly.",
+            "Clouds mask the moon.",
+            "The sun sets, stars appear.",
+            "A comet streaks through the sky.",
+            "Fireflies glow in the dark.",
+            "Crickets chirp in the evening.",
+            "A candle flickers in the window."
+        ]
+    }
+]
