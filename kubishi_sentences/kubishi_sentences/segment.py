@@ -265,6 +265,27 @@ def calculate_semantic_similarity_metrics_helper(base_sentence, comparison_sente
     return dist, rbo_similarity
 
 def calculate_similarity_metrics(sentences, similarity_funcs, ranking_algorithm = rbo.RankingSimilarity):
+    """
+    Calculate semantic similarity metrics for given sentences using various similarity functions.
+
+    This function calculates semantic similarity metrics, including average displacement and RBO similarity, 
+    for a set of sentences using multiple semantic similarity functions.
+
+    Args:
+        sentences (list of dict): List of dictionaries containing 'base' and 'sentences' keys,
+            where 'base' represents the original sentence, and 'sentences' represents a list of
+            sentences created from the base sentence for comparison.
+        similarity_funcs (dict): A dictionary where keys are string identifiers for similarity functions
+            and values are the corresponding similarity function objects.
+        ranking_algorithm (callable): A function or object capable of computing ranking similarity between sentences.
+            Default is `rbo.RankingSimilarity`.
+
+    Returns:
+        list of dict: A list of dictionaries containing calculated semantic similarity metrics for each sentence
+            using various similarity functions. Each dictionary has keys 'sentence', 'similarity_func',
+            'avg_displacement', and 'rbo'.
+    """
+
     rows = []
     
     for sentence in sentences:
