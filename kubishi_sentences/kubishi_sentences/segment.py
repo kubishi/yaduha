@@ -20,104 +20,14 @@ from openai.types.chat import ChatCompletion
 from sentence_transformers import SentenceTransformer, util
 from transformers import BertModel, BertTokenizer
 
+from kubishi_sentences.semantic_models import semantic_similarity_openai, semantic_similarity_bert, semantic_similarity_sentence_transformers, semantic_similarity_spacy
+
 dotenv.load_dotenv()
 
 thisdir = pathlib.Path(__file__).parent.absolute()
 cache = FanoutCache(thisdir / ".cache", shards=64)
 
-oai_client = openai.Client(api_key=os.environ["OPENAI_API_KEY"])
-
-nlp = spacy.load("en_core_web_md")
-
-
-@functools.lru_cache(maxsize=1000)
-def semantic_similarity_spacy(sentence1: str, sentence2: str) -> float:
-    """Compute the semantic similarity between two sentences using spaCy.
-
-    Args:
-        sentence1 (str): The first sentence.
-        sentence2 (str): The second sentence.
-
-    Returns:
-        float: The semantic similarity between the two sentences.
-    """
-    doc1 = nlp(sentence1)
-    doc2 = nlp(sentence2)
-    similarity = doc1.similarity(doc2)
-    return similarity
-
-
-tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
-model = BertModel.from_pretrained("bert-base-uncased", return_dict=True)
-
-
-@functools.lru_cache(maxsize=1000)
-def semantic_similarity_bert(sentence1: str, sentence2: str) -> float:
-    with torch.no_grad():
-        inputs1 = tokenizer(sentence1, return_tensors="pt", padding=True, truncation=True, max_length=512)
-        outputs1 = model(**inputs1)
-        inputs2 = tokenizer(sentence2, return_tensors="pt", padding=True, truncation=True, max_length=512)
-        outputs2 = model(**inputs2)
-
-        # Use the average of the last hidden states as sentence embeddings
-        emb1 = outputs1.last_hidden_state.mean(dim=1)
-        emb2 = outputs2.last_hidden_state.mean(dim=1)
-
-        # Compute cosine similarity
-        similarity = torch.nn.functional.cosine_similarity(emb1, emb2).item()
-        return (similarity + 1) / 2  # Scale to 0-1 range
-
-
-@functools.lru_cache(maxsize=1000)
-def get_model(model: str) -> SentenceTransformer:
-    return SentenceTransformer(model)
-
-
-def semantic_similarity_sentence_transformers(sentence1: str, sentence2: str, model: str) -> float:
-    embedder = get_model(model)
-    emb1 = embedder.encode(sentence1, convert_to_tensor=True)
-    emb2 = embedder.encode(sentence2, convert_to_tensor=True)
-    similarity = util.pytorch_cos_sim(emb1, emb2).item()
-    return (similarity + 1) / 2  # Scale to 0-1 range
-
-
-def _get_openai_embeddings(model: str, *sentences: str) -> Dict[str, np.ndarray]:
-    savedir = thisdir / ".results" / "embeddings" / model
-    savedir.mkdir(exist_ok=True, parents=True)
-    # load cached embeddings from disk
-    embeddings = {}
-    for sentence in sentences:
-        sentence_id = hashlib.md5(sentence.encode()).hexdigest()
-        try:
-            with open(savedir / f"{sentence_id}.npy", "rb") as f:
-                embeddings[sentence] = np.load(f)
-        except FileNotFoundError:
-            pass
-
-    new_sentences = [s for s in sentences if s not in embeddings]
-    if new_sentences:
-        res = openai.embeddings.create(input=new_sentences, model=model, encoding_format="float")
-        # save embeddings to disk
-        for sentence, embedding in zip(new_sentences, res.data):
-            emb = np.array(embedding.embedding)
-            sentence_id = hashlib.md5(sentence.encode()).hexdigest()
-            with open(savedir / f"{sentence_id}.npy", "wb") as f:
-                np.save(f, emb)
-            embeddings[sentence] = emb
-
-    return embeddings
-
-
-def semantic_similarity_openai(sentence1: str, sentence2: str, model: str) -> float:
-    embeddings = _get_openai_embeddings(model, sentence1, sentence2)
-    # convert python lists to numpy arrays
-    emb1 = np.array(embeddings[sentence1])
-    emb2 = np.array(embeddings[sentence2])
-    similarity = util.pytorch_cos_sim(emb1, emb2).item()
-    return (similarity + 1) / 2  # Scale to 0-1 range
-
-
-sentence_schema = {
+SENTENCE_SCHEMA = {
     "type": "object",
     "properties": {
         "subject": {
@@ -142,6 +52,34 @@ sentence_schema = {
 }
 
 
+def hash_dict(func):
+    """Transform mutable dictionnary
+    Into immutable
+    Useful to be compatible with cache
+    """
+
+    class HDict(dict):
+        def __hash__(self):
+            return hash(frozenset(self.items()))
+
+    @functools.wraps(func)
+    def wrapped(*args, **kwargs):
+        args = tuple([HDict(arg) if isinstance(arg, dict) else arg for arg in args])
+        kwargs = {k: HDict(v) if isinstance(v, dict) else v for k, v in kwargs.items()}
+        return func(*args, **kwargs)
+
+    return wrapped
+
+def avg_displacement(truth: np.ndarray, arr: np.ndarray) -> float:
+    """Compute the average displacement between two arrays.
+
+    Computes the distance of each element to its proper position in the truth array
+    and returns the average of these distances.
+    """
+    return np.mean(np.abs(np.argsort(truth) - np.argsort(arr)))
+
+
+
 # @functools.lru_cache(maxsize=1000)
 def split_sentence(
     sentence: str, model: str = None, res_callback: Optional[Callable[[ChatCompletion], None]] = None
@@ -161,7 +99,7 @@ def split_sentence(
         {
             "name": "set_sentences",
             "description": "Set the simple sentences.",
-            "parameters": {"type": "object", "properties": {"sentences": sentence_schema}, "required": ["sentences"]},
+            "parameters": {"type": "object", "properties": {"sentences": SENTENCE_SCHEMA}, "required": ["sentences"]},
         }
     ]
 
@@ -229,6 +167,7 @@ def split_sentence(
         },
         {"role": "user", "content": sentence},
     ]
+
     response = openai.chat.completions.create(
         model=model,
         messages=messages,
@@ -237,30 +176,12 @@ def split_sentence(
         temperature=0.0,
         timeout=10,
     )
+
     if res_callback:
         res_callback(response)
     response_message = response.choices[0].message
     function_args = json.loads(response_message.function_call.arguments)
     return function_args.get("sentences")
-
-
-def hash_dict(func):
-    """Transform mutable dictionnary
-    Into immutable
-    Useful to be compatible with cache
-    """
-
-    class HDict(dict):
-        def __hash__(self):
-            return hash(frozenset(self.items()))
-
-    @functools.wraps(func)
-    def wrapped(*args, **kwargs):
-        args = tuple([HDict(arg) if isinstance(arg, dict) else arg for arg in args])
-        kwargs = {k: HDict(v) if isinstance(v, dict) else v for k, v in kwargs.items()}
-        return func(*args, **kwargs)
-
-    return wrapped
 
 
 @hash_dict
@@ -314,38 +235,48 @@ def make_sentence(
     return function_args.get("sentence")
 
 
-def main():  # pylint: disable=missing-function-docstring
-    source_sentences = [
-        "The dog fell.",
-        "The dog fell yesterday.",
-        "The dog was running yesterday and fell.",
-        "The dog was running yesterday and fell while chasing a cat.",
-        "The dog sat in the house.",
-        "I gave him bread.",
-        "The dog and the cat were running.",
-    ]
-    for source_sentence in source_sentences:
-        simple_sentences = split_sentence(source_sentence, model=os.environ["OPENAI_MODEL"])
-        print(simple_sentences)
-        simple_nl_sentence = ". ".join([make_sentence(sentence) for sentence in simple_sentences]) + "."
-
-        print(f"Source sentence: {source_sentence}")
-        print(f"Simple sentences: {simple_nl_sentence}")
-        similarity = semantic_similarity_spacy(source_sentence, simple_nl_sentence)
-        print(f"Semantic similarity: {similarity:0.3f}")
-        print()
-
-
-def avg_displacement(truth: np.ndarray, arr: np.ndarray) -> float:
-    """Compute the average displacement between two arrays.
-
-    Computes the distance of each element to its proper position in the truth array
-    and returns the average of these distances.
+def calculate_semantic_similarity_metrics_helper(base_sentence, comparison_sentences, similarity_func, ranking_algorithm):
     """
-    return np.mean(np.abs(np.argsort(truth) - np.argsort(arr)))
+    Args:
+        base_sentence (str): Original sentence
+        comparison_sentences: Sentences created from base_sentence 
+        similarity_func: semantic similarity function
+        ranking_algorithm: 
+    """
+
+    similarities = np.array([similarity_func(base_sentence, s) for s in comparison_sentences])
+    dist = np.mean(np.abs(np.argsort(-similarities) - np.arange(len(similarities))))
+
+    sorted_sentences = [sentences[i] for i in np.argsort(-similarities)]
+    
+    rbo_similarity = ranking_algorithm(sorted_sentences, sentences).rbo()
+
+    return dist, rbo_similarity
+
+def calculate_similarity_metrics(sentences, similarity_funcs, ranking_algorithm = rbo.RankingSimilarity):
+    rows = []
+    
+    for sentence in sentences:
+        base_sentence = sentence["base"]
+        sentences = sentence["sentences"]
+
+        for similarity_func_name, similarity_func in similarity_funcs.items():
+
+            ranking_similarity, avg_displacement = calculate_semantic_similarity_metrics_helper(base_sentence, comparison_sentences, similarity_func, ranking_algorithm)
+
+            row = {
+                'sentence': base_sentence,
+                'similarity_fun': similarity_func_name,
+                'avg_displacement': avg_displacement,
+                'rbo': ranking_similarity,
+            }
+
+            rows.append(row)
+   
+    return rows
 
 
-def test_similarity():
+def main():
     sentences = json.loads((thisdir / "data" / "semantic_sentences.json").read_text())
     similarity_funcs = {
         "spacy": semantic_similarity_spacy,
@@ -360,20 +291,9 @@ def test_similarity():
         "text-embedding-ada-002": functools.partial(semantic_similarity_openai, model="text-embedding-ada-002"),
     }
 
-    rows = []
-    for sentence in sentences:
-        base_sentence = sentence["base"]
-        sentences = sentence["sentences"]
-        for similarity_func_name, similarity_func in similarity_funcs.items():
-            similarities = np.array([similarity_func(base_sentence, s) for s in sentences])
-            dist = np.mean(np.abs(np.argsort(-similarities) - np.arange(len(similarities))))
+    rows = calculate_similarity_metrics(sentences, similarity_funcs)
 
-            sorted_sentences = [sentences[i] for i in np.argsort(-similarities)]
-            rbo_similarity = rbo.RankingSimilarity(sorted_sentences, sentences).rbo()
-
-            rows.append([base_sentence, similarity_func_name, dist, rbo_similarity])
-
-    df = pd.DataFrame(rows, columns=["sentence", "similarity_func", "avg_displacement", "rbo"])
+    df = pd.DataFrame(rows)
     print(df)
 
     # compute stats for each similarity function
@@ -384,5 +304,4 @@ def test_similarity():
 
 
 if __name__ == "__main__":
-    # main()
-    test_similarity()
+    main()
