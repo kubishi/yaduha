@@ -1,17 +1,9 @@
 name: Monorepo CI
 
-on:
-  push:
-    branches:
-      - main
-      - master
-  pull_request:
-    branches:
-      - main
-      - master
+on: [push]
 
 jobs:
-  k-s-tests:
+  build:
     name: Regression Tests
     runs-on: ubuntu-latest
     steps:
