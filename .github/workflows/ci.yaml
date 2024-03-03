@@ -28,8 +28,3 @@ jobs:
 
       - name: Run data science tests
         run: pytest tests/
-
-  linting:
-    name: Linting
-    runs-on: ubuntu-latest
-    steps:
