@@ -73,6 +73,15 @@ def semantic_similarity_sentence_transformers(sentence1: str, sentence2: str, mo
     similarity = util.pytorch_cos_sim(emb1, emb2).item()
     return (similarity + 1) / 2  # Scale to 0-1 range
 
+def semantic_similarity_sentence_transforms_all_combinations(sentences: List[str], model: str) -> np.ndarray:
+    embedder = get_model(model)
+    embeddings = embedder.encode(sentences, convert_to_tensor=True)
+    similarities = util.pytorch_cos_sim(embeddings, embeddings)
+    similarities = similarities.cpu().numpy()
+    # scale to 0-1 range
+    similarities = (similarities + 1) / 2
+    return similarities
+
 def _get_openai_embeddings(model: str, *sentences: str) -> Dict[str, np.ndarray]:
     savedir = thisdir / '.results' / 'embeddings' / model
     savedir.mkdir(exist_ok=True, parents=True)
@@ -195,6 +204,32 @@ def split_sentence(sentence: str, model: str = None, res_callback: Optional[Call
                 "name": "set_sentences"
             },
         },
+        {'role': 'user', 'content': 'The book sits on the table.'},
+        {
+            "role": "assistant",
+            "content": None,
+            "function_call": {
+                "arguments": json.dumps({
+                    'sentences': [
+                        {'subject': 'book', 'verb': 'sit', 'verb_tense': 'present', 'object': None},
+                    ]
+                }),
+                "name": "set_sentences"
+            },
+        },
+        {'role': 'user', 'content': 'The boy talked about the girl.'},
+        {
+            "role": "assistant",
+            "content": None,
+            "function_call": {
+                "arguments": json.dumps({
+                    'sentences': [
+                        {'subject': 'boy', 'verb': 'talk', 'verb_tense': 'past', 'object': None},
+                    ]
+                }),
+                "name": "set_sentences"
+            },
+        },
         {'role': 'user', 'content': 'I saw two men walking their dogs yesterday at Starbucks while drinking a cup of coffee'},
         {
             "role": "assistant",
@@ -275,7 +310,31 @@ def make_sentence(sentence: Dict, model: str = None, res_callback: Optional[Call
             'content': 'You are an assistant takes structured data and generates simple SVO or SV natural language sentence. Only add add necessary articles and conjugations. Do not add any other words.'
         },
         {
-            'role': 'system',
+            'role': 'user',
+            'content': "{'subject': 'He', 'verb': '[VERB]', 'verb_tense': 'past', 'object': 'dog'}"
+        },
+        {
+            'role': 'assistant',
+            'content': None,
+            'function_call': {
+                'arguments': json.dumps({'sentence': 'He [VERB]-ed a dog'}),
+                'name': 'make_sentence'
+            }
+        },
+        {
+            'role': 'user',
+            'content': "{'subject': '[SUBJECT]', 'verb': 'drink', 'verb_tense': 'present_continuous'}"
+        },
+        {
+            'role': 'assistant',
+            'content': None,
+            'function_call': {
+                'arguments': json.dumps({'sentence': '[SUBJECT] was drinking'}),
+                'name': 'make_sentence'
+            }
+        },
+        {
+            'role': 'user',
             'content': "{'subject': 'I', 'verb': 'see', 'verb_tense': 'past', 'object': 'man'}"
         },
         {

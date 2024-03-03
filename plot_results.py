@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import pathlib
-from segment import semantic_similarity_spacy, semantic_similarity_bert, semantic_similarity_sentence_transformers
+from segment import semantic_similarity_sentence_transforms_all_combinations, semantic_similarity_spacy, semantic_similarity_bert, semantic_similarity_sentence_transformers
 import plotly.express as px
 import time
 import numpy as np
@@ -37,18 +37,23 @@ def main():
     # semantic_similarity = semantic_similarity_spacy
     # semantic_similarity = semantic_similarity_bert
     semantic_similarity = partial(semantic_similarity_sentence_transformers, model='all-MiniLM-L6-v2')
+    semantic_similarity_all_combos = partial(semantic_similarity_sentence_transforms_all_combinations, model='all-MiniLM-L6-v2')
 
     # compute similarity metrics
     df['sim_simple'] = df.apply(lambda row: semantic_similarity(row['sentence'], row['simple']), axis=1)
     df['sim_comparator'] = df.apply(lambda row: semantic_similarity(row['sentence'], row['comparator']), axis=1)
     df['sim_backwards'] = df.apply(lambda row: semantic_similarity(row['sentence'], row['backwards']), axis=1)
 
-    n_samples = 200
-    baseline_similarities = []
-    all_combos = combinations(df['sentence'].values, 2)
-    for line1, line2 in random.sample(list(all_combos), n_samples):
-        bsim = semantic_similarity(line1, line2)
-        baseline_similarities.append(bsim)
+    similarities = semantic_similarity_all_combos(df['sentence'].unique())
+    # keep only upper triangle
+    similarities = np.triu(similarities, k=1)
+    # make 0s NaNs
+    similarities[similarities == 0] = np.nan
+    sim_mean = np.mean(similarities, where=~np.isnan(similarities))
+    sim_std = np.std(similarities, where=~np.isnan(similarities))
+    baseline_similarities = pd.Series(similarities.flatten())
+
+    print(f'mean: {sim_mean}, std: {sim_std}')
 
     # plot baseline similarities as histogram with plotly
     fig = px.histogram(
@@ -65,11 +70,6 @@ def main():
     fig.write_image(savedir / 'baseline_similarities.pdf')
     time.sleep(1)
     fig.write_image(savedir / 'baseline_similarities.pdf') # do twice because of bug
-
-        
-    sim_mean = np.mean(baseline_similarities)
-    sim_std = np.std(baseline_similarities)
-
 
     sim_metrics = ['sim_simple', 'sim_comparator', 'sim_backwards']
     df['translation_quality'] = df.apply(lambda row: row[sim_metrics].mean(), axis=1)
@@ -97,8 +97,13 @@ def main():
     # convert to percentages
     print(freqs.to_latex(float_format=lambda x: f"{int(x*100)}\%"))
 
+    # group tokens by model and sentence and sum them
+    tokens_df = df.groupby(['model', 'sentence']).agg({
+        'prompt_tokens': 'sum',
+        'completion_tokens': 'sum',
+    })
     # compute min, max, mean, std for prompt_tokens and completion_tokens
-    tokens_summary = df.agg({
+    tokens_summary = tokens_df.agg({
         'prompt_tokens': ['min', 'max', 'mean', 'std'],
         'completion_tokens': ['min', 'max', 'mean', 'std'],
     })
@@ -123,8 +128,18 @@ def main():
         value_name='similarity'
     )
 
+    rename_values = {
+        'sim_simple': 'simple',
+        'sim_comparator': 'comparator',
+        'sim_backwards': 'backwards',
+    }
+    labels = {
+        'similarity_metric': 'generated sentence',
+        'type': 'sentence type',
+    }
+
     fig = px.scatter(
-        df,
+        df.replace(rename_values),
         x='sentence',
         y='similarity',
         symbol='model',
@@ -133,6 +148,7 @@ def main():
         facet_col_wrap=2,
         template='plotly_white',
         custom_data=['sentence', 'simple', 'comparator', 'target', 'backwards'],
+        labels=labels
     )
     fig.update_xaxes(matches=None)
     fig.for_each_xaxis(lambda yaxis: yaxis.update(showticklabels=True))
@@ -144,17 +160,17 @@ def main():
         hovermode="x unified",
     )
     def set_hoverdata(trace) -> str:
-        if trace.legendgroup == 'sim_simple':            
+        if rename_values['sim_simple'] in trace.legendgroup:
             trace.update(hovertemplate="<br>" + "<br>".join([
                 "simple: %{customdata[1]}",
                 "similarity: %{y}",
             ]))
-        elif trace.legendgroup == 'sim_comparator':
+        elif rename_values['sim_comparator'] in trace.legendgroup:
             trace.update(hovertemplate="<br>" + "<br>".join([
                 "comparator: %{customdata[2]}",
                 "similarity: %{y}",
             ]))
-        elif trace.legendgroup == 'sim_backwards':
+        elif rename_values['sim_backwards'] in trace.legendgroup:
             trace.update(hovertemplate="<br>" + "<br>".join([
                 "target: %{customdata[3]}",
                 "backwards: %{customdata[4]}",
@@ -183,14 +199,15 @@ def main():
         opacity=0.1, layer='below',
         row='all', col='all'
     )
+    fig.update_yaxes(range=[0, 1])
     fig.write_html(savedir / 'translation_quality.html')
     fig.write_image(savedir / 'translation_quality.pdf')
 
     # generate same plot for each type separately
     for sim_type in df['type'].unique():
-        df_type = df[df['type'] == sim_type]
+        df_type: pd.DataFrame = df[df['type'] == sim_type]
         fig = px.scatter(
-            df_type,
+            df_type.replace(rename_values),
             x='sentence',
             y='similarity',
             symbol='model',
@@ -199,16 +216,13 @@ def main():
             facet_col_wrap=2,
             template='plotly_white',
             custom_data=['sentence', 'simple', 'comparator', 'target', 'backwards'],
+            labels=labels
         )
         fig.update_xaxes(matches=None)
         fig.for_each_xaxis(lambda yaxis: yaxis.update(showticklabels=True))
         fig.update_traces(marker=dict(size=10, opacity=0.5), mode="markers", hovertemplate=None)
-        fig.update_layout(
-            # autosize=False,
-            # width=1650,
-            # height=2500,
-            hovermode="x unified",
-        )
+        fig.update_layout(hovermode="x unified")
+
         def set_hoverdata(trace) -> str:
             if trace.legendgroup == 'sim_simple':            
                 trace.update(hovertemplate="<br>" + "<br>".join([
@@ -258,6 +272,8 @@ def main():
             width=1000,
             height=500,
         )
+        # set y-axis range
+        fig.update_yaxes(range=[0, 1])
         fig.write_image(savedir / f'translation_quality_{sim_type}.pdf')
 
 
