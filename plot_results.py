@@ -179,7 +179,6 @@ def main():
     # add data to hover data
     fig.for_each_trace(set_hoverdata)
     fig.update_xaxes(tickangle=45)
-    fig.update_yaxes(range=[-0.1, 1.1])
 
     fig.add_hrect(
         y0=sim_mean - sim_std, y1=sim_mean + sim_std,
@@ -199,7 +198,7 @@ def main():
         opacity=0.1, layer='below',
         row='all', col='all'
     )
-    fig.update_yaxes(range=[0, 1])
+    fig.update_yaxes(range=[0, 1.1])
     fig.write_html(savedir / 'translation_quality.html')
     fig.write_image(savedir / 'translation_quality.pdf')
 
@@ -244,7 +243,6 @@ def main():
         # add data to hover data
         fig.for_each_trace(set_hoverdata)
         fig.update_xaxes(tickangle=45)
-        fig.update_yaxes(range=[0, 1.05])
 
         fig.add_hrect(
             y0=sim_mean - sim_std, y1=sim_mean + sim_std,
@@ -273,7 +271,7 @@ def main():
             height=500,
         )
         # set y-axis range
-        fig.update_yaxes(range=[0, 1])
+        fig.update_yaxes(range=[0, 1.1])
         fig.write_image(savedir / f'translation_quality_{sim_type}.pdf')
 
 
