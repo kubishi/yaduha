@@ -138,11 +138,18 @@ def main():
         'type': 'sentence type',
     }
 
+    symbol_map = {
+        'gpt-3.5-turbo': 'diamond-tall',
+        'gpt-4': 'diamond-wide',
+    }
+    marker_format = dict(size=15, opacity=0.8, line=dict(width=2, color='DarkSlateGrey'))
+
     fig = px.scatter(
         df.replace(rename_values),
         x='sentence',
         y='similarity',
         symbol='model',
+        symbol_map=symbol_map,
         color='similarity_metric',
         facet_col='type',
         facet_col_wrap=2,
@@ -152,7 +159,7 @@ def main():
     )
     fig.update_xaxes(matches=None)
     fig.for_each_xaxis(lambda yaxis: yaxis.update(showticklabels=True))
-    fig.update_traces(marker=dict(size=10, opacity=0.5), mode="markers", hovertemplate=None)
+    fig.update_traces(marker=marker_format, mode="markers", hovertemplate=None)
     fig.update_layout(
         autosize=False,
         width=1650,
@@ -210,6 +217,7 @@ def main():
             x='sentence',
             y='similarity',
             symbol='model',
+            symbol_map=symbol_map,
             color='similarity_metric',
             facet_col='type',
             facet_col_wrap=2,
@@ -219,26 +227,26 @@ def main():
         )
         fig.update_xaxes(matches=None)
         fig.for_each_xaxis(lambda yaxis: yaxis.update(showticklabels=True))
-        fig.update_traces(marker=dict(size=10, opacity=0.5), mode="markers", hovertemplate=None)
+        fig.update_traces(marker=marker_format, mode="markers", hovertemplate=None)
         fig.update_layout(hovermode="x unified")
 
-        def set_hoverdata(trace) -> str:
-            if trace.legendgroup == 'sim_simple':            
-                trace.update(hovertemplate="<br>" + "<br>".join([
-                    "simple: %{customdata[1]}",
-                    "similarity: %{y}",
-                ]))
-            elif trace.legendgroup == 'sim_comparator':
-                trace.update(hovertemplate="<br>" + "<br>".join([
-                    "comparator: %{customdata[2]}",
-                    "similarity: %{y}",
-                ]))
-            elif trace.legendgroup == 'sim_backwards':
-                trace.update(hovertemplate="<br>" + "<br>".join([
-                    "target: %{customdata[3]}",
-                    "backwards: %{customdata[4]}",
-                    "similarity: %{y}",
-                ]))
+        # def set_hoverdata(trace) -> str:
+        #     if rename_values['sim_simple'] in trace.legendgroup:
+        #         trace.update(hovertemplate="<br>" + "<br>".join([
+        #             "simple: %{customdata[1]}",
+        #             "similarity: %{y}",
+        #         ]))
+        #     elif rename_values['sim_comparator'] in trace.legendgroup:
+        #         trace.update(hovertemplate="<br>" + "<br>".join([
+        #             "comparator: %{customdata[2]}",
+        #             "similarity: %{y}",
+        #         ]))
+        #     elif rename_values['sim_backwards'] in trace.legendgroup:
+        #         trace.update(hovertemplate="<br>" + "<br>".join([
+        #             "target: %{customdata[3]}",
+        #             "backwards: %{customdata[4]}",
+        #             "similarity: %{y}",
+        #         ]))
 
         # add data to hover data
         fig.for_each_trace(set_hoverdata)
