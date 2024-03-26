@@ -5,3 +5,4 @@ gunicorn==20.1.0
 python-dotenv==1.0.0
 flask-talisman==1.0.0
 aiohttp>=3.9.2 # not directly required, pinned by Snyk to avoid a vulnerability
+setuptools>=65.5.1 # not directly required, pinned by Snyk to avoid a vulnerability
