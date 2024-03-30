@@ -22,7 +22,7 @@ limiter = Limiter(
     default_limits=["10/second"], # to prevent abuse
 )
 LIMITS = {
-    "translate": "1/second;1/minute;200/month",
+    "translate": "1/second;30/minute;200/month",
 }
 
 # API Routes
@@ -129,6 +129,7 @@ def get_random_example():
         return jsonify(sentence=[], error=str(e)), 400
     
 @app.route('/api/translator/translate', methods=['POST'])
+@limiter.limit(LIMITS['translate'], key_func = lambda: session.get('profile', {}).get('sub', 'anonymous'))
 def translate_sentence():
     data: Dict = request.get_json()
     try:
