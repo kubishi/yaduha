@@ -16,12 +16,17 @@ import pandas as pd
 
 from sentence_builder import NOUNS, Object, Subject, Verb
 from segment import make_sentence, split_sentence
-from segment import semantic_similarity_sentence_transformers
+from segment import semantic_similarity_transformers, semantic_similarity_openai
 from translate_ovp2eng import translate as translate_ovp_to_english
 
 dotenv.load_dotenv()
 
-semantic_similarity = partial(semantic_similarity_sentence_transformers, model='all-MiniLM-L6-v2')
+SS_MODE = os.getenv('SS_MODE', 'sentence-transformers')
+
+if SS_MODE == 'openai':
+    semantic_similarity = partial(semantic_similarity_openai, model='text-embedding-ada-002')
+else:
+    semantic_similarity = partial(semantic_similarity_transformers, model='sentence-transformers/all-MiniLM-L6-v2')
 
 thisdir = pathlib.Path(__file__).parent.absolute()
 

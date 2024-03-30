@@ -1,11 +1,18 @@
 from functools import partial
 from itertools import combinations
+import os
 from typing import Tuple
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import pathlib
-from segment import semantic_similarity_sentence_transforms_all_combinations, semantic_similarity_spacy, semantic_similarity_bert, semantic_similarity_sentence_transformers
+from segment import (
+    semantic_similarity_sentence_transforms_all_combinations,
+    semantic_similarity_openai_all_combinations,
+    semantic_similarity_spacy, semantic_similarity_bert,
+    semantic_similarity_openai,
+    semantic_similarity_sentence_transformers
+)
 import plotly.express as px
 import time
 import numpy as np
@@ -15,6 +22,16 @@ np.random.seed(0)
 random.seed(0)
 
 thisdir = pathlib.Path(__file__).parent.absolute()
+
+SS_MODE = os.getenv('SS_MODE', 'sentence-transformers')
+
+
+if SS_MODE == 'openai':
+    semantic_similarity_all_combos = partial(semantic_similarity_openai_all_combinations, model='text-embedding-ada-002')
+    semantic_similarity = partial(semantic_similarity_openai, model='text-embedding-ada-002')
+else:
+    semantic_similarity_all_combos = partial(semantic_similarity_sentence_transforms_all_combinations, model='all-MiniLM-L6-v2')
+    semantic_similarity = partial(semantic_similarity_sentence_transformers, model='all-MiniLM-L6-v2')
 
 
 def main():
@@ -33,11 +50,6 @@ def main():
 
     # replace "he/she/it" (not case-sensitive) with "he"
     df['backwards'] = df['backwards'].str.replace(r'\b([Hh]e/[Ss]he/[Ii]t)\b', 'he', regex=True)
-
-    # semantic_similarity = semantic_similarity_spacy
-    # semantic_similarity = semantic_similarity_bert
-    semantic_similarity = partial(semantic_similarity_sentence_transformers, model='all-MiniLM-L6-v2')
-    semantic_similarity_all_combos = partial(semantic_similarity_sentence_transforms_all_combinations, model='all-MiniLM-L6-v2')
 
     # compute similarity metrics
     df['sim_simple'] = df.apply(lambda row: semantic_similarity(row['sentence'], row['simple']), axis=1)

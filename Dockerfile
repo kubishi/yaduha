@@ -1,6 +1,8 @@
 # Use an official Python runtime as a parent image
 FROM python:3.10.11
 
+RUN pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+
 # Set the working directory to /app
 WORKDIR /app
 

@@ -1,4 +1,5 @@
 """API routes for the app"""
+import logging
 import os
 from typing import Dict, List
 
@@ -24,6 +25,8 @@ limiter = Limiter(
 LIMITS = {
     "translate": "1/second;30/minute;200/month",
 }
+
+TRANSLATION_QUALITY_THRESHOLD = 0.8
 
 # API Routes
 @app.errorhandler(429)
@@ -134,19 +137,20 @@ def translate_sentence():
     data: Dict = request.get_json()
     try:
         response = translate_english_to_ovp(data.get('english'))
-        if response['sim_simple'] <= 0.8:
+        logging.info(response)
+        if response['sim_simple'] < TRANSLATION_QUALITY_THRESHOLD:
             response['warning'] = (
                 'The input sentence is complex, so alot of meaning may have been lost in breaking ' +
                 'it down into simple sentences.'
             )
-        elif response['sim_backwards'] <= 0.8:
+        elif response['sim_backwards'] < TRANSLATION_QUALITY_THRESHOLD:
             response['warning'] = 'The translation doesn\'t seem to be very accurate.'
-        elif response['sim_comparator'] <= 0.8:
+        elif response['sim_comparator'] < TRANSLATION_QUALITY_THRESHOLD:
             response['warning'] = (
                 'The translator doesn\'t know some of the words in your input sentence. ' +
                 'It left the english words as placeholders and gave you the best translation it could.'
             )
-        elif all([response[k] > 0.9 for k in ['sim_simple', 'sim_backwards', 'sim_comparator']]):
+        elif all([response[k] >= TRANSLATION_QUALITY_THRESHOLD for k in ['sim_simple', 'sim_backwards', 'sim_comparator']]):
             response['message'] = 'The translation is probably pretty good!'
         return jsonify(
             english=response['backwards'],
