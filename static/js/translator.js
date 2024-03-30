@@ -29,7 +29,16 @@ $(document).ready(function() {
             body: JSON.stringify({
                 english: english
             })
-        }).then(res => res.json()).then(response => {
+        }).then(res => {
+            if (res.status == 200) {
+                let res_json = res.json();
+                return res_json;
+            } else if (res.status == 429) {
+                throw new Error(`Too many requests. Please try again later.`);
+            } else{
+                throw new Error(`Unknown error: ${res.status}`);
+            }
+        }).then(response => {
             console.log(response);
             $("#output-translator-english").text(response.english);
             $("#output-translator-paiute").text(response.paiute);
@@ -42,9 +51,10 @@ $(document).ready(function() {
                 $("#translation-message").show();
             }
             $("#translation-section").show();
-
         }).catch(error => {
             console.log(error);
+            $("#output-translator-warning").text(`*${error}`);
+            $("#translation-warning").show();
         }).finally(() => {
             // re-enable button and remove bootstrap spinner
             $("#btn-translator").prop("disabled", false);
