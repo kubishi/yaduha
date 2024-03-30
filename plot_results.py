@@ -104,13 +104,35 @@ def main():
     })
     # compute min, max, mean, std for prompt_tokens and completion_tokens
     tokens_summary = tokens_df.agg({
-        'prompt_tokens': ['min', 'max', 'mean', 'std'],
-        'completion_tokens': ['min', 'max', 'mean', 'std'],
+        'prompt_tokens': ['min', 'max', 'mean', 'std', 'sum'],
+        'completion_tokens': ['min', 'max', 'mean', 'std', 'sum'],
     })
     tokens_summary.to_csv(savedir / 'translation_quality_tokens_summary.csv')
     tokens_summary.to_html(savedir / 'translation_quality_tokens_summary.html')
     print(tokens_summary.to_string())
     print(tokens_summary.to_latex(float_format=lambda x: f"{int(x)}"))
+
+    token_costs = {
+        'gpt-3.5-turbo': {
+            'prompt_tokens': 0.5 / 1e6,
+            'completion_tokens': 1.5 / 1e6,
+        },
+        'gpt-4': {
+            'prompt_tokens': 30 / 1e6,
+            'completion_tokens': 60 / 1e6,
+        },
+    }
+    # compute token costs
+    tokens_df = tokens_df.reset_index()
+    tokens_df['prompt_cost'] = tokens_df.apply(lambda row: row['prompt_tokens'] * token_costs[row['model']]['prompt_tokens'], axis=1)
+    tokens_df['completion_cost'] = tokens_df.apply(lambda row: row['completion_tokens'] * token_costs[row['model']]['completion_tokens'], axis=1)
+    tokens_costs = tokens_df.groupby('model').agg({
+        'prompt_cost': ['min', 'max', 'mean', 'std', 'sum'],
+        'completion_cost': ['min', 'max', 'mean', 'std', 'sum'],
+    })
+    tokens_costs.to_csv(savedir / 'translation_quality_tokens_costs.csv')
+    tokens_costs.to_html(savedir / 'translation_quality_tokens_costs.html')
+    print(tokens_costs.to_string())
 
     # rename types
     df['type'] = df['type'].replace({
@@ -120,6 +142,8 @@ def main():
         '2s': 'complex',
         '2c': 'two-clause',
     })
+
+    print(df.groupby(by=["model", "type"]).agg({'translation_quality': ['mean', 'std']}).to_string())
 
     df = df.melt(
         id_vars=['model', 'sentence', 'type', 'simple', 'comparator', 'target', 'backwards'],
