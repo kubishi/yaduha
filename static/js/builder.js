@@ -297,14 +297,24 @@ $('#btn-translate').click(function() {
             "object_suffix": object_suffix
         })
     }).catch(err => {
+        console.log(`Status code: ${err.status}`);
+        $('#btn-translate').prop('disabled', false);
+    }).then(res => {
+        if (res.status == 200) {
+            let res_json = res.json();
+            return res_json;
+        } else if (res.status == 429) {
+            throw new Error(`Too many requests. Please try again later.`);
+        } else{
+            throw new Error(`Unknown error: ${res.status}`);
+        }
+    }).then(res_json => {
+        $('#translation').html(res_json.translation);
+        $('#btn-translate').css('display', 'none');
+    }).catch(err => {
         console.error(err);
-        // enable btn-translate
-        $('#btn-translate').prop('disabled', false)
-    }).then(response => response.json()).then(res => {
-        // set the contents of #translation to the returned translation
-        $('#translation').html(res.translation)
-        // make btn-translate invisible
-        $('#btn-translate').css('display', 'none')
+        $('#translation').html(`<br/>${err.message}`);
+        $('#btn-translate').prop('disabled', false);
     });
 })
 

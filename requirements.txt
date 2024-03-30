@@ -7,3 +7,6 @@ flask-talisman==1.0.
 matplotlib==3.8.
 plotly==5.19.0
 kaleido==0.2.1
+auth0-python==4.4.0
+Flask-OAuthlib==0.9.6
+Werkzeug==2.3.7

@@ -1,140 +1,70 @@
+import logging
+import pathlib
 from typing import Dict
-from flask import Flask, render_template, request, jsonify, redirect, url_for
+from flask import Flask, render_template, request, jsonify, redirect, send_from_directory, url_for
 from flask_talisman import Talisman
 import os
+from helpers import MyAPIError
 from translate_eng2ovp import translate_ovp_to_english, translate_english_to_ovp
 
-app = Flask(__name__)
+
+from helpers import MyAPIError
+from app_base import app, bp
+import app_oauth
+import app_api
+
+thisdir = pathlib.Path(__file__).parent.absolute()
 
 if os.getenv('FLASK_ENV') == 'production':
     Talisman(app, content_security_policy=None)
 
+class AppError(Exception):
+    def __init__(self, status_code: int, message: str):
+        self.status_code = status_code
+        self.message = message
+
+# error page
+@bp.errorhandler(404)
+def page_not_found(e):
+    logging.warning('Page not found: %s', request.path)
+    return render_template('error.html', error_code=404, error_message='Page not found'), 404
+
+# error pages for ApiError, AppError, and Exception
+@bp.errorhandler(MyAPIError)
+def handle_api_error(e: MyAPIError):
+    logging.exception(e)
+    return render_template('error.html', error_code=e.status_code, error_message=e.message), e.status_code
+
+@bp.errorhandler(AppError)
+def handle_app_error(e: AppError):
+    logging.exception(e)
+    return render_template('error.html', error_code=e.status_code, error_message=e.message), e.status_code
+
+@bp.errorhandler(Exception)
+def handle_exception(e: Exception):
+    logging.exception(e)
+    return render_template('error.html', error_code=500, error_message='Internal server error'), 500
+
 from sentence_builder import get_all_choices, format_sentence, get_random_sentence, get_random_sentence_big
 
-@app.route('/')
-def index():
-    return redirect(url_for('builder'))
+# favicon route - in static/img/favicon.ico
+@bp.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(bp.root_path, 'static/img'), 'favicon.ico')
 
-@app.route('/builder')
+@bp.route('/')
+def index():
+    return redirect(url_for('kubishi.builder'))
+
+@bp.route('/builder')
 def builder():
     return render_template('builder.html')
 
-@app.route('/translator')
+@bp.route('/translator')
 def translator():
     return render_template('translator.html')
 
-@app.route('/api/builder/choices', methods=['POST'])
-def get_choices():
-    data: Dict = request.get_json()
-    choices = get_all_choices(
-        subject_noun=data.get('subject_noun') or None,
-        subject_suffix=data.get('subject_suffix') or None,
-        verb=data.get('verb') or None,
-        verb_tense=data.get('verb_tense') or None,
-        object_pronoun=data.get('object_pronoun') or None,
-        object_noun=data.get('object_noun') or None,
-        object_suffix=data.get('object_suffix') or None,
-    )
-    
-    sentence = []
-    try:
-        sentence = format_sentence(
-            subject_noun=data.get('subject_noun') or None,
-            subject_suffix=data.get('subject_suffix') or None,
-            verb=data.get('verb') or None,
-            verb_tense=data.get('verb_tense') or None,
-            object_pronoun=data.get('object_pronoun') or None,
-            object_noun=data.get('object_noun') or None,
-            object_suffix=data.get('object_suffix') or None,
-        )
-    except Exception as e:
-        print(e) 
-
-    print(choices)
-
-    # here you can call your functions and build the sentence
-    return jsonify(choices=choices, sentence=sentence)
-
-@app.route('/api/builder/sentence', methods=['POST'])
-def build_sentence():
-    data: Dict = request.get_json()
-    try:
-        sentence = format_sentence(
-            subject_noun=data.get('subject_noun') or None,
-            subject_suffix=data.get('subject_suffix') or None,
-            verb=data.get('verb') or None,
-            verb_tense=data.get('verb_tense') or None,
-            object_pronoun=data.get('object_pronoun') or None,
-            object_noun=data.get('object_noun') or None,
-            object_suffix=data.get('object_suffix') or None,
-        )
-        return jsonify(sentence=sentence)
-    except Exception as e:
-        return jsonify(sentence=[], error=str(e)), 400
-    
-
-@app.route('/api/builder/translate', methods=['POST'])
-def get_translation():
-    data: Dict = request.get_json()
-    try:
-        translation = translate_ovp_to_english(
-            subject_noun=data.get('subject_noun') or None,
-            subject_suffix=data.get('subject_suffix') or None,
-            verb=data.get('verb') or None,
-            verb_tense=data.get('verb_tense') or None,
-            object_pronoun=data.get('object_pronoun') or None,
-            object_noun=data.get('object_noun') or None,
-            object_suffix=data.get('object_suffix') or None,
-            model='gpt-3.5-turbo'
-        )
-        return jsonify(translation=translation)
-    except Exception as e:
-        return jsonify(sentence=[], error=str(e)), 400
-    
-
-# route to get random sentence
-@app.route('/api/builder/random', methods=['POST'])
-def get_random():
-    data: Dict = request.get_json() 
-    try:
-        choices = get_all_choices(
-            subject_noun=data.get('subject_noun') or None,
-            subject_suffix=data.get('subject_suffix') or None,
-            verb=data.get('verb') or None,
-            verb_tense=data.get('verb_tense') or None,
-            object_pronoun=data.get('object_pronoun') or None,
-            object_noun=data.get('object_noun') or None,
-            object_suffix=data.get('object_suffix') or None,
-        )
-
-        choices = get_random_sentence(choices)
-        sentence = format_sentence(**{k: v['value'] for k, v in choices.items()})
-        return jsonify(choices=choices, sentence=sentence)
-    except Exception as e:
-        return jsonify(sentence=[], error=str(e)), 400
-
-@app.route('/api/builder/random-example', methods=['GET'])
-def get_random_example():
-    try:
-        choices = get_random_sentence_big()
-        sentence = format_sentence(**{k: v['value'] for k, v in choices.items()})
-        return jsonify(choices=choices, sentence=sentence)
-    except Exception as e:
-        return jsonify(sentence=[], error=str(e)), 400
-    
-@app.route('/api/translator/translate', methods=['POST'])
-def translate_sentence():
-    data: Dict = request.get_json()
-    try:
-        response = translate_english_to_ovp(data.get('english'))
-        return jsonify(english=response['backwards'], paiute=response['target'])
-    except Exception as e:
-        return jsonify(error=str(e)), 400
-
-# health check
-@app.route('/api/healthz', methods=['GET'])
-def health_check():
-    return jsonify(status='ok')
-
+app.register_blueprint(bp)
 if __name__ == '__main__':
-    app.run(debug=True)
+    logging.basicConfig(level=logging.INFO)
+    app.run(debug=True, host='0.0.0.0', port=5000)

@@ -2,11 +2,31 @@
 {% block content %}
 
 <div class="container pt-3">
-    <div class="row justify-content-center">
-        <div class="col-6">
+    <div class="row lead justify-content-center">
+        <div class="col-md-8 text-center">
+            <p  class="text-center">
+                This translator is a work in progress.
+                It is not perfect and may not be accurate.
+                It works by first breaking down your input sentence into simple sentences
+                that it knows how to build in Paiute.
+                It then translates each simple sentence.
+                Please take the results with a grain of salt and always consult our 
+                great teachers at the Nüümü Yadoha Language Program!
+            </p>
+            <p>
+                <u>Some suggestions to try out</u>: 
+            </br> I eat rice.
+            </br> The dog and I are running.
+            </br> The cat slept.
+            </br> He will fish.
+            </p>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-6">
             <form>
                 <div class="form-group">
-                    <input type="text" class="form-control mb-1" id="input-translator-english" placeholder="Enter a English sentence">
+                    <input type="text" class="form-control mb-1" id="input-translator-english" placeholder="Enter a sentence in English">
                 </div>
                 <button type="button" class="btn btn-outline-dark w-100" id="btn-translator">Submit</button>
             </form>
@@ -20,6 +40,16 @@
         <div class="col-4 text-start">
             <b>Paiute</b>
             <p id="output-translator-paiute"></p>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-4" id="translation-message" style="display: none">
+        <div class="col-md-4 text-start">
+            <p id="output-translator-message" class="text-success text-center"></p>
+        </div>
+    </div>  
+    <div class="row justify-content-center mt-4" id="translation-warning" style="display: none">
+        <div class="col-md-8 text-start">
+            <p id="output-translator-warning" class="text-danger text-center"></p>
         </div>
     </div>
 </div>
