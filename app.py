@@ -70,7 +70,7 @@ def build_sentence():
         )
         return jsonify(sentence=sentence)
     except Exception as e:
-        return jsonify(sentence=[], error=str(e))
+        return jsonify(sentence=[], error=str(e)), 400
     
 
 @app.route('/api/builder/translate', methods=['POST'])
@@ -84,11 +84,12 @@ def get_translation():
             verb_tense=data.get('verb_tense') or None,
             object_pronoun=data.get('object_pronoun') or None,
             object_noun=data.get('object_noun') or None,
-            object_suffix=data.get('object_suffix') or None
+            object_suffix=data.get('object_suffix') or None,
+            model='gpt-3.5-turbo'
         )
         return jsonify(translation=translation)
     except Exception as e:
-        return jsonify(sentence=[], error=str(e))
+        return jsonify(sentence=[], error=str(e)), 400
     
 
 # route to get random sentence
@@ -110,7 +111,7 @@ def get_random():
         sentence = format_sentence(**{k: v['value'] for k, v in choices.items()})
         return jsonify(choices=choices, sentence=sentence)
     except Exception as e:
-        return jsonify(sentence=[], error=str(e))
+        return jsonify(sentence=[], error=str(e)), 400
 
 @app.route('/api/builder/random-example', methods=['GET'])
 def get_random_example():
@@ -119,7 +120,7 @@ def get_random_example():
         sentence = format_sentence(**{k: v['value'] for k, v in choices.items()})
         return jsonify(choices=choices, sentence=sentence)
     except Exception as e:
-        return jsonify(sentence=[], error=str(e))
+        return jsonify(sentence=[], error=str(e)), 400
     
 @app.route('/api/translator/translate', methods=['POST'])
 def translate_sentence():
@@ -128,7 +129,7 @@ def translate_sentence():
         response = translate_english_to_ovp(data.get('english'))
         return jsonify(english=response['backwards'], paiute=response['target'])
     except Exception as e:
-        return jsonify(error=str(e))
+        return jsonify(error=str(e)), 400
 
 # health check
 @app.route('/api/healthz', methods=['GET'])
