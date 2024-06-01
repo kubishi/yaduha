@@ -1,50 +1,29 @@
+{% extends "index.html" %}
+{% block content %}
+
 <div class="container pt-1">
     {% include 'help_subject.html' %}
     {% include 'help_object.html' %}
     {% include 'help_verb.html' %}
-    <!-- <div class="row">
-        <div class="col-8">
-
-        </div>
-        <div class="col-4">
-            <button onclick="startIntro();" class="btn btn-outline-dark btn-block" style="width: 100%;">
-                Tour
-            </button>
-        </div>
-    </div>
-    <div class="row mb-4 mt-2">
-        <div class="col">
-            <h1 style="text-align: center;">Owens Valley Paiute Sentence Builder</h1>
-        </div>
-    </div> -->
-    <!-- put title and tour button in navbar instead -->
-    <nav class="navbar fixed-top navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand text-dark" href="/">Kubishi Sentences</a>
-            <div class="ml-auto">
-                <button onclick="startIntro();" class="btn btn-outline-dark">
-                    Tour
-                </button>
-            </div>
-        </div>
-    </nav>
-    
     <div class="row pt-2" style="margin-top: 56px;">
+        <!-- <button type="button" class="btn btn-lg btn-danger" data-bs-trigger="hover focus"  data-bs-toggle="popover" title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button> -->
         <div class="col col-12 col-md-4 p-1">
             <div class="position-relative" style="border: 1px dashed red; border-radius: 5px; padding: 10px;">
                 <!-- add ? icon popover -->
                 <h2 class="text-center">Subject</h2>
-                <button type="button" class="icon-button" id="help-subject-popover" data-toggle="popover">
+                <button type="button" class="icon-button" id="help-subject-popover"
+                    data-bs-toggle="popover" data-bs-trigger="hover focus"
+                    title="Subject" data-bs-content-id="help-subject">
                     <i class="fas fa-question-circle"></i>
                 </button>
                 <div class="row">
                     <div class="col-6" style="padding-right: 6px;" id="subject-noun-choice">
-                        <select id="subject-noun" aria-label="subject-noun" onchange="updateUI('/api/choices')">
+                        <select id="subject-noun" aria-label="subject-noun" onchange="updateUI('/api/builder/choices')">
                             <option value="" selected disabled>Subject</option>
                         </select>
                     </div>
                     <div class="col-6" style="padding-left: 6px;" id="subject-suffix-choice">
-                        <select class="form-select mt-1" id="subject-suffix" aria-label="subject-suffix" onchange="updateUI('/api/choices')">
+                        <select class="form-select mt-1" id="subject-suffix" aria-label="subject-suffix" onchange="updateUI('/api/builder/choices')">
                             <option value="" selected disabled>Suffix</option>
                         </select>
                     </div>
@@ -54,18 +33,20 @@
         <div class="col col-12 col-md-4 p-1">
             <div class="position-relative" style="border: 1px dashed green; border-radius: 5px; padding: 10px;">
                 <h2 style="text-align: center;">Object</h2>
-                <button type="button" class="icon-button" id="help-object-popover" data-toggle="popover">
+                <button type="button" class="icon-button" id="help-object-popover"
+                        data-bs-toggle="popover" data-bs-trigger="hover focus"
+                        title="Object" data-bs-content-id="help-object">
                     <i class="fas fa-question-circle"></i>
                 </button>
                 <!-- Object Dropdown -->
                 <div class="row equal-spacing">
                     <div class="col-6" style="padding-right: 6px;" id="object-noun-choice">
-                        <select class="form-select mt-1" id="object-noun" aria-label="object-noun" onchange="updateUI('/api/choices')">
+                        <select class="form-select mt-1" id="object-noun" aria-label="object-noun" onchange="updateUI('/api/builder/choices')">
                             <option value="" selected disabled>Object</option>
                         </select>
                     </div>
                     <div class="col-6" style="padding-left: 6px;" id="object-suffix-choice">
-                        <select class="form-select mt-1" id="object-suffix" aria-label="object-suffix" onchange="updateUI('/api/choices')">
+                        <select class="form-select mt-1" id="object-suffix" aria-label="object-suffix" onchange="updateUI('/api/builder/choices')">
                             <option value="" selected disabled>Suffix</option>
                         </select>
                     </div>
@@ -75,24 +56,26 @@
         <div class="col col-12 col-md-4 p-1">
             <div class="position-relative" style="border: 1px dashed blue; border-radius: 5px; padding: 10px;">
                 <h2 style="text-align: center;">Verb</h2>
-                <button type="button" class="icon-button" id="help-verb-popover" data-toggle="popover">
+                <button type="button" class="icon-button" id="help-verb-popover"
+                        data-bs-toggle="popover" data-bs-trigger="hover focus"
+                        title="Verb" data-bs-content-id="help-verb">
                     <i class="fas fa-question-circle"></i>
                 </button>
                 <!-- Verb Dropdown -->
                 <div class="row">
                     <!-- object pronoun -->
                     <div class="col-4" style="padding-right: 6px;" id="object-pronoun-choice">
-                        <select class="form-select mt-1" id="object-pronoun" aria-label="object-pronoun" onchange="updateUI('/api/choices')">
+                        <select class="form-select mt-1" id="object-pronoun" aria-label="object-pronoun" onchange="updateUI('/api/builder/choices')">
                             <option value="" selected disabled>Pronoun</option>
                         </select>
                     </div>
                     <div class="col-4" style="padding-right: 6px; padding-left: 6px;" id="verb-choice">
-                        <select class="form-select mt-1" id="verb" aria-label="verb" onchange="updateUI('/api/choices')">
+                        <select class="form-select mt-1" id="verb" aria-label="verb" onchange="updateUI('/api/builder/choices')">
                             <option value="" selected disabled>Verb</option>
                         </select>
                     </div>
                     <div class="col-4" style="padding-left: 6px;" id="verb-tense-choice">
-                        <select class="form-select mt-1" id="verb-tense" aria-label="verb-tense" onchange="updateUI('/api/choices')">
+                        <select class="form-select mt-1" id="verb-tense" aria-label="verb-tense" onchange="updateUI('/api/builder/choices')">
                             <option value="" selected disabled>Tense</option>
                             <option value="present">Present</option>
                         </select>
@@ -106,7 +89,7 @@
             <div class="row mt-3">
                 <div class="col text-center">
                     <h3 style="text-align: center;" id="sentence"></h3>
-                    <button type="button" class="btn btn-outline-dark mt-3" id="btn-randomize" onclick="updateUI('/api/random')">Randomize Choices</button>
+                    <button type="button" class="btn btn-outline-dark mt-3" id="btn-randomize" onclick="updateUI('/api/builder/random')">Randomize Choices</button>
                 </div>
             </div>
             <div class="row">
@@ -120,3 +103,8 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/builder.js') }}"></script>
+{% endblock %}

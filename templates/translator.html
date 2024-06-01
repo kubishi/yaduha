@@ -1,0 +1,60 @@
+{% extends "index.html" %}
+{% block content %}
+
+<div class="container pt-3">
+    <div class="row lead justify-content-center">
+        <div class="col-md-10 text-center">
+            <p class="text-center">
+                This translator is based on the research presented in the paper
+                <a href='https://arxiv.org/abs/2405.08997'>LLM-Assisted Rule Based Machine Translation for Low/No-Resource Languages</a> .
+                It is an educational tool and is not perfect.
+                Please take the results with a grain of salt and always consult our 
+                great teachers at the <a href="http://www.ovcdc.com/language">Nüümü Yadoha Language Program</a>
+                for the most accurate translations.
+            </p>
+            <p>
+                <u>Some suggestions to try out</u>: 
+                </br> I eat rice.
+                </br> The dog and I are running.
+                </br> The cat slept.
+                </br> He will fish.
+            </p>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-6">
+            <form>
+                <div class="form-group">
+                    <input type="text" class="form-control mb-1" id="input-translator-english" placeholder="Enter a sentence in English">
+                </div>
+                <button type="button" class="btn btn-outline-dark w-100" id="btn-translator">Submit</button>
+            </form>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-4" id="translation-section" style="display: none">
+        <div class="col-4 text-end">
+            <b>English</b>
+            <p id="output-translator-english"></p>
+        </div>
+        <div class="col-4 text-start">
+            <b>Paiute</b>
+            <p id="output-translator-paiute"></p>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-4" id="translation-message" style="display: none">
+        <div class="col-md-4 text-start">
+            <p id="output-translator-message" class="text-success text-center"></p>
+        </div>
+    </div>  
+    <div class="row justify-content-center mt-4" id="translation-warning" style="display: none">
+        <div class="col-md-8 text-start">
+            <p id="output-translator-warning" class="text-danger text-center"></p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/translator.js') }}"></script>
+{% endblock %}

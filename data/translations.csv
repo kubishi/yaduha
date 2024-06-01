@@ -1,0 +1,101 @@
+sentence                                        ,translation                                   ,label
+tei-zawa-ku ihi                                 ,This cooked us.                               ,    1
+isha'-uu tüba-neika ai-hibi-pü                  ,That coyote has drunk these pinenuts.         ,    1
+tüba-uu tsibui-dü                               ,Those pinenuts climb.                         ,    1
+ta-w̃ui-gaa-wei mahuw̃a                           ,"They are going to write to us, you and I."   ,    1
+wo'ada-uu aaponu'-oka u-zawa-ti                 ,The mosquito is cooking the apple.            ,    1
+tübbi-uu tüwoobü-neika a-yadohi-pü              ,The rock has talked to the earth.             ,    1
+payahuupü-uu katü-ti                            ,That river is sitting.                        ,    1
+kwisha'i-wei üü                                 ,You will sneeze.                              ,    1
+isha'-ii tübbi-neika mai-w̃ui-gaa-wei            ,This coyote is going to write these rocks.    ,    1
+toni-uu wünü-ti                                 ,The wickiup is standing.                      ,    1
+isha'pugu-neika ihi mai-dama'i-ku               ,This found these dogs.                        ,    1
+wo'ada-neika ihi mai-dama'i-gaa-wei             ,This will find these mosquitoes.              ,    1
+tabuutsi'-uu tüba-noka u-buni-ku                ,The cottontail saw those pinenuts.            ,    1
+maishibü-neika uhu ai-nia-ti                    ,He/she/it is reading these corn.              ,    1
+koopi'-ii wükada-noka ui-nia-ku                 ,This coffee read those bird snakes.           ,    1
+tuunapi-uu waakü-pü                             ,That food has worked.                         ,    1 
+katünu-ii koopi'-oka ui-nobini-wei              ,This chair will visit those coffees.          ,    1
+aingwü-neika mahu ma-nia-dü                     ,He/she/it reads the squirrel.                 ,    1
+maishibü-uu wükihaa-gaa-wei                     ,That corn is going to smile.                  ,    1
+isha'-uu isha'-oka ui-zawa-wei                  ,That coyote will cook those coyotes.          ,    1
+aingwü-ii tsibui-dü                             ,This squirrel climbs.                         ,    1
+katünu-ii tübbi-neika ma-buni-wei               ,This chair will see this rock.                ,    1
+wükada-uu tsibui-ku                             ,The bird snake climbed.                       ,    1
+wo'ada-uu paya-neika ma-hibi-ti                 ,The mosquito is drinking the water.           ,    1
+pagwi-neika mahu ma-w̃ui-pü                      ,He/she/it has written/is writing this fish.   ,    1
+tabuutsi'-uu isha'pugu-neika mai-nobini-gaa-wei ,That cottontail is going to visit those dogs. ,    1
+paya-neika mahu mai-hibi-gaa-wei                ,He/she/it is going to drink this water.       ,    1
+nishua'i-pü nüü                                 ,I am laughing.                                ,    1
+aaponu'-ii küna-neika a-düka-pü                 ,This apple has eaten this wood.               ,    1
+katü-dü uhu                                     ,He/she/it sits.                               ,    1
+mukita-uu isha'pugu-noka u-naki-ti              ,The lizard is chasing the dog.                ,    1
+isha'-oka üü ui-dama'i-ku                       ,You found those coyotes.                      ,    1
+pahabichi-uu wükihaa-dü                         ,That bear smiles.                             ,    1
+pahabichi-ii wo'abi-noka ui-naka-dü             ,This bear hears those worms.                  ,    1
+habi-ku ihi                                     ,This lay down.                                ,    1
+tümui-ku taa                                    ,You and I wrote.                              ,    1
+üwi-ku ihiw̃a                                    ,These slept.                                  ,    1
+tübbi-uu ta-naka-ku                             ,"That rock heard us, you and I."              ,    1
+wo'ada-uu tei-gwana-dü                          ,That mosquito smells us.                      ,    1
+tümui-dü mahuw̃a                                 ,They write.                                   ,    1
+üwi-dü nüügwa                                   ,We are sleeping.                              ,    1
+tsibui-ti mahu                                  ,He/she/it is climbing.                        ,    1
+mukita-uu tsibui-pü                             ,That lizard has climbed.                      ,    1
+payahuupü-uu toyabi-neika ma-zawa-gaa-wei       ,The river is going to cook the mountain.      ,    1
+nobi-uu kwisha'i-ku                             ,That house sneezed.                           ,    1
+kamü-uu wükihaa-dü                              ,That jackrabbit smiles.                       ,    1
+toni-uu katü-wei                                ,That wickiup will sit.                        ,    1
+aingwü-uu katünu-noka u-zawa-gaa-wei            ,The squirrel is going to cook that chair.     ,    1
+paya-uu pasohobü-neika ai-buni-wei              ,That water will see those trees.              ,    1
+toyabi-ii tsibui-ku                             ,The mountain climbed.                         ,    1
+tsibui-wei taa                                  ,You and I will climb.                         ,    1
+pugu-uu wo'abi-neika ai-naki-ku                 ,That horse chased those worms.                ,    1
+mukita-uu wai-noka u-nobini-gaa-wei             ,The lizard is going to visit the rice.        ,    1
+wükihaa-ti mahu                                 ,He/she/it is smiling.                         ,    1
+tüsüga-ii tüwoobü-neika ma-naki-gaa-wei         ,This weasel is going to chase this earth.     ,    1
+yadoha-ku uhuw̃a                                 ,They talked.                                  ,    1
+pahabichi-ii pugu-noka ui-nia-ku                ,The bear read those horses.                   ,    1
+paya-uu katünu-noka ui-yadohi-gaa-wei           ,Water is going to talk to those chairs.       ,    1
+pagwi-ii wo'abi-noka ui-düka-ti                 ,This fish is eating those worms.              ,    1
+tabuutsi'-uu tübinohi-ku                        ,That cottontail played.                       ,    1
+tünia-ku nüü                                    ,I read.                                       ,    1
+poyoha-pü ihiw̃a                                 ,These are running.                            ,    0
+mukita-uu yotsi-wei                             ,That lizard will fly.                         ,    1
+tabuutsi'-uu tübbi-neika ma-buni-pü             ,That cottontail has seen this rock.           ,    1
+isha'pugu-ii tüba-neika ai-nobini-ku            ,This dog visited these pinenuts.              ,    1
+isha'-uu katü-dü                                ,That coyote sits.                             ,    1
+pasohobü-ii tsiipa-noka ui-naka-ku              ,The tree heard those birds.                   ,    1
+kamü-uu mukita-neika ma-zawa-wei                ,That jackrabbit will cook this lizard.        ,    1
+tuunapi-uu tümui-gaa-wei                        ,That food is going to write.                  ,    1
+wai-uu aingwü-neika ai-naka-pü                  ,That rice has heard those squirrels.          ,    1
+tsiipa-uu pugu-noka ui-naka-pü                  ,The bird has heard those horses.              ,    1
+pagwi-ii wükihaa-gaa-wei                        ,These fish are going to smile.                ,    1
+tei-nobini-dü uhuw̃a                             ,They visit us.                                ,    1
+paya-neika ihi ma-dama'i-dü                     ,This finds this water.                        ,    1
+isha'pugu-neika nüügwa ma-düka-ku               ,We ate this dog.                              ,    1
+tabuutsi'-uu hubiadu-dü                         ,The cottontail sings.                         ,    1
+kwadzi-ii yadoha-wei                            ,This tail will talk.                          ,    1
+isha'pugu-uu mukita-neika ai-naka-ti            ,That dog is hearing these lizards.            ,    1
+pasohobü-noka üü u-zawa-gaa-wei                 ,You are going to cook that tree.              ,    1
+tsiipa-noka uhu u-buni-pü                       ,He/she/it has seen or is seeing that bird.    ,    1
+tuunapi-neika mahu mai-gwati-ku                 ,He/she/it hit the foods here.                 ,    0
+isha'-eika nüügwa ai-w̃ui-gaa-wei                ,We are going to write coyotes.                ,    1
+pasohobü-uu toyabi-neika ma-hibi-pü             ,The tree has drunk the mountain.              ,    1
+aingwü-uu aaponu'-eika ai-naka-ti               ,The squirrel is hearing these apples.         ,    1
+tabuutsi'-uu wai-noka u-yadohi-pü               ,The cottontail has talked to the rice.        ,    1
+katünu-noka mahuw̃a ui-gwati-dü                  ,They are hitting those chairs.                ,    1
+tüwoobü-neika uhuw̃a mai-buni-ti                 ,They are seeing these earths.                 ,    1
+koopi'-uu hukaw̃ia-ti                            ,Coffee is walking.                            ,    1
+küna-ii ni-naka-ti                              ,This wood is hearing us.                      ,    1
+toyabi-neika taagwa ma-buni-gaa-wei             ,We are going to see this mountain.            ,    1
+isha'pugu-ii üwi-dü                             ,This dog sleeps.                              ,    1
+pagwi-neika ihi mai-naka-gaa-wei                ,This will hear these fish.                    ,    1
+kwadzi-ii toni-neika ai-gwati-gaa-wei           ,This tail is going to hit those wickiups.     ,    1
+paya-ii tuunapi-noka u-düka-ti                  ,This water is eating that food.               ,    1
+mukita-uu tümui-gaa-wei                         ,That lizard is going to write.                ,    1
+pahabichi-uu küna-neika ma-zawa-ku              ,The bear cooked the wood.                     ,    1
+isha'pugu-uu tabuutsi'-eika a-zawa-dü           ,That dog is cooking this cottontail.          ,    1
+katünu-uu pahabichi-noka u-naki-ku              ,The chair chased the bear.                    ,    1
+küna-uu waakü-gaa-wei                           ,That wood is going to work.                   ,    1
+pugu-neika mahu ai-naka-ku                      ,He/she/it heard these horses.                 ,    1

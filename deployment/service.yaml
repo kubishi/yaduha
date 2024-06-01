@@ -1,0 +1,95 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: kubishi-sentences
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: kubishi-sentences
+  name: kubishi-sentences-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: kubishi-sentences-service
+      app.kubernetes.io/part-of: kubishi-sentences
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: kubishi-sentences-service
+        app.kubernetes.io/part-of: kubishi-sentences
+    spec:
+      containers:
+        - name: service
+          image: registry.digitalocean.com/kubishi-registry/kubishi-sentences:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: FLASK_ENV
+              value: "production"
+            - name: DEPLOY_ID # for reasy re-deployment
+              value: DEPLOYID-065daf2c829ead678b4a17764fe26cad
+            - name: SECRET_KEY # mount from secret
+              valueFrom:
+                secretKeyRef:
+                  name: secret-key
+                  key: SECRET_KEY
+
+            - name: OPENAI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: openai-api-key
+                  key: OPENAI_API_KEY
+            - name: OPENAI_MODEL
+              value: gpt-3.5-turbo
+            - name: SS_MODE
+              value: transformers
+            - name: AUTH0_CLIENT_ID
+              value: lL6qh5m6hvObdgKTMj4KeMUb361amrah
+            - name: AUTH0_DOMAIN
+              value: kubishi.us.auth0.com
+            - name: AUTH0_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: auth0-client-secret
+                  key: AUTH0_CLIENT_SECRET
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: kubishi-sentences
+  name: kubishi-sentences-service
+spec:
+  selector:
+    app.kubernetes.io/name: kubishi-sentences-service
+    app.kubernetes.io/part-of: kubishi-sentences
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kubishi-sentences-service-ingress
+  namespace: kubishi-sentences
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+    cert-manager.io/cluster-issuer: letsencrypt-issuer
+spec:
+  rules:
+    - host: sentences.kubishi.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: kubishi-sentences-service
+                port:
+                  number: 80
+  tls:
+    - secretName: kubishi-sentences-service-cert
+      hosts:
+        - sentences.kubishi.com

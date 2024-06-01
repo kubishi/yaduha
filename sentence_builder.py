@@ -2,6 +2,7 @@
 
 from itertools import starmap
 import json
+import logging
 import pathlib
 import random
 from typing import Any, Callable, Dict, Iterable, List, Optional, Tuple
@@ -12,6 +13,7 @@ import pandas as pd
 NOUNS = {
     "isha'": "coyote",
     "isha'pugu": "dog",
+    "kidi'": "cat",
     "pugu": "horse",
     "wai": "rice",
     "tüba": "pinenuts",
@@ -29,6 +31,19 @@ NOUNS = {
     "tübbi": "rock",
     "tabuutsi'": "cottontail",
     "kamü": "jackrabbit",
+    "aaponu'": "apple",
+    "tüsüga": "weasle",
+    "mukita": "lizard",
+    "wo'ada": "mosquito",
+    "wükada": "bird snake",
+    "wo'abi": "worm",
+    "aingwü": "squirrel",
+    "tsiipa": "bird",
+    "tüwoobü": "earth",
+    "koopi'": "coffee",
+    "pahabichi": "bear",
+    "pagwi": "fish",
+    "kwadzi": "tail",
 }
 
 class Subject:
@@ -130,6 +145,13 @@ class Verb:
         'kwana': 'smell',
         'kwati': 'hit',
         'yadohi': 'talk to',
+        'naki': 'chase',
+        'tsibui': 'climb',
+        'sawa': 'cook',
+        'tama\'i': 'find',
+        'nia': 'read',
+        'mui': 'write',
+        'nobini': 'visit',
     }
     INTRANSITIVE_VERBS = {
         'katü': 'sit',
@@ -141,6 +163,19 @@ class Verb:
         'wünü': 'stand',
         'habi': 'lie down',
         'yadoha': 'talk',
+        'kwatsa\'i': 'fall',
+        'waakü': 'work',
+        'wükihaa': 'smile',
+        'hubiadu': 'sing',
+        'nishua\'i': 'laugh',
+        'tsibui': 'climb',
+        'tübinohi': 'play',
+        'yotsi': 'fly',
+        'nüga': 'dance',
+        'pahabi': 'swim',
+        'tünia': 'read',
+        'tümui': 'write',
+        'tsiipe\'i': 'chirp',
     }
     def __init__(self, 
                  verb_stem: str, 
@@ -161,7 +196,8 @@ class Verb:
             if self.object_pronoun_prefix is not None:
                 raise ValueError("Intransitive verbs cannot have object pronouns")
         else:
-            raise ValueError(f"Verb stem must be one of {Verb.TRANSIITIVE_VERBS} or {Verb.INTRANSITIVE_VERBS} (not {verb_stem})")
+            # raise ValueError(f"Verb stem must be one of {Verb.TRANSIITIVE_VERBS} or {Verb.INTRANSITIVE_VERBS} (not {verb_stem})")
+            logging.warning(f"Verb stem must be one of {Verb.TRANSIITIVE_VERBS} or {Verb.INTRANSITIVE_VERBS} (not {verb_stem})")
         
     def __str__(self) -> str:
         if self.object_pronoun_prefix is None:
@@ -429,7 +465,7 @@ def get_all_choices(subject_noun: Optional[str],
             'value': object_pronoun,
             'requirement': "optional"
         }
-    
+
 
     # Object noun
     # if verb is intransitive, object noun must be None

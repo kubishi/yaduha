@@ -17,6 +17,7 @@ Object.keys(dropdownIDLabels).forEach((id, index) => {
         placeholder: true,
         placeholderValue: '',
         shouldSort: false,
+        allowHTML: false,
     });
 });
 
@@ -165,7 +166,7 @@ function updateUI(url) {
 }
 
 function startIntro() {
-    fetch('/api/random-example', {
+    fetch('/api/builder/random-example', {
         method: 'GET',
         headers: {'Content-Type': 'application/json'}
     }).catch(err => {
@@ -258,7 +259,7 @@ function startIntro() {
             // disable buttons on start of tour
             onDestroyStarted: () => {
                 // update UI to re-enable buttons
-                updateUI('/api/choices')
+                updateUI('/api/builder/choices')
                 driver.destroy();
             }
         });
@@ -281,8 +282,8 @@ $('#btn-translate').click(function() {
     // disable btn-translate
     $('#btn-translate').prop('disabled', true)
 
-    // call /api/translate with the current values of all dropdowns
-    fetch('/api/translate', {
+    // call /api/builder/translate with the current values of all dropdowns
+    fetch('/api/builder/translate', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -297,51 +298,40 @@ $('#btn-translate').click(function() {
             "object_suffix": object_suffix
         })
     }).catch(err => {
+        console.log(`Status code: ${err.status}`);
+        $('#btn-translate').prop('disabled', false);
+    }).then(res => {
+        if (res.status == 200) {
+            let res_json = res.json();
+            return res_json;
+        } else if (res.status == 429) {
+            throw new Error(`Too many requests. Please try again later.`);
+        } else{
+            throw new Error(`Unknown error: ${res.status}`);
+        }
+    }).then(res_json => {
+        $('#translation').html(res_json.translation);
+        $('#btn-translate').css('display', 'none');
+    }).catch(err => {
         console.error(err);
-        // enable btn-translate
-        $('#btn-translate').prop('disabled', false)
-    }).then(response => response.json()).then(res => {
-        // set the contents of #translation to the returned translation
-        $('#translation').html(res.translation)
-        // make btn-translate invisible
-        $('#btn-translate').css('display', 'none')
+        $('#translation').html(`<br/>${err.message}`);
+        $('#btn-translate').prop('disabled', false);
     });
 })
-
-$(function () {
-    $('[data-toggle="help-subject-popover"]').popover()
-    $('[data-toggle="help-verb-popover"]').popover()
-    $('[data-toggle="help-object-popover"]').popover()
-})
-
-$('body').on('click', function (e) {
-    //did not click a popover toggle or popover
-    if (!$(e.target).hasClass('popover') && !$(e.target).hasClass('popover-header') && !$(e.target).hasClass('popover-body')) {
-        $('#help-subject-popover').popover('hide');
-        $('#help-verb-popover').popover('hide');
-        $('#help-object-popover').popover('hide');
-    }
-});
 
 // call updateUI() when the page loads
-$(document).ready(function() {
-    $('#help-subject-popover').popover({
-        title: 'What is a subject?',
-        content: $('#help-subject').html(),
-        html: true
-    });
+$(document).ready(function() {    
+    const list = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    list.map((el) => {
+      let opts = {
+        animation: false,
+      }
+      if (el.hasAttribute('data-bs-content-id')) {
+        opts.content = document.getElementById(el.getAttribute('data-bs-content-id')).innerHTML;
+        opts.html = true;
+      }
+      new bootstrap.Popover(el, opts);
+    })
 
-    $('#help-verb-popover').popover({
-        title: 'What is a verb?',
-        content: $('#help-verb').html(),
-        html: true
-    });
-
-    $('#help-object-popover').popover({
-        title: 'What is an object?',
-        content: $('#help-object').html(),
-        html: true
-    });
-
-    updateUI('/api/choices')
+    updateUI('/api/builder/choices')
 })
