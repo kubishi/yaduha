@@ -17,6 +17,7 @@ Object.keys(dropdownIDLabels).forEach((id, index) => {
         placeholder: true,
         placeholderValue: '',
         shouldSort: false,
+        allowHTML: false,
     });
 });
 
@@ -318,40 +319,19 @@ $('#btn-translate').click(function() {
     });
 })
 
-$(function () {
-    $('[data-toggle="help-subject-popover"]').popover()
-    $('[data-toggle="help-verb-popover"]').popover()
-    $('[data-toggle="help-object-popover"]').popover()
-})
-
-$('body').on('click', function (e) {
-    //did not click a popover toggle or popover
-    if (!$(e.target).hasClass('popover') && !$(e.target).hasClass('popover-header') && !$(e.target).hasClass('popover-body')) {
-        $('#help-subject-popover').popover('hide');
-        $('#help-verb-popover').popover('hide');
-        $('#help-object-popover').popover('hide');
-    }
-});
-
 // call updateUI() when the page loads
-$(document).ready(function() {
-    $('#help-subject-popover').popover({
-        title: 'What is a subject?',
-        content: $('#help-subject').html(),
-        html: true
-    });
-
-    $('#help-verb-popover').popover({
-        title: 'What is a verb?',
-        content: $('#help-verb').html(),
-        html: true
-    });
-
-    $('#help-object-popover').popover({
-        title: 'What is an object?',
-        content: $('#help-object').html(),
-        html: true
-    });
+$(document).ready(function() {    
+    const list = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    list.map((el) => {
+      let opts = {
+        animation: false,
+      }
+      if (el.hasAttribute('data-bs-content-id')) {
+        opts.content = document.getElementById(el.getAttribute('data-bs-content-id')).innerHTML;
+        opts.html = true;
+      }
+      new bootstrap.Popover(el, opts);
+    })
 
     updateUI('/api/builder/choices')
 })

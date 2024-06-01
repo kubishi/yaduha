@@ -41,3 +41,17 @@
         margin-bottom: 10px !important;
     }
 }
+
+
+/* make visited links same color */
+a {
+    color: #0D6EFD;
+}
+
+a:visited {
+    color: #0D6EFD;
+}
+
+a:hover {
+    color: #0D6EFD;
+}

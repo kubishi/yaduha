@@ -6,11 +6,14 @@
     {% include 'help_object.html' %}
     {% include 'help_verb.html' %}
     <div class="row pt-2" style="margin-top: 56px;">
+        <!-- <button type="button" class="btn btn-lg btn-danger" data-bs-trigger="hover focus"  data-bs-toggle="popover" title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button> -->
         <div class="col col-12 col-md-4 p-1">
             <div class="position-relative" style="border: 1px dashed red; border-radius: 5px; padding: 10px;">
                 <!-- add ? icon popover -->
                 <h2 class="text-center">Subject</h2>
-                <button type="button" class="icon-button" id="help-subject-popover" data-toggle="popover">
+                <button type="button" class="icon-button" id="help-subject-popover"
+                    data-bs-toggle="popover" data-bs-trigger="hover focus"
+                    title="Subject" data-bs-content-id="help-subject">
                     <i class="fas fa-question-circle"></i>
                 </button>
                 <div class="row">
@@ -30,7 +33,9 @@
         <div class="col col-12 col-md-4 p-1">
             <div class="position-relative" style="border: 1px dashed green; border-radius: 5px; padding: 10px;">
                 <h2 style="text-align: center;">Object</h2>
-                <button type="button" class="icon-button" id="help-object-popover" data-toggle="popover">
+                <button type="button" class="icon-button" id="help-object-popover"
+                        data-bs-toggle="popover" data-bs-trigger="hover focus"
+                        title="Object" data-bs-content-id="help-object">
                     <i class="fas fa-question-circle"></i>
                 </button>
                 <!-- Object Dropdown -->
@@ -51,7 +56,9 @@
         <div class="col col-12 col-md-4 p-1">
             <div class="position-relative" style="border: 1px dashed blue; border-radius: 5px; padding: 10px;">
                 <h2 style="text-align: center;">Verb</h2>
-                <button type="button" class="icon-button" id="help-verb-popover" data-toggle="popover">
+                <button type="button" class="icon-button" id="help-verb-popover"
+                        data-bs-toggle="popover" data-bs-trigger="hover focus"
+                        title="Verb" data-bs-content-id="help-verb">
                     <i class="fas fa-question-circle"></i>
                 </button>
                 <!-- Verb Dropdown -->

@@ -2,6 +2,7 @@ version: '3'
 services:
   kubishi-dev: 
     image: registry.digitalocean.com/kubishi-registry/kubishi-sentences:latest
+    build: .
     volumes:
       - .env:/app/.env
     ports:
