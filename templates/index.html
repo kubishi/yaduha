@@ -19,7 +19,7 @@
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{ url_for('kubishi.static', filename='css/style.css') }}">
-    <link rel="icon" href="{{ url_for('kubishi.static', filename='images/favicon.ico') }}">
+    <link rel="icon" href="{{ url_for('kubishi.static', filename='images/logo_bg.png') }}">
 </head>
 <body>
     <header>
@@ -77,6 +77,27 @@
     <main>
         {% block content %}{% endblock %}
     </main>
+
+    <footer class="footer navbar navbar-bottom navbar-expand navbar-light bg-light"> <!-- fixed-bottom -->
+        <div class="container-fluid">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a href="https://research.kubishi.com">
+                        <img src="{{ url_for('kubishi.static', filename='images/logo.png') }}" alt="Kubishi" 
+                            width="50" height="50" class="d-inline-block align-text-top">
+                    </a>
+                </li>
+            </ul>
+            <p class="text-muted mb-0 text-center">© 2024 Kubishi Research Group</p>
+            <div class="d-flex">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a href="https://github.com/kubishi/kubishi_sentences" class="nav-link"><i class="fab fa-github custom-icon-size"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

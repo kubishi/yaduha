@@ -55,3 +55,23 @@ a:visited {
 a:hover {
     color: #0D6EFD;
 }
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+
+.footer {
+    margin-top: auto;
+    border-top: 1px solid #ccc;
+}
+  
+.header {
+    border-bottom: 1px solid #ccc;
+}
+
+.custom-icon-size {
+    font-size: 2em; /* Or any other size between 1em (default) and 2em (fa-2x equivalent) */
+  }
