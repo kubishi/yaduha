@@ -22,14 +22,14 @@ spec:
     spec:
       containers:
         - name: service
-          image: registry.digitalocean.com/kubishi-registry/kubishi-sentences:latest
+          image: jaredraycoleman/kubishi-sentences:latest
           ports:
             - containerPort: 80
           env:
             - name: FLASK_ENV
               value: "production"
             - name: DEPLOY_ID # for reasy re-deployment
-              value: DEPLOYID-35ec37b5660a93c2c55844635885b76f
+              value: DEPLOYID-fb2fcdbcf3cdb0aab2183e11389e0ac5
             - name: SECRET_KEY # mount from secret
               valueFrom:
                 secretKeyRef:

@@ -1,7 +1,7 @@
 version: '3'
 services:
   kubishi-dev: 
-    image: registry.digitalocean.com/kubishi-registry/kubishi-sentences:latest
+    image: jaredraycoleman/kubishi-sentences:latest
     build: .
     volumes:
       - .env:/app/.env
