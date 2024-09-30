@@ -30,11 +30,8 @@ else:
 
 thisdir = pathlib.Path(__file__).parent.absolute()
 
-R_TRANSIITIVE_VERBS = {v: k for k, v in Verb.TRANSIITIVE_VERBS.items()}
+R_TRANSITIVE_VERBS = {v: k for k, v in Verb.TRANSITIVE_VERBS.items()}
 R_INTRANSITIVE_VERBS = {v: k for k, v in Verb.INTRANSITIVE_VERBS.items()}
-#     **{v: k for k, v in Verb.TRANSIITIVE_VERBS.items()},
-#     **{v: k for k, v in Verb.INTRANSITIVE_VERBS.items()}
-# }
 R_NOUNS = {v: k for k, v in NOUNS.items()}
 
 R_OBJECT_PRONOUNS = {
@@ -65,6 +62,11 @@ R_SUBJECT_PRONOUNS = {
     'you all': ['üügwa'],
     'this': ['ihi']
 }
+R_VERB_NOMINALIZERS = {
+    'present': 'dü',
+    'past': 'pü',
+    'future': 'weidü',
+}
 
 def translate_simple(sentence: Dict[str, str]) -> Tuple[Subject, Verb, Object]:
     """Translate a simple English sentence to Paiute.
@@ -77,9 +79,9 @@ def translate_simple(sentence: Dict[str, str]) -> Tuple[Subject, Verb, Object]:
     """
     sentence = {k: v.strip().lower() for k, v in sentence.items() if v}
     if sentence.get('object'):
-        verb_stem = R_TRANSIITIVE_VERBS.get(sentence['verb'], f"[{sentence['verb']}]")
+        verb_stem = R_TRANSITIVE_VERBS.get(sentence['verb'], f"[{sentence['verb']}]")
     else:
-        verb_stem = R_INTRANSITIVE_VERBS.get(sentence['verb'], R_TRANSIITIVE_VERBS.get(sentence['verb'], f"[{sentence['verb']}]"))
+        verb_stem = R_INTRANSITIVE_VERBS.get(sentence['verb'], R_TRANSITIVE_VERBS.get(sentence['verb'], f"[{sentence['verb']}]"))
 
     verb_tense = R_VERB_TENSES.get(sentence['verb_tense'], f"[{sentence['verb_tense']}]")
     # verb = f"{verb_stem}-{verb_tense}"
@@ -91,22 +93,33 @@ def translate_simple(sentence: Dict[str, str]) -> Tuple[Subject, Verb, Object]:
             object_pronoun = random.choice(R_OBJECT_PRONOUNS.get(sentence['object'], [sentence['object']]))
             # verb = f"{object_pronoun}-{verb}"
             verb = Verb(verb_stem, verb_tense, object_pronoun_prefix=object_pronoun)
+        elif sentence.get('object_nominalizer'):
+            _object = {**R_TRANSITIVE_VERBS, **R_INTRANSITIVE_VERBS}.get(sentence['object'], f"[{sentence['object']}]")
+            object_suffix = random.choice(['ii', 'uu'])
+            object_nominalizer = R_VERB_NOMINALIZERS.get(sentence['object_nominalizer'], f"[{sentence['object_nominalizer']}]")
+            _object = Object(_object, object_nominalizer, object_suffix)
         else:
             _object = R_NOUNS.get(sentence['object'], f"[{sentence['object']}]")
             object_pronoun = random.choice(R_OBJECT_PRONOUNS['it'])
             object_suffix = Object.get_matching_suffix(object_pronoun)
-            _object = Object(_object, object_suffix)
+            _object = Object(_object, None, object_suffix)
             # verb = f"{object_pronoun}-{verb}"
             verb = Verb(verb_stem, verb_tense, object_pronoun_prefix=object_pronoun)
 
-    if sentence['subject'] in R_SUBJECT_PRONOUNS:
+    if sentence.get('subject_nominalizer'):
+        subject = {**R_TRANSITIVE_VERBS, **R_INTRANSITIVE_VERBS}.get(sentence['subject'], f"[{sentence['subject']}]")
+        subject_suffix = random.choice(['ii', 'uu'])
+        subject_nominalizer = R_VERB_NOMINALIZERS.get(sentence['subject_nominalizer'], f"[{sentence['subject_nominalizer']}]")
+        # subject = f"{subject}-{subject_suffix}"
+        subject = Subject(subject, subject_nominalizer, subject_suffix)
+    elif sentence['subject'] in R_SUBJECT_PRONOUNS:
         subject = random.choice(R_SUBJECT_PRONOUNS.get(sentence['subject'], [sentence['subject']]))
-        subject = Subject(subject, subject_suffix=None)
+        subject = Subject(subject, subject_noun_nominalizer=None, subject_suffix=None)
     else:
         subject = R_NOUNS.get(sentence['subject'], f"[{sentence['subject']}]")
         subject_suffix = random.choice(['ii', 'uu'])
         # subject = f"{subject}-{subject_suffix}"
-        subject = Subject(subject, subject_suffix)
+        subject = Subject(subject, None, subject_suffix)
 
     return subject, verb, _object
 
@@ -119,12 +132,24 @@ def order_sentence(subject: Subject, verb: Verb, _object: Optional[Object] = Non
 
 def comparator_sentence(simple_sentence: Dict[str, str]) -> str:
     simple_sentence = {k: v.strip().lower() for k, v in simple_sentence.items() if v}
-    if simple_sentence['subject'] not in R_NOUNS and simple_sentence['subject'] not in R_SUBJECT_PRONOUNS:
-        simple_sentence['subject'] = '[SUBJECT]'
-    if simple_sentence['verb'] not in R_TRANSIITIVE_VERBS and simple_sentence['verb'] not in R_INTRANSITIVE_VERBS:
+    subject_nominalizer = simple_sentence.get('subject_nominalizer')
+    object_nominalizer = simple_sentence.get('object_nominalizer')
+    if subject_nominalizer is None:
+        if simple_sentence['subject'] not in {*R_SUBJECT_PRONOUNS, *R_NOUNS}:
+            simple_sentence['subject'] = '[SUBJECT]'
+    else:
+        if simple_sentence['subject'] not in {*R_TRANSITIVE_VERBS, *R_INTRANSITIVE_VERBS}:
+            simple_sentence['subject'] = '[SUBJECT]'
+    if simple_sentence['verb'] not in R_TRANSITIVE_VERBS and simple_sentence['verb'] not in R_INTRANSITIVE_VERBS:
         simple_sentence['verb'] = '[VERB]'
-    if (simple_sentence.get('object') or '').strip() and simple_sentence['object'] not in R_NOUNS and simple_sentence['object'] not in R_OBJECT_PRONOUNS:
-        simple_sentence['object'] = '[OBJECT]'
+    
+    if object_nominalizer is None:
+        if (simple_sentence.get('object') or '').strip() and simple_sentence['object'] not in {*R_NOUNS, *R_OBJECT_PRONOUNS}:
+            simple_sentence['object'] = '[OBJECT]'
+    else:
+        if (simple_sentence.get('object') or '').strip() and simple_sentence['object'] not in R_NOUNS:
+            simple_sentence['object'] = '[OBJECT]'
+
     return simple_sentence
 
 def translate_english_to_ovp(sentence: str, model: str = None, res_callback: Optional[Callable[[ChatCompletion], None]] = None) -> Dict[str, Any]:
@@ -133,18 +158,23 @@ def translate_english_to_ovp(sentence: str, model: str = None, res_callback: Opt
     target_simple_sentences = []
     backwards_translations = []
     for simple_sentence in simple_sentences:
+        # print(simple_sentence)
         comparator_sentences.append(comparator_sentence(simple_sentence))
+        # print(comparator_sentences[-1])
         subject, verb, _object = translate_simple(simple_sentence)
+        # print(subject, verb, _object)
         target_simple_sentence = order_sentence(subject, verb, _object)
         target_simple_sentences.append(" ".join(map(str, target_simple_sentence)))
         backwards_translations.append(
             translate_ovp_to_english(
                 subject_noun=subject.noun,
+                subject_noun_nominalizer=subject.subject_noun_nominalizer,
                 subject_suffix=subject.subject_suffix,
                 verb=verb.verb_stem,
                 verb_tense=verb.tense_suffix,
                 object_pronoun=verb.object_pronoun_prefix,
                 object_noun=_object.noun if _object else None,
+                object_noun_nominalizer=_object.object_noun_nominalizer if _object else None,
                 object_suffix=_object.object_suffix if _object else None
             ).strip(".")
         )

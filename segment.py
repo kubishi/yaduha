@@ -243,6 +243,9 @@ def split_sentence(sentence: str, model: str = None, res_callback: Optional[Call
             'The set of simple sentences should be as semantically equivalent as possible to the user input sentence. ',
             'No adjectives, adverbs, prepositions, or conjunctions should be added to the simple sentences. ',
             'Indirect objects and objects of prepositions should not be included in the simple sentences. ',
+            'Subjects and objects can be verbs IF they are "nominalized" as "past", "present", or "future" ',
+            '(e.g., "run" -> "the runner", "the one who ran", "the one who will run"). ',
+            'The present nominalizer should be used to describe those who always do the action (runner, drinker, cook(er), etc.). ',
         ])},
         {'role': 'user', 'content': 'I am sitting in a chair.'},
         {
@@ -257,6 +260,19 @@ def split_sentence(sentence: str, model: str = None, res_callback: Optional[Call
                 "name": "set_sentences"
             },
         },
+        {'role': 'user', 'content': 'The one who ran is sitting.'},
+        {
+            "role": "assistant",
+            "content": None,
+            "function_call": {
+                "arguments": json.dumps({
+                    'sentences': [
+                        {'subject': 'run', 'subject_nominalizer': 'past', 'verb': 'sit', 'verb_tense': 'present_continuous', 'object': None},
+                    ]
+                }),
+                "name": "set_sentences"
+            },
+        },
         {'role': 'user', 'content': 'The dogs were chasing their tails.'},
         {
             "role": "assistant",
@@ -265,6 +281,19 @@ def split_sentence(sentence: str, model: str = None, res_callback: Optional[Call
                 "arguments": json.dumps({
                     'sentences': [
                         {'subject': 'dog', 'verb': 'chase', 'verb_tense': 'past_continuous', 'object': 'tail'},
+                    ]
+                }),
+                "name": "set_sentences"
+            },
+        },
+        {'role': 'user', 'content': 'The drinker is eating.'},
+        {
+            "role": "assistant",
+            "content": None,
+            "function_call": {
+                "arguments": json.dumps({
+                    'sentences': [
+                        {'subject': 'drink', 'subject_nominalizer': 'present', 'verb': 'eat', 'verb_tense': 'present', 'object': None},
                     ]
                 }),
                 "name": "set_sentences"
@@ -306,6 +335,19 @@ def split_sentence(sentence: str, model: str = None, res_callback: Optional[Call
                         {'subject': 'I', 'verb': 'see', 'verb_tense': 'past', 'object': 'man'},
                         {'subject': 'man', 'verb': 'walk', 'verb_tense': 'past_continuous', 'object': 'dog'},
                         {'subject': 'man', 'verb': 'drink', 'verb_tense': 'past_continuous', 'object': 'coffee'}
+                    ]
+                }),
+                "name": "set_sentences"
+            },
+        },
+        {'role': 'user', 'content': 'That runner down the street will eat the one that fell.'},
+        {
+            "role": "assistant",
+            "content": None,
+            "function_call": {
+                "arguments": json.dumps({
+                    'sentences': [
+                        {'subject': 'run', 'subject_nominalizer': 'present', 'verb': 'eat', 'verb_tense': 'future', 'object': 'fall', 'object_nominalizer': 'past'},
                     ]
                 }),
                 "name": "set_sentences"
@@ -373,7 +415,14 @@ def make_sentence(sentence: Dict, model: str = None, res_callback: Optional[Call
     messages = [
         {
             'role': 'system',
-            'content': 'You are an assistant takes structured data and generates simple SVO or SV natural language sentence. Only add add necessary articles and conjugations. Do not add any other words.'
+            'content': (
+                'You are an assistant takes structured data and generates simple SVO or SV natural language sentence. '
+                'Only add add necessary articles and conjugations. '
+                'Do not add any other words.'
+                'When a subject_nominalizer or object_nominalizer is present, subjects are "nominalized" verbs as "past", "present", or "future" '
+                '(e.g., "run" -> "the runner", "the one who ran", "the one who will run"; "drink" -> "the drinker", "the one who drank", "the one who will drink"). '
+
+            )
         },
         {
             'role': 'user',
@@ -408,6 +457,30 @@ def make_sentence(sentence: Dict, model: str = None, res_callback: Optional[Call
             'content': None,
             'function_call': {
                 'arguments': json.dumps({'sentence': 'I saw a man'}),
+                'name': 'make_sentence'
+            }
+        },
+        {
+            'role': 'user',
+            'content': "{'subject': 'drink', 'subject_nominalizer': 'past', 'verb': 'stand', 'verb_tense': 'present', 'object': None}"
+        },
+        {
+            'role': 'assistant',
+            'content': None,
+            'function_call': {
+                'arguments': json.dumps({'sentence': 'The one who drank stood'}),
+                'name': 'make_sentence'
+            }
+        },
+        {
+            'role': 'user',
+            'content': "{'subject': 'walk', 'subject_nominalizer': 'present', 'verb': 'drink', 'verb_tense': 'past', 'object': None}"
+        },
+        {
+            'role': 'assistant',
+            'content': None,
+            'function_call': {
+                'arguments': json.dumps({'sentence': 'The walker drank'}),
                 'name': 'make_sentence'
             }
         },
@@ -496,6 +569,14 @@ def test_similarity():
     print(stats.to_latex(float_format="%.3f", bold_rows=True, column_format="lcccc"))
         
 
+def test_split_sentence():
+    sentence = "The writer is writing a book."
+    simple_sentences = split_sentence(sentence, model=os.environ['OPENAI_MODEL'])
+    print(simple_sentences)
+    simple_nl_sentence = '. '.join([make_sentence(sentence) for sentence in simple_sentences]) + '.'
+    print(simple_nl_sentence)
+
 if __name__ == '__main__':
     # main()
-    test_similarity()
+    # test_similarity()
+    test_split_sentence()
