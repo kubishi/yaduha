@@ -391,21 +391,15 @@ def get_all_choices(subject_noun: Optional[str],
         'value': subject_noun,
         'requirement': "required"
     }
-    if subject_noun is None:
+    if subject_noun is None or subject_noun in Subject.PRONOUNS:
         choices['subject_suffix'] = {
             'choices': [],
             'value': None,
             'requirement': "disabled"
         }
-    elif subject_noun in Subject.PRONOUNS:
-        choices['subject_suffix'] = {
-            'choices': [],
-            'value': None,
-            'requirement': "disabled"
-        }
+        subject_suffix = None
     else:
         choices['subject_suffix'] = {
-            # 'choices': list(Subject.SUFFIXES.keys()),
             'choices': [*starmap(to_choice, Subject.SUFFIXES.items())],
             'value': subject_suffix,
             'requirement': "required"
@@ -413,15 +407,15 @@ def get_all_choices(subject_noun: Optional[str],
 
     # Verb
     if object_noun is not None: # verb must be transitive
+        if verb not in Verb.TRANSIITIVE_VERBS:
+            verb = None
         choices['verb'] = {
-            # 'choices': list(Verb.TRANSIITIVE_VERBS.keys()),
             'choices': [*starmap(to_choice, Verb.TRANSIITIVE_VERBS.items())],
             'value': verb,
             'requirement': "required"
         }
     else:
         choices['verb'] = {
-            # 'choices': [*Verb.TRANSIITIVE_VERBS.keys(), *Verb.INTRANSITIVE_VERBS.keys()],
             'choices': [
                 *starmap(to_choice, Verb.TRANSIITIVE_VERBS.items()),
                 *starmap(to_choice, Verb.INTRANSITIVE_VERBS.items())
@@ -437,6 +431,7 @@ def get_all_choices(subject_noun: Optional[str],
             'value': None,
             'requirement': "disabled"
         }
+        verb_tense = None
     else:
         choices['verb_tense'] = {
             # 'choices': list(Verb.TENSES.keys()),
@@ -452,6 +447,7 @@ def get_all_choices(subject_noun: Optional[str],
             'value': None,
             'requirement': "disabled"
         }
+        object_pronoun = None
     elif object_noun is not None: # object pronoun must match object suffix
         choices['object_pronoun'] = {
             'choices': [to_choice(pronoun, Object.PRONOUNS[pronoun]) for pronoun in Object.get_matching_third_person_pronouns(object_suffix)],
@@ -476,6 +472,7 @@ def get_all_choices(subject_noun: Optional[str],
             'value': None,
             'requirement': "disabled"
         }
+        object_noun = None
     else: # verb is not selected or is transitive
         choices['object_noun'] = {
             # 'choices': list(NOUNS.keys()),
@@ -491,6 +488,7 @@ def get_all_choices(subject_noun: Optional[str],
             'value': None,
             'requirement': "disabled"
         }
+        object_suffix = None
     elif object_pronoun is not None:
         matching_suffix = Object.get_matching_suffix(object_pronoun)
         choices['object_suffix'] = {
@@ -500,7 +498,6 @@ def get_all_choices(subject_noun: Optional[str],
         }
     else:
         choices['object_suffix'] = {
-            # 'choices': list(Object.SUFFIXES.keys()),
             'choices': [*starmap(to_choice, Object.SUFFIXES.items())],
             'value': object_suffix,
             'requirement': "required"

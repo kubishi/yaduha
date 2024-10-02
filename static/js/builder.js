@@ -81,6 +81,7 @@ function setChoices(dropdownID, choices, value, requirement) {
 
 function doUpdate(res) {
     choices = res.choices
+    console.log(choices);
     setChoices(
         '#subject-noun', 
         choices.subject_noun.choices, choices.subject_noun.value, choices.subject_noun.requirement
