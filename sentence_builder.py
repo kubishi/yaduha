@@ -464,6 +464,8 @@ def get_all_choices(subject_noun: Optional[str] = None,
 
     # Verb
     if object_noun is not None: # verb must be transitive
+        if verb not in Verb.TRANSIITIVE_VERBS:
+            verb = None
         choices['verb'] = {
             'choices': Verb.TRANSITIVE_VERBS,
             'value': verb if verb in Verb.TRANSITIVE_VERBS else None,

@@ -37,6 +37,15 @@ def ratelimit_handler(exp):
 @app.route('/api/builder/choices', methods=['POST'])
 def get_choices():
     data: Dict = request.get_json()
+    word_choices = dict(
+        subject_noun=data.get('subject_noun') or None,
+        subject_suffix=data.get('subject_suffix') or None,
+        verb=data.get('verb') or None,
+        verb_tense=data.get('verb_tense') or None,
+        object_pronoun=data.get('object_pronoun') or None,
+        object_noun=data.get('object_noun') or None,
+        object_suffix=data.get('object_suffix') or None,
+    )
     choices = get_all_choices(
         subject_noun=data.get('subject_noun') or None,
         subject_suffix=data.get('subject_suffix') or None,
@@ -46,6 +55,9 @@ def get_choices():
         object_noun=data.get('object_noun') or None,
         object_suffix=data.get('object_suffix') or None,
     )
+
+    print(choices)
+    print(word_choices)
     
     sentence = []
     try:
