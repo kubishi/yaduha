@@ -33,7 +33,7 @@ def get_english_structure(subject_noun: str,
     sentence_details = []
 
     subject_info = {'part_of_speech': 'subject'}
-    if subject_noun_nominalizer is not None:
+    if subject_noun_nominalizer is not None and subject_noun in {*Verb.TRANSITIVE_VERBS, *Verb.INTRANSITIVE_VERBS}:
         subject_info['word'] = {**Verb.TRANSITIVE_VERBS, **Verb.INTRANSITIVE_VERBS}[subject_noun]
         subject_info['agent_nominalizer'] = Verb.NOMINALIZER_TENSES[subject_noun_nominalizer]
         subject_info['positional'] = Subject.SUFFIXES[subject_suffix]
@@ -51,7 +51,7 @@ def get_english_structure(subject_noun: str,
     plural_keywords = ['plural', 'you all', 'they', 'them', 'we', 'us']
     if object_pronoun and any(kw in Object.PRONOUNS[object_pronoun] for kw in plural_keywords):
         object_info['plural'] = True
-    if object_noun_nominalizer is not None:
+    if object_noun_nominalizer is not None and object_noun in {*Verb.TRANSITIVE_VERBS, *Verb.INTRANSITIVE_VERBS}:
         object_info['word'] = {**Verb.TRANSITIVE_VERBS, **Verb.INTRANSITIVE_VERBS}[object_noun]
         object_info['agent_nominalizer'] = Verb.NOMINALIZER_TENSES[object_noun_nominalizer]
         object_info['positional'] = Object.SUFFIXES[object_suffix]
@@ -143,7 +143,7 @@ def translate(subject_noun: str,
                  {'part_of_speech': 'verb', 'tense': 'completive (past)', 'word': 'see'}]
             )
         },
-        {'role': 'assistant', 'content': '(This one who cooks) saw (that one who hits).'},
+        {'role': 'assistant', 'content': '(This one who cooks) saw (that hitter).'},
         # # nia-pü-uu naka-wei-neika ma-dsibui-wei 
         {
             'role': 'user',
@@ -209,6 +209,7 @@ def main():
     parser = argparse.ArgumentParser(description='Translate OVP sentences to English')
     parser.add_argument('--seed', type=int, help='Seed for random sentence generation')
     parser.add_argument('--big', action='store_true', help='Generate a random "big" sentence to translate')
+    parser.set_defaults(func=None)
 
     subparsers = parser.add_subparsers(dest='subparser_name')
 
