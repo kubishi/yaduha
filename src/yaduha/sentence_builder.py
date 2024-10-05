@@ -1,3 +1,4 @@
+from copy import deepcopy
 import logging
 import random
 from typing import Any, Dict, List, Optional
@@ -662,14 +663,15 @@ def get_random_sentence(choices: Dict[str, Dict[str, Any]] = {}):
                 raise e
             continue
 
-def get_random_simple_sentence():
-    subject_noun = random.choice(list(NOUNS.keys()))
-    verb = random.choice([*Verb.TRANSITIVE_VERBS.keys(), *Verb.INTRANSITIVE_VERBS.keys()])
-    object_noun = None
-    if Verb._is_transitive(verb):
-        object_noun = random.choice(list(NOUNS.keys()))
+def get_random_simple_sentence(choices: Dict[str, Dict[str, Any]] = {}):
+    choices = get_all_choices(**{k: v['value'] for k, v in choices.items()})
 
-    choices = get_all_choices(subject_noun=subject_noun, verb=verb, object_noun=object_noun)
+    word_choices = {pos: v.get('value') for pos, v in choices.items()}
+    choices['subject_noun']['value'] = word_choices.get('subject_noun', random.choice(list(NOUNS.keys())))
+    choices['verb']['value'] = word_choices.get('verb', random.choice([*Verb.TRANSITIVE_VERBS.keys(), *Verb.INTRANSITIVE_VERBS.keys()]))
+    if Verb._is_transitive(choices['verb']['value']):
+        choices['object_noun']['value'] = word_choices.get('object_noun', random.choice(list(NOUNS.keys())))
+
     return get_random_sentence(choices)
 
 
@@ -707,17 +709,5 @@ def sentence_to_str(sentence: List[Dict]):
 def print_sentence(sentence: List[Dict]):
     print(sentence_to_str(sentence))
 
-def main():
-    # random big sentence
-    choices = get_random_sentence_big()
-    # choices = get_random_sentence()
-    sentence = format_sentence(**{k: v['value'] for k, v in choices.items()})
-    print_sentence(sentence)
-    # for _ in range(100):
-    #     choices = get_random_sentence()
-    #     sentence = format_sentence(**{k: v['value'] for k, v in choices.items()})
-    #     print_sentence(sentence)
 
-if __name__ == "__main__":
-    main()
     

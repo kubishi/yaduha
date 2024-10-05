@@ -79,7 +79,6 @@ def get_english_structure(subject_noun: str,
     return sentence_details
 
 from openai.types.chat import ChatCompletion
-# @lru_cache(maxsize=1000)
 def translate(subject_noun: str,
               subject_noun_nominalizer: Optional[str],
               subject_suffix: Optional[str],

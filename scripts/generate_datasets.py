@@ -1,12 +1,10 @@
 import logging
-from typing import Callable
-from translate_ovp2eng import translate as translate_ovp2eng, translate_random
-from sentence_builder import NOUNS, Object, Subject, format_sentence, get_random_sentence, get_random_simple_sentence, sentence_to_str
-
 import pathlib
 import pandas as pd
 import random
-import numpy as np
+
+from yaduha.sentence_builder import NOUNS, format_sentence, get_random_sentence, get_random_simple_sentence, sentence_to_str
+from yaduha.translate_ovp2eng import translate as translate_ovp2eng
 
 thisdir = pathlib.Path(__file__).parent.absolute()
 datadir = thisdir / "data"
