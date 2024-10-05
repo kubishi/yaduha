@@ -262,10 +262,12 @@ class AgenticTranslator(Translator):
                             self.savepath.parent.mkdir(parents=True, exist_ok=True)
                             self.savepath.write_text(json.dumps(messages, indent=4, ensure_ascii=False))
                         
+                        backwards_prompt_tokens = 0
+                        backwards_completion_tokens = 0
                         def count_tokens(completion: ChatCompletion):
-                            nonlocal prompt_tokens, completion_tokens
-                            prompt_tokens += completion.usage.prompt_tokens
-                            completion_tokens += completion.usage.completion_tokens
+                            nonlocal backwards_prompt_tokens, backwards_completion_tokens
+                            backwards_prompt_tokens += completion.usage.prompt_tokens
+                            backwards_completion_tokens += completion.usage.completion_tokens
         
                         translation = ". ".join(sentences) + "."
                         back_translation = " ".join([
@@ -278,8 +280,8 @@ class AgenticTranslator(Translator):
                             back_translation=back_translation,
                             translation_prompt_tokens=prompt_tokens,
                             translation_completion_tokens=completion_tokens,
-                            back_translation_prompt_tokens=0,
-                            back_translation_completion_tokens=0
+                            back_translation_prompt_tokens=backwards_prompt_tokens,
+                            back_translation_completion_tokens=backwards_completion_tokens
                         )
                     elif continue_choice == "n": # start a new sentence
                         word_choices = {}

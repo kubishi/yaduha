@@ -617,11 +617,11 @@
     },
     {
         "role": "assistant",
-        "content": "uu"
+        "content": "ii"
     },
     {
         "role": "user",
-        "content": "Input Sentence: The cook saw the ones who walked.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'sawa', 'subject_suffix': 'uu', 'subject_noun_nominalizer': 'dü', 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a required part of speech: verb"
+        "content": "Input Sentence: The cook saw the ones who walked.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'sawa', 'subject_suffix': 'ii', 'subject_noun_nominalizer': 'dü', 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a required part of speech: verb"
     },
     {
         "role": "assistant",
@@ -629,7 +629,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The cook saw the ones who walked.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'sawa', 'subject_suffix': 'uu', 'subject_noun_nominalizer': 'dü', 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for verb: tüka (eat), puni (see), hibi (drink), naka (hear), kwana (smell), kwati (hit), yadohi (talk to), naki (chase), tsibui (climb), sawa (cook), tama'i (find), nia (read), mui (write), nobini (visit), katü (sit), üwi (sleep), kwisha'i (sneeze), poyoha (run), mia (go), hukaw̃ia (walk), wünü (stand), habi (lie down), yadoha (talk), kwatsa'i (fall), waakü (work), wükihaa (smile), hubiadu (sing), nishua'i (laugh), tübinohi (play), yotsi (fly), nüga (dance), pahabi (swim), tünia (read), tümui (write), tsiipe'i (chirp)\nBecuase this is a verb word, you can also choose to use a wildcard by putting the word in brackets. For example: [wildcard]"
+        "content": "Input Sentence: The cook saw the ones who walked.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'sawa', 'subject_suffix': 'ii', 'subject_noun_nominalizer': 'dü', 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for verb: tüka (eat), puni (see), hibi (drink), naka (hear), kwana (smell), kwati (hit), yadohi (talk to), naki (chase), tsibui (climb), sawa (cook), tama'i (find), nia (read), mui (write), nobini (visit), katü (sit), üwi (sleep), kwisha'i (sneeze), poyoha (run), mia (go), hukaw̃ia (walk), wünü (stand), habi (lie down), yadoha (talk), kwatsa'i (fall), waakü (work), wükihaa (smile), hubiadu (sing), nishua'i (laugh), tübinohi (play), yotsi (fly), nüga (dance), pahabi (swim), tünia (read), tümui (write), tsiipe'i (chirp)\nBecuase this is a verb word, you can also choose to use a wildcard by putting the word in brackets. For example: [wildcard]"
     },
     {
         "role": "assistant",
@@ -637,7 +637,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The cook saw the ones who walked.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'sawa', 'subject_suffix': 'uu', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a required part of speech: verb_tense"
+        "content": "Input Sentence: The cook saw the ones who walked.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'sawa', 'subject_suffix': 'ii', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a required part of speech: verb_tense"
     },
     {
         "role": "assistant",
@@ -645,7 +645,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The cook saw the ones who walked.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'sawa', 'subject_suffix': 'uu', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for verb_tense: ku (completive (past)), ti (present ongoing (-ing)), dü (present), wei (future (will)), gaa-wei (future (going to)), pü (have x-ed, am x-ed)"
+        "content": "Input Sentence: The cook saw the ones who walked.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'sawa', 'subject_suffix': 'ii', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for verb_tense: ku (completive (past)), ti (present ongoing (-ing)), dü (present), wei (future (will)), gaa-wei (future (going to)), pü (have x-ed, am x-ed)"
     },
     {
         "role": "assistant",
@@ -653,7 +653,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The cook saw the ones who walked.\nCurrent Translation: sawa-dü-uu puni-ku.\nEnter one of the following choices:\nc: Continue building the last sentence\nn: Add and build a new Paiute sentence for this translation\nt: Terminate and return the current translation."
+        "content": "Input Sentence: The cook saw the ones who walked.\nCurrent Translation: sawa-dü-ii puni-ku.\nEnter one of the following choices:\nc: Continue building the last sentence\nn: Add and build a new Paiute sentence for this translation\nt: Terminate and return the current translation."
     },
     {
         "role": "assistant",
@@ -661,7 +661,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The cook saw the ones who walked.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'sawa', 'subject_suffix': 'uu', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a part of speech: subject_noun, subject_suffix, subject_noun_nominalizer, verb, verb_tense, object_pronoun, object_noun, object_noun_nominalizer, object_suffix"
+        "content": "Input Sentence: The cook saw the ones who walked.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'sawa', 'subject_suffix': 'ii', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a part of speech: subject_noun, subject_suffix, subject_noun_nominalizer, verb, verb_tense, object_pronoun, object_noun, object_noun_nominalizer, object_suffix"
     },
     {
         "role": "assistant",
@@ -669,7 +669,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The cook saw the ones who walked.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'sawa', 'subject_suffix': 'uu', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for object_noun: isha' (coyote), isha'pugu (dog), kidi' (cat), pugu (horse), wai (rice), tüba (pinenuts), maishibü (corn), paya (water), payahuupü (river), katünu (chair), toyabi (mountain), tuunapi (food), pasohobü (tree), nobi (house), toni (wickiup), apo (cup), küna (wood), tübbi (rock), tabuutsi' (cottontail), kamü (jackrabbit), aaponu' (apple), tüsüga (weasle), mukita (lizard), wo'ada (mosquito), wükada (bird snake), wo'abi (worm), aingwü (squirrel), tsiipa (bird), tüwoobü (earth), koopi' (coffee), pahabichi (bear), pagwi (fish), kwadzi (tail), tüka (eat), puni (see), hibi (drink), naka (hear), kwana (smell), kwati (hit), yadohi (talk to), naki (chase), tsibui (climb), sawa (cook), tama'i (find), nia (read), mui (write), nobini (visit), katü (sit), üwi (sleep), kwisha'i (sneeze), poyoha (run), mia (go), hukaw̃ia (walk), wünü (stand), habi (lie down), yadoha (talk), kwatsa'i (fall), waakü (work), wükihaa (smile), hubiadu (sing), nishua'i (laugh), tübinohi (play), yotsi (fly), nüga (dance), pahabi (swim), tünia (read), tümui (write), tsiipe'i (chirp)\nBecuase this is a object_noun word, you can also choose to use a wildcard by putting the word in brackets. For example: [wildcard]"
+        "content": "Input Sentence: The cook saw the ones who walked.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'sawa', 'subject_suffix': 'ii', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for object_noun: isha' (coyote), isha'pugu (dog), kidi' (cat), pugu (horse), wai (rice), tüba (pinenuts), maishibü (corn), paya (water), payahuupü (river), katünu (chair), toyabi (mountain), tuunapi (food), pasohobü (tree), nobi (house), toni (wickiup), apo (cup), küna (wood), tübbi (rock), tabuutsi' (cottontail), kamü (jackrabbit), aaponu' (apple), tüsüga (weasle), mukita (lizard), wo'ada (mosquito), wükada (bird snake), wo'abi (worm), aingwü (squirrel), tsiipa (bird), tüwoobü (earth), koopi' (coffee), pahabichi (bear), pagwi (fish), kwadzi (tail), tüka (eat), puni (see), hibi (drink), naka (hear), kwana (smell), kwati (hit), yadohi (talk to), naki (chase), tsibui (climb), sawa (cook), tama'i (find), nia (read), mui (write), nobini (visit), katü (sit), üwi (sleep), kwisha'i (sneeze), poyoha (run), mia (go), hukaw̃ia (walk), wünü (stand), habi (lie down), yadoha (talk), kwatsa'i (fall), waakü (work), wükihaa (smile), hubiadu (sing), nishua'i (laugh), tübinohi (play), yotsi (fly), nüga (dance), pahabi (swim), tünia (read), tümui (write), tsiipe'i (chirp)\nBecuase this is a object_noun word, you can also choose to use a wildcard by putting the word in brackets. For example: [wildcard]"
     },
     {
         "role": "assistant",
@@ -677,7 +677,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The cook saw the ones who walked.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'sawa', 'subject_suffix': 'uu', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': 'hukaw̃ia', 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a required part of speech: object_pronoun, object_noun_nominalizer, object_suffix"
+        "content": "Input Sentence: The cook saw the ones who walked.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'sawa', 'subject_suffix': 'ii', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': 'hukaw̃ia', 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a required part of speech: object_pronoun, object_noun_nominalizer, object_suffix"
     },
     {
         "role": "assistant",
@@ -685,7 +685,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The cook saw the ones who walked.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'sawa', 'subject_suffix': 'uu', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': 'hukaw̃ia', 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for object_noun_nominalizer: dü (present), pü (have x-ed, am x-ed), weidü (future (will))"
+        "content": "Input Sentence: The cook saw the ones who walked.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'sawa', 'subject_suffix': 'ii', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': 'hukaw̃ia', 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for object_noun_nominalizer: dü (present), pü (have x-ed, am x-ed), weidü (future (will))"
     },
     {
         "role": "assistant",
@@ -693,7 +693,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The cook saw the ones who walked.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'sawa', 'subject_suffix': 'uu', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': 'hukaw̃ia', 'object_noun_nominalizer': 'dü', 'object_suffix': None}\nPlease select a required part of speech: object_pronoun, object_suffix"
+        "content": "Input Sentence: The cook saw the ones who walked.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'sawa', 'subject_suffix': 'ii', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': 'hukaw̃ia', 'object_noun_nominalizer': 'dü', 'object_suffix': None}\nPlease select a required part of speech: object_pronoun, object_suffix"
     },
     {
         "role": "assistant",
@@ -701,7 +701,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The cook saw the ones who walked.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'sawa', 'subject_suffix': 'uu', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': 'hukaw̃ia', 'object_noun_nominalizer': 'dü', 'object_suffix': None}\nPlease select a word for object_suffix: eika (proximal), oka (distal)"
+        "content": "Input Sentence: The cook saw the ones who walked.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'sawa', 'subject_suffix': 'ii', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': 'hukaw̃ia', 'object_noun_nominalizer': 'dü', 'object_suffix': None}\nPlease select a word for object_suffix: eika (proximal), oka (distal)"
     },
     {
         "role": "assistant",
@@ -709,7 +709,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The cook saw the ones who walked.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'sawa', 'subject_suffix': 'uu', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': 'hukaw̃ia', 'object_noun_nominalizer': 'dü', 'object_suffix': 'oka'}\nPlease select a required part of speech: object_pronoun"
+        "content": "Input Sentence: The cook saw the ones who walked.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'sawa', 'subject_suffix': 'ii', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': 'hukaw̃ia', 'object_noun_nominalizer': 'dü', 'object_suffix': 'oka'}\nPlease select a required part of speech: object_pronoun"
     },
     {
         "role": "assistant",
@@ -717,7 +717,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The cook saw the ones who walked.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'sawa', 'subject_suffix': 'uu', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': 'hukaw̃ia', 'object_noun_nominalizer': 'dü', 'object_suffix': 'oka'}\nPlease select a word for object_pronoun: u (him/her/it (distal)), ui (them (distal))"
+        "content": "Input Sentence: The cook saw the ones who walked.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'sawa', 'subject_suffix': 'ii', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': 'hukaw̃ia', 'object_noun_nominalizer': 'dü', 'object_suffix': 'oka'}\nPlease select a word for object_pronoun: u (him/her/it (distal)), ui (them (distal))"
     },
     {
         "role": "assistant",
@@ -725,7 +725,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The cook saw the ones who walked.\nCurrent Translation: sawa-dü-uu hukaw̃ia-doka ui-buni-ku.\nEnter one of the following choices:\nc: Continue building the last sentence\nn: Add and build a new Paiute sentence for this translation\nt: Terminate and return the current translation."
+        "content": "Input Sentence: The cook saw the ones who walked.\nCurrent Translation: sawa-dü-ii hukaw̃ia-doka ui-buni-ku.\nEnter one of the following choices:\nc: Continue building the last sentence\nn: Add and build a new Paiute sentence for this translation\nt: Terminate and return the current translation."
     },
     {
         "role": "assistant",
