@@ -62,11 +62,11 @@ def random_good_translations(savepath: pathlib.Path,
         _df.to_csv(savepath, index=False)
 
 def main():
-    overwrite = True
-    # random_good_translations(
-    #     datadir / "random_good_translations.csv",
-    #     overwrite=overwrite
-    # )
+    overwrite = False
+    random_good_translations(
+        datadir / "random_good_translations.csv",
+        overwrite=overwrite
+    )
     random_good_translations(
         datadir / "random_no_subject_noun.csv",
         n=25,

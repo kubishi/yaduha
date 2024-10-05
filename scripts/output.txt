@@ -1,0 +1,26 @@
+=== Using model: gpt-4o-mini ===
+Source: This coyote is eating rice.
+Target: isha'-ii tüka-ti.
+Back Translation: This coyote is eating.
+
+Source: The boy and the girl are eating a quesadilla.
+Target: tüka-ti uhuw̃a. [quesadilla]-uu tüka-ti.
+Back Translation: They are eating. The quesadilla is eating.
+
+Source: The cook saw the ones who walked.
+Target: sawa-dü-uu puni-ku.
+Back Translation: That one who cooks saw.
+
+=== Using model: gpt-4o ===
+Source: This coyote is eating rice.
+Target: isha'-ii wai-neika a-düka-ti.
+Back Translation: This coyote is eating this rice.
+
+Source: The boy and the girl are eating a quesadilla.
+Target: [boy and girl]-ii [quesadilla]-neika a-düka-ti.
+Back Translation: The boy and girl are eating this quesadilla.
+
+Source: The cook saw the ones who walked.
+Target: sawa-dü-uu hukaw̃ia-doka ui-buni-ku.
+Back Translation: That one who cooks saw those who walk.
+
