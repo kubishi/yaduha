@@ -3,7 +3,7 @@ import os
 import functools
 import numpy as np
 import pandas as pd
-from rbo import rbo
+from yaduha.rbo import RankingSimilarity
 import pathlib
 
 from yaduha.segment import (
@@ -65,7 +65,7 @@ def test_similarity():
             dist = np.mean(np.abs(np.argsort(-similarities) - np.arange(len(similarities))))
 
             sorted_sentences = [sentences[i] for i in np.argsort(-similarities)]
-            rbo_similarity = rbo.RankingSimilarity(sorted_sentences, sentences).rbo()
+            rbo_similarity = RankingSimilarity(sorted_sentences, sentences).rbo()
 
             rows.append([base_sentence, similarity_func_name, dist, rbo_similarity])
 
@@ -87,6 +87,6 @@ def test_split_sentence():
     print(simple_nl_sentence)
 
 if __name__ == '__main__':
-    main()
+    # main()
     test_similarity()
     test_split_sentence()

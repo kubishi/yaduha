@@ -2,6 +2,7 @@
 import functools
 import hashlib
 import json
+import logging
 import os
 import pathlib
 from typing import Callable, Dict, List, Optional, TYPE_CHECKING
@@ -10,9 +11,7 @@ import dotenv
 import numpy as np
 import openai
 from openai.types.chat import ChatCompletion
-import pandas as pd
 import numpy as np
-import rbo
 
 if TYPE_CHECKING:
     from sentence_transformers import SentenceTransformer
@@ -38,7 +37,13 @@ def semantic_similarity_spacy(sentence1: str, sentence2: str) -> float:
     global nlp
     import spacy
     if nlp is None:
-        nlp = spacy.load("en_core_web_md")
+        try:
+            nlp = spacy.load("en_core_web_md")
+        except OSError:
+            from spacy.cli import download
+            logging.info("Downloading spaCy model 'en_core_web_md'")
+            download('en_core_web_md')
+            nlp = spacy.load("en_core_web_md")
     doc1 = nlp(sentence1)
     doc2 = nlp(sentence2)
     similarity = doc1.similarity(doc2)
