@@ -1,4 +1,5 @@
 """Functions for translating simple sentences from English to Paiute."""
+from dataclasses import dataclass
 from functools import partial
 import os
 import random
@@ -8,7 +9,7 @@ import dotenv
 from openai.types.chat import ChatCompletion
 
 from ..sentence_builder import NOUNS, Object, Subject, Verb
-from ..segment import semantic_similarity_transformers, semantic_similarity_openai, split_sentence
+from ..segment import make_sentence, semantic_similarity_transformers, semantic_similarity_openai, split_sentence
 from ..back_translate import translate as translate_ovp_to_english
 from ..base import Translator, Translation
 
@@ -141,11 +142,17 @@ def comparator_sentence(simple_sentence: Dict[str, str]) -> str:
 
     return simple_sentence
 
+@dataclass
+class PipelineTranslation(Translation):
+    simple: str
+    comparator: str
+
+
 class PipelineTranslator(Translator):
     def __init__(self, model: str):
         self.model = model
 
-    def translate(self, sentence: str) -> Translation:
+    def translate(self, sentence: str) -> PipelineTranslation:
         prompt_tokens = 0
         completion_tokens = 0
         def res_callback(res: ChatCompletion):
@@ -161,9 +168,11 @@ class PipelineTranslator(Translator):
             completion_tokens_back += res.usage.completion_tokens
 
         simple_sentences = split_sentence(sentence, model=self.model, res_callback=res_callback)
+        comparator_sentences = []
         target_simple_sentences = []
         backwards_translations = []
         for simple_sentence in simple_sentences:
+            comparator_sentences.append(comparator_sentence(simple_sentence))
             subject, verb, _object = translate_simple(simple_sentence)
             target_simple_sentence = order_sentence(subject, verb, _object)
             target_simple_sentences.append(" ".join(map(str, target_simple_sentence)))
@@ -182,15 +191,19 @@ class PipelineTranslator(Translator):
                 ).strip(".")
             )
 
+        simple_sentences_nl = ". ".join([make_sentence(sentence, model=self.model, res_callback=res_callback) for sentence in simple_sentences]) + '.'
+        comparator_sentence_nl = ". ".join([make_sentence(sentence, model=self.model, res_callback=res_callback_backwards) for sentence in comparator_sentences]) + '.'
         target_simple_sentence_nl = ". ".join(target_simple_sentences) + '.'
         backwards_translation_nl = ". ".join(backwards_translations) + '.'
 
-        return Translation(
+        return PipelineTranslation(
             source=sentence,
             target=target_simple_sentence_nl,
             back_translation=backwards_translation_nl,
             translation_prompt_tokens=prompt_tokens,
             translation_completion_tokens=completion_tokens,
             back_translation_prompt_tokens=prompt_tokens_back,
-            back_translation_completion_tokens=completion_tokens_back
+            back_translation_completion_tokens=completion_tokens_back,
+            simple=simple_sentences_nl,
+            comparator=comparator_sentence_nl
         )

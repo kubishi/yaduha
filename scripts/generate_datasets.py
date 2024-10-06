@@ -4,7 +4,7 @@ import pandas as pd
 import random
 
 from yaduha.sentence_builder import NOUNS, format_sentence, get_random_sentence, get_random_simple_sentence, sentence_to_str
-from yaduha.translate_ovp2eng import translate as translate_ovp2eng
+from yaduha.back_translate import translate as translate_ovp2eng
 
 thisdir = pathlib.Path(__file__).parent.absolute()
 datadir = thisdir / "data"

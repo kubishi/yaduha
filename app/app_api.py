@@ -4,8 +4,9 @@ import os
 import traceback
 from typing import Dict
 
-from yaduha.translate_eng2ovp import translate_ovp_to_english, translate_english_to_ovp
-from yaduha.sentence_builder import NOUNS, Object, Subject, Verb, get_all_choices, format_sentence, get_random_sentence, get_random_sentence_big, get_random_simple_sentence
+from yaduha.forward.pipeline import PipelineTranslator, translate_ovp_to_english
+from yaduha.sentence_builder import NOUNS, Object, Subject, Verb, get_all_choices, format_sentence, get_random_simple_sentence
+from yaduha.segment import semantic_similarity_sentence_transformers as semantic_similarity
 
 from flask import jsonify, make_response, request, session
 from flask_limiter import Limiter
@@ -53,10 +54,14 @@ def get_restricted_choices(data: Dict) -> Dict:
     object_nouns = {*NOUNS, *Object.PRONOUNS}
 
     choices['subject_noun']['choices'] = {
-        c: v for c, v in choices['subject_noun']['choices'].items() if c is None or (c in subject_nouns and c not in verbs)
+        c: v
+        for c, v in choices['subject_noun']['choices'].items()
+        if c is None or (c in subject_nouns and c not in verbs)
     }
     choices['object_noun']['choices'] = {
-        c: v for c, v in choices['object_noun']['choices'].items() if c is None or (c in object_nouns and c not in verbs)
+        c: v
+        for c, v in choices['object_noun']['choices'].items()
+        if c is None or (c in object_nouns and c not in verbs)
     }
 
     sentence = []
@@ -139,7 +144,26 @@ def get_random():
 def translate_sentence():
     data: Dict = request.get_json()
     try:
-        response = translate_english_to_ovp(data.get('english'))
+        translator = PipelineTranslator(model='gpt-4o-mini')
+        translation = translator.translate(data.get('english'))
+        response = {
+            'simple': translation.simple,
+            'comparator': translation.comparator,
+            'target': translation.target,
+            'backwards': translation.back_translation,
+            'sim_simple': semantic_similarity(
+                translation.source, translation.simple, 
+                model='all-MiniLM-L6-v2'
+            ),
+            'sim_backwards': semantic_similarity(
+                translation.source, translation.back_translation, 
+                model='all-MiniLM-L6-v2'
+            ),
+            'sim_comparator': semantic_similarity(
+                translation.source, translation.comparator, 
+                model='all-MiniLM-L6-v2'
+            )
+        }
         logging.info(response)
         if response['sim_simple'] < TRANSLATION_QUALITY_THRESHOLD:
             response['warning'] = (
@@ -169,3 +193,6 @@ def translate_sentence():
 def health_check():
     return jsonify(status='ok')
 
+
+if __name__ == '__main__':
+    app.run(debug=True)

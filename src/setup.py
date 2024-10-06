@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
     name='yaduha',
     version='0.1',
-    packages=['yaduha'],
+    packages=find_packages(),
     install_requires=[
         'numpy',
         'pandas',

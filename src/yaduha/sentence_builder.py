@@ -664,14 +664,12 @@ def get_random_sentence(choices: Dict[str, Dict[str, Any]] = {}):
             continue
 
 def get_random_simple_sentence(choices: Dict[str, Dict[str, Any]] = {}):
-    choices = get_all_choices(**{k: v['value'] for k, v in choices.items()})
-
     word_choices = {pos: v.get('value') for pos, v in choices.items()}
-    choices['subject_noun']['value'] = word_choices.get('subject_noun', random.choice(list(NOUNS.keys())))
-    choices['verb']['value'] = word_choices.get('verb', random.choice([*Verb.TRANSITIVE_VERBS.keys(), *Verb.INTRANSITIVE_VERBS.keys()]))
+    choices['subject_noun']['value'] = word_choices.get('subject_noun') or random.choice(list(NOUNS.keys()))
+    choices['verb']['value'] = word_choices.get('verb') or random.choice([*Verb.TRANSITIVE_VERBS.keys(), *Verb.INTRANSITIVE_VERBS.keys()])
     if Verb._is_transitive(choices['verb']['value']):
-        choices['object_noun']['value'] = word_choices.get('object_noun', random.choice(list(NOUNS.keys())))
-
+        choices['object_noun']['value'] = word_choices.get('object_noun') or random.choice(list(NOUNS.keys()))
+    choices = get_all_choices(**{k: v['value'] for k, v in choices.items()})
     return get_random_sentence(choices)
 
 
