@@ -18,7 +18,8 @@ if TYPE_CHECKING:
 
 dotenv.load_dotenv()
 
-thisdir = pathlib.Path(__file__).parent.absolute()
+cachedir = pathlib.Path.home() / '.cache' / 'yaduha'
+cachedir.mkdir(exist_ok=True, parents=True)
 
 oai_client = openai.Client(api_key=os.environ['OPENAI_API_KEY'])
 
@@ -144,7 +145,7 @@ def semantic_similarity_transformers(sentence1: str, sentence2: str, model: str)
     return similarities[0, 1]
 
 def _get_openai_embeddings(model: str, *sentences: str) -> Dict[str, np.ndarray]:
-    savedir = thisdir / '.results' / 'embeddings' / model
+    savedir = cachedir / '.results' / 'embeddings' / model
     savedir.mkdir(exist_ok=True, parents=True)
     # load cached embeddings from disk
     embeddings = {}

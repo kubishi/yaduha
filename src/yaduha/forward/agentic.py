@@ -8,9 +8,9 @@ import os
 import tempfile
 from openai.types.chat import ChatCompletion
 
-from .sentence_builder import format_sentence, get_all_choices, sentence_to_str
-from .translate_ovp2eng import translate as translate_ovp2eng
-from .base import Translator, Translation
+from ..sentence_builder import format_sentence, get_all_choices, sentence_to_str
+from ..back_translate import translate as translate_ovp2eng
+from ..base import Translator, Translation
 
 
 class AgenticTranslator(Translator):
