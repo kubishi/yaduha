@@ -638,19 +638,19 @@ def format_sentence(subject_noun: Optional[str],
             return [subject.details, object.details, _verb.details]
         else:
              return [subject.details, _verb.details]
-        
 
 def get_random_sentence(choices: Dict[str, Dict[str, Any]] = {}):
-    if not choices:
-        choices = get_all_choices()
-    all_keys = list(choices.keys())
+    choices = get_all_choices(**{k: v['value'] for k, v in choices.items()})
+    all_pos = list(choices.keys())
     i = 0
     while True:
-        random.shuffle(all_keys)
-        for key in all_keys:
-            if not choices[key]['choices'] or choices[key]['value']:
+        random.shuffle(all_pos)
+        for pos in all_pos:
+            if not choices[pos]['choices'] or choices[pos]['value'] is not None:
+                print(f"Skipping {pos} ({choices[pos]['value']})")
                 continue
-            choices[key]['value'], _ = random.choice(list(choices[key]['choices'].items()))
+            choices[pos]['value'], _ = random.choice(list(choices[pos]['choices'].items()))
+            print(f"Choosing {pos} as {choices[pos]['value']}")
             choices = get_all_choices(**{k: v['value'] for k, v in choices.items()})
             i = 0
 
