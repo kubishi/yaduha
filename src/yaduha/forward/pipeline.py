@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from functools import partial
 import os
 import random
+import time
 from typing import Dict, List, Optional, Tuple, Union
 
 import dotenv
@@ -153,6 +154,7 @@ class PipelineTranslator(Translator):
         self.model = model
 
     def translate(self, sentence: str) -> PipelineTranslation:
+        start_time = time.time()
         prompt_tokens = 0
         completion_tokens = 0
         def res_callback(res: ChatCompletion):
@@ -171,11 +173,13 @@ class PipelineTranslator(Translator):
         comparator_sentences = []
         target_simple_sentences = []
         backwards_translations = []
+        back_translation_time = 0
         for simple_sentence in simple_sentences:
             comparator_sentences.append(comparator_sentence(simple_sentence))
             subject, verb, _object = translate_simple(simple_sentence)
             target_simple_sentence = order_sentence(subject, verb, _object)
             target_simple_sentences.append(" ".join(map(str, target_simple_sentence)))
+            back_translation_start_time = time.time()
             backwards_translations.append(
                 translate_ovp_to_english(
                     subject_noun=subject.noun,
@@ -190,20 +194,24 @@ class PipelineTranslator(Translator):
                     res_callback=res_callback_backwards
                 ).strip(".")
             )
+            back_translation_time += time.time() - back_translation_start_time
 
         simple_sentences_nl = ". ".join([make_sentence(sentence, model=self.model, res_callback=res_callback) for sentence in simple_sentences]) + '.'
         comparator_sentence_nl = ". ".join([make_sentence(sentence, model=self.model, res_callback=res_callback_backwards) for sentence in comparator_sentences]) + '.'
         target_simple_sentence_nl = ". ".join(target_simple_sentences) + '.'
         backwards_translation_nl = ". ".join(backwards_translations) + '.'
 
+        translation_time = (time.time() - start_time) - back_translation_time
         return PipelineTranslation(
             source=sentence,
             target=target_simple_sentence_nl,
             back_translation=backwards_translation_nl,
             translation_prompt_tokens=prompt_tokens,
             translation_completion_tokens=completion_tokens,
+            translation_time=translation_time,
             back_translation_prompt_tokens=prompt_tokens_back,
             back_translation_completion_tokens=completion_tokens_back,
+            back_translation_time=back_translation_time,
             simple=simple_sentences_nl,
             comparator=comparator_sentence_nl
         )

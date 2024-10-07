@@ -1,4 +1,5 @@
 import logging
+import time
 import openai
 import json
 from typing import Dict, List, Optional, Union
@@ -156,6 +157,7 @@ class AgenticTranslator(Translator):
         return list(pathlib.Path(self._examples_dir.name).glob("*.json"))
 
     def translate(self, text: str) -> Translation:
+        start_time = time.time()
         if self.auto_choices and self.openai_model is not None:
             raise Exception("Cannot use auto_choices with openai_model=True")
         
@@ -270,18 +272,23 @@ class AgenticTranslator(Translator):
                             backwards_completion_tokens += completion.usage.completion_tokens
         
                         translation = ". ".join(sentences) + "."
+                        translation_time = time.time() - start_time
+                        back_translation_start_time = time.time()
                         back_translation = " ".join([
                             translate_ovp2eng(**_word_choices, res_callback=count_tokens)
                             for _word_choices in all_word_choices
                         ])
+                        back_translation_time = time.time() - back_translation_start_time
                         return Translation(
                             source=text,
                             target=translation,
                             back_translation=back_translation,
                             translation_prompt_tokens=prompt_tokens,
                             translation_completion_tokens=completion_tokens,
+                            translation_time=translation_time,
                             back_translation_prompt_tokens=backwards_prompt_tokens,
-                            back_translation_completion_tokens=backwards_completion_tokens
+                            back_translation_completion_tokens=backwards_completion_tokens,
+                            back_translation_time=back_translation_time
                         )
                     elif continue_choice == "n": # start a new sentence
                         word_choices = {}
