@@ -1,6 +1,10 @@
 import argparse
+import os
 import pathlib
 from yaduha.forward.pipeline import PipelineTranslator
+import dotenv
+
+dotenv.load_dotenv()
 
 thisdir = pathlib.Path(__file__).parent.absolute()
 
@@ -14,7 +18,7 @@ def main():
     args = parser.parse_args()
     translator = PipelineTranslator(model=args.model)
     translation = translator.translate(args.sentence)
-    print(translation)
+    print(translation.model_dump_json())
 
 if __name__ == '__main__':
     main()

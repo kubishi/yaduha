@@ -6,15 +6,12 @@ import random
 import time
 from typing import Dict, List, Optional, Tuple, Union
 
-import dotenv
 from openai.types.chat import ChatCompletion
 
 from ..sentence_builder import NOUNS, Object, Subject, Verb
 from ..segment import make_sentence, semantic_similarity_transformers, semantic_similarity_openai, split_sentence
 from ..back_translate import translate as translate_ovp_to_english
 from ..base import Translator, Translation
-
-dotenv.load_dotenv()
 
 SS_MODE = os.getenv('SS_MODE', 'sentence-transformers')
 
@@ -143,7 +140,6 @@ def comparator_sentence(simple_sentence: Dict[str, str]) -> str:
 
     return simple_sentence
 
-@dataclass
 class PipelineTranslation(Translation):
     simple: str
     comparator: str

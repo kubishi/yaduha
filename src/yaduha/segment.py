@@ -7,7 +7,6 @@ import os
 import pathlib
 from typing import Callable, Dict, List, Optional, TYPE_CHECKING
 
-import dotenv
 import numpy as np
 import openai
 from openai.types.chat import ChatCompletion
@@ -16,12 +15,14 @@ import numpy as np
 if TYPE_CHECKING:
     from sentence_transformers import SentenceTransformer
 
-dotenv.load_dotenv()
-
 cachedir = pathlib.Path.home() / '.cache' / 'yaduha'
 cachedir.mkdir(exist_ok=True, parents=True)
 
-oai_client = openai.Client(api_key=os.environ['OPENAI_API_KEY'])
+def get_openai_client():
+    try:
+        return openai.Client(api_key=os.environ['OPENAI_API_KEY'])
+    except KeyError:
+        raise ValueError("OPENAI_API_KEY environment variable not set")
 
 nlp = None
 @functools.lru_cache(maxsize=1000)
@@ -159,7 +160,7 @@ def _get_openai_embeddings(model: str, *sentences: str) -> Dict[str, np.ndarray]
 
     new_sentences = [s for s in sentences if s not in embeddings]
     if new_sentences:
-        res = openai.embeddings.create(
+        res = get_openai_client().embeddings.create(
             input=new_sentences,
             model=model,
             encoding_format="float"
@@ -363,7 +364,7 @@ def split_sentence(sentence: str, model: str = None, res_callback: Optional[Call
         },
         {'role': 'user', 'content': sentence},
     ]
-    response = openai.chat.completions.create(
+    response = get_openai_client().chat.completions.create(
         model=model,
         messages=messages,
         functions=functions,
@@ -497,7 +498,7 @@ def make_sentence(sentence: Dict, model: str = None, res_callback: Optional[Call
             'content': json.dumps(sentence)
         }
     ]
-    response = openai.chat.completions.create(
+    response = get_openai_client().chat.completions.create(
         model=model,
         messages=messages,
         functions=functions,
