@@ -1,4 +1,5 @@
 import json
+import traceback
 from typing import Dict, List, Set, Tuple, Type
 from yaduha.base import Translation, Translator
 from yaduha.forward import (
@@ -11,6 +12,8 @@ from itertools import product
 
 from pydantic import BaseModel
 import dotenv
+
+from yaduha.forward.finetuned import FinetunedTranslator
 
 dotenv.load_dotenv()
 
@@ -26,12 +29,24 @@ class Results(BaseModel):
     results: List[Result]
 
 def main():
-    models = ["gpt-4o-mini", "gpt-4o"]
-    sentences = pd.read_csv(thisdir / 'data/evaluation_sentences.csv')
-    translators: Dict[str, Type[Translator]] = {
-        'pipeline': PipelineTranslator,
-        'instructions': InstructionsTranslator,
-        'agentic': AgenticTranslator
+    sentences = [
+        (sentence_type, sentence)
+        for _, sentence, sentence_type in
+        pd.read_csv(thisdir / 'data/evaluation_sentences.csv').itertuples()
+    ]
+    translators: Dict[str, Dict[str, Translator]] = {
+        'gpt-4o-mini': {
+            'pipeline': PipelineTranslator(model='gpt-4o-mini'),
+            'instructions': InstructionsTranslator(model='gpt-4o-mini'),
+            'agentic': AgenticTranslator(model='gpt-4o-mini'),
+            'finetuned-simple': FinetunedTranslator(model='ft:gpt-4o-mini-2024-07-18:kubishi:brackets-plus-prompt-merged:AFvrmkic')
+        },
+        # 'gpt-4o': {
+        #     'pipeline': PipelineTranslator(model='gpt-4o'),
+        #     'instructions': InstructionsTranslator(model='gpt-4o'),
+        #     'agentic': AgenticTranslator(model='gpt-4o'),
+        #     'finetuned-simple': FinetunedTranslator(model='ft:gpt-4o-2024-08-06:kubishi:brackets-plus-prompt-merged-4o:AGCTD0Ao')
+        # },
     }
 
     # load results from disk
@@ -41,27 +56,35 @@ def main():
     if resultspath.exists():
         results = Results.model_validate_json(resultspath.read_text())
     finished = {
-        (r.translator, r.model, r.sentence_type)
+        (r.translator, r.model, r.translation.source)
         for r in results.results
     }
-    combos = list(product(models, sentences.itertuples(), translators.items()))
-    for model, (_, sentence, sentence_type), (translator_name, TranslatorClass) in combos:
-        if (translator_name, model, sentence_type) in finished:
-            continue
-        translator = TranslatorClass(model=model)
-        translation = translator.translate(sentence)
-        result = Result(
-            translator=translator_name,
-            model=model,
-            sentence_type=sentence_type,
-            translation=translation
-        )
-        results.results.append(result)
-        finished.add((translator_name, model, sentence_type))
-        resultspath.write_text(results.model_dump_json())
-
-
-
+    for i, (model, _translators) in enumerate(translators.items(), start=1):
+        print(f"[RUNNING] model={model} ({i}/{len(translators)})")
+        for j, (translator_name, translator) in enumerate(_translators.items(), start=1):
+            print(f"  [RUNNING] translator={translator_name} ({j}/{len(_translators)})")
+            for k, (sentence_type, sentence) in enumerate(sentences, start=1):
+                print(f"    [RUNNING] sentence={k}/{len(sentences)} ({k/len(sentences)*100:.2f}%)", end='\r')
+                if (translator_name, model, sentence) in finished:
+                    continue
+                try:
+                    translation = translator.translate(sentence)
+                except Exception as e:
+                    print(traceback.format_exc())
+                    print(f"    [ERROR] translator={translator_name} sentence={sentence} error={e}")
+                    return
+                result = Result(
+                    translator=translator_name,
+                    model=model,
+                    sentence_type=sentence_type,
+                    translation=translation
+                )
+                results.results.append(result)
+                finished.add((translator_name, model, sentence))
+                resultspath.write_text(results.model_dump_json(indent=2))
+            print(" "*100, end='\r')
+            print(f"  [FINISHED] translator={translator_name}")
+        print(f"[FINISHED] model={model}")
 
 if __name__ == '__main__':
     main()

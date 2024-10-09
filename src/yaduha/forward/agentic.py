@@ -21,13 +21,12 @@ class AgenticTranslator(Translator):
     """
     
     def __init__(self,
-                 openai_model: Optional[str] = None, 
-                 openai_api_key: Optional[str] = None,
+                 model: Optional[str] = None, 
                  savepath: Optional[pathlib.Path] = None,
                  max_iterations: int = 30,
                  max_sentences: int = 4,
                  auto_choices: List[str] = []):
-        self.openai_model = openai_model
+        self.openai_model = model
         self.openai_client = None
         self.savepath = savepath
         self.max_iterations = max_iterations
@@ -36,8 +35,8 @@ class AgenticTranslator(Translator):
 
         # create temporary directory for examples that doesn't delete automatically
         self._examples_dir = None
-        if openai_model is not None:
-            self.openai_client = openai.Client(api_key=openai_api_key or os.environ.get("OPENAI_API_KEY"))
+        if model is not None:
+            self.openai_client = openai.Client(api_key=os.environ.get("OPENAI_API_KEY"))
             self._examples_dir = tempfile.TemporaryDirectory()
             self._build_examples()
 
@@ -167,7 +166,7 @@ class AgenticTranslator(Translator):
                 "content": (
                     f"You are an assistant trying to build a sentence in Paiute. "
                     "The user will provide you with parts of speech and vocabulary options one at a time. "
-                    "Make choices to best approximate the meaning of Input Sentence."
+                    "Make choices to best approximate the meaning of Input Sentence. "
                     "Whenever you've chosen enough parts of speech and vocabulary to form a grammatically correct sentence, "
                     "The user will ask you if you want to continue. "
                     "If you're happy with the sentence you've built, you can choose to stop. "
@@ -190,7 +189,11 @@ class AgenticTranslator(Translator):
                         allow_wild: bool = False) -> str:
                 nonlocal prompt_tokens, completion_tokens
                 messages.append({"role": "user", "content": prompt})
-                res = self.openai_client.chat.completions.create(model=self.openai_model, messages=messages, temperature=0.0)
+                res = self.openai_client.chat.completions.create(
+                    model=self.openai_model,
+                    messages=messages,
+                    temperature=0.0
+                )
                 choice = res.choices[0].message.content
                 prompt_tokens += res.usage.prompt_tokens
                 completion_tokens += res.usage.completion_tokens
@@ -198,7 +201,11 @@ class AgenticTranslator(Translator):
                 messages.append({"role": "assistant", "content": choice})
                 while choice not in choices and not (allow_wild and choice.startswith('[') and choice.endswith(']')):
                     messages.append({"role": "assistant", "content": f"Invalid choice. Please try again.\n{prompt}"})
-                    res = self.openai_client.chat.completions.create(model=self.openai_model, messages=messages, temperature=0.0)
+                    res = self.openai_client.chat.completions.create(
+                        model=self.openai_model,
+                        messages=messages,
+                        temperature=0.0
+                    )
                     choice = res.choices[0].message.content
                     prompt_tokens += res.usage.prompt_tokens
                     completion_tokens += res.usage.completion_tokens

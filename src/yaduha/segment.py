@@ -255,6 +255,7 @@ def split_sentence(sentence: str, model: str = None, res_callback: Optional[Call
             'Subjects and objects can be verbs IF they are "nominalized" as "past", "present", or "future" ',
             '(e.g., "run" -> "the runner", "the one who ran", "the one who will run"). ',
             'The present nominalizer should be used to describe those who always do the action (runner, drinker, cook(er), etc.). ',
+            'nominalizer_tense must be either None or one of "past", "present", "future". ',
         ])},
         {'role': 'user', 'content': 'I am sitting in a chair.'},
         {

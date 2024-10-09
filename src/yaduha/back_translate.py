@@ -24,7 +24,7 @@ def get_english_structure(subject_noun: str,
 
     subject_info = {'part_of_speech': 'subject'}
     if subject_noun_nominalizer is not None:
-        subject_info['word'] = {**Verb.TRANSITIVE_VERBS, **Verb.INTRANSITIVE_VERBS}[subject_noun]
+        subject_info['word'] = {**Verb.TRANSITIVE_VERBS, **Verb.INTRANSITIVE_VERBS}.get(subject_noun, subject_noun)
         subject_info['agent_nominalizer'] = Verb.NOMINALIZER_TENSES[subject_noun_nominalizer]
         subject_info['positional'] = Subject.SUFFIXES[subject_suffix]
     elif subject_noun in NOUNS:
@@ -42,7 +42,7 @@ def get_english_structure(subject_noun: str,
     if object_pronoun and any(kw in Object.PRONOUNS[object_pronoun] for kw in plural_keywords):
         object_info['plural'] = True
     if object_noun_nominalizer is not None:
-        object_info['word'] = {**Verb.TRANSITIVE_VERBS, **Verb.INTRANSITIVE_VERBS}[object_noun]
+        object_info['word'] = {**Verb.TRANSITIVE_VERBS, **Verb.INTRANSITIVE_VERBS}.get(object_noun, object_noun)
         object_info['agent_nominalizer'] = Verb.NOMINALIZER_TENSES[object_noun_nominalizer]
         object_info['positional'] = Object.SUFFIXES[object_suffix]
         sentence_details.append(object_info)

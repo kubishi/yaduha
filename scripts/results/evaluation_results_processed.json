@@ -14,7 +14,8 @@
         "back_translation_prompt_tokens": 1039,
         "back_translation_completion_tokens": 11,
         "back_translation_time": 0.4366912841796875
-      }
+      },
+      "semantic_similarity": 1.0000001192092896
     },
     {
       "translator": "pipeline",
@@ -30,7 +31,8 @@
         "back_translation_prompt_tokens": 1030,
         "back_translation_completion_tokens": 9,
         "back_translation_time": 0.4735848903656006
-      }
+      },
+      "semantic_similarity": 1.0
     },
     {
       "translator": "pipeline",
@@ -46,7 +48,8 @@
         "back_translation_prompt_tokens": 1033,
         "back_translation_completion_tokens": 12,
         "back_translation_time": 0.3794395923614502
-      }
+      },
+      "semantic_similarity": 0.7117001414299011
     },
     {
       "translator": "pipeline",
@@ -62,7 +65,8 @@
         "back_translation_prompt_tokens": 1033,
         "back_translation_completion_tokens": 11,
         "back_translation_time": 0.5202300548553467
-      }
+      },
+      "semantic_similarity": 0.9999999701976776
     },
     {
       "translator": "pipeline",
@@ -78,7 +82,8 @@
         "back_translation_prompt_tokens": 1039,
         "back_translation_completion_tokens": 11,
         "back_translation_time": 0.6922974586486816
-      }
+      },
+      "semantic_similarity": 1.0000000596046448
     },
     {
       "translator": "pipeline",
@@ -94,7 +99,8 @@
         "back_translation_prompt_tokens": 1038,
         "back_translation_completion_tokens": 12,
         "back_translation_time": 0.44254493713378906
-      }
+      },
+      "semantic_similarity": 0.8255558013916016
     },
     {
       "translator": "pipeline",
@@ -110,7 +116,8 @@
         "back_translation_prompt_tokens": 1035,
         "back_translation_completion_tokens": 9,
         "back_translation_time": 0.2902858257293701
-      }
+      },
+      "semantic_similarity": 1.0000000596046448
     },
     {
       "translator": "pipeline",
@@ -126,7 +133,8 @@
         "back_translation_prompt_tokens": 1038,
         "back_translation_completion_tokens": 11,
         "back_translation_time": 0.4314553737640381
-      }
+      },
+      "semantic_similarity": 0.931726336479187
     },
     {
       "translator": "pipeline",
@@ -142,7 +150,8 @@
         "back_translation_prompt_tokens": 1037,
         "back_translation_completion_tokens": 11,
         "back_translation_time": 0.4241945743560791
-      }
+      },
+      "semantic_similarity": 0.8993513584136963
     },
     {
       "translator": "pipeline",
@@ -158,7 +167,8 @@
         "back_translation_prompt_tokens": 1048,
         "back_translation_completion_tokens": 15,
         "back_translation_time": 0.5032734870910645
-      }
+      },
+      "semantic_similarity": 0.8994441032409668
     },
     {
       "translator": "pipeline",
@@ -174,7 +184,8 @@
         "back_translation_prompt_tokens": 1033,
         "back_translation_completion_tokens": 12,
         "back_translation_time": 0.3767683506011963
-      }
+      },
+      "semantic_similarity": 0.7543006241321564
     },
     {
       "translator": "pipeline",
@@ -190,7 +201,8 @@
         "back_translation_prompt_tokens": 1040,
         "back_translation_completion_tokens": 11,
         "back_translation_time": 0.36762142181396484
-      }
+      },
+      "semantic_similarity": 1.0000000596046448
     },
     {
       "translator": "pipeline",
@@ -206,7 +218,8 @@
         "back_translation_prompt_tokens": 1040,
         "back_translation_completion_tokens": 14,
         "back_translation_time": 0.43593573570251465
-      }
+      },
+      "semantic_similarity": 0.7902727127075195
     },
     {
       "translator": "pipeline",
@@ -222,7 +235,8 @@
         "back_translation_prompt_tokens": 1035,
         "back_translation_completion_tokens": 9,
         "back_translation_time": 0.44977259635925293
-      }
+      },
+      "semantic_similarity": 1.0000000596046448
     },
     {
       "translator": "pipeline",
@@ -238,7 +252,8 @@
         "back_translation_prompt_tokens": 1034,
         "back_translation_completion_tokens": 14,
         "back_translation_time": 0.45007848739624023
-      }
+      },
+      "semantic_similarity": 1.0
     },
     {
       "translator": "pipeline",
@@ -254,7 +269,8 @@
         "back_translation_prompt_tokens": 1039,
         "back_translation_completion_tokens": 13,
         "back_translation_time": 0.3946998119354248
-      }
+      },
+      "semantic_similarity": 0.9999999701976776
     },
     {
       "translator": "pipeline",
@@ -270,7 +286,8 @@
         "back_translation_prompt_tokens": 1038,
         "back_translation_completion_tokens": 14,
         "back_translation_time": 0.7130789756774902
-      }
+      },
+      "semantic_similarity": 1.0000001192092896
     },
     {
       "translator": "pipeline",
@@ -286,7 +303,8 @@
         "back_translation_prompt_tokens": 1047,
         "back_translation_completion_tokens": 14,
         "back_translation_time": 0.44425463676452637
-      }
+      },
+      "semantic_similarity": 0.8693848848342896
     },
     {
       "translator": "pipeline",
@@ -302,7 +320,8 @@
         "back_translation_prompt_tokens": 1040,
         "back_translation_completion_tokens": 12,
         "back_translation_time": 0.3731400966644287
-      }
+      },
+      "semantic_similarity": 0.7805449366569519
     },
     {
       "translator": "pipeline",
@@ -318,7 +337,8 @@
         "back_translation_prompt_tokens": 1043,
         "back_translation_completion_tokens": 18,
         "back_translation_time": 0.4782562255859375
-      }
+      },
+      "semantic_similarity": 0.9257638454437256
     },
     {
       "translator": "pipeline",
@@ -334,7 +354,8 @@
         "back_translation_prompt_tokens": 1041,
         "back_translation_completion_tokens": 18,
         "back_translation_time": 0.8004827499389648
-      }
+      },
+      "semantic_similarity": 0.7931063771247864
     },
     {
       "translator": "pipeline",
@@ -350,7 +371,8 @@
         "back_translation_prompt_tokens": 1037,
         "back_translation_completion_tokens": 17,
         "back_translation_time": 0.43327784538269043
-      }
+      },
+      "semantic_similarity": 0.8360990285873413
     },
     {
       "translator": "pipeline",
@@ -366,7 +388,8 @@
         "back_translation_prompt_tokens": 1033,
         "back_translation_completion_tokens": 18,
         "back_translation_time": 0.42496514320373535
-      }
+      },
+      "semantic_similarity": 0.9131187498569489
     },
     {
       "translator": "pipeline",
@@ -382,7 +405,8 @@
         "back_translation_prompt_tokens": 1040,
         "back_translation_completion_tokens": 16,
         "back_translation_time": 0.4139988422393799
-      }
+      },
+      "semantic_similarity": 0.9211364388465881
     },
     {
       "translator": "pipeline",
@@ -398,7 +422,8 @@
         "back_translation_prompt_tokens": 1041,
         "back_translation_completion_tokens": 25,
         "back_translation_time": 0.49889516830444336
-      }
+      },
+      "semantic_similarity": 0.5975993797183037
     },
     {
       "translator": "pipeline",
@@ -414,7 +439,8 @@
         "back_translation_prompt_tokens": 1074,
         "back_translation_completion_tokens": 17,
         "back_translation_time": 0.46572065353393555
-      }
+      },
+      "semantic_similarity": 0.993172287940979
     },
     {
       "translator": "pipeline",
@@ -430,7 +456,8 @@
         "back_translation_prompt_tokens": 1073,
         "back_translation_completion_tokens": 21,
         "back_translation_time": 0.4648005962371826
-      }
+      },
+      "semantic_similarity": 0.9958135485649109
     },
     {
       "translator": "pipeline",
@@ -446,7 +473,8 @@
         "back_translation_prompt_tokens": 1067,
         "back_translation_completion_tokens": 20,
         "back_translation_time": 0.4210026264190674
-      }
+      },
+      "semantic_similarity": 0.9910854697227478
     },
     {
       "translator": "pipeline",
@@ -462,7 +490,8 @@
         "back_translation_prompt_tokens": 1063,
         "back_translation_completion_tokens": 15,
         "back_translation_time": 0.3567466735839844
-      }
+      },
+      "semantic_similarity": 0.9795500636100769
     },
     {
       "translator": "pipeline",
@@ -478,7 +507,8 @@
         "back_translation_prompt_tokens": 1067,
         "back_translation_completion_tokens": 17,
         "back_translation_time": 0.42545509338378906
-      }
+      },
+      "semantic_similarity": 0.9669031202793121
     },
     {
       "translator": "pipeline",
@@ -494,7 +524,8 @@
         "back_translation_prompt_tokens": 1073,
         "back_translation_completion_tokens": 19,
         "back_translation_time": 0.46291422843933105
-      }
+      },
+      "semantic_similarity": 0.9325335621833801
     },
     {
       "translator": "pipeline",
@@ -510,7 +541,8 @@
         "back_translation_prompt_tokens": 1062,
         "back_translation_completion_tokens": 23,
         "back_translation_time": 0.31078577041625977
-      }
+      },
+      "semantic_similarity": 1.0000000596046448
     },
     {
       "translator": "pipeline",
@@ -526,7 +558,8 @@
         "back_translation_prompt_tokens": 1070,
         "back_translation_completion_tokens": 21,
         "back_translation_time": 0.3041369915008545
-      }
+      },
+      "semantic_similarity": 0.9944436848163605
     },
     {
       "translator": "pipeline",
@@ -542,7 +575,8 @@
         "back_translation_prompt_tokens": 1068,
         "back_translation_completion_tokens": 19,
         "back_translation_time": 0.38808107376098633
-      }
+      },
+      "semantic_similarity": 0.9889380037784576
     },
     {
       "translator": "pipeline",
@@ -558,7 +592,8 @@
         "back_translation_prompt_tokens": 1068,
         "back_translation_completion_tokens": 18,
         "back_translation_time": 0.43753719329833984
-      }
+      },
+      "semantic_similarity": 0.9923237860202789
     },
     {
       "translator": "pipeline",
@@ -574,7 +609,8 @@
         "back_translation_prompt_tokens": 1063,
         "back_translation_completion_tokens": 18,
         "back_translation_time": 0.39622020721435547
-      }
+      },
+      "semantic_similarity": 0.9465303421020508
     },
     {
       "translator": "pipeline",
@@ -590,7 +626,8 @@
         "back_translation_prompt_tokens": 1069,
         "back_translation_completion_tokens": 21,
         "back_translation_time": 0.4110226631164551
-      }
+      },
+      "semantic_similarity": 0.9745886325836182
     },
     {
       "translator": "pipeline",
@@ -606,7 +643,8 @@
         "back_translation_prompt_tokens": 1069,
         "back_translation_completion_tokens": 24,
         "back_translation_time": 0.47464728355407715
-      }
+      },
+      "semantic_similarity": 0.9889415800571442
     },
     {
       "translator": "pipeline",
@@ -622,7 +660,8 @@
         "back_translation_prompt_tokens": 1068,
         "back_translation_completion_tokens": 22,
         "back_translation_time": 0.3916513919830322
-      }
+      },
+      "semantic_similarity": 0.9945031404495239
     },
     {
       "translator": "pipeline",
@@ -638,7 +677,8 @@
         "back_translation_prompt_tokens": 1070,
         "back_translation_completion_tokens": 23,
         "back_translation_time": 0.36933159828186035
-      }
+      },
+      "semantic_similarity": 0.9999999403953552
     },
     {
       "translator": "pipeline",
@@ -654,7 +694,8 @@
         "back_translation_prompt_tokens": 1069,
         "back_translation_completion_tokens": 21,
         "back_translation_time": 0.44310498237609863
-      }
+      },
+      "semantic_similarity": 0.9954277873039246
     },
     {
       "translator": "pipeline",
@@ -670,7 +711,8 @@
         "back_translation_prompt_tokens": 1069,
         "back_translation_completion_tokens": 22,
         "back_translation_time": 0.43831944465637207
-      }
+      },
+      "semantic_similarity": 0.9696499109268188
     },
     {
       "translator": "pipeline",
@@ -686,7 +728,8 @@
         "back_translation_prompt_tokens": 1068,
         "back_translation_completion_tokens": 22,
         "back_translation_time": 0.3993813991546631
-      }
+      },
+      "semantic_similarity": 0.9972754418849945
     },
     {
       "translator": "pipeline",
@@ -702,7 +745,8 @@
         "back_translation_prompt_tokens": 1064,
         "back_translation_completion_tokens": 23,
         "back_translation_time": 0.40973615646362305
-      }
+      },
+      "semantic_similarity": 0.8696443736553192
     },
     {
       "translator": "pipeline",
@@ -718,7 +762,8 @@
         "back_translation_prompt_tokens": 1068,
         "back_translation_completion_tokens": 21,
         "back_translation_time": 0.4306061267852783
-      }
+      },
+      "semantic_similarity": 0.9921400547027588
     },
     {
       "translator": "pipeline",
@@ -734,7 +779,8 @@
         "back_translation_prompt_tokens": 1064,
         "back_translation_completion_tokens": 17,
         "back_translation_time": 0.4280252456665039
-      }
+      },
+      "semantic_similarity": 1.0000001192092896
     },
     {
       "translator": "pipeline",
@@ -750,7 +796,8 @@
         "back_translation_prompt_tokens": 1068,
         "back_translation_completion_tokens": 22,
         "back_translation_time": 0.4470362663269043
-      }
+      },
+      "semantic_similarity": 0.9691116809844971
     },
     {
       "translator": "pipeline",
@@ -766,7 +813,8 @@
         "back_translation_prompt_tokens": 1038,
         "back_translation_completion_tokens": 17,
         "back_translation_time": 0.4235234260559082
-      }
+      },
+      "semantic_similarity": 0.8380831480026245
     },
     {
       "translator": "pipeline",
@@ -782,7 +830,8 @@
         "back_translation_prompt_tokens": 1069,
         "back_translation_completion_tokens": 20,
         "back_translation_time": 0.4443490505218506
-      }
+      },
+      "semantic_similarity": 1.0000000596046448
     },
     {
       "translator": "pipeline",
@@ -798,7 +847,8 @@
         "back_translation_prompt_tokens": 1069,
         "back_translation_completion_tokens": 21,
         "back_translation_time": 0.38518714904785156
-      }
+      },
+      "semantic_similarity": 0.9899611473083496
     },
     {
       "translator": "pipeline",
@@ -814,7 +864,8 @@
         "back_translation_prompt_tokens": 2081,
         "back_translation_completion_tokens": 22,
         "back_translation_time": 0.8641462326049805
-      }
+      },
+      "semantic_similarity": 0.986141175031662
     },
     {
       "translator": "pipeline",
@@ -830,7 +881,8 @@
         "back_translation_prompt_tokens": 2066,
         "back_translation_completion_tokens": 22,
         "back_translation_time": 0.780951976776123
-      }
+      },
+      "semantic_similarity": 0.9607059359550476
     },
     {
       "translator": "pipeline",
@@ -846,7 +898,8 @@
         "back_translation_prompt_tokens": 2060,
         "back_translation_completion_tokens": 18,
         "back_translation_time": 0.8235020637512207
-      }
+      },
+      "semantic_similarity": 0.9347023367881775
     },
     {
       "translator": "pipeline",
@@ -862,7 +915,8 @@
         "back_translation_prompt_tokens": 2077,
         "back_translation_completion_tokens": 26,
         "back_translation_time": 0.815037727355957
-      }
+      },
+      "semantic_similarity": 0.9272147715091705
     },
     {
       "translator": "pipeline",
@@ -878,7 +932,8 @@
         "back_translation_prompt_tokens": 2066,
         "back_translation_completion_tokens": 24,
         "back_translation_time": 0.853877067565918
-      }
+      },
+      "semantic_similarity": 0.7853409647941589
     },
     {
       "translator": "pipeline",
@@ -894,7 +949,8 @@
         "back_translation_prompt_tokens": 2071,
         "back_translation_completion_tokens": 18,
         "back_translation_time": 0.7122659683227539
-      }
+      },
+      "semantic_similarity": 0.9881853461265564
     },
     {
       "translator": "pipeline",
@@ -910,7 +966,8 @@
         "back_translation_prompt_tokens": 2078,
         "back_translation_completion_tokens": 28,
         "back_translation_time": 0.867194652557373
-      }
+      },
+      "semantic_similarity": 0.832866907119751
     },
     {
       "translator": "pipeline",
@@ -926,7 +983,8 @@
         "back_translation_prompt_tokens": 2074,
         "back_translation_completion_tokens": 25,
         "back_translation_time": 0.8362724781036377
-      }
+      },
+      "semantic_similarity": 0.9841682016849518
     },
     {
       "translator": "pipeline",
@@ -942,7 +1000,8 @@
         "back_translation_prompt_tokens": 2093,
         "back_translation_completion_tokens": 29,
         "back_translation_time": 0.9196946620941162
-      }
+      },
+      "semantic_similarity": 0.8930563628673553
     },
     {
       "translator": "pipeline",
@@ -958,7 +1017,8 @@
         "back_translation_prompt_tokens": 2078,
         "back_translation_completion_tokens": 26,
         "back_translation_time": 0.8850100040435791
-      }
+      },
+      "semantic_similarity": 0.9921291470527649
     },
     {
       "translator": "pipeline",
@@ -974,7 +1034,8 @@
         "back_translation_prompt_tokens": 2067,
         "back_translation_completion_tokens": 28,
         "back_translation_time": 0.8817868232727051
-      }
+      },
+      "semantic_similarity": 0.7286988943815231
     },
     {
       "translator": "pipeline",
@@ -990,7 +1051,8 @@
         "back_translation_prompt_tokens": 2082,
         "back_translation_completion_tokens": 32,
         "back_translation_time": 0.8852038383483887
-      }
+      },
+      "semantic_similarity": 0.7887880504131317
     },
     {
       "translator": "pipeline",
@@ -1006,7 +1068,8 @@
         "back_translation_prompt_tokens": 2078,
         "back_translation_completion_tokens": 26,
         "back_translation_time": 0.6123945713043213
-      }
+      },
+      "semantic_similarity": 0.9858065247535706
     },
     {
       "translator": "pipeline",
@@ -1022,7 +1085,8 @@
         "back_translation_prompt_tokens": 2111,
         "back_translation_completion_tokens": 48,
         "back_translation_time": 0.9043292999267578
-      }
+      },
+      "semantic_similarity": 0.7298948168754578
     },
     {
       "translator": "pipeline",
@@ -1038,7 +1102,8 @@
         "back_translation_prompt_tokens": 2103,
         "back_translation_completion_tokens": 29,
         "back_translation_time": 0.7409188747406006
-      }
+      },
+      "semantic_similarity": 0.9324323534965515
     },
     {
       "translator": "pipeline",
@@ -1054,7 +1119,8 @@
         "back_translation_prompt_tokens": 2069,
         "back_translation_completion_tokens": 28,
         "back_translation_time": 0.827625036239624
-      }
+      },
+      "semantic_similarity": 0.9823558926582336
     },
     {
       "translator": "pipeline",
@@ -1070,7 +1136,8 @@
         "back_translation_prompt_tokens": 2078,
         "back_translation_completion_tokens": 26,
         "back_translation_time": 0.8822567462921143
-      }
+      },
+      "semantic_similarity": 0.9849536120891571
     },
     {
       "translator": "pipeline",
@@ -1086,7 +1153,8 @@
         "back_translation_prompt_tokens": 2105,
         "back_translation_completion_tokens": 32,
         "back_translation_time": 1.666111946105957
-      }
+      },
+      "semantic_similarity": 0.8923908472061157
     },
     {
       "translator": "pipeline",
@@ -1102,7 +1170,8 @@
         "back_translation_prompt_tokens": 2085,
         "back_translation_completion_tokens": 34,
         "back_translation_time": 0.9893255233764648
-      }
+      },
+      "semantic_similarity": 0.9462919235229492
     },
     {
       "translator": "pipeline",
@@ -1118,7 +1187,8 @@
         "back_translation_prompt_tokens": 2082,
         "back_translation_completion_tokens": 38,
         "back_translation_time": 0.9511303901672363
-      }
+      },
+      "semantic_similarity": 0.8298300504684448
     },
     {
       "translator": "pipeline",
@@ -1134,7 +1204,8 @@
         "back_translation_prompt_tokens": 2074,
         "back_translation_completion_tokens": 36,
         "back_translation_time": 0.8596205711364746
-      }
+      },
+      "semantic_similarity": 0.7881889343261719
     },
     {
       "translator": "pipeline",
@@ -1150,7 +1221,8 @@
         "back_translation_prompt_tokens": 2094,
         "back_translation_completion_tokens": 32,
         "back_translation_time": 0.8419833183288574
-      }
+      },
+      "semantic_similarity": 0.9170796871185303
     },
     {
       "translator": "pipeline",
@@ -1166,7 +1238,8 @@
         "back_translation_prompt_tokens": 2067,
         "back_translation_completion_tokens": 36,
         "back_translation_time": 0.7913193702697754
-      }
+      },
+      "semantic_similarity": 0.8913393616676331
     },
     {
       "translator": "pipeline",
@@ -1182,7 +1255,8 @@
         "back_translation_prompt_tokens": 2109,
         "back_translation_completion_tokens": 36,
         "back_translation_time": 0.7814509868621826
-      }
+      },
+      "semantic_similarity": 0.9116933941841125
     },
     {
       "translator": "pipeline",
@@ -1198,7 +1272,8 @@
         "back_translation_prompt_tokens": 2079,
         "back_translation_completion_tokens": 28,
         "back_translation_time": 0.6707503795623779
-      }
+      },
+      "semantic_similarity": 0.8538020551204681
     },
     {
       "translator": "pipeline",
@@ -1214,7 +1289,8 @@
         "back_translation_prompt_tokens": 2092,
         "back_translation_completion_tokens": 29,
         "back_translation_time": 1.1421005725860596
-      }
+      },
+      "semantic_similarity": 0.9924142956733704
     },
     {
       "translator": "pipeline",
@@ -1230,7 +1306,8 @@
         "back_translation_prompt_tokens": 2076,
         "back_translation_completion_tokens": 25,
         "back_translation_time": 0.6868922710418701
-      }
+      },
+      "semantic_similarity": 0.9817023575305939
     },
     {
       "translator": "pipeline",
@@ -1246,7 +1323,8 @@
         "back_translation_prompt_tokens": 2116,
         "back_translation_completion_tokens": 31,
         "back_translation_time": 0.833465576171875
-      }
+      },
+      "semantic_similarity": 0.9797500371932983
     },
     {
       "translator": "pipeline",
@@ -1262,7 +1340,8 @@
         "back_translation_prompt_tokens": 2073,
         "back_translation_completion_tokens": 21,
         "back_translation_time": 0.9096376895904541
-      }
+      },
+      "semantic_similarity": 0.9904900193214417
     },
     {
       "translator": "pipeline",
@@ -1278,7 +1357,8 @@
         "back_translation_prompt_tokens": 2075,
         "back_translation_completion_tokens": 24,
         "back_translation_time": 0.7509214878082275
-      }
+      },
+      "semantic_similarity": 0.9706952571868896
     },
     {
       "translator": "pipeline",
@@ -1294,7 +1374,8 @@
         "back_translation_prompt_tokens": 2074,
         "back_translation_completion_tokens": 26,
         "back_translation_time": 1.238553524017334
-      }
+      },
+      "semantic_similarity": 0.9966841340065002
     },
     {
       "translator": "pipeline",
@@ -1310,7 +1391,8 @@
         "back_translation_prompt_tokens": 2076,
         "back_translation_completion_tokens": 28,
         "back_translation_time": 0.8135838508605957
-      }
+      },
+      "semantic_similarity": 0.9906490445137024
     },
     {
       "translator": "pipeline",
@@ -1326,7 +1408,8 @@
         "back_translation_prompt_tokens": 2076,
         "back_translation_completion_tokens": 25,
         "back_translation_time": 0.7518131732940674
-      }
+      },
+      "semantic_similarity": 0.9875957667827606
     },
     {
       "translator": "pipeline",
@@ -1342,7 +1425,8 @@
         "back_translation_prompt_tokens": 2078,
         "back_translation_completion_tokens": 29,
         "back_translation_time": 0.8095605373382568
-      }
+      },
+      "semantic_similarity": 0.99017533659935
     },
     {
       "translator": "pipeline",
@@ -1358,7 +1442,8 @@
         "back_translation_prompt_tokens": 2076,
         "back_translation_completion_tokens": 28,
         "back_translation_time": 0.6915237903594971
-      }
+      },
+      "semantic_similarity": 0.9940741658210754
     },
     {
       "translator": "pipeline",
@@ -1374,7 +1459,8 @@
         "back_translation_prompt_tokens": 2075,
         "back_translation_completion_tokens": 30,
         "back_translation_time": 0.6800496578216553
-      }
+      },
+      "semantic_similarity": 0.9695193469524384
     },
     {
       "translator": "pipeline",
@@ -1390,7 +1476,8 @@
         "back_translation_prompt_tokens": 2079,
         "back_translation_completion_tokens": 35,
         "back_translation_time": 0.9293820858001709
-      }
+      },
+      "semantic_similarity": 0.9879986047744751
     },
     {
       "translator": "pipeline",
@@ -1406,7 +1493,8 @@
         "back_translation_prompt_tokens": 2078,
         "back_translation_completion_tokens": 34,
         "back_translation_time": 0.73708176612854
-      }
+      },
+      "semantic_similarity": 0.9960510730743408
     },
     {
       "translator": "pipeline",
@@ -1422,7 +1510,8 @@
         "back_translation_prompt_tokens": 2079,
         "back_translation_completion_tokens": 32,
         "back_translation_time": 0.802760124206543
-      }
+      },
+      "semantic_similarity": 0.9877602159976959
     },
     {
       "translator": "pipeline",
@@ -1438,7 +1527,8 @@
         "back_translation_prompt_tokens": 2077,
         "back_translation_completion_tokens": 36,
         "back_translation_time": 0.8682832717895508
-      }
+      },
+      "semantic_similarity": 0.9917709827423096
     },
     {
       "translator": "pipeline",
@@ -1454,7 +1544,8 @@
         "back_translation_prompt_tokens": 2076,
         "back_translation_completion_tokens": 29,
         "back_translation_time": 0.7583680152893066
-      }
+      },
+      "semantic_similarity": 0.9862922728061676
     },
     {
       "translator": "pipeline",
@@ -1470,7 +1561,8 @@
         "back_translation_prompt_tokens": 2077,
         "back_translation_completion_tokens": 34,
         "back_translation_time": 0.8015093803405762
-      }
+      },
+      "semantic_similarity": 0.9929572939872742
     },
     {
       "translator": "pipeline",
@@ -1486,7 +1578,8 @@
         "back_translation_prompt_tokens": 2077,
         "back_translation_completion_tokens": 34,
         "back_translation_time": 0.871135950088501
-      }
+      },
+      "semantic_similarity": 0.9873845279216766
     },
     {
       "translator": "pipeline",
@@ -1502,7 +1595,8 @@
         "back_translation_prompt_tokens": 2077,
         "back_translation_completion_tokens": 34,
         "back_translation_time": 0.8274378776550293
-      }
+      },
+      "semantic_similarity": 0.994088888168335
     },
     {
       "translator": "pipeline",
@@ -1518,7 +1612,8 @@
         "back_translation_prompt_tokens": 2076,
         "back_translation_completion_tokens": 32,
         "back_translation_time": 0.8037981986999512
-      }
+      },
+      "semantic_similarity": 0.9850518107414246
     },
     {
       "translator": "pipeline",
@@ -1534,7 +1629,8 @@
         "back_translation_prompt_tokens": 2083,
         "back_translation_completion_tokens": 35,
         "back_translation_time": 0.7018778324127197
-      }
+      },
+      "semantic_similarity": 0.9780071973800659
     },
     {
       "translator": "pipeline",
@@ -1550,7 +1646,8 @@
         "back_translation_prompt_tokens": 2077,
         "back_translation_completion_tokens": 34,
         "back_translation_time": 0.8953292369842529
-      }
+      },
+      "semantic_similarity": 0.9819355905056
     },
     {
       "translator": "pipeline",
@@ -1566,7 +1663,8 @@
         "back_translation_prompt_tokens": 2078,
         "back_translation_completion_tokens": 33,
         "back_translation_time": 0.8112549781799316
-      }
+      },
+      "semantic_similarity": 0.9918968677520752
     },
     {
       "translator": "pipeline",
@@ -1582,7 +1680,8 @@
         "back_translation_prompt_tokens": 2078,
         "back_translation_completion_tokens": 33,
         "back_translation_time": 0.796823263168335
-      }
+      },
+      "semantic_similarity": 0.9939520359039307
     },
     {
       "translator": "pipeline",
@@ -1598,7 +1697,8 @@
         "back_translation_prompt_tokens": 2078,
         "back_translation_completion_tokens": 35,
         "back_translation_time": 0.7634506225585938
-      }
+      },
+      "semantic_similarity": 0.9861484169960022
     },
     {
       "translator": "pipeline",
@@ -1614,7 +1714,8 @@
         "back_translation_prompt_tokens": 2088,
         "back_translation_completion_tokens": 23,
         "back_translation_time": 1.1049160957336426
-      }
+      },
+      "semantic_similarity": 0.9824762940406799
     },
     {
       "translator": "pipeline",
@@ -1630,7 +1731,8 @@
         "back_translation_prompt_tokens": 2142,
         "back_translation_completion_tokens": 43,
         "back_translation_time": 0.7911617755889893
-      }
+      },
+      "semantic_similarity": 0.9757938385009766
     },
     {
       "translator": "pipeline",
@@ -1646,7 +1748,8 @@
         "back_translation_prompt_tokens": 2150,
         "back_translation_completion_tokens": 39,
         "back_translation_time": 0.9111008644104004
-      }
+      },
+      "semantic_similarity": 0.8898326754570007
     },
     {
       "translator": "pipeline",
@@ -1662,7 +1765,8 @@
         "back_translation_prompt_tokens": 2138,
         "back_translation_completion_tokens": 43,
         "back_translation_time": 0.8068857192993164
-      }
+      },
+      "semantic_similarity": 0.971443772315979
     },
     {
       "translator": "pipeline",
@@ -1678,7 +1782,8 @@
         "back_translation_prompt_tokens": 2135,
         "back_translation_completion_tokens": 30,
         "back_translation_time": 0.7247281074523926
-      }
+      },
+      "semantic_similarity": 0.9318453967571259
     },
     {
       "translator": "pipeline",
@@ -1694,7 +1799,8 @@
         "back_translation_prompt_tokens": 2082,
         "back_translation_completion_tokens": 38,
         "back_translation_time": 0.9384496212005615
-      }
+      },
+      "semantic_similarity": 0.9562740325927734
     },
     {
       "translator": "pipeline",
@@ -1710,7 +1816,8 @@
         "back_translation_prompt_tokens": 2128,
         "back_translation_completion_tokens": 34,
         "back_translation_time": 0.7796900272369385
-      }
+      },
+      "semantic_similarity": 0.9681006371974945
     },
     {
       "translator": "pipeline",
@@ -1726,7 +1833,8 @@
         "back_translation_prompt_tokens": 2128,
         "back_translation_completion_tokens": 44,
         "back_translation_time": 0.8693532943725586
-      }
+      },
+      "semantic_similarity": 0.9399874806404114
     },
     {
       "translator": "pipeline",
@@ -1742,7 +1850,8 @@
         "back_translation_prompt_tokens": 2141,
         "back_translation_completion_tokens": 48,
         "back_translation_time": 0.8785488605499268
-      }
+      },
+      "semantic_similarity": 0.9645354747772217
     },
     {
       "translator": "pipeline",
@@ -1758,7 +1867,8 @@
         "back_translation_prompt_tokens": 2079,
         "back_translation_completion_tokens": 35,
         "back_translation_time": 0.8518576622009277
-      }
+      },
+      "semantic_similarity": 0.9399826526641846
     },
     {
       "translator": "pipeline",
@@ -1774,7 +1884,8 @@
         "back_translation_prompt_tokens": 2139,
         "back_translation_completion_tokens": 44,
         "back_translation_time": 0.893439769744873
-      }
+      },
+      "semantic_similarity": 0.9760337173938751
     },
     {
       "translator": "pipeline",
@@ -1790,7 +1901,8 @@
         "back_translation_prompt_tokens": 2137,
         "back_translation_completion_tokens": 45,
         "back_translation_time": 0.9222664833068848
-      }
+      },
+      "semantic_similarity": 0.8938135802745819
     },
     {
       "translator": "pipeline",
@@ -1806,7 +1918,8 @@
         "back_translation_prompt_tokens": 2138,
         "back_translation_completion_tokens": 44,
         "back_translation_time": 0.7161800861358643
-      }
+      },
+      "semantic_similarity": 0.9796850085258484
     },
     {
       "translator": "pipeline",
@@ -1822,7 +1935,8 @@
         "back_translation_prompt_tokens": 2131,
         "back_translation_completion_tokens": 41,
         "back_translation_time": 0.8871724605560303
-      }
+      },
+      "semantic_similarity": 0.9542386829853058
     },
     {
       "translator": "pipeline",
@@ -1838,7 +1952,8 @@
         "back_translation_prompt_tokens": 2079,
         "back_translation_completion_tokens": 36,
         "back_translation_time": 0.8854091167449951
-      }
+      },
+      "semantic_similarity": 0.9742408692836761
     },
     {
       "translator": "pipeline",
@@ -1854,7 +1969,8 @@
         "back_translation_prompt_tokens": 2130,
         "back_translation_completion_tokens": 50,
         "back_translation_time": 0.9339258670806885
-      }
+      },
+      "semantic_similarity": 0.9608858823776245
     },
     {
       "translator": "pipeline",
@@ -1870,7 +1986,8 @@
         "back_translation_prompt_tokens": 2065,
         "back_translation_completion_tokens": 28,
         "back_translation_time": 0.8548269271850586
-      }
+      },
+      "semantic_similarity": 0.9256051480770111
     },
     {
       "translator": "pipeline",
@@ -1886,7 +2003,8 @@
         "back_translation_prompt_tokens": 2082,
         "back_translation_completion_tokens": 37,
         "back_translation_time": 0.7503151893615723
-      }
+      },
+      "semantic_similarity": 0.8657070398330688
     },
     {
       "translator": "pipeline",
@@ -1902,7 +2020,8 @@
         "back_translation_prompt_tokens": 2130,
         "back_translation_completion_tokens": 45,
         "back_translation_time": 0.8994548320770264
-      }
+      },
+      "semantic_similarity": 0.9518827795982361
     },
     {
       "translator": "pipeline",
@@ -1918,7 +2037,8 @@
         "back_translation_prompt_tokens": 2080,
         "back_translation_completion_tokens": 36,
         "back_translation_time": 0.7185652256011963
-      }
+      },
+      "semantic_similarity": 0.9483052492141724
     },
     {
       "translator": "pipeline",
@@ -1934,7 +2054,8 @@
         "back_translation_prompt_tokens": 2127,
         "back_translation_completion_tokens": 42,
         "back_translation_time": 0.9147903919219971
-      }
+      },
+      "semantic_similarity": 0.9437877535820007
     },
     {
       "translator": "pipeline",
@@ -1950,7 +2071,8 @@
         "back_translation_prompt_tokens": 2130,
         "back_translation_completion_tokens": 36,
         "back_translation_time": 0.9297938346862793
-      }
+      },
+      "semantic_similarity": 0.9267355799674988
     },
     {
       "translator": "pipeline",
@@ -1966,7 +2088,8 @@
         "back_translation_prompt_tokens": 2075,
         "back_translation_completion_tokens": 25,
         "back_translation_time": 0.8667426109313965
-      }
+      },
+      "semantic_similarity": 0.8775206208229065
     },
     {
       "translator": "pipeline",
@@ -1982,7 +2105,8 @@
         "back_translation_prompt_tokens": 2076,
         "back_translation_completion_tokens": 34,
         "back_translation_time": 0.7438814640045166
-      }
+      },
+      "semantic_similarity": 0.9430645704269409
     },
     {
       "translator": "pipeline",
@@ -1998,7 +2122,8 @@
         "back_translation_prompt_tokens": 2068,
         "back_translation_completion_tokens": 34,
         "back_translation_time": 0.662916898727417
-      }
+      },
+      "semantic_similarity": 0.9226407408714294
     },
     {
       "translator": "pipeline",
@@ -2014,7 +2139,8 @@
         "back_translation_prompt_tokens": 1089,
         "back_translation_completion_tokens": 29,
         "back_translation_time": 0.5260460376739502
-      }
+      },
+      "semantic_similarity": 0.9675107598304749
     },
     {
       "translator": "pipeline",
@@ -2030,7 +2156,8 @@
         "back_translation_prompt_tokens": 1094,
         "back_translation_completion_tokens": 24,
         "back_translation_time": 0.3465757369995117
-      }
+      },
+      "semantic_similarity": 0.911653995513916
     },
     {
       "translator": "pipeline",
@@ -2046,7 +2173,8 @@
         "back_translation_prompt_tokens": 1095,
         "back_translation_completion_tokens": 28,
         "back_translation_time": 0.41696834564208984
-      }
+      },
+      "semantic_similarity": 0.9085559546947479
     },
     {
       "translator": "pipeline",
@@ -2062,7 +2190,8 @@
         "back_translation_prompt_tokens": 2136,
         "back_translation_completion_tokens": 43,
         "back_translation_time": 1.0094501972198486
-      }
+      },
+      "semantic_similarity": 0.9261125326156616
     },
     {
       "translator": "pipeline",
@@ -2078,7 +2207,8 @@
         "back_translation_prompt_tokens": 1087,
         "back_translation_completion_tokens": 25,
         "back_translation_time": 0.48070597648620605
-      }
+      },
+      "semantic_similarity": 0.9834296703338623
     },
     {
       "translator": "pipeline",
@@ -2094,7 +2224,8 @@
         "back_translation_prompt_tokens": 1058,
         "back_translation_completion_tokens": 20,
         "back_translation_time": 0.7284176349639893
-      }
+      },
+      "semantic_similarity": 0.9191713333129883
     },
     {
       "translator": "pipeline",
@@ -2110,7 +2241,8 @@
         "back_translation_prompt_tokens": 1090,
         "back_translation_completion_tokens": 26,
         "back_translation_time": 0.5040876865386963
-      }
+      },
+      "semantic_similarity": 0.8575693368911743
     },
     {
       "translator": "pipeline",
@@ -2126,7 +2258,8 @@
         "back_translation_prompt_tokens": 1062,
         "back_translation_completion_tokens": 19,
         "back_translation_time": 0.45382022857666016
-      }
+      },
+      "semantic_similarity": 0.8100332319736481
     },
     {
       "translator": "pipeline",
@@ -2142,7 +2275,8 @@
         "back_translation_prompt_tokens": 1092,
         "back_translation_completion_tokens": 32,
         "back_translation_time": 0.5488781929016113
-      }
+      },
+      "semantic_similarity": 1.0
     },
     {
       "translator": "pipeline",
@@ -2158,7 +2292,8 @@
         "back_translation_prompt_tokens": 1034,
         "back_translation_completion_tokens": 17,
         "back_translation_time": 0.39150023460388184
-      }
+      },
+      "semantic_similarity": 0.9249374568462372
     },
     {
       "translator": "pipeline",
@@ -2174,7 +2309,8 @@
         "back_translation_prompt_tokens": 1100,
         "back_translation_completion_tokens": 28,
         "back_translation_time": 0.4935035705566406
-      }
+      },
+      "semantic_similarity": 0.969624251127243
     },
     {
       "translator": "pipeline",
@@ -2190,7 +2326,8 @@
         "back_translation_prompt_tokens": 1069,
         "back_translation_completion_tokens": 22,
         "back_translation_time": 0.42725682258605957
-      }
+      },
+      "semantic_similarity": 1.0000000596046448
     },
     {
       "translator": "pipeline",
@@ -2206,7 +2343,8 @@
         "back_translation_prompt_tokens": 1089,
         "back_translation_completion_tokens": 25,
         "back_translation_time": 0.47759294509887695
-      }
+      },
+      "semantic_similarity": 0.9818583130836487
     },
     {
       "translator": "pipeline",
@@ -2222,7 +2360,8 @@
         "back_translation_prompt_tokens": 1064,
         "back_translation_completion_tokens": 23,
         "back_translation_time": 0.42798733711242676
-      }
+      },
+      "semantic_similarity": 0.9854259192943573
     },
     {
       "translator": "pipeline",
@@ -2238,7 +2377,8 @@
         "back_translation_prompt_tokens": 1088,
         "back_translation_completion_tokens": 25,
         "back_translation_time": 0.5004622936248779
-      }
+      },
+      "semantic_similarity": 0.873184323310852
     },
     {
       "translator": "pipeline",
@@ -2254,7 +2394,8 @@
         "back_translation_prompt_tokens": 1062,
         "back_translation_completion_tokens": 22,
         "back_translation_time": 0.41951942443847656
-      }
+      },
+      "semantic_similarity": 0.9793537855148315
     },
     {
       "translator": "pipeline",
@@ -2270,7 +2411,8 @@
         "back_translation_prompt_tokens": 2113,
         "back_translation_completion_tokens": 32,
         "back_translation_time": 0.9015538692474365
-      }
+      },
+      "semantic_similarity": 0.9275319576263428
     },
     {
       "translator": "pipeline",
@@ -2286,7 +2428,8 @@
         "back_translation_prompt_tokens": 1090,
         "back_translation_completion_tokens": 27,
         "back_translation_time": 0.42780017852783203
-      }
+      },
+      "semantic_similarity": 0.8934116959571838
     },
     {
       "translator": "pipeline",
@@ -2302,7 +2445,8 @@
         "back_translation_prompt_tokens": 1094,
         "back_translation_completion_tokens": 28,
         "back_translation_time": 0.8431212902069092
-      }
+      },
+      "semantic_similarity": 0.9825718402862549
     },
     {
       "translator": "pipeline",
@@ -2318,7 +2462,8 @@
         "back_translation_prompt_tokens": 1034,
         "back_translation_completion_tokens": 17,
         "back_translation_time": 0.392575740814209
-      }
+      },
+      "semantic_similarity": 0.687983050942421
     },
     {
       "translator": "pipeline",
@@ -2334,7 +2479,8 @@
         "back_translation_prompt_tokens": 1095,
         "back_translation_completion_tokens": 32,
         "back_translation_time": 0.9539268016815186
-      }
+      },
+      "semantic_similarity": 0.9767892956733704
     },
     {
       "translator": "pipeline",
@@ -2350,7 +2496,8 @@
         "back_translation_prompt_tokens": 1063,
         "back_translation_completion_tokens": 24,
         "back_translation_time": 0.34343814849853516
-      }
+      },
+      "semantic_similarity": 0.9374479353427887
     },
     {
       "translator": "pipeline",
@@ -2366,7 +2513,8 @@
         "back_translation_prompt_tokens": 1089,
         "back_translation_completion_tokens": 29,
         "back_translation_time": 0.5338349342346191
-      }
+      },
+      "semantic_similarity": 0.978578507900238
     },
     {
       "translator": "pipeline",
@@ -2382,7 +2530,8 @@
         "back_translation_prompt_tokens": 1057,
         "back_translation_completion_tokens": 18,
         "back_translation_time": 0.4473574161529541
-      }
+      },
+      "semantic_similarity": 0.7699555158615112
     },
     {
       "translator": "pipeline",
@@ -2398,7 +2547,8 @@
         "back_translation_prompt_tokens": 1059,
         "back_translation_completion_tokens": 19,
         "back_translation_time": 0.6603522300720215
-      }
+      },
+      "semantic_similarity": 0.9208619594573975
     },
     {
       "translator": "instructions",
@@ -2414,7 +2564,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 1.0000001192092896
     },
     {
       "translator": "instructions",
@@ -2430,7 +2581,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.7443125396966934
     },
     {
       "translator": "instructions",
@@ -2446,7 +2598,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -2462,7 +2615,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.7537572085857391
     },
     {
       "translator": "instructions",
@@ -2478,7 +2632,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.9305857717990875
     },
     {
       "translator": "instructions",
@@ -2494,7 +2649,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.9406453967094421
     },
     {
       "translator": "instructions",
@@ -2510,7 +2666,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -2526,7 +2683,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.8788920640945435
     },
     {
       "translator": "instructions",
@@ -2542,7 +2700,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.8586178421974182
     },
     {
       "translator": "instructions",
@@ -2558,7 +2717,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -2574,7 +2734,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.8020144999027252
     },
     {
       "translator": "instructions",
@@ -2590,7 +2751,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -2606,7 +2768,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -2622,7 +2785,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.9277364611625671
     },
     {
       "translator": "instructions",
@@ -2638,7 +2802,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -2654,7 +2819,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -2670,7 +2836,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -2686,7 +2853,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.7747423350811005
     },
     {
       "translator": "instructions",
@@ -2702,7 +2870,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.757357656955719
     },
     {
       "translator": "instructions",
@@ -2718,7 +2887,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -2734,7 +2904,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -2750,7 +2921,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -2766,7 +2938,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.8609125018119812
     },
     {
       "translator": "instructions",
@@ -2782,7 +2955,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.6518808007240295
     },
     {
       "translator": "instructions",
@@ -2798,7 +2972,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -2814,7 +2989,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.9375202357769012
     },
     {
       "translator": "instructions",
@@ -2830,7 +3006,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.8946391344070435
     },
     {
       "translator": "instructions",
@@ -2846,7 +3023,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.9193041622638702
     },
     {
       "translator": "instructions",
@@ -2862,7 +3040,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -2878,7 +3057,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.9422945082187653
     },
     {
       "translator": "instructions",
@@ -2894,7 +3074,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.9358883202075958
     },
     {
       "translator": "instructions",
@@ -2910,7 +3091,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -2926,7 +3108,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.937054455280304
     },
     {
       "translator": "instructions",
@@ -2942,7 +3125,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -2958,7 +3142,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.9777962565422058
     },
     {
       "translator": "instructions",
@@ -2974,7 +3159,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 1.0000000596046448
     },
     {
       "translator": "instructions",
@@ -2990,7 +3176,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.9370143711566925
     },
     {
       "translator": "instructions",
@@ -3006,7 +3193,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.9635173976421356
     },
     {
       "translator": "instructions",
@@ -3022,7 +3210,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.9192134737968445
     },
     {
       "translator": "instructions",
@@ -3038,7 +3227,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.9413017332553864
     },
     {
       "translator": "instructions",
@@ -3054,7 +3244,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.918567419052124
     },
     {
       "translator": "instructions",
@@ -3070,7 +3261,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.9696499109268188
     },
     {
       "translator": "instructions",
@@ -3086,7 +3278,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.9306367635726929
     },
     {
       "translator": "instructions",
@@ -3102,7 +3295,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.9338449239730835
     },
     {
       "translator": "instructions",
@@ -3118,7 +3312,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.985106348991394
     },
     {
       "translator": "instructions",
@@ -3134,7 +3329,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -3150,7 +3346,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.9355437159538269
     },
     {
       "translator": "instructions",
@@ -3166,7 +3363,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.923061192035675
     },
     {
       "translator": "instructions",
@@ -3182,7 +3380,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.812702476978302
     },
     {
       "translator": "instructions",
@@ -3198,7 +3397,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.9571598768234253
     },
     {
       "translator": "instructions",
@@ -3214,7 +3414,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -3230,7 +3431,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -3246,7 +3448,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -3262,7 +3465,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -3278,7 +3482,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.8098064363002777
     },
     {
       "translator": "instructions",
@@ -3294,7 +3499,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.900603711605072
     },
     {
       "translator": "instructions",
@@ -3310,7 +3516,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -3326,7 +3533,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -3342,7 +3550,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -3358,7 +3567,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.9924101233482361
     },
     {
       "translator": "instructions",
@@ -3374,7 +3584,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -3390,7 +3601,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -3406,7 +3618,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -3422,7 +3635,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -3438,7 +3652,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -3454,7 +3669,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -3470,7 +3686,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -3486,7 +3703,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -3502,7 +3720,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -3518,7 +3737,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -3534,7 +3754,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -3550,7 +3771,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -3566,7 +3788,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -3582,7 +3805,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -3598,7 +3822,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.9014623463153839
     },
     {
       "translator": "instructions",
@@ -3614,7 +3839,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.9075082540512085
     },
     {
       "translator": "instructions",
@@ -3630,7 +3856,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.9194788932800293
     },
     {
       "translator": "instructions",
@@ -3646,7 +3873,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.927547812461853
     },
     {
       "translator": "instructions",
@@ -3662,7 +3890,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -3678,7 +3907,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -3694,7 +3924,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.9327261447906494
     },
     {
       "translator": "instructions",
@@ -3710,7 +3941,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.9318265318870544
     },
     {
       "translator": "instructions",
@@ -3726,7 +3958,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.9282781481742859
     },
     {
       "translator": "instructions",
@@ -3742,7 +3975,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.9652255773544312
     },
     {
       "translator": "instructions",
@@ -3758,7 +3992,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.9368761479854584
     },
     {
       "translator": "instructions",
@@ -3774,7 +4009,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.9295376837253571
     },
     {
       "translator": "instructions",
@@ -3790,7 +4026,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.9110584259033203
     },
     {
       "translator": "instructions",
@@ -3806,7 +4043,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.915753036737442
     },
     {
       "translator": "instructions",
@@ -3822,7 +4060,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.9304350018501282
     },
     {
       "translator": "instructions",
@@ -3838,7 +4077,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.9252719283103943
     },
     {
       "translator": "instructions",
@@ -3854,7 +4094,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.9040797352790833
     },
     {
       "translator": "instructions",
@@ -3870,7 +4111,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.8636024594306946
     },
     {
       "translator": "instructions",
@@ -3886,7 +4128,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -3902,7 +4145,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.8789122104644775
     },
     {
       "translator": "instructions",
@@ -3918,7 +4162,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -3934,7 +4179,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.8272959589958191
     },
     {
       "translator": "instructions",
@@ -3950,7 +4196,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.9186001420021057
     },
     {
       "translator": "instructions",
@@ -3966,7 +4213,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.9929497539997101
     },
     {
       "translator": "instructions",
@@ -3982,7 +4230,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.7643961310386658
     },
     {
       "translator": "instructions",
@@ -3998,7 +4247,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -4014,7 +4264,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -4030,7 +4281,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -4046,7 +4298,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -4062,7 +4315,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -4078,7 +4332,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -4094,7 +4349,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -4110,7 +4366,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -4126,7 +4383,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.8900368511676788
     },
     {
       "translator": "instructions",
@@ -4142,7 +4400,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -4158,7 +4417,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -4174,7 +4434,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -4190,7 +4451,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -4206,7 +4468,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -4222,7 +4485,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -4238,7 +4502,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -4254,7 +4519,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -4270,7 +4536,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -4286,7 +4553,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -4302,7 +4570,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -4318,7 +4587,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -4334,7 +4604,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -4350,7 +4621,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -4366,7 +4638,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -4382,7 +4655,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -4398,7 +4672,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -4414,7 +4689,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -4430,7 +4706,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -4446,7 +4723,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.9907212257385254
     },
     {
       "translator": "instructions",
@@ -4462,7 +4740,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.7188301980495453
     },
     {
       "translator": "instructions",
@@ -4478,7 +4757,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.8561676740646362
     },
     {
       "translator": "instructions",
@@ -4494,7 +4774,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -4510,7 +4791,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.8643160462379456
     },
     {
       "translator": "instructions",
@@ -4526,7 +4808,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -4542,7 +4825,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -4558,7 +4842,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -4574,7 +4859,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.8986073136329651
     },
     {
       "translator": "instructions",
@@ -4590,7 +4876,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -4606,7 +4893,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.9621718525886536
     },
     {
       "translator": "instructions",
@@ -4622,7 +4910,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -4638,7 +4927,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -4654,7 +4944,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.9621343314647675
     },
     {
       "translator": "instructions",
@@ -4670,7 +4961,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -4686,7 +4978,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.9367680251598358
     },
     {
       "translator": "instructions",
@@ -4702,7 +4995,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -4718,7 +5012,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -4734,7 +5029,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.9648604691028595
     },
     {
       "translator": "instructions",
@@ -4750,7 +5046,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0.83488929271698
     },
     {
       "translator": "instructions",
@@ -4766,7 +5063,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -4782,7 +5080,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "instructions",
@@ -4798,7 +5097,8 @@
         "back_translation_prompt_tokens": 0,
         "back_translation_completion_tokens": 0,
         "back_translation_time": 0.0
-      }
+      },
+      "semantic_similarity": 0
     },
     {
       "translator": "agentic",
@@ -4814,7 +5114,8 @@
         "back_translation_prompt_tokens": 577,
         "back_translation_completion_tokens": 4,
         "back_translation_time": 0.7466614246368408
-      }
+      },
+      "semantic_similarity": 1.0000001192092896
     },
     {
       "translator": "agentic",
@@ -4830,7 +5131,8 @@
         "back_translation_prompt_tokens": 577,
         "back_translation_completion_tokens": 3,
         "back_translation_time": 0.47540712356567383
-      }
+      },
+      "semantic_similarity": 1.0
     },
     {
       "translator": "agentic",
@@ -4846,7 +5148,8 @@
         "back_translation_prompt_tokens": 579,
         "back_translation_completion_tokens": 7,
         "back_translation_time": 0.5586035251617432
-      }
+      },
+      "semantic_similarity": 0.7340256869792938
     },
     {
       "translator": "agentic",
@@ -4862,7 +5165,8 @@
         "back_translation_prompt_tokens": 575,
         "back_translation_completion_tokens": 4,
         "back_translation_time": 0.49076056480407715
-      }
+      },
+      "semantic_similarity": 0.9999999701976776
     },
     {
       "translator": "agentic",
@@ -4878,7 +5182,8 @@
         "back_translation_prompt_tokens": 577,
         "back_translation_completion_tokens": 4,
         "back_translation_time": 0.46256279945373535
-      }
+      },
+      "semantic_similarity": 1.0000000596046448
     },
     {
       "translator": "agentic",
@@ -4894,7 +5199,8 @@
         "back_translation_prompt_tokens": 580,
         "back_translation_completion_tokens": 6,
         "back_translation_time": 0.44598865509033203
-      }
+      },
+      "semantic_similarity": 0.8255558013916016
     },
     {
       "translator": "agentic",
@@ -4910,7 +5216,8 @@
         "back_translation_prompt_tokens": 577,
         "back_translation_completion_tokens": 3,
         "back_translation_time": 0.5642490386962891
-      }
+      },
+      "semantic_similarity": 1.0000000596046448
     },
     {
       "translator": "agentic",
@@ -4926,7 +5233,8 @@
         "back_translation_prompt_tokens": 578,
         "back_translation_completion_tokens": 3,
         "back_translation_time": 0.5434911251068115
-      }
+      },
+      "semantic_similarity": 0.9499837160110474
     },
     {
       "translator": "agentic",
@@ -4942,7 +5250,8 @@
         "back_translation_prompt_tokens": 577,
         "back_translation_completion_tokens": 3,
         "back_translation_time": 0.3687398433685303
-      }
+      },
+      "semantic_similarity": 0.9113554358482361
     },
     {
       "translator": "agentic",
@@ -4958,7 +5267,8 @@
         "back_translation_prompt_tokens": 586,
         "back_translation_completion_tokens": 6,
         "back_translation_time": 0.47264790534973145
-      }
+      },
+      "semantic_similarity": 0.8994441032409668
     },
     {
       "translator": "agentic",
@@ -4974,7 +5284,8 @@
         "back_translation_prompt_tokens": 579,
         "back_translation_completion_tokens": 7,
         "back_translation_time": 0.5995452404022217
-      }
+      },
+      "semantic_similarity": 0.7811404764652252
     },
     {
       "translator": "agentic",
@@ -4990,7 +5301,8 @@
         "back_translation_prompt_tokens": 579,
         "back_translation_completion_tokens": 4,
         "back_translation_time": 0.5111198425292969
-      }
+      },
+      "semantic_similarity": 1.0000000596046448
     },
     {
       "translator": "agentic",
@@ -5006,7 +5318,8 @@
         "back_translation_prompt_tokens": 579,
         "back_translation_completion_tokens": 7,
         "back_translation_time": 0.4510180950164795
-      }
+      },
+      "semantic_similarity": 0.7902727127075195
     },
     {
       "translator": "agentic",
@@ -5022,7 +5335,8 @@
         "back_translation_prompt_tokens": 577,
         "back_translation_completion_tokens": 3,
         "back_translation_time": 0.47379469871520996
-      }
+      },
+      "semantic_similarity": 1.0000000596046448
     },
     {
       "translator": "agentic",
@@ -5038,7 +5352,8 @@
         "back_translation_prompt_tokens": 575,
         "back_translation_completion_tokens": 4,
         "back_translation_time": 0.5089008808135986
-      }
+      },
+      "semantic_similarity": 0.8310334384441376
     },
     {
       "translator": "agentic",
@@ -5054,7 +5369,8 @@
         "back_translation_prompt_tokens": 580,
         "back_translation_completion_tokens": 6,
         "back_translation_time": 0.45374178886413574
-      }
+      },
+      "semantic_similarity": 0.7223913222551346
     },
     {
       "translator": "agentic",
@@ -5070,7 +5386,8 @@
         "back_translation_prompt_tokens": 578,
         "back_translation_completion_tokens": 4,
         "back_translation_time": 0.4406466484069824
-      }
+      },
+      "semantic_similarity": 0.8188234865665436
     },
     {
       "translator": "agentic",
@@ -5086,7 +5403,8 @@
         "back_translation_prompt_tokens": 577,
         "back_translation_completion_tokens": 4,
         "back_translation_time": 0.38579320907592773
-      }
+      },
+      "semantic_similarity": 0.8728213310241699
     },
     {
       "translator": "agentic",
@@ -5102,7 +5420,8 @@
         "back_translation_prompt_tokens": 581,
         "back_translation_completion_tokens": 6,
         "back_translation_time": 0.5128331184387207
-      }
+      },
+      "semantic_similarity": 0.7805449366569519
     },
     {
       "translator": "agentic",
@@ -5118,7 +5437,8 @@
         "back_translation_prompt_tokens": 575,
         "back_translation_completion_tokens": 4,
         "back_translation_time": 1.443453073501587
-      }
+      },
+      "semantic_similarity": 0.7855604290962219
     },
     {
       "translator": "agentic",
@@ -5134,7 +5454,8 @@
         "back_translation_prompt_tokens": 580,
         "back_translation_completion_tokens": 6,
         "back_translation_time": 0.4781012535095215
-      }
+      },
+      "semantic_similarity": 0.5698657184839249
     },
     {
       "translator": "agentic",
@@ -5150,7 +5471,8 @@
         "back_translation_prompt_tokens": 578,
         "back_translation_completion_tokens": 7,
         "back_translation_time": 0.5148532390594482
-      }
+      },
+      "semantic_similarity": 0.6447613835334778
     },
     {
       "translator": "agentic",
@@ -5166,7 +5488,8 @@
         "back_translation_prompt_tokens": 576,
         "back_translation_completion_tokens": 4,
         "back_translation_time": 0.3694272041320801
-      }
+      },
+      "semantic_similarity": 0.5938516557216644
     },
     {
       "translator": "agentic",
@@ -5182,7 +5505,8 @@
         "back_translation_prompt_tokens": 576,
         "back_translation_completion_tokens": 4,
         "back_translation_time": 0.7891621589660645
-      }
+      },
+      "semantic_similarity": 0.6453687697649002
     },
     {
       "translator": "agentic",
@@ -5198,7 +5522,8 @@
         "back_translation_prompt_tokens": 579,
         "back_translation_completion_tokens": 7,
         "back_translation_time": 0.4018828868865967
-      }
+      },
+      "semantic_similarity": 0.6766240894794464
     },
     {
       "translator": "agentic",
@@ -5214,7 +5539,8 @@
         "back_translation_prompt_tokens": 586,
         "back_translation_completion_tokens": 5,
         "back_translation_time": 0.439838171005249
-      }
+      },
+      "semantic_similarity": 0.8726669549942017
     },
     {
       "translator": "agentic",
@@ -5230,7 +5556,8 @@
         "back_translation_prompt_tokens": 585,
         "back_translation_completion_tokens": 6,
         "back_translation_time": 0.48897624015808105
-      }
+      },
+      "semantic_similarity": 0.7821671366691589
     },
     {
       "translator": "agentic",
@@ -5246,7 +5573,8 @@
         "back_translation_prompt_tokens": 580,
         "back_translation_completion_tokens": 26,
         "back_translation_time": 0.609297513961792
-      }
+      },
+      "semantic_similarity": 0.5503009781241417
     },
     {
       "translator": "agentic",
@@ -5262,7 +5590,8 @@
         "back_translation_prompt_tokens": 573,
         "back_translation_completion_tokens": 5,
         "back_translation_time": 0.4657421112060547
-      }
+      },
+      "semantic_similarity": 0.7785142064094543
     },
     {
       "translator": "agentic",
@@ -5278,7 +5607,8 @@
         "back_translation_prompt_tokens": 579,
         "back_translation_completion_tokens": 5,
         "back_translation_time": 0.4709353446960449
-      }
+      },
+      "semantic_similarity": 0.6221980676054955
     },
     {
       "translator": "agentic",
@@ -5294,7 +5624,8 @@
         "back_translation_prompt_tokens": 585,
         "back_translation_completion_tokens": 4,
         "back_translation_time": 0.478466272354126
-      }
+      },
+      "semantic_similarity": 0.8005460500717163
     },
     {
       "translator": "agentic",
@@ -5310,7 +5641,8 @@
         "back_translation_prompt_tokens": 574,
         "back_translation_completion_tokens": 6,
         "back_translation_time": 0.4851396083831787
-      }
+      },
+      "semantic_similarity": 0.527564587071538
     },
     {
       "translator": "agentic",
@@ -5326,7 +5658,8 @@
         "back_translation_prompt_tokens": 579,
         "back_translation_completion_tokens": 3,
         "back_translation_time": 0.46189403533935547
-      }
+      },
+      "semantic_similarity": 0.842110276222229
     },
     {
       "translator": "agentic",
@@ -5342,7 +5675,8 @@
         "back_translation_prompt_tokens": 580,
         "back_translation_completion_tokens": 5,
         "back_translation_time": 0.6717991828918457
-      }
+      },
+      "semantic_similarity": 0.943844348192215
     },
     {
       "translator": "agentic",
@@ -5358,7 +5692,8 @@
         "back_translation_prompt_tokens": 578,
         "back_translation_completion_tokens": 4,
         "back_translation_time": 0.45221829414367676
-      }
+      },
+      "semantic_similarity": 0.6122352704405785
     },
     {
       "translator": "agentic",
@@ -5374,7 +5709,8 @@
         "back_translation_prompt_tokens": 577,
         "back_translation_completion_tokens": 4,
         "back_translation_time": 0.5235331058502197
-      }
+      },
+      "semantic_similarity": 0.9466770887374878
     },
     {
       "translator": "agentic",
@@ -5390,7 +5726,8 @@
         "back_translation_prompt_tokens": 579,
         "back_translation_completion_tokens": 5,
         "back_translation_time": 0.45001649856567383
-      }
+      },
+      "semantic_similarity": 0.5945730060338974
     },
     {
       "translator": "agentic",
@@ -5406,7 +5743,8 @@
         "back_translation_prompt_tokens": 579,
         "back_translation_completion_tokens": 5,
         "back_translation_time": 0.4668269157409668
-      }
+      },
+      "semantic_similarity": 0.7519920766353607
     },
     {
       "translator": "agentic",
@@ -5422,7 +5760,8 @@
         "back_translation_prompt_tokens": 579,
         "back_translation_completion_tokens": 4,
         "back_translation_time": 0.40744733810424805
-      }
+      },
+      "semantic_similarity": 0.8640191555023193
     },
     {
       "translator": "agentic",
@@ -5438,7 +5777,8 @@
         "back_translation_prompt_tokens": 579,
         "back_translation_completion_tokens": 17,
         "back_translation_time": 0.5700559616088867
-      }
+      },
+      "semantic_similarity": 0.5427384674549103
     },
     {
       "translator": "agentic",
@@ -5454,7 +5794,8 @@
         "back_translation_prompt_tokens": 579,
         "back_translation_completion_tokens": 26,
         "back_translation_time": 0.6545124053955078
-      }
+      },
+      "semantic_similarity": 0.5891316682100296
     },
     {
       "translator": "agentic",
@@ -5470,7 +5811,8 @@
         "back_translation_prompt_tokens": 578,
         "back_translation_completion_tokens": 3,
         "back_translation_time": 0.4577155113220215
-      }
+      },
+      "semantic_similarity": 0.5904449969530106
     },
     {
       "translator": "agentic",
@@ -5486,7 +5828,8 @@
         "back_translation_prompt_tokens": 578,
         "back_translation_completion_tokens": 4,
         "back_translation_time": 0.4587380886077881
-      }
+      },
+      "semantic_similarity": 0.920936644077301
     },
     {
       "translator": "agentic",
@@ -5502,7 +5845,8 @@
         "back_translation_prompt_tokens": 579,
         "back_translation_completion_tokens": 7,
         "back_translation_time": 0.4147956371307373
-      }
+      },
+      "semantic_similarity": 0.5712241753935814
     },
     {
       "translator": "agentic",
@@ -5518,7 +5862,8 @@
         "back_translation_prompt_tokens": 579,
         "back_translation_completion_tokens": 3,
         "back_translation_time": 0.4856131076812744
-      }
+      },
+      "semantic_similarity": 0.8245442807674408
     },
     {
       "translator": "agentic",
@@ -5534,7 +5879,8 @@
         "back_translation_prompt_tokens": 577,
         "back_translation_completion_tokens": 4,
         "back_translation_time": 0.3992912769317627
-      }
+      },
+      "semantic_similarity": 0.8924770951271057
     },
     {
       "translator": "agentic",
@@ -5550,7 +5896,8 @@
         "back_translation_prompt_tokens": 1157,
         "back_translation_completion_tokens": 28,
         "back_translation_time": 0.9873569011688232
-      }
+      },
+      "semantic_similarity": 0.6249396800994873
     },
     {
       "translator": "agentic",
@@ -5566,7 +5913,8 @@
         "back_translation_prompt_tokens": 578,
         "back_translation_completion_tokens": 4,
         "back_translation_time": 0.45944976806640625
-      }
+      },
+      "semantic_similarity": 0.8173738420009613
     },
     {
       "translator": "agentic",
@@ -5582,7 +5930,8 @@
         "back_translation_prompt_tokens": 580,
         "back_translation_completion_tokens": 6,
         "back_translation_time": 0.38927173614501953
-      }
+      },
+      "semantic_similarity": 0.6752427518367767
     },
     {
       "translator": "agentic",
@@ -5598,7 +5947,8 @@
         "back_translation_prompt_tokens": 578,
         "back_translation_completion_tokens": 3,
         "back_translation_time": 0.4065976142883301
-      }
+      },
+      "semantic_similarity": 0.877965122461319
     },
     {
       "translator": "agentic",
@@ -5614,7 +5964,8 @@
         "back_translation_prompt_tokens": 1159,
         "back_translation_completion_tokens": 8,
         "back_translation_time": 0.98433518409729
-      }
+      },
+      "semantic_similarity": 0.986141175031662
     },
     {
       "translator": "agentic",
@@ -5630,7 +5981,8 @@
         "back_translation_prompt_tokens": 1150,
         "back_translation_completion_tokens": 8,
         "back_translation_time": 0.9167473316192627
-      }
+      },
+      "semantic_similarity": 0.9607059359550476
     },
     {
       "translator": "agentic",
@@ -5646,7 +5998,8 @@
         "back_translation_prompt_tokens": 1152,
         "back_translation_completion_tokens": 8,
         "back_translation_time": 1.0457446575164795
-      }
+      },
+      "semantic_similarity": 0.8927306234836578
     },
     {
       "translator": "agentic",
@@ -5662,7 +6015,8 @@
         "back_translation_prompt_tokens": 577,
         "back_translation_completion_tokens": 4,
         "back_translation_time": 0.48436474800109863
-      }
+      },
+      "semantic_similarity": 0.8970380127429962
     },
     {
       "translator": "agentic",
@@ -5678,7 +6032,8 @@
         "back_translation_prompt_tokens": 579,
         "back_translation_completion_tokens": 7,
         "back_translation_time": 0.4921071529388428
-      }
+      },
+      "semantic_similarity": 0.7395355403423309
     },
     {
       "translator": "agentic",
@@ -5694,7 +6049,8 @@
         "back_translation_prompt_tokens": 577,
         "back_translation_completion_tokens": 3,
         "back_translation_time": 0.5851051807403564
-      }
+      },
+      "semantic_similarity": 0.8819882869720459
     },
     {
       "translator": "agentic",
@@ -5710,7 +6066,8 @@
         "back_translation_prompt_tokens": 580,
         "back_translation_completion_tokens": 6,
         "back_translation_time": 0.4431014060974121
-      }
+      },
+      "semantic_similarity": 0.7590609788894653
     },
     {
       "translator": "agentic",
@@ -5726,7 +6083,8 @@
         "back_translation_prompt_tokens": 578,
         "back_translation_completion_tokens": 4,
         "back_translation_time": 0.43023109436035156
-      }
+      },
+      "semantic_similarity": 0.9307970106601715
     },
     {
       "translator": "agentic",
@@ -5742,7 +6100,8 @@
         "back_translation_prompt_tokens": 578,
         "back_translation_completion_tokens": 5,
         "back_translation_time": 0.4418156147003174
-      }
+      },
+      "semantic_similarity": 0.8181610405445099
     },
     {
       "translator": "agentic",
@@ -5758,7 +6117,8 @@
         "back_translation_prompt_tokens": 1153,
         "back_translation_completion_tokens": 8,
         "back_translation_time": 0.8324306011199951
-      }
+      },
+      "semantic_similarity": 0.8799108266830444
     },
     {
       "translator": "agentic",
@@ -5774,7 +6134,8 @@
         "back_translation_prompt_tokens": 579,
         "back_translation_completion_tokens": 7,
         "back_translation_time": 1.369615077972412
-      }
+      },
+      "semantic_similarity": 0.6275599598884583
     },
     {
       "translator": "agentic",
@@ -5790,7 +6151,8 @@
         "back_translation_prompt_tokens": 1158,
         "back_translation_completion_tokens": 14,
         "back_translation_time": 0.8660087585449219
-      }
+      },
+      "semantic_similarity": 0.7285959124565125
     },
     {
       "translator": "agentic",
@@ -5806,7 +6168,8 @@
         "back_translation_prompt_tokens": 1154,
         "back_translation_completion_tokens": 8,
         "back_translation_time": 0.7435660362243652
-      }
+      },
+      "semantic_similarity": 0.8994203209877014
     },
     {
       "translator": "agentic",
@@ -5822,7 +6185,8 @@
         "back_translation_prompt_tokens": 1156,
         "back_translation_completion_tokens": 13,
         "back_translation_time": 0.8692450523376465
-      }
+      },
+      "semantic_similarity": 0.7610556483268738
     },
     {
       "translator": "agentic",
@@ -5838,7 +6202,8 @@
         "back_translation_prompt_tokens": 1154,
         "back_translation_completion_tokens": 6,
         "back_translation_time": 0.8794071674346924
-      }
+      },
+      "semantic_similarity": 0.8085205852985382
     },
     {
       "translator": "agentic",
@@ -5854,7 +6219,8 @@
         "back_translation_prompt_tokens": 575,
         "back_translation_completion_tokens": 4,
         "back_translation_time": 0.39021873474121094
-      }
+      },
+      "semantic_similarity": 0.7570804953575134
     },
     {
       "translator": "agentic",
@@ -5870,7 +6236,8 @@
         "back_translation_prompt_tokens": 581,
         "back_translation_completion_tokens": 6,
         "back_translation_time": 0.48807621002197266
-      }
+      },
+      "semantic_similarity": 0.6821544170379639
     },
     {
       "translator": "agentic",
@@ -5886,7 +6253,8 @@
         "back_translation_prompt_tokens": 1153,
         "back_translation_completion_tokens": 7,
         "back_translation_time": 0.9016721248626709
-      }
+      },
+      "semantic_similarity": 0.8162906169891357
     },
     {
       "translator": "agentic",
@@ -5902,7 +6270,8 @@
         "back_translation_prompt_tokens": 1152,
         "back_translation_completion_tokens": 37,
         "back_translation_time": 1.1382148265838623
-      }
+      },
+      "semantic_similarity": 0.6748439222574234
     },
     {
       "translator": "agentic",
@@ -5918,7 +6287,8 @@
         "back_translation_prompt_tokens": 1161,
         "back_translation_completion_tokens": 34,
         "back_translation_time": 1.3903372287750244
-      }
+      },
+      "semantic_similarity": 0.591842383146286
     },
     {
       "translator": "agentic",
@@ -5934,7 +6304,8 @@
         "back_translation_prompt_tokens": 578,
         "back_translation_completion_tokens": 8,
         "back_translation_time": 0.3596224784851074
-      }
+      },
+      "semantic_similarity": 0.6595687568187714
     },
     {
       "translator": "agentic",
@@ -5950,7 +6321,8 @@
         "back_translation_prompt_tokens": 1155,
         "back_translation_completion_tokens": 9,
         "back_translation_time": 0.9176886081695557
-      }
+      },
+      "semantic_similarity": 0.9209734797477722
     },
     {
       "translator": "agentic",
@@ -5966,7 +6338,8 @@
         "back_translation_prompt_tokens": 1735,
         "back_translation_completion_tokens": 46,
         "back_translation_time": 1.562504529953003
-      }
+      },
+      "semantic_similarity": 0.7069721221923828
     },
     {
       "translator": "agentic",
@@ -5982,7 +6355,8 @@
         "back_translation_prompt_tokens": 1152,
         "back_translation_completion_tokens": 8,
         "back_translation_time": 1.1643970012664795
-      }
+      },
+      "semantic_similarity": 0.6273633539676666
     },
     {
       "translator": "agentic",
@@ -5998,7 +6372,8 @@
         "back_translation_prompt_tokens": 581,
         "back_translation_completion_tokens": 6,
         "back_translation_time": 0.48552584648132324
-      }
+      },
+      "semantic_similarity": 0.743083268404007
     },
     {
       "translator": "agentic",
@@ -6014,7 +6389,8 @@
         "back_translation_prompt_tokens": 1175,
         "back_translation_completion_tokens": 13,
         "back_translation_time": 0.9347958564758301
-      }
+      },
+      "semantic_similarity": 0.9176348447799683
     },
     {
       "translator": "agentic",
@@ -6030,7 +6406,8 @@
         "back_translation_prompt_tokens": 579,
         "back_translation_completion_tokens": 4,
         "back_translation_time": 0.47653889656066895
-      }
+      },
+      "semantic_similarity": 0.8232958018779755
     },
     {
       "translator": "agentic",
@@ -6046,7 +6423,8 @@
         "back_translation_prompt_tokens": 610,
         "back_translation_completion_tokens": 11,
         "back_translation_time": 0.511866569519043
-      }
+      },
+      "semantic_similarity": 0.6766293942928314
     },
     {
       "translator": "agentic",
@@ -6062,7 +6440,8 @@
         "back_translation_prompt_tokens": 1154,
         "back_translation_completion_tokens": 6,
         "back_translation_time": 1.3006153106689453
-      }
+      },
+      "semantic_similarity": 0.8304210901260376
     },
     {
       "translator": "agentic",
@@ -6078,7 +6457,8 @@
         "back_translation_prompt_tokens": 1156,
         "back_translation_completion_tokens": 6,
         "back_translation_time": 0.7996807098388672
-      }
+      },
+      "semantic_similarity": 0.9706952571868896
     },
     {
       "translator": "agentic",
@@ -6094,7 +6474,8 @@
         "back_translation_prompt_tokens": 1154,
         "back_translation_completion_tokens": 6,
         "back_translation_time": 1.0729646682739258
-      }
+      },
+      "semantic_similarity": 0.789178192615509
     },
     {
       "translator": "agentic",
@@ -6110,7 +6491,8 @@
         "back_translation_prompt_tokens": 578,
         "back_translation_completion_tokens": 4,
         "back_translation_time": 0.42544102668762207
-      }
+      },
+      "semantic_similarity": 0.6498362123966217
     },
     {
       "translator": "agentic",
@@ -6126,7 +6508,8 @@
         "back_translation_prompt_tokens": 1157,
         "back_translation_completion_tokens": 6,
         "back_translation_time": 0.751413106918335
-      }
+      },
+      "semantic_similarity": 0.8211238980293274
     },
     {
       "translator": "agentic",
@@ -6142,7 +6525,8 @@
         "back_translation_prompt_tokens": 1156,
         "back_translation_completion_tokens": 6,
         "back_translation_time": 0.8545238971710205
-      }
+      },
+      "semantic_similarity": 0.7881944477558136
     },
     {
       "translator": "agentic",
@@ -6158,7 +6542,8 @@
         "back_translation_prompt_tokens": 578,
         "back_translation_completion_tokens": 3,
         "back_translation_time": 0.4630465507507324
-      }
+      },
+      "semantic_similarity": 0.7488322556018829
     },
     {
       "translator": "agentic",
@@ -6174,7 +6559,8 @@
         "back_translation_prompt_tokens": 577,
         "back_translation_completion_tokens": 3,
         "back_translation_time": 0.7098543643951416
-      }
+      },
+      "semantic_similarity": 0.7041560560464859
     },
     {
       "translator": "agentic",
@@ -6190,7 +6576,8 @@
         "back_translation_prompt_tokens": 580,
         "back_translation_completion_tokens": 5,
         "back_translation_time": 0.4506518840789795
-      }
+      },
+      "semantic_similarity": 0.8290608525276184
     },
     {
       "translator": "agentic",
@@ -6206,7 +6593,8 @@
         "back_translation_prompt_tokens": 580,
         "back_translation_completion_tokens": 6,
         "back_translation_time": 0.5018162727355957
-      }
+      },
+      "semantic_similarity": 0.8969501256942749
     },
     {
       "translator": "agentic",
@@ -6222,7 +6610,8 @@
         "back_translation_prompt_tokens": 1156,
         "back_translation_completion_tokens": 8,
         "back_translation_time": 0.9132120609283447
-      }
+      },
+      "semantic_similarity": 0.7949562668800354
     },
     {
       "translator": "agentic",
@@ -6238,7 +6627,8 @@
         "back_translation_prompt_tokens": 580,
         "back_translation_completion_tokens": 6,
         "back_translation_time": 0.44791603088378906
-      }
+      },
+      "semantic_similarity": 0.757311999797821
     },
     {
       "translator": "agentic",
@@ -6254,7 +6644,8 @@
         "back_translation_prompt_tokens": 1158,
         "back_translation_completion_tokens": 9,
         "back_translation_time": 0.8404185771942139
-      }
+      },
+      "semantic_similarity": 0.7400201261043549
     },
     {
       "translator": "agentic",
@@ -6270,7 +6661,8 @@
         "back_translation_prompt_tokens": 587,
         "back_translation_completion_tokens": 6,
         "back_translation_time": 0.5052919387817383
-      }
+      },
+      "semantic_similarity": 0.7188199162483215
     },
     {
       "translator": "agentic",
@@ -6286,7 +6678,8 @@
         "back_translation_prompt_tokens": 1156,
         "back_translation_completion_tokens": 27,
         "back_translation_time": 1.6054041385650635
-      }
+      },
+      "semantic_similarity": 0.6305113434791565
     },
     {
       "translator": "agentic",
@@ -6302,7 +6695,8 @@
         "back_translation_prompt_tokens": 1156,
         "back_translation_completion_tokens": 10,
         "back_translation_time": 0.8661713600158691
-      }
+      },
+      "semantic_similarity": 0.7702693045139313
     },
     {
       "translator": "agentic",
@@ -6318,7 +6712,8 @@
         "back_translation_prompt_tokens": 1157,
         "back_translation_completion_tokens": 9,
         "back_translation_time": 0.8408904075622559
-      }
+      },
+      "semantic_similarity": 0.6008089259266853
     },
     {
       "translator": "agentic",
@@ -6334,7 +6729,8 @@
         "back_translation_prompt_tokens": 1172,
         "back_translation_completion_tokens": 12,
         "back_translation_time": 1.332655429840088
-      }
+      },
+      "semantic_similarity": 0.6809752732515335
     },
     {
       "translator": "agentic",
@@ -6350,7 +6746,8 @@
         "back_translation_prompt_tokens": 1154,
         "back_translation_completion_tokens": 6,
         "back_translation_time": 0.9387085437774658
-      }
+      },
+      "semantic_similarity": 0.7380597591400146
     },
     {
       "translator": "agentic",
@@ -6366,7 +6763,8 @@
         "back_translation_prompt_tokens": 1156,
         "back_translation_completion_tokens": 9,
         "back_translation_time": 0.8663256168365479
-      }
+      },
+      "semantic_similarity": 0.8022717833518982
     },
     {
       "translator": "agentic",
@@ -6382,7 +6780,8 @@
         "back_translation_prompt_tokens": 1154,
         "back_translation_completion_tokens": 6,
         "back_translation_time": 0.8589744567871094
-      }
+      },
+      "semantic_similarity": 0.6906508207321167
     },
     {
       "translator": "agentic",
@@ -6398,7 +6797,8 @@
         "back_translation_prompt_tokens": 577,
         "back_translation_completion_tokens": 3,
         "back_translation_time": 0.7200331687927246
-      }
+      },
+      "semantic_similarity": 0.6132543608546257
     },
     {
       "translator": "agentic",
@@ -6414,7 +6814,8 @@
         "back_translation_prompt_tokens": 585,
         "back_translation_completion_tokens": 6,
         "back_translation_time": 0.480867862701416
-      }
+      },
+      "semantic_similarity": 0.8530769944190979
     },
     {
       "translator": "agentic",
@@ -6430,7 +6831,8 @@
         "back_translation_prompt_tokens": 585,
         "back_translation_completion_tokens": 6,
         "back_translation_time": 0.4746243953704834
-      }
+      },
+      "semantic_similarity": 0.8415753245353699
     },
     {
       "translator": "agentic",
@@ -6446,7 +6848,8 @@
         "back_translation_prompt_tokens": 585,
         "back_translation_completion_tokens": 6,
         "back_translation_time": 0.7932839393615723
-      }
+      },
+      "semantic_similarity": 0.746178075671196
     },
     {
       "translator": "agentic",
@@ -6462,7 +6865,8 @@
         "back_translation_prompt_tokens": 578,
         "back_translation_completion_tokens": 3,
         "back_translation_time": 0.4003584384918213
-      }
+      },
+      "semantic_similarity": 0.6145867705345154
     },
     {
       "translator": "agentic",
@@ -6478,7 +6882,8 @@
         "back_translation_prompt_tokens": 580,
         "back_translation_completion_tokens": 6,
         "back_translation_time": 0.5126242637634277
-      }
+      },
+      "semantic_similarity": 0.7005727589130402
     },
     {
       "translator": "agentic",
@@ -6494,7 +6899,8 @@
         "back_translation_prompt_tokens": 578,
         "back_translation_completion_tokens": 5,
         "back_translation_time": 0.5058770179748535
-      }
+      },
+      "semantic_similarity": 0.7457230389118195
     },
     {
       "translator": "agentic",
@@ -6510,7 +6916,8 @@
         "back_translation_prompt_tokens": 576,
         "back_translation_completion_tokens": 4,
         "back_translation_time": 0.5141119956970215
-      }
+      },
+      "semantic_similarity": 0.6765691637992859
     },
     {
       "translator": "agentic",
@@ -6526,7 +6933,8 @@
         "back_translation_prompt_tokens": 576,
         "back_translation_completion_tokens": 4,
         "back_translation_time": 0.438690185546875
-      }
+      },
+      "semantic_similarity": 0.6378106474876404
     },
     {
       "translator": "agentic",
@@ -6542,7 +6950,8 @@
         "back_translation_prompt_tokens": 577,
         "back_translation_completion_tokens": 3,
         "back_translation_time": 0.3448028564453125
-      }
+      },
+      "semantic_similarity": 0.5809493884444237
     },
     {
       "translator": "agentic",
@@ -6558,7 +6967,8 @@
         "back_translation_prompt_tokens": 577,
         "back_translation_completion_tokens": 3,
         "back_translation_time": 0.4058520793914795
-      }
+      },
+      "semantic_similarity": 0.6182423308491707
     },
     {
       "translator": "agentic",
@@ -6574,7 +6984,8 @@
         "back_translation_prompt_tokens": 577,
         "back_translation_completion_tokens": 3,
         "back_translation_time": 0.4901139736175537
-      }
+      },
+      "semantic_similarity": 0.6794616729021072
     },
     {
       "translator": "agentic",
@@ -6590,7 +7001,8 @@
         "back_translation_prompt_tokens": 577,
         "back_translation_completion_tokens": 3,
         "back_translation_time": 0.4602031707763672
-      }
+      },
+      "semantic_similarity": 0.599411740899086
     },
     {
       "translator": "agentic",
@@ -6606,7 +7018,8 @@
         "back_translation_prompt_tokens": 1154,
         "back_translation_completion_tokens": 6,
         "back_translation_time": 0.9186265468597412
-      }
+      },
+      "semantic_similarity": 0.7631218433380127
     },
     {
       "translator": "agentic",
@@ -6622,7 +7035,8 @@
         "back_translation_prompt_tokens": 578,
         "back_translation_completion_tokens": 4,
         "back_translation_time": 0.417557954788208
-      }
+      },
+      "semantic_similarity": 0.6999876499176025
     },
     {
       "translator": "agentic",
@@ -6638,7 +7052,8 @@
         "back_translation_prompt_tokens": 1158,
         "back_translation_completion_tokens": 34,
         "back_translation_time": 1.1030800342559814
-      }
+      },
+      "semantic_similarity": 0.6758183836936951
     },
     {
       "translator": "agentic",
@@ -6654,7 +7069,8 @@
         "back_translation_prompt_tokens": 1155,
         "back_translation_completion_tokens": 58,
         "back_translation_time": 1.4714958667755127
-      }
+      },
+      "semantic_similarity": 0.524667102843523
     },
     {
       "translator": "agentic",
@@ -6670,7 +7086,8 @@
         "back_translation_prompt_tokens": 576,
         "back_translation_completion_tokens": 4,
         "back_translation_time": 0.4494462013244629
-      }
+      },
+      "semantic_similarity": 0.8011228144168854
     },
     {
       "translator": "agentic",
@@ -6686,7 +7103,8 @@
         "back_translation_prompt_tokens": 576,
         "back_translation_completion_tokens": 4,
         "back_translation_time": 0.42479729652404785
-      }
+      },
+      "semantic_similarity": 0.6213757917284966
     },
     {
       "translator": "agentic",
@@ -6702,7 +7120,8 @@
         "back_translation_prompt_tokens": 576,
         "back_translation_completion_tokens": 4,
         "back_translation_time": 0.7651631832122803
-      }
+      },
+      "semantic_similarity": 0.6150993853807449
     },
     {
       "translator": "agentic",
@@ -6718,7 +7137,8 @@
         "back_translation_prompt_tokens": 576,
         "back_translation_completion_tokens": 4,
         "back_translation_time": 0.5105922222137451
-      }
+      },
+      "semantic_similarity": 0.6418446898460388
     },
     {
       "translator": "agentic",
@@ -6734,7 +7154,8 @@
         "back_translation_prompt_tokens": 576,
         "back_translation_completion_tokens": 4,
         "back_translation_time": 0.48838186264038086
-      }
+      },
+      "semantic_similarity": 0.5535940155386925
     },
     {
       "translator": "agentic",
@@ -6750,7 +7171,8 @@
         "back_translation_prompt_tokens": 577,
         "back_translation_completion_tokens": 4,
         "back_translation_time": 0.4947516918182373
-      }
+      },
+      "semantic_similarity": 0.6566218286752701
     },
     {
       "translator": "agentic",
@@ -6766,7 +7188,8 @@
         "back_translation_prompt_tokens": 1154,
         "back_translation_completion_tokens": 6,
         "back_translation_time": 1.071643590927124
-      }
+      },
+      "semantic_similarity": 0.646249994635582
     },
     {
       "translator": "agentic",
@@ -6782,7 +7205,8 @@
         "back_translation_prompt_tokens": 577,
         "back_translation_completion_tokens": 3,
         "back_translation_time": 0.3753080368041992
-      }
+      },
+      "semantic_similarity": 0.5747968107461929
     },
     {
       "translator": "agentic",
@@ -6798,7 +7222,8 @@
         "back_translation_prompt_tokens": 1152,
         "back_translation_completion_tokens": 8,
         "back_translation_time": 0.8974628448486328
-      }
+      },
+      "semantic_similarity": 0.6114873886108398
     },
     {
       "translator": "agentic",
@@ -6814,7 +7239,8 @@
         "back_translation_prompt_tokens": 579,
         "back_translation_completion_tokens": 19,
         "back_translation_time": 0.6251945495605469
-      }
+      },
+      "semantic_similarity": 0.575561061501503
     },
     {
       "translator": "agentic",
@@ -6830,7 +7256,8 @@
         "back_translation_prompt_tokens": 1740,
         "back_translation_completion_tokens": 85,
         "back_translation_time": 2.0128979682922363
-      }
+      },
+      "semantic_similarity": 0.5402528345584869
     },
     {
       "translator": "agentic",
@@ -6846,7 +7273,8 @@
         "back_translation_prompt_tokens": 577,
         "back_translation_completion_tokens": 7,
         "back_translation_time": 0.7847380638122559
-      }
+      },
+      "semantic_similarity": 0.7135896533727646
     },
     {
       "translator": "agentic",
@@ -6862,7 +7290,8 @@
         "back_translation_prompt_tokens": 579,
         "back_translation_completion_tokens": 4,
         "back_translation_time": 0.43784022331237793
-      }
+      },
+      "semantic_similarity": 0.6842061281204224
     },
     {
       "translator": "agentic",
@@ -6878,7 +7307,8 @@
         "back_translation_prompt_tokens": 573,
         "back_translation_completion_tokens": 5,
         "back_translation_time": 0.3983445167541504
-      }
+      },
+      "semantic_similarity": 0.831665575504303
     },
     {
       "translator": "agentic",
@@ -6894,7 +7324,8 @@
         "back_translation_prompt_tokens": 577,
         "back_translation_completion_tokens": 6,
         "back_translation_time": 0.6467926502227783
-      }
+      },
+      "semantic_similarity": 0.6702517867088318
     },
     {
       "translator": "agentic",
@@ -6910,7 +7341,8 @@
         "back_translation_prompt_tokens": 1736,
         "back_translation_completion_tokens": 74,
         "back_translation_time": 2.042113780975342
-      }
+      },
+      "semantic_similarity": 0.6881866753101349
     },
     {
       "translator": "agentic",
@@ -6926,7 +7358,8 @@
         "back_translation_prompt_tokens": 1159,
         "back_translation_completion_tokens": 30,
         "back_translation_time": 1.0641920566558838
-      }
+      },
+      "semantic_similarity": 0.6138699799776077
     },
     {
       "translator": "agentic",
@@ -6942,7 +7375,8 @@
         "back_translation_prompt_tokens": 578,
         "back_translation_completion_tokens": 6,
         "back_translation_time": 0.5012013912200928
-      }
+      },
+      "semantic_similarity": 0.5351614877581596
     },
     {
       "translator": "agentic",
@@ -6958,7 +7392,8 @@
         "back_translation_prompt_tokens": 1157,
         "back_translation_completion_tokens": 56,
         "back_translation_time": 1.3563251495361328
-      }
+      },
+      "semantic_similarity": 0.5363025180995464
     },
     {
       "translator": "agentic",
@@ -6974,7 +7409,8 @@
         "back_translation_prompt_tokens": 579,
         "back_translation_completion_tokens": 5,
         "back_translation_time": 0.7343320846557617
-      }
+      },
+      "semantic_similarity": 0.7159931361675262
     },
     {
       "translator": "agentic",
@@ -6990,7 +7426,8 @@
         "back_translation_prompt_tokens": 579,
         "back_translation_completion_tokens": 4,
         "back_translation_time": 0.4981982707977295
-      }
+      },
+      "semantic_similarity": 0.8769769072532654
     },
     {
       "translator": "agentic",
@@ -7006,7 +7443,8 @@
         "back_translation_prompt_tokens": 579,
         "back_translation_completion_tokens": 5,
         "back_translation_time": 0.3267996311187744
-      }
+      },
+      "semantic_similarity": 0.5716468840837479
     },
     {
       "translator": "agentic",
@@ -7022,7 +7460,8 @@
         "back_translation_prompt_tokens": 1171,
         "back_translation_completion_tokens": 32,
         "back_translation_time": 1.0443711280822754
-      }
+      },
+      "semantic_similarity": 0.6150427758693695
     },
     {
       "translator": "agentic",
@@ -7038,7 +7477,8 @@
         "back_translation_prompt_tokens": 1154,
         "back_translation_completion_tokens": 9,
         "back_translation_time": 0.757678747177124
-      }
+      },
+      "semantic_similarity": 0.8794717490673065
     },
     {
       "translator": "agentic",
@@ -7054,7 +7494,8 @@
         "back_translation_prompt_tokens": 1149,
         "back_translation_completion_tokens": 57,
         "back_translation_time": 1.361722469329834
-      }
+      },
+      "semantic_similarity": 0.5273723546415567
     },
     {
       "translator": "agentic",
@@ -7070,7 +7511,8 @@
         "back_translation_prompt_tokens": 578,
         "back_translation_completion_tokens": 4,
         "back_translation_time": 0.4037468433380127
-      }
+      },
+      "semantic_similarity": 0.8918382823467255
     },
     {
       "translator": "agentic",
@@ -7086,7 +7528,8 @@
         "back_translation_prompt_tokens": 577,
         "back_translation_completion_tokens": 6,
         "back_translation_time": 0.41088056564331055
-      }
+      },
+      "semantic_similarity": 0.6455875039100647
     },
     {
       "translator": "agentic",
@@ -7102,7 +7545,8 @@
         "back_translation_prompt_tokens": 579,
         "back_translation_completion_tokens": 6,
         "back_translation_time": 0.41466784477233887
-      }
+      },
+      "semantic_similarity": 0.5663661286234856
     },
     {
       "translator": "agentic",
@@ -7118,7 +7562,8 @@
         "back_translation_prompt_tokens": 576,
         "back_translation_completion_tokens": 4,
         "back_translation_time": 0.4513661861419678
-      }
+      },
+      "semantic_similarity": 0.5417695678770542
     },
     {
       "translator": "agentic",
@@ -7134,7 +7579,8 @@
         "back_translation_prompt_tokens": 577,
         "back_translation_completion_tokens": 6,
         "back_translation_time": 0.3229677677154541
-      }
+      },
+      "semantic_similarity": 0.655912920832634
     },
     {
       "translator": "agentic",
@@ -7150,7 +7596,8 @@
         "back_translation_prompt_tokens": 578,
         "back_translation_completion_tokens": 5,
         "back_translation_time": 0.32695579528808594
-      }
+      },
+      "semantic_similarity": 0.7316558808088303
     },
     {
       "translator": "agentic",
@@ -7166,7 +7613,8 @@
         "back_translation_prompt_tokens": 579,
         "back_translation_completion_tokens": 5,
         "back_translation_time": 0.36742591857910156
-      }
+      },
+      "semantic_similarity": 0.7984676957130432
     },
     {
       "translator": "agentic",
@@ -7182,7 +7630,8 @@
         "back_translation_prompt_tokens": 1154,
         "back_translation_completion_tokens": 28,
         "back_translation_time": 1.070192575454712
-      }
+      },
+      "semantic_similarity": 0.6022429242730141
     },
     {
       "translator": "agentic",
@@ -7198,7 +7647,8 @@
         "back_translation_prompt_tokens": 1156,
         "back_translation_completion_tokens": 29,
         "back_translation_time": 1.1366324424743652
-      }
+      },
+      "semantic_similarity": 0.6229406893253326
     },
     {
       "translator": "finetuned-simple",

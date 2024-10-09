@@ -24,7 +24,7 @@ def main():
         for i, (name, target_sentence) in enumerate(sentences.items()):
             translation = AgenticTranslator(
                 savepath=savedir / f"messages-openai-{name}-{model}.json",
-                openai_model=model
+                model=model
             ).translate(target_sentence)
             results.append({
                 "model": model,
