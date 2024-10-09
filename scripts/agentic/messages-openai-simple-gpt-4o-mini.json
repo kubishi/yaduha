@@ -1,11 +1,11 @@
 [
     {
         "role": "system",
-        "content": "You are an assistant trying to build a sentence in Paiute. The user will provide you with parts of speech and vocabulary options one at a time. Make choices to best approximate the meaning of Input Sentence.Whenever you've chosen enough parts of speech and vocabulary to form a grammatically correct sentence, The user will ask you if you want to continue. If you're happy with the sentence you've built, you can choose to stop. If not, continue selecting optional parts of speech and vocabulary until you're satisfied."
+        "content": "You are an assistant trying to build a sentence in Paiute. The user will provide you with parts of speech and vocabulary options one at a time. Make choices to best approximate the meaning of Input Sentence. Do not make choices that are not provided by the user. This may mean you can't build the sentence you want, but that's okay. Whenever you've chosen enough parts of speech and vocabulary to form a grammatically correct sentence, The user will ask you if you want to continue. If you're happy with the sentence you've built, you can choose to stop. If not, continue selecting optional parts of speech and vocabulary until you're satisfied."
     },
     {
         "role": "user",
-        "content": "Input Sentence: Jared will eat an apple.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': None, 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a required part of speech: subject_noun, verb"
+        "content": "Input Sentence: Jared will eat an apple.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': None, 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select one of the following part of speeches to choose next: subject_noun, verb. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -13,7 +13,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: Jared will eat an apple.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': None, 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for subject_noun: nüü (I), uhu (he/she/it), uhuw̃a (they), mahu (he/she/it), mahuw̃a (they), ihi (this), ihiw̃a (these), taa (you and I), nüügwa (we (exclusive)), taagwa (we (inclusive)), üü (you), üügwa (you (plural)), isha' (coyote), isha'pugu (dog), kidi' (cat), pugu (horse), wai (rice), tüba (pinenuts), maishibü (corn), paya (water), payahuupü (river), katünu (chair), toyabi (mountain), tuunapi (food), pasohobü (tree), nobi (house), toni (wickiup), apo (cup), küna (wood), tübbi (rock), tabuutsi' (cottontail), kamü (jackrabbit), aaponu' (apple), tüsüga (weasle), mukita (lizard), wo'ada (mosquito), wükada (bird snake), wo'abi (worm), aingwü (squirrel), tsiipa (bird), tüwoobü (earth), koopi' (coffee), pahabichi (bear), pagwi (fish), kwadzi (tail), tüka (eat), puni (see), hibi (drink), naka (hear), kwana (smell), kwati (hit), yadohi (talk to), naki (chase), tsibui (climb), sawa (cook), tama'i (find), nia (read), mui (write), nobini (visit), katü (sit), üwi (sleep), kwisha'i (sneeze), poyoha (run), mia (go), hukaw̃ia (walk), wünü (stand), habi (lie down), yadoha (talk), kwatsa'i (fall), waakü (work), wükihaa (smile), hubiadu (sing), nishua'i (laugh), tübinohi (play), yotsi (fly), nüga (dance), pahabi (swim), tünia (read), tümui (write), tsiipe'i (chirp)\nBecuase this is a subject_noun word, you can also choose to use a wildcard by putting the word in brackets. For example: [wildcard]"
+        "content": "Input Sentence: Jared will eat an apple.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': None, 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for subject_noun: nüü (I), uhu (he/she/it), uhuw̃a (they), mahu (he/she/it), mahuw̃a (they), ihi (this), ihiw̃a (these), taa (you and I), nüügwa (we (exclusive)), taagwa (we (inclusive)), üü (you), üügwa (you (plural)), isha' (coyote), isha'pugu (dog), kidi' (cat), pugu (horse), wai (rice), tüba (pinenuts), maishibü (corn), paya (water), payahuupü (river), katünu (chair), toyabi (mountain), tuunapi (food), pasohobü (tree), nobi (house), toni (wickiup), apo (cup), küna (wood), tübbi (rock), tabuutsi' (cottontail), kamü (jackrabbit), aaponu' (apple), tüsüga (weasle), mukita (lizard), wo'ada (mosquito), wükada (bird snake), wo'abi (worm), aingwü (squirrel), tsiipa (bird), tüwoobü (earth), koopi' (coffee), pahabichi (bear), pagwi (fish), kwadzi (tail), tüka (eat), puni (see), hibi (drink), naka (hear), kwana (smell), kwati (hit), yadohi (talk to), naki (chase), tsibui (climb), sawa (cook), tama'i (find), nia (read), mui (write), nobini (visit), katü (sit), üwi (sleep), kwisha'i (sneeze), poyoha (run), mia (go), hukaw̃ia (walk), wünü (stand), habi (lie down), yadoha (talk), kwatsa'i (fall), waakü (work), wükihaa (smile), hubiadu (sing), nishua'i (laugh), tübinohi (play), yotsi (fly), nüga (dance), pahabi (swim), tünia (read), tümui (write), tsiipe'i (chirp)\nBecuase this is a subject_noun word, you can also choose to use a wildcard by putting the word in brackets. For example: [wildcard]. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -21,7 +21,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: Jared will eat an apple.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[Jared]', 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a required part of speech: subject_suffix, verb"
+        "content": "Input Sentence: Jared will eat an apple.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[Jared]', 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select one of the following part of speeches to choose next: subject_suffix, verb. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -29,7 +29,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: Jared will eat an apple.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[Jared]', 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for subject_suffix: ii (proximal), uu (distal)"
+        "content": "Input Sentence: Jared will eat an apple.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[Jared]', 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for subject_suffix: ii (proximal), uu (distal). Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -37,7 +37,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: Jared will eat an apple.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[Jared]', 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a required part of speech: verb"
+        "content": "Input Sentence: Jared will eat an apple.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[Jared]', 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select one of the following part of speeches to choose next: verb. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -45,7 +45,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: Jared will eat an apple.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[Jared]', 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for verb: tüka (eat), puni (see), hibi (drink), naka (hear), kwana (smell), kwati (hit), yadohi (talk to), naki (chase), tsibui (climb), sawa (cook), tama'i (find), nia (read), mui (write), nobini (visit), katü (sit), üwi (sleep), kwisha'i (sneeze), poyoha (run), mia (go), hukaw̃ia (walk), wünü (stand), habi (lie down), yadoha (talk), kwatsa'i (fall), waakü (work), wükihaa (smile), hubiadu (sing), nishua'i (laugh), tübinohi (play), yotsi (fly), nüga (dance), pahabi (swim), tünia (read), tümui (write), tsiipe'i (chirp)\nBecuase this is a verb word, you can also choose to use a wildcard by putting the word in brackets. For example: [wildcard]"
+        "content": "Input Sentence: Jared will eat an apple.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[Jared]', 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for verb: tüka (eat), puni (see), hibi (drink), naka (hear), kwana (smell), kwati (hit), yadohi (talk to), naki (chase), tsibui (climb), sawa (cook), tama'i (find), nia (read), mui (write), nobini (visit), katü (sit), üwi (sleep), kwisha'i (sneeze), poyoha (run), mia (go), hukaw̃ia (walk), wünü (stand), habi (lie down), yadoha (talk), kwatsa'i (fall), waakü (work), wükihaa (smile), hubiadu (sing), nishua'i (laugh), tübinohi (play), yotsi (fly), nüga (dance), pahabi (swim), tünia (read), tümui (write), tsiipe'i (chirp)\nBecuase this is a verb word, you can also choose to use a wildcard by putting the word in brackets. For example: [wildcard]. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -53,7 +53,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: Jared will eat an apple.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[Jared]', 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': 'tüka', 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a required part of speech: verb_tense"
+        "content": "Input Sentence: Jared will eat an apple.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[Jared]', 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': 'tüka', 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select one of the following part of speeches to choose next: verb_tense. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -61,7 +61,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: Jared will eat an apple.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[Jared]', 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': 'tüka', 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for verb_tense: ku (completive (past)), ti (present ongoing (-ing)), dü (present), wei (future (will)), gaa-wei (future (going to)), pü (have x-ed, am x-ed)"
+        "content": "Input Sentence: Jared will eat an apple.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[Jared]', 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': 'tüka', 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for verb_tense: ku (completive (past)), ti (present ongoing (-ing)), dü (present), wei (future (will)), gaa-wei (future (going to)), pü (have x-ed, am x-ed). Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -69,7 +69,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: Jared will eat an apple.\nCurrent Translation: [Jared]-ii tüka-wei.\nEnter one of the following choices:\nc: Continue building the last sentence\nn: Add and build a new Paiute sentence for this translation\nt: Terminate and return the current translation."
+        "content": "Input Sentence: Jared will eat an apple.\nCurrent Translation: [Jared]-ii tüka-wei.\nEnter one of the following choices:\nc: Continue building the last sentence\nn: Add and build a new Paiute sentence for this translation\nt: Terminate and return the current translation. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -77,7 +77,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: Jared will eat an apple.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[Jared]', 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': 'tüka', 'verb_tense': 'wei', 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a part of speech: subject_noun, subject_suffix, subject_noun_nominalizer, verb, verb_tense, object_pronoun, object_noun, object_noun_nominalizer, object_suffix"
+        "content": "Input Sentence: Jared will eat an apple.\nCurrent Translation: [Jared]-ii tüka-wei.\nCurrent Choices: {'subject_noun': '[Jared]', 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': 'tüka', 'verb_tense': 'wei', 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select one of the following part of speeches to choose next: subject_noun, subject_suffix, verb, verb_tense, object_pronoun, object_noun. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -85,7 +85,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: Jared will eat an apple.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[Jared]', 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': 'tüka', 'verb_tense': 'wei', 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for object_noun: isha' (coyote), isha'pugu (dog), kidi' (cat), pugu (horse), wai (rice), tüba (pinenuts), maishibü (corn), paya (water), payahuupü (river), katünu (chair), toyabi (mountain), tuunapi (food), pasohobü (tree), nobi (house), toni (wickiup), apo (cup), küna (wood), tübbi (rock), tabuutsi' (cottontail), kamü (jackrabbit), aaponu' (apple), tüsüga (weasle), mukita (lizard), wo'ada (mosquito), wükada (bird snake), wo'abi (worm), aingwü (squirrel), tsiipa (bird), tüwoobü (earth), koopi' (coffee), pahabichi (bear), pagwi (fish), kwadzi (tail), tüka (eat), puni (see), hibi (drink), naka (hear), kwana (smell), kwati (hit), yadohi (talk to), naki (chase), tsibui (climb), sawa (cook), tama'i (find), nia (read), mui (write), nobini (visit), katü (sit), üwi (sleep), kwisha'i (sneeze), poyoha (run), mia (go), hukaw̃ia (walk), wünü (stand), habi (lie down), yadoha (talk), kwatsa'i (fall), waakü (work), wükihaa (smile), hubiadu (sing), nishua'i (laugh), tübinohi (play), yotsi (fly), nüga (dance), pahabi (swim), tünia (read), tümui (write), tsiipe'i (chirp)\nBecuase this is a object_noun word, you can also choose to use a wildcard by putting the word in brackets. For example: [wildcard]"
+        "content": "Input Sentence: Jared will eat an apple.\nCurrent Translation: [Jared]-ii tüka-wei.\nCurrent Choices: {'subject_noun': '[Jared]', 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': 'tüka', 'verb_tense': 'wei', 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for object_noun: isha' (coyote), isha'pugu (dog), kidi' (cat), pugu (horse), wai (rice), tüba (pinenuts), maishibü (corn), paya (water), payahuupü (river), katünu (chair), toyabi (mountain), tuunapi (food), pasohobü (tree), nobi (house), toni (wickiup), apo (cup), küna (wood), tübbi (rock), tabuutsi' (cottontail), kamü (jackrabbit), aaponu' (apple), tüsüga (weasle), mukita (lizard), wo'ada (mosquito), wükada (bird snake), wo'abi (worm), aingwü (squirrel), tsiipa (bird), tüwoobü (earth), koopi' (coffee), pahabichi (bear), pagwi (fish), kwadzi (tail), tüka (eat), puni (see), hibi (drink), naka (hear), kwana (smell), kwati (hit), yadohi (talk to), naki (chase), tsibui (climb), sawa (cook), tama'i (find), nia (read), mui (write), nobini (visit), katü (sit), üwi (sleep), kwisha'i (sneeze), poyoha (run), mia (go), hukaw̃ia (walk), wünü (stand), habi (lie down), yadoha (talk), kwatsa'i (fall), waakü (work), wükihaa (smile), hubiadu (sing), nishua'i (laugh), tübinohi (play), yotsi (fly), nüga (dance), pahabi (swim), tünia (read), tümui (write), tsiipe'i (chirp)\nBecuase this is a object_noun word, you can also choose to use a wildcard by putting the word in brackets. For example: [wildcard]. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -93,7 +93,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: Jared will eat an apple.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[Jared]', 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': 'tüka', 'verb_tense': 'wei', 'object_pronoun': None, 'object_noun': \"aaponu'\", 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a required part of speech: object_pronoun, object_suffix"
+        "content": "Input Sentence: Jared will eat an apple.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[Jared]', 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': 'tüka', 'verb_tense': 'wei', 'object_pronoun': None, 'object_noun': \"aaponu'\", 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select one of the following part of speeches to choose next: object_pronoun, object_suffix. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -101,7 +101,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: Jared will eat an apple.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[Jared]', 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': 'tüka', 'verb_tense': 'wei', 'object_pronoun': None, 'object_noun': \"aaponu'\", 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for object_suffix: eika (proximal), oka (distal)"
+        "content": "Input Sentence: Jared will eat an apple.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[Jared]', 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': 'tüka', 'verb_tense': 'wei', 'object_pronoun': None, 'object_noun': \"aaponu'\", 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for object_suffix: eika (proximal), oka (distal). Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -109,7 +109,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: Jared will eat an apple.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[Jared]', 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': 'tüka', 'verb_tense': 'wei', 'object_pronoun': None, 'object_noun': \"aaponu'\", 'object_noun_nominalizer': None, 'object_suffix': 'eika'}\nPlease select a required part of speech: object_pronoun"
+        "content": "Input Sentence: Jared will eat an apple.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[Jared]', 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': 'tüka', 'verb_tense': 'wei', 'object_pronoun': None, 'object_noun': \"aaponu'\", 'object_noun_nominalizer': None, 'object_suffix': 'eika'}\nPlease select one of the following part of speeches to choose next: object_pronoun. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -117,7 +117,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: Jared will eat an apple.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[Jared]', 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': 'tüka', 'verb_tense': 'wei', 'object_pronoun': None, 'object_noun': \"aaponu'\", 'object_noun_nominalizer': None, 'object_suffix': 'eika'}\nPlease select a word for object_pronoun: ma (him/her/it (proximal)), mai (them (proximal)), a (him/her/it (proximal)), ai (them (proximal))"
+        "content": "Input Sentence: Jared will eat an apple.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[Jared]', 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': 'tüka', 'verb_tense': 'wei', 'object_pronoun': None, 'object_noun': \"aaponu'\", 'object_noun_nominalizer': None, 'object_suffix': 'eika'}\nPlease select a word for object_pronoun: ma (him/her/it (proximal)), mai (them (proximal)), a (him/her/it (proximal)), ai (them (proximal)). Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -125,7 +125,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: Jared will eat an apple.\nCurrent Translation: [Jared]-ii aaponu'-eika a-düka-wei.\nEnter one of the following choices:\nc: Continue building the last sentence\nn: Add and build a new Paiute sentence for this translation\nt: Terminate and return the current translation."
+        "content": "Input Sentence: Jared will eat an apple.\nCurrent Translation: [Jared]-ii aaponu'-eika a-düka-wei.\nEnter one of the following choices:\nc: Continue building the last sentence\nn: Add and build a new Paiute sentence for this translation\nt: Terminate and return the current translation. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -133,7 +133,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: This dog and cat are running.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': None, 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a required part of speech: subject_noun, verb"
+        "content": "Input Sentence: This dog and cat are running.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': None, 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select one of the following part of speeches to choose next: subject_noun, verb. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -141,7 +141,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: This dog and cat are running.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': None, 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for subject_noun: nüü (I), uhu (he/she/it), uhuw̃a (they), mahu (he/she/it), mahuw̃a (they), ihi (this), ihiw̃a (these), taa (you and I), nüügwa (we (exclusive)), taagwa (we (inclusive)), üü (you), üügwa (you (plural)), isha' (coyote), isha'pugu (dog), kidi' (cat), pugu (horse), wai (rice), tüba (pinenuts), maishibü (corn), paya (water), payahuupü (river), katünu (chair), toyabi (mountain), tuunapi (food), pasohobü (tree), nobi (house), toni (wickiup), apo (cup), küna (wood), tübbi (rock), tabuutsi' (cottontail), kamü (jackrabbit), aaponu' (apple), tüsüga (weasle), mukita (lizard), wo'ada (mosquito), wükada (bird snake), wo'abi (worm), aingwü (squirrel), tsiipa (bird), tüwoobü (earth), koopi' (coffee), pahabichi (bear), pagwi (fish), kwadzi (tail), tüka (eat), puni (see), hibi (drink), naka (hear), kwana (smell), kwati (hit), yadohi (talk to), naki (chase), tsibui (climb), sawa (cook), tama'i (find), nia (read), mui (write), nobini (visit), katü (sit), üwi (sleep), kwisha'i (sneeze), poyoha (run), mia (go), hukaw̃ia (walk), wünü (stand), habi (lie down), yadoha (talk), kwatsa'i (fall), waakü (work), wükihaa (smile), hubiadu (sing), nishua'i (laugh), tübinohi (play), yotsi (fly), nüga (dance), pahabi (swim), tünia (read), tümui (write), tsiipe'i (chirp)\nBecuase this is a subject_noun word, you can also choose to use a wildcard by putting the word in brackets. For example: [wildcard]"
+        "content": "Input Sentence: This dog and cat are running.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': None, 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for subject_noun: nüü (I), uhu (he/she/it), uhuw̃a (they), mahu (he/she/it), mahuw̃a (they), ihi (this), ihiw̃a (these), taa (you and I), nüügwa (we (exclusive)), taagwa (we (inclusive)), üü (you), üügwa (you (plural)), isha' (coyote), isha'pugu (dog), kidi' (cat), pugu (horse), wai (rice), tüba (pinenuts), maishibü (corn), paya (water), payahuupü (river), katünu (chair), toyabi (mountain), tuunapi (food), pasohobü (tree), nobi (house), toni (wickiup), apo (cup), küna (wood), tübbi (rock), tabuutsi' (cottontail), kamü (jackrabbit), aaponu' (apple), tüsüga (weasle), mukita (lizard), wo'ada (mosquito), wükada (bird snake), wo'abi (worm), aingwü (squirrel), tsiipa (bird), tüwoobü (earth), koopi' (coffee), pahabichi (bear), pagwi (fish), kwadzi (tail), tüka (eat), puni (see), hibi (drink), naka (hear), kwana (smell), kwati (hit), yadohi (talk to), naki (chase), tsibui (climb), sawa (cook), tama'i (find), nia (read), mui (write), nobini (visit), katü (sit), üwi (sleep), kwisha'i (sneeze), poyoha (run), mia (go), hukaw̃ia (walk), wünü (stand), habi (lie down), yadoha (talk), kwatsa'i (fall), waakü (work), wükihaa (smile), hubiadu (sing), nishua'i (laugh), tübinohi (play), yotsi (fly), nüga (dance), pahabi (swim), tünia (read), tümui (write), tsiipe'i (chirp)\nBecuase this is a subject_noun word, you can also choose to use a wildcard by putting the word in brackets. For example: [wildcard]. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -149,7 +149,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: This dog and cat are running.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': \"isha'pugu\", 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a required part of speech: subject_suffix, verb"
+        "content": "Input Sentence: This dog and cat are running.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': \"isha'pugu\", 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select one of the following part of speeches to choose next: subject_suffix, verb. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -157,7 +157,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: This dog and cat are running.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': \"isha'pugu\", 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for subject_suffix: ii (proximal), uu (distal)"
+        "content": "Input Sentence: This dog and cat are running.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': \"isha'pugu\", 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for subject_suffix: ii (proximal), uu (distal). Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -165,7 +165,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: This dog and cat are running.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': \"isha'pugu\", 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a required part of speech: verb"
+        "content": "Input Sentence: This dog and cat are running.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': \"isha'pugu\", 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select one of the following part of speeches to choose next: verb. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -173,7 +173,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: This dog and cat are running.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': \"isha'pugu\", 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for verb: tüka (eat), puni (see), hibi (drink), naka (hear), kwana (smell), kwati (hit), yadohi (talk to), naki (chase), tsibui (climb), sawa (cook), tama'i (find), nia (read), mui (write), nobini (visit), katü (sit), üwi (sleep), kwisha'i (sneeze), poyoha (run), mia (go), hukaw̃ia (walk), wünü (stand), habi (lie down), yadoha (talk), kwatsa'i (fall), waakü (work), wükihaa (smile), hubiadu (sing), nishua'i (laugh), tübinohi (play), yotsi (fly), nüga (dance), pahabi (swim), tünia (read), tümui (write), tsiipe'i (chirp)\nBecuase this is a verb word, you can also choose to use a wildcard by putting the word in brackets. For example: [wildcard]"
+        "content": "Input Sentence: This dog and cat are running.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': \"isha'pugu\", 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for verb: tüka (eat), puni (see), hibi (drink), naka (hear), kwana (smell), kwati (hit), yadohi (talk to), naki (chase), tsibui (climb), sawa (cook), tama'i (find), nia (read), mui (write), nobini (visit), katü (sit), üwi (sleep), kwisha'i (sneeze), poyoha (run), mia (go), hukaw̃ia (walk), wünü (stand), habi (lie down), yadoha (talk), kwatsa'i (fall), waakü (work), wükihaa (smile), hubiadu (sing), nishua'i (laugh), tübinohi (play), yotsi (fly), nüga (dance), pahabi (swim), tünia (read), tümui (write), tsiipe'i (chirp)\nBecuase this is a verb word, you can also choose to use a wildcard by putting the word in brackets. For example: [wildcard]. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -181,7 +181,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: This dog and cat are running.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': \"isha'pugu\", 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': 'poyoha', 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a required part of speech: verb_tense"
+        "content": "Input Sentence: This dog and cat are running.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': \"isha'pugu\", 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': 'poyoha', 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select one of the following part of speeches to choose next: verb_tense. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -189,7 +189,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: This dog and cat are running.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': \"isha'pugu\", 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': 'poyoha', 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for verb_tense: ku (completive (past)), ti (present ongoing (-ing)), dü (present), wei (future (will)), gaa-wei (future (going to)), pü (have x-ed, am x-ed)"
+        "content": "Input Sentence: This dog and cat are running.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': \"isha'pugu\", 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': 'poyoha', 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for verb_tense: ku (completive (past)), ti (present ongoing (-ing)), dü (present), wei (future (will)), gaa-wei (future (going to)), pü (have x-ed, am x-ed). Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -197,7 +197,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: This dog and cat are running.\nCurrent Translation: isha'pugu-ii poyoha-ti.\nEnter one of the following choices:\nc: Continue building the last sentence\nn: Add and build a new Paiute sentence for this translation\nt: Terminate and return the current translation."
+        "content": "Input Sentence: This dog and cat are running.\nCurrent Translation: isha'pugu-ii poyoha-ti.\nEnter one of the following choices:\nc: Continue building the last sentence\nn: Add and build a new Paiute sentence for this translation\nt: Terminate and return the current translation. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -205,15 +205,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: This dog and cat are running.\nCurrent Translation: isha'pugu-ii poyoha-ti.\nCurrent Choices: {'subject_noun': None, 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a required part of speech: subject_noun, verb"
-    },
-    {
-        "role": "assistant",
-        "content": ""
-    },
-    {
-        "role": "assistant",
-        "content": "Invalid choice. Please try again.\nInput Sentence: This dog and cat are running.\nCurrent Translation: isha'pugu-ii poyoha-ti.\nCurrent Choices: {'subject_noun': None, 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a required part of speech: subject_noun, verb"
+        "content": "Input Sentence: This dog and cat are running.\nCurrent Translation: isha'pugu-ii poyoha-ti. .\nCurrent Choices: {'subject_noun': None, 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select one of the following part of speeches to choose next: subject_noun, verb. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -221,7 +213,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: This dog and cat are running.\nCurrent Translation: isha'pugu-ii poyoha-ti.\nCurrent Choices: {'subject_noun': None, 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for subject_noun: nüü (I), uhu (he/she/it), uhuw̃a (they), mahu (he/she/it), mahuw̃a (they), ihi (this), ihiw̃a (these), taa (you and I), nüügwa (we (exclusive)), taagwa (we (inclusive)), üü (you), üügwa (you (plural)), isha' (coyote), isha'pugu (dog), kidi' (cat), pugu (horse), wai (rice), tüba (pinenuts), maishibü (corn), paya (water), payahuupü (river), katünu (chair), toyabi (mountain), tuunapi (food), pasohobü (tree), nobi (house), toni (wickiup), apo (cup), küna (wood), tübbi (rock), tabuutsi' (cottontail), kamü (jackrabbit), aaponu' (apple), tüsüga (weasle), mukita (lizard), wo'ada (mosquito), wükada (bird snake), wo'abi (worm), aingwü (squirrel), tsiipa (bird), tüwoobü (earth), koopi' (coffee), pahabichi (bear), pagwi (fish), kwadzi (tail), tüka (eat), puni (see), hibi (drink), naka (hear), kwana (smell), kwati (hit), yadohi (talk to), naki (chase), tsibui (climb), sawa (cook), tama'i (find), nia (read), mui (write), nobini (visit), katü (sit), üwi (sleep), kwisha'i (sneeze), poyoha (run), mia (go), hukaw̃ia (walk), wünü (stand), habi (lie down), yadoha (talk), kwatsa'i (fall), waakü (work), wükihaa (smile), hubiadu (sing), nishua'i (laugh), tübinohi (play), yotsi (fly), nüga (dance), pahabi (swim), tünia (read), tümui (write), tsiipe'i (chirp)\nBecuase this is a subject_noun word, you can also choose to use a wildcard by putting the word in brackets. For example: [wildcard]"
+        "content": "Input Sentence: This dog and cat are running.\nCurrent Translation: isha'pugu-ii poyoha-ti. .\nCurrent Choices: {'subject_noun': None, 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for subject_noun: nüü (I), uhu (he/she/it), uhuw̃a (they), mahu (he/she/it), mahuw̃a (they), ihi (this), ihiw̃a (these), taa (you and I), nüügwa (we (exclusive)), taagwa (we (inclusive)), üü (you), üügwa (you (plural)), isha' (coyote), isha'pugu (dog), kidi' (cat), pugu (horse), wai (rice), tüba (pinenuts), maishibü (corn), paya (water), payahuupü (river), katünu (chair), toyabi (mountain), tuunapi (food), pasohobü (tree), nobi (house), toni (wickiup), apo (cup), küna (wood), tübbi (rock), tabuutsi' (cottontail), kamü (jackrabbit), aaponu' (apple), tüsüga (weasle), mukita (lizard), wo'ada (mosquito), wükada (bird snake), wo'abi (worm), aingwü (squirrel), tsiipa (bird), tüwoobü (earth), koopi' (coffee), pahabichi (bear), pagwi (fish), kwadzi (tail), tüka (eat), puni (see), hibi (drink), naka (hear), kwana (smell), kwati (hit), yadohi (talk to), naki (chase), tsibui (climb), sawa (cook), tama'i (find), nia (read), mui (write), nobini (visit), katü (sit), üwi (sleep), kwisha'i (sneeze), poyoha (run), mia (go), hukaw̃ia (walk), wünü (stand), habi (lie down), yadoha (talk), kwatsa'i (fall), waakü (work), wükihaa (smile), hubiadu (sing), nishua'i (laugh), tübinohi (play), yotsi (fly), nüga (dance), pahabi (swim), tünia (read), tümui (write), tsiipe'i (chirp)\nBecuase this is a subject_noun word, you can also choose to use a wildcard by putting the word in brackets. For example: [wildcard]. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -229,7 +221,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: This dog and cat are running.\nCurrent Translation: isha'pugu-ii poyoha-ti.\nCurrent Choices: {'subject_noun': \"kidi'\", 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a required part of speech: subject_suffix, verb"
+        "content": "Input Sentence: This dog and cat are running.\nCurrent Translation: isha'pugu-ii poyoha-ti. .\nCurrent Choices: {'subject_noun': \"kidi'\", 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select one of the following part of speeches to choose next: subject_suffix, verb. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -237,7 +229,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: This dog and cat are running.\nCurrent Translation: isha'pugu-ii poyoha-ti.\nCurrent Choices: {'subject_noun': \"kidi'\", 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for subject_suffix: ii (proximal), uu (distal)"
+        "content": "Input Sentence: This dog and cat are running.\nCurrent Translation: isha'pugu-ii poyoha-ti. .\nCurrent Choices: {'subject_noun': \"kidi'\", 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for subject_suffix: ii (proximal), uu (distal). Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -245,7 +237,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: This dog and cat are running.\nCurrent Translation: isha'pugu-ii poyoha-ti.\nCurrent Choices: {'subject_noun': \"kidi'\", 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a required part of speech: verb"
+        "content": "Input Sentence: This dog and cat are running.\nCurrent Translation: isha'pugu-ii poyoha-ti. .\nCurrent Choices: {'subject_noun': \"kidi'\", 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select one of the following part of speeches to choose next: verb. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -253,7 +245,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: This dog and cat are running.\nCurrent Translation: isha'pugu-ii poyoha-ti.\nCurrent Choices: {'subject_noun': \"kidi'\", 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for verb: tüka (eat), puni (see), hibi (drink), naka (hear), kwana (smell), kwati (hit), yadohi (talk to), naki (chase), tsibui (climb), sawa (cook), tama'i (find), nia (read), mui (write), nobini (visit), katü (sit), üwi (sleep), kwisha'i (sneeze), poyoha (run), mia (go), hukaw̃ia (walk), wünü (stand), habi (lie down), yadoha (talk), kwatsa'i (fall), waakü (work), wükihaa (smile), hubiadu (sing), nishua'i (laugh), tübinohi (play), yotsi (fly), nüga (dance), pahabi (swim), tünia (read), tümui (write), tsiipe'i (chirp)\nBecuase this is a verb word, you can also choose to use a wildcard by putting the word in brackets. For example: [wildcard]"
+        "content": "Input Sentence: This dog and cat are running.\nCurrent Translation: isha'pugu-ii poyoha-ti. .\nCurrent Choices: {'subject_noun': \"kidi'\", 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for verb: tüka (eat), puni (see), hibi (drink), naka (hear), kwana (smell), kwati (hit), yadohi (talk to), naki (chase), tsibui (climb), sawa (cook), tama'i (find), nia (read), mui (write), nobini (visit), katü (sit), üwi (sleep), kwisha'i (sneeze), poyoha (run), mia (go), hukaw̃ia (walk), wünü (stand), habi (lie down), yadoha (talk), kwatsa'i (fall), waakü (work), wükihaa (smile), hubiadu (sing), nishua'i (laugh), tübinohi (play), yotsi (fly), nüga (dance), pahabi (swim), tünia (read), tümui (write), tsiipe'i (chirp)\nBecuase this is a verb word, you can also choose to use a wildcard by putting the word in brackets. For example: [wildcard]. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -261,7 +253,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: This dog and cat are running.\nCurrent Translation: isha'pugu-ii poyoha-ti.\nCurrent Choices: {'subject_noun': \"kidi'\", 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': 'poyoha', 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a required part of speech: verb_tense"
+        "content": "Input Sentence: This dog and cat are running.\nCurrent Translation: isha'pugu-ii poyoha-ti. .\nCurrent Choices: {'subject_noun': \"kidi'\", 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': 'poyoha', 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select one of the following part of speeches to choose next: verb_tense. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -269,7 +261,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: This dog and cat are running.\nCurrent Translation: isha'pugu-ii poyoha-ti.\nCurrent Choices: {'subject_noun': \"kidi'\", 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': 'poyoha', 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for verb_tense: ku (completive (past)), ti (present ongoing (-ing)), dü (present), wei (future (will)), gaa-wei (future (going to)), pü (have x-ed, am x-ed)"
+        "content": "Input Sentence: This dog and cat are running.\nCurrent Translation: isha'pugu-ii poyoha-ti. .\nCurrent Choices: {'subject_noun': \"kidi'\", 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': 'poyoha', 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for verb_tense: ku (completive (past)), ti (present ongoing (-ing)), dü (present), wei (future (will)), gaa-wei (future (going to)), pü (have x-ed, am x-ed). Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -277,7 +269,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: This dog and cat are running.\nCurrent Translation: isha'pugu-ii poyoha-ti. kidi'-ii poyoha-ti.\nEnter one of the following choices:\nc: Continue building the last sentence\nn: Add and build a new Paiute sentence for this translation\nt: Terminate and return the current translation."
+        "content": "Input Sentence: This dog and cat are running.\nCurrent Translation: isha'pugu-ii poyoha-ti. kidi'-ii poyoha-ti.\nEnter one of the following choices:\nc: Continue building the last sentence\nn: Add and build a new Paiute sentence for this translation\nt: Terminate and return the current translation. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -285,7 +277,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': None, 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a required part of speech: subject_noun, verb"
+        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': None, 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select one of the following part of speeches to choose next: subject_noun, verb. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -293,7 +285,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': None, 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for subject_noun: nüü (I), uhu (he/she/it), uhuw̃a (they), mahu (he/she/it), mahuw̃a (they), ihi (this), ihiw̃a (these), taa (you and I), nüügwa (we (exclusive)), taagwa (we (inclusive)), üü (you), üügwa (you (plural)), isha' (coyote), isha'pugu (dog), kidi' (cat), pugu (horse), wai (rice), tüba (pinenuts), maishibü (corn), paya (water), payahuupü (river), katünu (chair), toyabi (mountain), tuunapi (food), pasohobü (tree), nobi (house), toni (wickiup), apo (cup), küna (wood), tübbi (rock), tabuutsi' (cottontail), kamü (jackrabbit), aaponu' (apple), tüsüga (weasle), mukita (lizard), wo'ada (mosquito), wükada (bird snake), wo'abi (worm), aingwü (squirrel), tsiipa (bird), tüwoobü (earth), koopi' (coffee), pahabichi (bear), pagwi (fish), kwadzi (tail), tüka (eat), puni (see), hibi (drink), naka (hear), kwana (smell), kwati (hit), yadohi (talk to), naki (chase), tsibui (climb), sawa (cook), tama'i (find), nia (read), mui (write), nobini (visit), katü (sit), üwi (sleep), kwisha'i (sneeze), poyoha (run), mia (go), hukaw̃ia (walk), wünü (stand), habi (lie down), yadoha (talk), kwatsa'i (fall), waakü (work), wükihaa (smile), hubiadu (sing), nishua'i (laugh), tübinohi (play), yotsi (fly), nüga (dance), pahabi (swim), tünia (read), tümui (write), tsiipe'i (chirp)\nBecuase this is a subject_noun word, you can also choose to use a wildcard by putting the word in brackets. For example: [wildcard]"
+        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': None, 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for subject_noun: nüü (I), uhu (he/she/it), uhuw̃a (they), mahu (he/she/it), mahuw̃a (they), ihi (this), ihiw̃a (these), taa (you and I), nüügwa (we (exclusive)), taagwa (we (inclusive)), üü (you), üügwa (you (plural)), isha' (coyote), isha'pugu (dog), kidi' (cat), pugu (horse), wai (rice), tüba (pinenuts), maishibü (corn), paya (water), payahuupü (river), katünu (chair), toyabi (mountain), tuunapi (food), pasohobü (tree), nobi (house), toni (wickiup), apo (cup), küna (wood), tübbi (rock), tabuutsi' (cottontail), kamü (jackrabbit), aaponu' (apple), tüsüga (weasle), mukita (lizard), wo'ada (mosquito), wükada (bird snake), wo'abi (worm), aingwü (squirrel), tsiipa (bird), tüwoobü (earth), koopi' (coffee), pahabichi (bear), pagwi (fish), kwadzi (tail), tüka (eat), puni (see), hibi (drink), naka (hear), kwana (smell), kwati (hit), yadohi (talk to), naki (chase), tsibui (climb), sawa (cook), tama'i (find), nia (read), mui (write), nobini (visit), katü (sit), üwi (sleep), kwisha'i (sneeze), poyoha (run), mia (go), hukaw̃ia (walk), wünü (stand), habi (lie down), yadoha (talk), kwatsa'i (fall), waakü (work), wükihaa (smile), hubiadu (sing), nishua'i (laugh), tübinohi (play), yotsi (fly), nüga (dance), pahabi (swim), tünia (read), tümui (write), tsiipe'i (chirp)\nBecuase this is a subject_noun word, you can also choose to use a wildcard by putting the word in brackets. For example: [wildcard]. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -301,7 +293,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'poyoha', 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a required part of speech: subject_suffix, subject_noun_nominalizer, verb"
+        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'poyoha', 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select one of the following part of speeches to choose next: subject_suffix, subject_noun_nominalizer, verb. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -309,7 +301,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'poyoha', 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for subject_noun_nominalizer: dü (present), pü (have x-ed, am x-ed), weidü (future (will))"
+        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'poyoha', 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for subject_noun_nominalizer: dü (present), pü (have x-ed, am x-ed), weidü (future (will)). Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -317,7 +309,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'poyoha', 'subject_suffix': None, 'subject_noun_nominalizer': 'dü', 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a required part of speech: subject_suffix, verb"
+        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'poyoha', 'subject_suffix': None, 'subject_noun_nominalizer': 'dü', 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select one of the following part of speeches to choose next: subject_suffix, verb. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -325,7 +317,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'poyoha', 'subject_suffix': None, 'subject_noun_nominalizer': 'dü', 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for subject_suffix: ii (proximal), uu (distal)"
+        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'poyoha', 'subject_suffix': None, 'subject_noun_nominalizer': 'dü', 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for subject_suffix: ii (proximal), uu (distal). Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -333,7 +325,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'poyoha', 'subject_suffix': 'uu', 'subject_noun_nominalizer': 'dü', 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a required part of speech: verb"
+        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'poyoha', 'subject_suffix': 'uu', 'subject_noun_nominalizer': 'dü', 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select one of the following part of speeches to choose next: verb. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -341,7 +333,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'poyoha', 'subject_suffix': 'uu', 'subject_noun_nominalizer': 'dü', 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for verb: tüka (eat), puni (see), hibi (drink), naka (hear), kwana (smell), kwati (hit), yadohi (talk to), naki (chase), tsibui (climb), sawa (cook), tama'i (find), nia (read), mui (write), nobini (visit), katü (sit), üwi (sleep), kwisha'i (sneeze), poyoha (run), mia (go), hukaw̃ia (walk), wünü (stand), habi (lie down), yadoha (talk), kwatsa'i (fall), waakü (work), wükihaa (smile), hubiadu (sing), nishua'i (laugh), tübinohi (play), yotsi (fly), nüga (dance), pahabi (swim), tünia (read), tümui (write), tsiipe'i (chirp)\nBecuase this is a verb word, you can also choose to use a wildcard by putting the word in brackets. For example: [wildcard]"
+        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'poyoha', 'subject_suffix': 'uu', 'subject_noun_nominalizer': 'dü', 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for verb: tüka (eat), puni (see), hibi (drink), naka (hear), kwana (smell), kwati (hit), yadohi (talk to), naki (chase), tsibui (climb), sawa (cook), tama'i (find), nia (read), mui (write), nobini (visit), katü (sit), üwi (sleep), kwisha'i (sneeze), poyoha (run), mia (go), hukaw̃ia (walk), wünü (stand), habi (lie down), yadoha (talk), kwatsa'i (fall), waakü (work), wükihaa (smile), hubiadu (sing), nishua'i (laugh), tübinohi (play), yotsi (fly), nüga (dance), pahabi (swim), tünia (read), tümui (write), tsiipe'i (chirp)\nBecuase this is a verb word, you can also choose to use a wildcard by putting the word in brackets. For example: [wildcard]. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -349,7 +341,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'poyoha', 'subject_suffix': 'uu', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a required part of speech: verb_tense"
+        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'poyoha', 'subject_suffix': 'uu', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select one of the following part of speeches to choose next: verb_tense. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -357,7 +349,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'poyoha', 'subject_suffix': 'uu', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for verb_tense: ku (completive (past)), ti (present ongoing (-ing)), dü (present), wei (future (will)), gaa-wei (future (going to)), pü (have x-ed, am x-ed)"
+        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'poyoha', 'subject_suffix': 'uu', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for verb_tense: ku (completive (past)), ti (present ongoing (-ing)), dü (present), wei (future (will)), gaa-wei (future (going to)), pü (have x-ed, am x-ed). Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -365,7 +357,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: poyoha-dü-uu puni-ku.\nEnter one of the following choices:\nc: Continue building the last sentence\nn: Add and build a new Paiute sentence for this translation\nt: Terminate and return the current translation."
+        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: poyoha-dü-uu puni-ku.\nEnter one of the following choices:\nc: Continue building the last sentence\nn: Add and build a new Paiute sentence for this translation\nt: Terminate and return the current translation. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -373,7 +365,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'poyoha', 'subject_suffix': 'uu', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a part of speech: subject_noun, subject_suffix, subject_noun_nominalizer, verb, verb_tense, object_pronoun, object_noun, object_noun_nominalizer, object_suffix"
+        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: poyoha-dü-uu puni-ku.\nCurrent Choices: {'subject_noun': 'poyoha', 'subject_suffix': 'uu', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select one of the following part of speeches to choose next: subject_noun, subject_suffix, subject_noun_nominalizer, verb, verb_tense, object_pronoun, object_noun. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -381,7 +373,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'poyoha', 'subject_suffix': 'uu', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for object_noun: isha' (coyote), isha'pugu (dog), kidi' (cat), pugu (horse), wai (rice), tüba (pinenuts), maishibü (corn), paya (water), payahuupü (river), katünu (chair), toyabi (mountain), tuunapi (food), pasohobü (tree), nobi (house), toni (wickiup), apo (cup), küna (wood), tübbi (rock), tabuutsi' (cottontail), kamü (jackrabbit), aaponu' (apple), tüsüga (weasle), mukita (lizard), wo'ada (mosquito), wükada (bird snake), wo'abi (worm), aingwü (squirrel), tsiipa (bird), tüwoobü (earth), koopi' (coffee), pahabichi (bear), pagwi (fish), kwadzi (tail), tüka (eat), puni (see), hibi (drink), naka (hear), kwana (smell), kwati (hit), yadohi (talk to), naki (chase), tsibui (climb), sawa (cook), tama'i (find), nia (read), mui (write), nobini (visit), katü (sit), üwi (sleep), kwisha'i (sneeze), poyoha (run), mia (go), hukaw̃ia (walk), wünü (stand), habi (lie down), yadoha (talk), kwatsa'i (fall), waakü (work), wükihaa (smile), hubiadu (sing), nishua'i (laugh), tübinohi (play), yotsi (fly), nüga (dance), pahabi (swim), tünia (read), tümui (write), tsiipe'i (chirp)\nBecuase this is a object_noun word, you can also choose to use a wildcard by putting the word in brackets. For example: [wildcard]"
+        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: poyoha-dü-uu puni-ku.\nCurrent Choices: {'subject_noun': 'poyoha', 'subject_suffix': 'uu', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for object_noun: isha' (coyote), isha'pugu (dog), kidi' (cat), pugu (horse), wai (rice), tüba (pinenuts), maishibü (corn), paya (water), payahuupü (river), katünu (chair), toyabi (mountain), tuunapi (food), pasohobü (tree), nobi (house), toni (wickiup), apo (cup), küna (wood), tübbi (rock), tabuutsi' (cottontail), kamü (jackrabbit), aaponu' (apple), tüsüga (weasle), mukita (lizard), wo'ada (mosquito), wükada (bird snake), wo'abi (worm), aingwü (squirrel), tsiipa (bird), tüwoobü (earth), koopi' (coffee), pahabichi (bear), pagwi (fish), kwadzi (tail), tüka (eat), puni (see), hibi (drink), naka (hear), kwana (smell), kwati (hit), yadohi (talk to), naki (chase), tsibui (climb), sawa (cook), tama'i (find), nia (read), mui (write), nobini (visit), katü (sit), üwi (sleep), kwisha'i (sneeze), poyoha (run), mia (go), hukaw̃ia (walk), wünü (stand), habi (lie down), yadoha (talk), kwatsa'i (fall), waakü (work), wükihaa (smile), hubiadu (sing), nishua'i (laugh), tübinohi (play), yotsi (fly), nüga (dance), pahabi (swim), tünia (read), tümui (write), tsiipe'i (chirp)\nBecuase this is a object_noun word, you can also choose to use a wildcard by putting the word in brackets. For example: [wildcard]. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -389,7 +381,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'poyoha', 'subject_suffix': 'uu', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': 'tüka', 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a required part of speech: object_pronoun, object_noun_nominalizer, object_suffix"
+        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'poyoha', 'subject_suffix': 'uu', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': 'tüka', 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select one of the following part of speeches to choose next: object_pronoun, object_noun_nominalizer, object_suffix. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -397,7 +389,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'poyoha', 'subject_suffix': 'uu', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': 'tüka', 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for object_noun_nominalizer: dü (present), pü (have x-ed, am x-ed), weidü (future (will))"
+        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'poyoha', 'subject_suffix': 'uu', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': 'tüka', 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for object_noun_nominalizer: dü (present), pü (have x-ed, am x-ed), weidü (future (will)). Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -405,7 +397,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'poyoha', 'subject_suffix': 'uu', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': 'tüka', 'object_noun_nominalizer': 'weidü', 'object_suffix': None}\nPlease select a required part of speech: object_pronoun, object_suffix"
+        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'poyoha', 'subject_suffix': 'uu', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': 'tüka', 'object_noun_nominalizer': 'weidü', 'object_suffix': None}\nPlease select one of the following part of speeches to choose next: object_pronoun, object_suffix. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -413,7 +405,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'poyoha', 'subject_suffix': 'uu', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': 'tüka', 'object_noun_nominalizer': 'weidü', 'object_suffix': None}\nPlease select a word for object_suffix: eika (proximal), oka (distal)"
+        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'poyoha', 'subject_suffix': 'uu', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': 'tüka', 'object_noun_nominalizer': 'weidü', 'object_suffix': None}\nPlease select a word for object_suffix: eika (proximal), oka (distal). Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -421,7 +413,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'poyoha', 'subject_suffix': 'uu', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': 'tüka', 'object_noun_nominalizer': 'weidü', 'object_suffix': 'oka'}\nPlease select a required part of speech: object_pronoun"
+        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'poyoha', 'subject_suffix': 'uu', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': 'tüka', 'object_noun_nominalizer': 'weidü', 'object_suffix': 'oka'}\nPlease select one of the following part of speeches to choose next: object_pronoun. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -429,7 +421,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'poyoha', 'subject_suffix': 'uu', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': 'tüka', 'object_noun_nominalizer': 'weidü', 'object_suffix': 'oka'}\nPlease select a word for object_pronoun: u (him/her/it (distal)), ui (them (distal))"
+        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': 'poyoha', 'subject_suffix': 'uu', 'subject_noun_nominalizer': 'dü', 'verb': 'puni', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': 'tüka', 'object_noun_nominalizer': 'weidü', 'object_suffix': 'oka'}\nPlease select a word for object_pronoun: u (him/her/it (distal)), ui (them (distal)). Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -437,7 +429,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: poyoha-dü-uu tüka-weidoka u-buni-ku.\nEnter one of the following choices:\nc: Continue building the last sentence\nn: Add and build a new Paiute sentence for this translation\nt: Terminate and return the current translation."
+        "content": "Input Sentence: The runner saw the one who will eat.\nCurrent Translation: poyoha-dü-uu tüka-weidoka u-buni-ku.\nEnter one of the following choices:\nc: Continue building the last sentence\nn: Add and build a new Paiute sentence for this translation\nt: Terminate and return the current translation. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -445,7 +437,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: That frog drank that juice.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': None, 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a required part of speech: subject_noun, verb"
+        "content": "Input Sentence: That frog drank that juice.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': None, 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select one of the following part of speeches to choose next: subject_noun, verb. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -453,7 +445,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: That frog drank that juice.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': None, 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for subject_noun: nüü (I), uhu (he/she/it), uhuw̃a (they), mahu (he/she/it), mahuw̃a (they), ihi (this), ihiw̃a (these), taa (you and I), nüügwa (we (exclusive)), taagwa (we (inclusive)), üü (you), üügwa (you (plural)), isha' (coyote), isha'pugu (dog), kidi' (cat), pugu (horse), wai (rice), tüba (pinenuts), maishibü (corn), paya (water), payahuupü (river), katünu (chair), toyabi (mountain), tuunapi (food), pasohobü (tree), nobi (house), toni (wickiup), apo (cup), küna (wood), tübbi (rock), tabuutsi' (cottontail), kamü (jackrabbit), aaponu' (apple), tüsüga (weasle), mukita (lizard), wo'ada (mosquito), wükada (bird snake), wo'abi (worm), aingwü (squirrel), tsiipa (bird), tüwoobü (earth), koopi' (coffee), pahabichi (bear), pagwi (fish), kwadzi (tail), tüka (eat), puni (see), hibi (drink), naka (hear), kwana (smell), kwati (hit), yadohi (talk to), naki (chase), tsibui (climb), sawa (cook), tama'i (find), nia (read), mui (write), nobini (visit), katü (sit), üwi (sleep), kwisha'i (sneeze), poyoha (run), mia (go), hukaw̃ia (walk), wünü (stand), habi (lie down), yadoha (talk), kwatsa'i (fall), waakü (work), wükihaa (smile), hubiadu (sing), nishua'i (laugh), tübinohi (play), yotsi (fly), nüga (dance), pahabi (swim), tünia (read), tümui (write), tsiipe'i (chirp)\nBecuase this is a subject_noun word, you can also choose to use a wildcard by putting the word in brackets. For example: [wildcard]"
+        "content": "Input Sentence: That frog drank that juice.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': None, 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for subject_noun: nüü (I), uhu (he/she/it), uhuw̃a (they), mahu (he/she/it), mahuw̃a (they), ihi (this), ihiw̃a (these), taa (you and I), nüügwa (we (exclusive)), taagwa (we (inclusive)), üü (you), üügwa (you (plural)), isha' (coyote), isha'pugu (dog), kidi' (cat), pugu (horse), wai (rice), tüba (pinenuts), maishibü (corn), paya (water), payahuupü (river), katünu (chair), toyabi (mountain), tuunapi (food), pasohobü (tree), nobi (house), toni (wickiup), apo (cup), küna (wood), tübbi (rock), tabuutsi' (cottontail), kamü (jackrabbit), aaponu' (apple), tüsüga (weasle), mukita (lizard), wo'ada (mosquito), wükada (bird snake), wo'abi (worm), aingwü (squirrel), tsiipa (bird), tüwoobü (earth), koopi' (coffee), pahabichi (bear), pagwi (fish), kwadzi (tail), tüka (eat), puni (see), hibi (drink), naka (hear), kwana (smell), kwati (hit), yadohi (talk to), naki (chase), tsibui (climb), sawa (cook), tama'i (find), nia (read), mui (write), nobini (visit), katü (sit), üwi (sleep), kwisha'i (sneeze), poyoha (run), mia (go), hukaw̃ia (walk), wünü (stand), habi (lie down), yadoha (talk), kwatsa'i (fall), waakü (work), wükihaa (smile), hubiadu (sing), nishua'i (laugh), tübinohi (play), yotsi (fly), nüga (dance), pahabi (swim), tünia (read), tümui (write), tsiipe'i (chirp)\nBecuase this is a subject_noun word, you can also choose to use a wildcard by putting the word in brackets. For example: [wildcard]. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -461,7 +453,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: That frog drank that juice.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[frog]', 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a required part of speech: subject_suffix, verb"
+        "content": "Input Sentence: That frog drank that juice.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[frog]', 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select one of the following part of speeches to choose next: subject_suffix, verb. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -469,7 +461,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: That frog drank that juice.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[frog]', 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for subject_suffix: ii (proximal), uu (distal)"
+        "content": "Input Sentence: That frog drank that juice.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[frog]', 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for subject_suffix: ii (proximal), uu (distal). Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -477,7 +469,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: That frog drank that juice.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[frog]', 'subject_suffix': 'uu', 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a required part of speech: verb"
+        "content": "Input Sentence: That frog drank that juice.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[frog]', 'subject_suffix': 'uu', 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select one of the following part of speeches to choose next: verb. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -485,7 +477,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: That frog drank that juice.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[frog]', 'subject_suffix': 'uu', 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for verb: tüka (eat), puni (see), hibi (drink), naka (hear), kwana (smell), kwati (hit), yadohi (talk to), naki (chase), tsibui (climb), sawa (cook), tama'i (find), nia (read), mui (write), nobini (visit), katü (sit), üwi (sleep), kwisha'i (sneeze), poyoha (run), mia (go), hukaw̃ia (walk), wünü (stand), habi (lie down), yadoha (talk), kwatsa'i (fall), waakü (work), wükihaa (smile), hubiadu (sing), nishua'i (laugh), tübinohi (play), yotsi (fly), nüga (dance), pahabi (swim), tünia (read), tümui (write), tsiipe'i (chirp)\nBecuase this is a verb word, you can also choose to use a wildcard by putting the word in brackets. For example: [wildcard]"
+        "content": "Input Sentence: That frog drank that juice.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[frog]', 'subject_suffix': 'uu', 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for verb: tüka (eat), puni (see), hibi (drink), naka (hear), kwana (smell), kwati (hit), yadohi (talk to), naki (chase), tsibui (climb), sawa (cook), tama'i (find), nia (read), mui (write), nobini (visit), katü (sit), üwi (sleep), kwisha'i (sneeze), poyoha (run), mia (go), hukaw̃ia (walk), wünü (stand), habi (lie down), yadoha (talk), kwatsa'i (fall), waakü (work), wükihaa (smile), hubiadu (sing), nishua'i (laugh), tübinohi (play), yotsi (fly), nüga (dance), pahabi (swim), tünia (read), tümui (write), tsiipe'i (chirp)\nBecuase this is a verb word, you can also choose to use a wildcard by putting the word in brackets. For example: [wildcard]. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -493,7 +485,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: That frog drank that juice.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[frog]', 'subject_suffix': 'uu', 'subject_noun_nominalizer': None, 'verb': 'hibi', 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a required part of speech: verb_tense"
+        "content": "Input Sentence: That frog drank that juice.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[frog]', 'subject_suffix': 'uu', 'subject_noun_nominalizer': None, 'verb': 'hibi', 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select one of the following part of speeches to choose next: verb_tense. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -501,7 +493,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: That frog drank that juice.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[frog]', 'subject_suffix': 'uu', 'subject_noun_nominalizer': None, 'verb': 'hibi', 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for verb_tense: ku (completive (past)), ti (present ongoing (-ing)), dü (present), wei (future (will)), gaa-wei (future (going to)), pü (have x-ed, am x-ed)"
+        "content": "Input Sentence: That frog drank that juice.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[frog]', 'subject_suffix': 'uu', 'subject_noun_nominalizer': None, 'verb': 'hibi', 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for verb_tense: ku (completive (past)), ti (present ongoing (-ing)), dü (present), wei (future (will)), gaa-wei (future (going to)), pü (have x-ed, am x-ed). Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -509,7 +501,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: That frog drank that juice.\nCurrent Translation: [frog]-uu hibi-ku.\nEnter one of the following choices:\nc: Continue building the last sentence\nn: Add and build a new Paiute sentence for this translation\nt: Terminate and return the current translation."
+        "content": "Input Sentence: That frog drank that juice.\nCurrent Translation: [frog]-uu hibi-ku.\nEnter one of the following choices:\nc: Continue building the last sentence\nn: Add and build a new Paiute sentence for this translation\nt: Terminate and return the current translation. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -517,7 +509,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: That frog drank that juice.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[frog]', 'subject_suffix': 'uu', 'subject_noun_nominalizer': None, 'verb': 'hibi', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a part of speech: subject_noun, subject_suffix, subject_noun_nominalizer, verb, verb_tense, object_pronoun, object_noun, object_noun_nominalizer, object_suffix"
+        "content": "Input Sentence: That frog drank that juice.\nCurrent Translation: [frog]-uu hibi-ku.\nCurrent Choices: {'subject_noun': '[frog]', 'subject_suffix': 'uu', 'subject_noun_nominalizer': None, 'verb': 'hibi', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select one of the following part of speeches to choose next: subject_noun, subject_suffix, verb, verb_tense, object_pronoun, object_noun. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -525,7 +517,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: That frog drank that juice.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[frog]', 'subject_suffix': 'uu', 'subject_noun_nominalizer': None, 'verb': 'hibi', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for object_noun: isha' (coyote), isha'pugu (dog), kidi' (cat), pugu (horse), wai (rice), tüba (pinenuts), maishibü (corn), paya (water), payahuupü (river), katünu (chair), toyabi (mountain), tuunapi (food), pasohobü (tree), nobi (house), toni (wickiup), apo (cup), küna (wood), tübbi (rock), tabuutsi' (cottontail), kamü (jackrabbit), aaponu' (apple), tüsüga (weasle), mukita (lizard), wo'ada (mosquito), wükada (bird snake), wo'abi (worm), aingwü (squirrel), tsiipa (bird), tüwoobü (earth), koopi' (coffee), pahabichi (bear), pagwi (fish), kwadzi (tail), tüka (eat), puni (see), hibi (drink), naka (hear), kwana (smell), kwati (hit), yadohi (talk to), naki (chase), tsibui (climb), sawa (cook), tama'i (find), nia (read), mui (write), nobini (visit), katü (sit), üwi (sleep), kwisha'i (sneeze), poyoha (run), mia (go), hukaw̃ia (walk), wünü (stand), habi (lie down), yadoha (talk), kwatsa'i (fall), waakü (work), wükihaa (smile), hubiadu (sing), nishua'i (laugh), tübinohi (play), yotsi (fly), nüga (dance), pahabi (swim), tünia (read), tümui (write), tsiipe'i (chirp)\nBecuase this is a object_noun word, you can also choose to use a wildcard by putting the word in brackets. For example: [wildcard]"
+        "content": "Input Sentence: That frog drank that juice.\nCurrent Translation: [frog]-uu hibi-ku.\nCurrent Choices: {'subject_noun': '[frog]', 'subject_suffix': 'uu', 'subject_noun_nominalizer': None, 'verb': 'hibi', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for object_noun: isha' (coyote), isha'pugu (dog), kidi' (cat), pugu (horse), wai (rice), tüba (pinenuts), maishibü (corn), paya (water), payahuupü (river), katünu (chair), toyabi (mountain), tuunapi (food), pasohobü (tree), nobi (house), toni (wickiup), apo (cup), küna (wood), tübbi (rock), tabuutsi' (cottontail), kamü (jackrabbit), aaponu' (apple), tüsüga (weasle), mukita (lizard), wo'ada (mosquito), wükada (bird snake), wo'abi (worm), aingwü (squirrel), tsiipa (bird), tüwoobü (earth), koopi' (coffee), pahabichi (bear), pagwi (fish), kwadzi (tail), tüka (eat), puni (see), hibi (drink), naka (hear), kwana (smell), kwati (hit), yadohi (talk to), naki (chase), tsibui (climb), sawa (cook), tama'i (find), nia (read), mui (write), nobini (visit), katü (sit), üwi (sleep), kwisha'i (sneeze), poyoha (run), mia (go), hukaw̃ia (walk), wünü (stand), habi (lie down), yadoha (talk), kwatsa'i (fall), waakü (work), wükihaa (smile), hubiadu (sing), nishua'i (laugh), tübinohi (play), yotsi (fly), nüga (dance), pahabi (swim), tünia (read), tümui (write), tsiipe'i (chirp)\nBecuase this is a object_noun word, you can also choose to use a wildcard by putting the word in brackets. For example: [wildcard]. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -533,7 +525,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: That frog drank that juice.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[frog]', 'subject_suffix': 'uu', 'subject_noun_nominalizer': None, 'verb': 'hibi', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': '[juice]', 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a required part of speech: object_pronoun, object_suffix"
+        "content": "Input Sentence: That frog drank that juice.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[frog]', 'subject_suffix': 'uu', 'subject_noun_nominalizer': None, 'verb': 'hibi', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': '[juice]', 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select one of the following part of speeches to choose next: object_pronoun, object_suffix. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -541,7 +533,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: That frog drank that juice.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[frog]', 'subject_suffix': 'uu', 'subject_noun_nominalizer': None, 'verb': 'hibi', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': '[juice]', 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for object_suffix: eika (proximal), oka (distal)"
+        "content": "Input Sentence: That frog drank that juice.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[frog]', 'subject_suffix': 'uu', 'subject_noun_nominalizer': None, 'verb': 'hibi', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': '[juice]', 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for object_suffix: eika (proximal), oka (distal). Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -549,7 +541,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: That frog drank that juice.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[frog]', 'subject_suffix': 'uu', 'subject_noun_nominalizer': None, 'verb': 'hibi', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': '[juice]', 'object_noun_nominalizer': None, 'object_suffix': 'oka'}\nPlease select a required part of speech: object_pronoun"
+        "content": "Input Sentence: That frog drank that juice.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[frog]', 'subject_suffix': 'uu', 'subject_noun_nominalizer': None, 'verb': 'hibi', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': '[juice]', 'object_noun_nominalizer': None, 'object_suffix': 'oka'}\nPlease select one of the following part of speeches to choose next: object_pronoun. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -557,7 +549,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: That frog drank that juice.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[frog]', 'subject_suffix': 'uu', 'subject_noun_nominalizer': None, 'verb': 'hibi', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': '[juice]', 'object_noun_nominalizer': None, 'object_suffix': 'oka'}\nPlease select a word for object_pronoun: u (him/her/it (distal)), ui (them (distal))"
+        "content": "Input Sentence: That frog drank that juice.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': '[frog]', 'subject_suffix': 'uu', 'subject_noun_nominalizer': None, 'verb': 'hibi', 'verb_tense': 'ku', 'object_pronoun': None, 'object_noun': '[juice]', 'object_noun_nominalizer': None, 'object_suffix': 'oka'}\nPlease select a word for object_pronoun: u (him/her/it (distal)), ui (them (distal)). Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -565,7 +557,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: That frog drank that juice.\nCurrent Translation: [frog]-uu [juice]-noka u-hibi-ku.\nEnter one of the following choices:\nc: Continue building the last sentence\nn: Add and build a new Paiute sentence for this translation\nt: Terminate and return the current translation."
+        "content": "Input Sentence: That frog drank that juice.\nCurrent Translation: [frog]-uu [juice]-noka u-hibi-ku.\nEnter one of the following choices:\nc: Continue building the last sentence\nn: Add and build a new Paiute sentence for this translation\nt: Terminate and return the current translation. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -573,7 +565,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The dog is running.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': None, 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a required part of speech: subject_noun, verb"
+        "content": "Input Sentence: The dog is running.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': None, 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select one of the following part of speeches to choose next: subject_noun, verb. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -581,7 +573,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The dog is running.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': None, 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for subject_noun: nüü (I), uhu (he/she/it), uhuw̃a (they), mahu (he/she/it), mahuw̃a (they), ihi (this), ihiw̃a (these), taa (you and I), nüügwa (we (exclusive)), taagwa (we (inclusive)), üü (you), üügwa (you (plural)), isha' (coyote), isha'pugu (dog), kidi' (cat), pugu (horse), wai (rice), tüba (pinenuts), maishibü (corn), paya (water), payahuupü (river), katünu (chair), toyabi (mountain), tuunapi (food), pasohobü (tree), nobi (house), toni (wickiup), apo (cup), küna (wood), tübbi (rock), tabuutsi' (cottontail), kamü (jackrabbit), aaponu' (apple), tüsüga (weasle), mukita (lizard), wo'ada (mosquito), wükada (bird snake), wo'abi (worm), aingwü (squirrel), tsiipa (bird), tüwoobü (earth), koopi' (coffee), pahabichi (bear), pagwi (fish), kwadzi (tail), tüka (eat), puni (see), hibi (drink), naka (hear), kwana (smell), kwati (hit), yadohi (talk to), naki (chase), tsibui (climb), sawa (cook), tama'i (find), nia (read), mui (write), nobini (visit), katü (sit), üwi (sleep), kwisha'i (sneeze), poyoha (run), mia (go), hukaw̃ia (walk), wünü (stand), habi (lie down), yadoha (talk), kwatsa'i (fall), waakü (work), wükihaa (smile), hubiadu (sing), nishua'i (laugh), tübinohi (play), yotsi (fly), nüga (dance), pahabi (swim), tünia (read), tümui (write), tsiipe'i (chirp)\nBecuase this is a subject_noun word, you can also choose to use a wildcard by putting the word in brackets. For example: [wildcard]"
+        "content": "Input Sentence: The dog is running.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': None, 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for subject_noun: nüü (I), uhu (he/she/it), uhuw̃a (they), mahu (he/she/it), mahuw̃a (they), ihi (this), ihiw̃a (these), taa (you and I), nüügwa (we (exclusive)), taagwa (we (inclusive)), üü (you), üügwa (you (plural)), isha' (coyote), isha'pugu (dog), kidi' (cat), pugu (horse), wai (rice), tüba (pinenuts), maishibü (corn), paya (water), payahuupü (river), katünu (chair), toyabi (mountain), tuunapi (food), pasohobü (tree), nobi (house), toni (wickiup), apo (cup), küna (wood), tübbi (rock), tabuutsi' (cottontail), kamü (jackrabbit), aaponu' (apple), tüsüga (weasle), mukita (lizard), wo'ada (mosquito), wükada (bird snake), wo'abi (worm), aingwü (squirrel), tsiipa (bird), tüwoobü (earth), koopi' (coffee), pahabichi (bear), pagwi (fish), kwadzi (tail), tüka (eat), puni (see), hibi (drink), naka (hear), kwana (smell), kwati (hit), yadohi (talk to), naki (chase), tsibui (climb), sawa (cook), tama'i (find), nia (read), mui (write), nobini (visit), katü (sit), üwi (sleep), kwisha'i (sneeze), poyoha (run), mia (go), hukaw̃ia (walk), wünü (stand), habi (lie down), yadoha (talk), kwatsa'i (fall), waakü (work), wükihaa (smile), hubiadu (sing), nishua'i (laugh), tübinohi (play), yotsi (fly), nüga (dance), pahabi (swim), tünia (read), tümui (write), tsiipe'i (chirp)\nBecuase this is a subject_noun word, you can also choose to use a wildcard by putting the word in brackets. For example: [wildcard]. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -589,23 +581,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The dog is running.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': \"isha'pugu\", 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a required part of speech: subject_suffix, verb"
-    },
-    {
-        "role": "assistant",
-        "content": "subject_suffix"
-    },
-    {
-        "role": "user",
-        "content": "Input Sentence: The dog is running.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': \"isha'pugu\", 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for subject_suffix: ii (proximal), uu (distal)"
-    },
-    {
-        "role": "assistant",
-        "content": "ii"
-    },
-    {
-        "role": "user",
-        "content": "Input Sentence: The dog is running.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': \"isha'pugu\", 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a required part of speech: verb"
+        "content": "Input Sentence: The dog is running.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': \"isha'pugu\", 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select one of the following part of speeches to choose next: subject_suffix, verb. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -613,7 +589,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The dog is running.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': \"isha'pugu\", 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for verb: tüka (eat), puni (see), hibi (drink), naka (hear), kwana (smell), kwati (hit), yadohi (talk to), naki (chase), tsibui (climb), sawa (cook), tama'i (find), nia (read), mui (write), nobini (visit), katü (sit), üwi (sleep), kwisha'i (sneeze), poyoha (run), mia (go), hukaw̃ia (walk), wünü (stand), habi (lie down), yadoha (talk), kwatsa'i (fall), waakü (work), wükihaa (smile), hubiadu (sing), nishua'i (laugh), tübinohi (play), yotsi (fly), nüga (dance), pahabi (swim), tünia (read), tümui (write), tsiipe'i (chirp)\nBecuase this is a verb word, you can also choose to use a wildcard by putting the word in brackets. For example: [wildcard]"
+        "content": "Input Sentence: The dog is running.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': \"isha'pugu\", 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': None, 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for verb: tüka (eat), puni (see), hibi (drink), naka (hear), kwana (smell), kwati (hit), yadohi (talk to), naki (chase), tsibui (climb), sawa (cook), tama'i (find), nia (read), mui (write), nobini (visit), katü (sit), üwi (sleep), kwisha'i (sneeze), poyoha (run), mia (go), hukaw̃ia (walk), wünü (stand), habi (lie down), yadoha (talk), kwatsa'i (fall), waakü (work), wükihaa (smile), hubiadu (sing), nishua'i (laugh), tübinohi (play), yotsi (fly), nüga (dance), pahabi (swim), tünia (read), tümui (write), tsiipe'i (chirp)\nBecuase this is a verb word, you can also choose to use a wildcard by putting the word in brackets. For example: [wildcard]. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -621,7 +597,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The dog is running.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': \"isha'pugu\", 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': 'poyoha', 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a required part of speech: verb_tense"
+        "content": "Input Sentence: The dog is running.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': \"isha'pugu\", 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': 'poyoha', 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select one of the following part of speeches to choose next: subject_suffix, verb_tense. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -629,7 +605,7 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The dog is running.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': \"isha'pugu\", 'subject_suffix': 'ii', 'subject_noun_nominalizer': None, 'verb': 'poyoha', 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for verb_tense: ku (completive (past)), ti (present ongoing (-ing)), dü (present), wei (future (will)), gaa-wei (future (going to)), pü (have x-ed, am x-ed)"
+        "content": "Input Sentence: The dog is running.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': \"isha'pugu\", 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': 'poyoha', 'verb_tense': None, 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for verb_tense: ku (completive (past)), ti (present ongoing (-ing)), dü (present), wei (future (will)), gaa-wei (future (going to)), pü (have x-ed, am x-ed). Respond only with your choices and no other text."
     },
     {
         "role": "assistant",
@@ -637,7 +613,23 @@
     },
     {
         "role": "user",
-        "content": "Input Sentence: The dog is running.\nCurrent Translation: isha'pugu-ii poyoha-ti.\nEnter one of the following choices:\nc: Continue building the last sentence\nn: Add and build a new Paiute sentence for this translation\nt: Terminate and return the current translation."
+        "content": "Input Sentence: The dog is running.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': \"isha'pugu\", 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': 'poyoha', 'verb_tense': 'ti', 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select one of the following part of speeches to choose next: subject_suffix. Respond only with your choices and no other text."
+    },
+    {
+        "role": "assistant",
+        "content": "subject_suffix"
+    },
+    {
+        "role": "user",
+        "content": "Input Sentence: The dog is running.\nCurrent Translation: .\nCurrent Choices: {'subject_noun': \"isha'pugu\", 'subject_suffix': None, 'subject_noun_nominalizer': None, 'verb': 'poyoha', 'verb_tense': 'ti', 'object_pronoun': None, 'object_noun': None, 'object_noun_nominalizer': None, 'object_suffix': None}\nPlease select a word for subject_suffix: ii (proximal), uu (distal). Respond only with your choices and no other text."
+    },
+    {
+        "role": "assistant",
+        "content": "ii"
+    },
+    {
+        "role": "user",
+        "content": "Input Sentence: The dog is running.\nCurrent Translation: isha'pugu-ii poyoha-ti.\nEnter one of the following choices:\nc: Continue building the last sentence\nn: Add and build a new Paiute sentence for this translation\nt: Terminate and return the current translation. Respond only with your choices and no other text."
     },
     {
         "role": "assistant",

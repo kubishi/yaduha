@@ -6,7 +6,7 @@ from typing import Dict
 
 from yaduha.forward.pipeline import PipelineTranslator, translate_ovp_to_english
 from yaduha.sentence_builder import NOUNS, Object, Subject, Verb, get_all_choices, format_sentence, get_random_simple_sentence
-from yaduha.segment import semantic_similarity_sentence_transformers as semantic_similarity
+from yaduha.segment import semantic_similarity_sentence_transformers as plot_semantic_similarity
 
 from flask import jsonify, make_response, request, session
 from flask_limiter import Limiter
@@ -151,15 +151,15 @@ def translate_sentence():
             'comparator': translation.comparator,
             'target': translation.target,
             'backwards': translation.back_translation,
-            'sim_simple': semantic_similarity(
+            'sim_simple': plot_semantic_similarity(
                 translation.source, translation.simple, 
                 model='all-MiniLM-L6-v2'
             ),
-            'sim_backwards': semantic_similarity(
+            'sim_backwards': plot_semantic_similarity(
                 translation.source, translation.back_translation, 
                 model='all-MiniLM-L6-v2'
             ),
-            'sim_comparator': semantic_similarity(
+            'sim_comparator': plot_semantic_similarity(
                 translation.source, translation.comparator, 
                 model='all-MiniLM-L6-v2'
             )

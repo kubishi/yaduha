@@ -59,7 +59,6 @@ class AgenticTranslator(Translator):
                 "verb_tense",
                 "ti",
                 "n", # new sentence
-                "",
                 "subject_noun",
                 "kidi'",
                 "subject_suffix",
@@ -85,7 +84,7 @@ class AgenticTranslator(Translator):
                 "tüka",
                 "verb_tense",
                 "wei",
-                "c", # new sentence
+                "c", # continue this sentence
                 "object_noun",
                 "aaponu'",
                 "object_suffix",
@@ -167,6 +166,8 @@ class AgenticTranslator(Translator):
                     f"You are an assistant trying to build a sentence in Paiute. "
                     "The user will provide you with parts of speech and vocabulary options one at a time. "
                     "Make choices to best approximate the meaning of Input Sentence. "
+                    "Do not make choices that are not provided by the user. "
+                    "This may mean you can't build the sentence you want, but that's okay. "
                     "Whenever you've chosen enough parts of speech and vocabulary to form a grammatically correct sentence, "
                     "The user will ask you if you want to continue. "
                     "If you're happy with the sentence you've built, you can choose to stop. "
@@ -185,10 +186,11 @@ class AgenticTranslator(Translator):
         completion_tokens: int = 0
         if self.openai_model is not None:
             def get_choice(choices: Union[Dict[str, str],List[str]],
-                        prompt: str = "Options: ",
-                        allow_wild: bool = False) -> str:
+                           prompt: str = "Options: ",
+                           allow_wild: bool = False) -> str:
                 nonlocal prompt_tokens, completion_tokens
                 messages.append({"role": "user", "content": prompt})
+                logging.info(f"{self.openai_model}: {prompt}")
                 res = self.openai_client.chat.completions.create(
                     model=self.openai_model,
                     messages=messages,
@@ -199,8 +201,9 @@ class AgenticTranslator(Translator):
                 completion_tokens += res.usage.completion_tokens
                 logging.info(f"{self.openai_model}: {choice}")
                 messages.append({"role": "assistant", "content": choice})
+                try_count = 0
                 while choice not in choices and not (allow_wild and choice.startswith('[') and choice.endswith(']')):
-                    messages.append({"role": "assistant", "content": f"Invalid choice. Please try again.\n{prompt}"})
+                    messages.append({"role": "user", "content": f"Invalid choice. Please try again.\n{prompt}"})
                     res = self.openai_client.chat.completions.create(
                         model=self.openai_model,
                         messages=messages,
@@ -211,12 +214,15 @@ class AgenticTranslator(Translator):
                     completion_tokens += res.usage.completion_tokens
                     logging.info(f"{self.openai_model} [Retry]: {choice}")
                     messages.append({"role": "assistant", "content": choice})
+                    try_count += 1
+                    if try_count > 3:
+                        raise Exception("Max retries reached." + json.dumps(messages[-6:], indent=2, ensure_ascii=False))
                 return choice
 
         else:
             def get_choice(choices: Union[Dict[str, str], List[str]],
-                        prompt: str = "Options: ",
-                        allow_wild: bool = False) -> str:
+                           prompt: str = "Options: ",
+                           allow_wild: bool = False) -> str:
                 nonlocal choice_idx    
                 messages.append({"role": "user", "content": prompt})
                 if choice_idx < len(self.auto_choices):
@@ -225,19 +231,24 @@ class AgenticTranslator(Translator):
                 else:
                     choice = input(prompt + "\nChoice: ")
                 messages.append({"role": "assistant", "content": choice})
+                try_count = 0
                 while choice not in choices and not (allow_wild and choice.startswith('[') and choice.endswith(']')):
-                    messages.append({"role": "assistant", "content": f"Invalid choice. Please try again.\n{prompt}"})
+                    messages.append({"role": "user", "content": f"Invalid choice. Please try again.\n{prompt}"})
                     if choice_idx < len(self.auto_choices):
                         choice = self.auto_choices[choice_idx]
                         choice_idx += 1
                     else:
                         choice = input(f"Invalid choice. Please try again.\n{prompt}\nChoice: ")
                     messages.append({"role": "assistant", "content": choice})
+                    try_count += 1
+                    if try_count > 3:
+                        raise Exception("Max retries reached." + json.dumps(messages[-6:], indent=2, ensure_ascii=False))
                 return choice
 
         iteration = 0
         sentences = []
         all_word_choices = []
+        sentence = "" # current sentence
         while True:
             iteration += 1
             if iteration > self.max_iterations:
@@ -261,11 +272,13 @@ class AgenticTranslator(Translator):
                     "Enter one of the following choices:\n" +
                     "c: Continue building the last sentence\n" +
                     "n: Add and build a new Paiute sentence for this translation\n" +
-                    "t: Terminate and return the current translation."
+                    "t: Terminate and return the current translation. "
+                    "Respond only with your choices and no other text."
                 )
                 if not continue_choice == "c":
                     sentences.append(sentence)
                     all_word_choices.append(word_choices)
+                    sentence = "" # reset sentence
                     if continue_choice == "t": # terminate and return sentences
                         if self.savepath is not None:
                             self.savepath.parent.mkdir(parents=True, exist_ok=True)
@@ -303,7 +316,8 @@ class AgenticTranslator(Translator):
                         continue
                 else:
                     pass # continue building sentence
-            except:
+            except Exception as e:
+                sentence = "" # reset sentence
                 pass
 
             required_parts_of_speech = [
@@ -313,41 +327,60 @@ class AgenticTranslator(Translator):
             ]
             if required_parts_of_speech:
                 # ask user to select which part of speech they want to choose next
-                part_of_speech = get_choice(
-                    required_parts_of_speech,
-                    "Input Sentence: " + text + "\n" +
-                    "Current Translation: " + ". ".join(sentences) + ".\n" +
-                    f"Current Choices: {word_choices}\n" +
-                    "Please select a required part of speech: " + 
-                    ", ".join(required_parts_of_speech)
-                )
+                try:
+                    part_of_speech = get_choice(
+                        required_parts_of_speech,
+                        "Input Sentence: " + text + "\n" +
+                        "Current Translation: " + ". ".join([*sentences, sentence]) + ".\n" +
+                        f"Current Choices: {word_choices}\n" +
+                        "Please select one of the following part of speeches to choose next: " +
+                        ", ".join(required_parts_of_speech) + ". " +
+                        "Respond only with your choices and no other text."
+                    )
+                except Exception as e:
+                    logging.warning(f"Error: {e}")
+                    continue
             else:
+                non_disabled_parts_of_speech = [
+                    part_of_speech
+                    for part_of_speech, details in choices.items()
+                    if details["requirement"] != "disabled"
+                ]
                 # let user select any part of speech
-                part_of_speech = get_choice(
-                    list(choices.keys()),
-                    "Input Sentence: " + text + "\n" +
-                    "Current Translation: " + ". ".join(sentences) + ".\n" +
-                    f"Current Choices: {word_choices}\n" +
-                    "Please select a part of speech: " + 
-                    ", ".join(choices.keys())
-                )
+                try:
+                    part_of_speech = get_choice(
+                        non_disabled_parts_of_speech,
+                        "Input Sentence: " + text + "\n" +
+                        "Current Translation: " + ". ".join([*sentences, sentence]) + ".\n" +
+                        f"Current Choices: {word_choices}\n" +
+                        "Please select one of the following part of speeches to choose next: " +
+                        ", ".join(non_disabled_parts_of_speech) + ". " +
+                        "Respond only with your choices and no other text."
+                    )
+                except Exception as e:
+                    logging.warning(f"Error: {e}")
+                    continue
 
             # ask user to select which word they want to choose for the selected part of speech
             allow_wild = part_of_speech in ["subject_noun", "object_noun", "verb"]
-            choice = get_choice(
-                choices[part_of_speech]["choices"],
-                "Input Sentence: " + text + "\n" +
-                "Current Translation: " + ". ".join(sentences) + ".\n" +
-                f"Current Choices: {word_choices}\n" +
-                f"Please select a word for {part_of_speech}: " + ", ".join(
-                    [f"{k} ({v})" for k, v in choices[part_of_speech]["choices"].items()]
-                ) + (
-                    f"\nBecuase this is a {part_of_speech} word, you can also choose to use a wildcard " + 
-                    "by putting the word in brackets. For example: [wildcard]"
-                    if allow_wild else ""
-                ),
-                allow_wild=allow_wild
-            )
+            try:
+                choice = get_choice(
+                    choices[part_of_speech]["choices"],
+                    "Input Sentence: " + text + "\n" +
+                    "Current Translation: " + ". ".join([*sentences, sentence]) + ".\n" +
+                    f"Current Choices: {word_choices}\n" +
+                    f"Please select a word for {part_of_speech}: " + ", ".join(
+                        [f"{k} ({v})" for k, v in choices[part_of_speech]["choices"].items()]
+                    ) + (
+                        f"\nBecuase this is a {part_of_speech} word, you can also choose to use a wildcard " + 
+                        "by putting the word in brackets. For example: [wildcard]"
+                        if allow_wild else ""
+                    ) + ". Respond only with your choices and no other text.",
+                    allow_wild=allow_wild
+                )
+            except Exception as e:
+                logging.warning(f"Error: {e}")
+                continue
             word_choices[part_of_speech] = choice
 
 

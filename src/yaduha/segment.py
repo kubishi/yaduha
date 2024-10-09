@@ -220,7 +220,7 @@ sentence_schema = {
 }
 
 # @functools.lru_cache(maxsize=1000)
-def split_sentence(sentence: str, model: str = None, res_callback: Optional[Callable[[ChatCompletion], None]] = None) -> List[Dict]:
+def split_sentence(sentence: str, model: str, res_callback: Optional[Callable[[ChatCompletion], None]] = None) -> List[Dict]:
     """Split a sentence into a set of simple SVO or SV sentences.
 
     Args:
@@ -230,8 +230,6 @@ def split_sentence(sentence: str, model: str = None, res_callback: Optional[Call
     Returns:
         list: A list of simple sentences.
     """
-    if model is None:
-        model = os.environ['OPENAI_MODEL']
     functions = [
         {
             'name': 'set_sentences',
@@ -397,7 +395,7 @@ def hash_dict(func):
 
 @hash_dict
 # @functools.lru_cache(maxsize=1000)
-def make_sentence(sentence: Dict, model: str = None, res_callback: Optional[Callable[[ChatCompletion], None]] = None) -> str:
+def make_sentence(sentence: Dict, model: str, res_callback: Optional[Callable[[ChatCompletion], None]] = None) -> str:
     """Generate a simple SVO or SV sentence from a schema.
 
     Args:
@@ -406,9 +404,6 @@ def make_sentence(sentence: Dict, model: str = None, res_callback: Optional[Call
     Returns:
         str: The generated sentence.
     """
-    if model is None:
-        model = os.environ['OPENAI_MODEL']
-
     functions = [
         {
             'name': 'make_sentence',

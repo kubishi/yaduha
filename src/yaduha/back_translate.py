@@ -1,6 +1,5 @@
 import json
 import logging
-import os
 from typing import Callable, Optional
 from openai.types.chat import ChatCompletion
 
@@ -77,10 +76,8 @@ def translate(subject_noun: str,
               object_noun: Optional[str],
               object_noun_nominalizer: Optional[str],
               object_suffix: Optional[str],
-              model = None,
+              model: str = 'gpt-4o-mini',
               res_callback: Optional[Callable[[ChatCompletion], None]] = None) -> str:
-    if model is None:
-        model = os.environ['OPENAI_MODEL']
     choices = dict(
         subject_noun=subject_noun,
         subject_noun_nominalizer=subject_noun_nominalizer,

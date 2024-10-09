@@ -2,6 +2,9 @@ import pathlib
 from yaduha.forward.agentic import AgenticTranslator
 import logging
 import json
+import dotenv
+
+dotenv.load_dotenv()
 
 thisdir = pathlib.Path(__file__).parent.absolute()
 
@@ -14,12 +17,12 @@ def main():
 
     sentences = {
         "simple": "The dog is running.",
-        "complex": "The boy and the girl are eating a quesadilla.",
-        "nominalization": "The cook saw the ones who walked."
+        # "complex": "The boy and the girl are eating a quesadilla.",
+        # "nominalization": "The cook saw the ones who walked."
     }
 
     results = []
-    for model in ["gpt-4o-mini", "gpt-4o"]:	
+    for model in ["gpt-4o-mini"]: #, "gpt-4o"]:	
         print(f"=== Using model: {model} ===")
         for i, (name, target_sentence) in enumerate(sentences.items()):
             translation = AgenticTranslator(
@@ -29,7 +32,7 @@ def main():
             results.append({
                 "model": model,
                 "sentence": name,
-                "translation": translation.to_dict()
+                "translation": translation.model_dump_json()
             })
             print(translation, end="\n\n")
 

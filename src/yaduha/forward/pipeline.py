@@ -83,8 +83,8 @@ def translate_simple(sentence: Dict[str, str]) -> Tuple[Subject, Verb, Object]:
             verb = Verb(verb_stem, verb_tense, object_pronoun_prefix=object_pronoun)
         elif sentence.get('object_nominalizer'):
             _object = {**R_TRANSITIVE_VERBS, **R_INTRANSITIVE_VERBS}.get(sentence['object'], f"[{sentence['object']}]")
-            object_suffix = random.choice(['ii', 'uu'])
-            object_nominalizer = R_VERB_NOMINALIZERS.get(sentence['object_nominalizer'], f"[{sentence['object_nominalizer']}]")
+            object_suffix = random.choice(['eika', 'oka'])
+            object_nominalizer = R_VERB_NOMINALIZERS.get(sentence['object_nominalizer'], "dü")
             _object = Object(_object, object_nominalizer, object_suffix)
         else:
             _object = R_NOUNS.get(sentence['object'], f"[{sentence['object']}]")
@@ -97,7 +97,7 @@ def translate_simple(sentence: Dict[str, str]) -> Tuple[Subject, Verb, Object]:
     if sentence.get('subject_nominalizer'):
         subject = {**R_TRANSITIVE_VERBS, **R_INTRANSITIVE_VERBS}.get(sentence['subject'], f"[{sentence['subject']}]")
         subject_suffix = random.choice(['ii', 'uu'])
-        subject_nominalizer = R_VERB_NOMINALIZERS.get(sentence['subject_nominalizer'], f"[{sentence['subject_nominalizer']}]")
+        subject_nominalizer = R_VERB_NOMINALIZERS.get(sentence['subject_nominalizer'], "dü")
         # subject = f"{subject}-{subject_suffix}"
         subject = Subject(subject, subject_nominalizer, subject_suffix)
     elif sentence['subject'] in R_SUBJECT_PRONOUNS:

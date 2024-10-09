@@ -12,12 +12,15 @@ from itertools import product
 
 from pydantic import BaseModel
 import dotenv
+import logging
 
 from yaduha.forward.finetuned import FinetunedTranslator
 
 dotenv.load_dotenv()
 
 thisdir = pathlib.Path(__file__).parent.resolve()
+
+# logging.basicConfig(level=logging.INFO)
 
 class Result(BaseModel):
     translator: str
@@ -35,18 +38,18 @@ def main():
         pd.read_csv(thisdir / 'data/evaluation_sentences.csv').itertuples()
     ]
     translators: Dict[str, Dict[str, Translator]] = {
-        'gpt-4o-mini': {
-            'pipeline': PipelineTranslator(model='gpt-4o-mini'),
-            'instructions': InstructionsTranslator(model='gpt-4o-mini'),
-            'agentic': AgenticTranslator(model='gpt-4o-mini'),
-            'finetuned-simple': FinetunedTranslator(model='ft:gpt-4o-mini-2024-07-18:kubishi:brackets-plus-prompt-merged:AFvrmkic')
-        },
-        # 'gpt-4o': {
-        #     'pipeline': PipelineTranslator(model='gpt-4o'),
-        #     'instructions': InstructionsTranslator(model='gpt-4o'),
-        #     'agentic': AgenticTranslator(model='gpt-4o'),
-        #     'finetuned-simple': FinetunedTranslator(model='ft:gpt-4o-2024-08-06:kubishi:brackets-plus-prompt-merged-4o:AGCTD0Ao')
+        # 'gpt-4o-mini': {
+        #     'pipeline': PipelineTranslator(model='gpt-4o-mini'),
+        #     'instructions': InstructionsTranslator(model='gpt-4o-mini'),
+        #     'agentic': AgenticTranslator(model='gpt-4o-mini'),
+        #     'finetuned-simple': FinetunedTranslator(model='ft:gpt-4o-mini-2024-07-18:kubishi:brackets-plus-prompt-merged:AFvrmkic')
         # },
+        'gpt-4o': {
+            'pipeline': PipelineTranslator(model='gpt-4o'),
+            'instructions': InstructionsTranslator(model='gpt-4o'),
+            'agentic': AgenticTranslator(model='gpt-4o'),
+            'finetuned-simple': FinetunedTranslator(model='ft:gpt-4o-2024-08-06:kubishi:brackets-plus-prompt-merged-4o:AGCTD0Ao')
+        },
     }
 
     # load results from disk
