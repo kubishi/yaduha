@@ -4,76 +4,58 @@ import openai
 import os
 
 class FinetunedTranslator(Translator):
-    def __init__(self, model: str):
-        self.model = model
-        self.client = openai.Client(api_key=os.getenv('OPENAI_API_KEY'))
+    DEFAULT_SYSTEM_PROMPT = (
+        "You are a translator for translating text from English to OVP. "
+        "For any word that does not have an equivalent in OVP, "
+        "leave the word untranslated and place it inside brackets. "
+    )
+    DEFAULT_EXAMPLES = [
+        ("The sleet climbs that rafter.", "[sleet]-uu [rafter]-noka u-dsibui-dü"),
+        ("The pouch has smelled this ledge.", "[pouch]-uu [ledge]-neika a-gwana-pü"),
+        ("The jackrabbit is eating the bread.", "kamü-uu tüwoobü-neika a-düka-ti")
+    ]
 
-    def translate(self, sentence: str) -> Translation:
-        start_time = time.time()
+    @classmethod
+    def get_default_messages(cls):
         messages = [
             {
                 "role": "system",
-                "content": (
-                    "Translate the following text from English to OVP. "
-                    "For any word that does not have an equivalent in OVP, "
-                    "leave the word untranslated and place it inside brackets. "
-                    "Do not attempt to translate words inside brackets. "
-                )
-            },
-            {
+                "content": cls.DEFAULT_SYSTEM_PROMPT
+            }
+        ]
+        for (source, target) in cls.DEFAULT_EXAMPLES:
+            messages.append({
                 "role": "user",
                 "content": [
                     {
-                    "type": "text",
-                    "text": "Sleet climbs that rafter."
+                        "type": "text",
+                        "text": source
                     }
                 ]
-            },
-            {
+            })
+            messages.append({
                 "role": "assistant",
                 "content": [
                     {
-                    "type": "text",
-                    "text": "[sleet]-uu [rafter]-noka u-dsibui-dü"
+                        "type": "text",
+                        "text": target
                     }
                 ]
-            },
-            {
-                "role": "user",
-                "content": [
-                    {
-                    "type": "text",
-                    "text": "The pouch has smelled this ledge."
-                    }
-                ]
-            },
-            {
-                "role": "assistant",
-                "content": [
-                    {
-                    "type": "text",
-                    "text": "[pouch]-uu [ledge]-neika a-gwana-pü"
-                    }
-                ]
-            },
-            {
-                "role": "user",
-                "content": [
-                    {
-                    "type": "text",
-                    "text": "The jackrabbit is eating the bread."
-                    }
-                ]
-            },
-            {
-                "role": "assistant",
-                "content": [
-                    {
-                    "type": "text",
-                    "text": "kamü-uu tüwoobü-neika a-düka-ti "
-                    }
-                ]
-            },
+            })
+        return messages
+
+    def __init__(self,
+                 model: str,
+                 system_prompt: str = None,
+                 examples: list = None):
+        self.model = model
+        self.client = openai.Client(api_key=os.getenv('OPENAI_API_KEY'))
+        self.system_prompt = system_prompt or self.DEFAULT_SYSTEM_PROMPT
+
+    def translate(self, sentence: str) -> Translation:
+        start_time = time.time()
+        messages = self.get_default_messages()
+        messages += [
             {
                 "role": "user",
                 "content": [

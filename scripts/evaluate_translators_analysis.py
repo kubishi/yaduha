@@ -4,7 +4,11 @@ import pandas as pd
 import plotly.express as px
 import pathlib
 from functools import lru_cache
-from yaduha.segment import semantic_similarity_sentence_transformers as semantic_similarity
+from yaduha.segment import make_sentence, semantic_similarity_sentence_transformers as semantic_similarity
+from yaduha.segment import (
+    split_sentence, 
+)
+from yaduha.forward.pipeline import split_sentence, comparator_sentence
 
 thisdir = pathlib.Path(__file__).parent.resolve()
 
@@ -22,8 +26,10 @@ CATEGORY_ORDERS = {
 }
 
 @lru_cache(maxsize=None)
-def load_data(compute_semantic_similarity: bool = False,
-              skip_errors: bool = True) -> pd.DataFrame:
+def load_data(do_save: bool = True,
+              overwrite: bool = False,
+              compute_semantic_similarity: bool = False,
+              skip_errors: bool = False) -> pd.DataFrame:
     file_path = pathlib.Path('./results/evaluation_results.json')
     data = json.loads(file_path.read_text())
 
@@ -37,17 +43,44 @@ def load_data(compute_semantic_similarity: bool = False,
                     raise ValueError(f"Missing back translation for the following result:\n{json.dumps(result, indent=2, ensure_ascii=False)}\n")
                 logging.warning(f"Missing back translation for the following result:\n{json.dumps(result, indent=2, ensure_ascii=False)}\n")
                 result['semantic_similarity'] = 0
+                result['semantic_similarity_comparator'] = 0
             elif back_translation == "N/A":
                 result['semantic_similarity'] = 0
+                result['semantic_similarity_comparator'] = 0
             else:
-                result['semantic_similarity'] = semantic_similarity(
-                    result['translation']['source'],
-                    back_translation,
-                    model="all-MiniLM-L6-v2"
-                )
+                if overwrite or 'semantic_similarity' not in result:
+                    result['semantic_similarity'] = semantic_similarity(
+                        result['translation']['source'],
+                        back_translation,
+                        model="all-MiniLM-L6-v2"
+                    )
+
+                if overwrite or 'semantic_similarity_comparator' not in result:
+                    simple_sentences = split_sentence(
+                        back_translation,
+                        model='gpt-4o-mini'
+                    )
+                    comparator_sentences = [
+                        comparator_sentence(sentence)
+                        for sentence in simple_sentences
+                    ]
+                    comparator = ". ".join([
+                        make_sentence(sentence, model='gpt-4o-mini')
+                        for sentence in comparator_sentences
+                    ]) + '.'
+                    result['comparator'] = comparator
+
+                    result['semantic_similarity_comparator'] = semantic_similarity(
+                        result['translation']['source'],
+                        comparator,
+                        model="all-MiniLM-L6-v2"
+                    )
 
             if 'semantic_similarity' not in result:
                 result['semantic_similarity'] = 0
+    
+            if do_save:
+                file_path.write_text(json.dumps(data, indent=2, ensure_ascii=False))
         
         print(" " * 100, end='\r')
         print("Semantic similarities computed successfully!")
@@ -91,44 +124,45 @@ def plot_translation_time():
 
 def plot_semantic_similarity():
     df = load_data(compute_semantic_similarity=True)
-    # Semantic Similarity Analysis
-    df_similarity = df[['translator', 'model', 'sentence_type', 'semantic_similarity']]
-    similarity_data = df_similarity.groupby(['translator', 'model', 'sentence_type']).agg(
-        median_similarity=('semantic_similarity', 'median'),
-        q1_similarity=('semantic_similarity', lambda x: x.quantile(0.25)),
-        q3_similarity=('semantic_similarity', lambda x: x.quantile(0.75))
-    ).reset_index()
+    for model in df['model'].unique():
+        df_model = df[df['model'] == model]
+        for yval in ['semantic_similarity', 'semantic_similarity_comparator']:
+            # Semantic Similarity Analysis
+            df_similarity = df_model[['translator', 'model', 'sentence_type', yval]]
+            similarity_data = df_similarity.groupby(['translator', 'model', 'sentence_type']).agg(
+                median_similarity=(yval, 'median'),
+                q1_similarity=(yval, lambda x: x.quantile(0.25)),
+                q3_similarity=(yval, lambda x: x.quantile(0.75))
+            ).reset_index()
 
-    # Calculate the error bars based on IQR for semantic similarity
-    similarity_data['error_y_plus'] = similarity_data['q3_similarity'] - similarity_data['median_similarity']
-    similarity_data['error_y_minus'] = similarity_data['median_similarity'] - similarity_data['q1_similarity']
+            # Calculate the error bars based on IQR for semantic similarity
+            similarity_data['error_y_plus'] = similarity_data['q3_similarity'] - similarity_data['median_similarity']
+            similarity_data['error_y_minus'] = similarity_data['median_similarity'] - similarity_data['q1_similarity']
 
-    # Step 5: Plot semantic similarity with IQR-based error bars using Plotly
-    fig_similarity = px.bar(
-        similarity_data,
-        x='sentence_type',
-        y='median_similarity',
-        color='translator',
-        barmode='group',
-        facet_col='model',
-        error_y='error_y_plus',  # Upper bound of error bar (Q3 to median)
-        error_y_minus='error_y_minus',  # Lower bound of error bar (median to Q1)
-        labels={
-            'median_similarity': 'Median Semantic Similarity',
-            'sentence_type': 'Sentence Type',
-            'translator': 'Translator',
-            'model': 'Model',
-        },
-        title='Semantic Similarity by Model, Translator, and Sentence Type',
-        template='simple_white',
-        category_orders=CATEGORY_ORDERS
-    )
+            # Step 5: Plot semantic similarity with IQR-based error bars using Plotly
+            fig_similarity = px.bar(
+                similarity_data,
+                x='sentence_type',
+                y='median_similarity',
+                color='translator',
+                barmode='group',
+                error_y='error_y_plus',  # Upper bound of error bar (Q3 to median)
+                error_y_minus='error_y_minus',  # Lower bound of error bar (median to Q1)
+                labels={
+                    'median_similarity': 'Median Semantic Similarity',
+                    'sentence_type': 'Sentence Type',
+                    'translator': 'Translator',
+                    'model': 'Model',
+                },
+                title=f'Semantic Similarity by Translator and Sentence Type ({model})',
+                template='simple_white',
+                category_orders=CATEGORY_ORDERS
+            )
 
-    # Display the semantic similarity plot
-    savepath_similarity = pathlib.Path('./plots/semantic_similarity.png')
-    savepath_similarity.parent.mkdir(exist_ok=True, parents=True)
-    fig_similarity.write_image(str(savepath_similarity))
-
+            # Display the semantic similarity plot
+            savepath_similarity = pathlib.Path(f'./plots/{yval}-{model}.png')
+            savepath_similarity.parent.mkdir(exist_ok=True, parents=True)
+            fig_similarity.write_image(str(savepath_similarity))
 
 def plot_cost():
     df = load_data(compute_semantic_similarity=False)

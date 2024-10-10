@@ -144,7 +144,6 @@ class PipelineTranslation(Translation):
     simple: str
     comparator: str
 
-
 class PipelineTranslator(Translator):
     def __init__(self, model: str):
         self.model = model
