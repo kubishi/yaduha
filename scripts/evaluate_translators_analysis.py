@@ -1,7 +1,8 @@
 import json
 import logging
+import numpy as np
 import pandas as pd
-import plotly.express as px
+import matplotlib.pyplot as plt
 import pathlib
 from functools import lru_cache
 from yaduha.segment import make_sentence, semantic_similarity_sentence_transformers as semantic_similarity
@@ -12,6 +13,22 @@ from yaduha.forward.pipeline import split_sentence, comparator_sentence
 
 thisdir = pathlib.Path(__file__).parent.resolve()
 
+FILETYPE = 'png'
+# set up for latex fonts
+if FILETYPE == 'pdf':
+    plt.rcParams.update({
+        "text.usetex": True,
+        "font.family": "serif",
+        "font.serif": ["Computer Modern Roman"],
+    })
+
+TRANSLATOR_NAMES = {
+    'instructions': 'Instructions-Based',
+    'finetuned-simple': 'Finetuned',
+    'pipeline': 'Pipeline',
+    'agentic': 'Builder',
+}
+
 CATEGORY_ORDERS = {
     'sentence_type': [
         'subject-verb',
@@ -21,9 +38,11 @@ CATEGORY_ORDERS = {
         'complex',
         'nominalization',
     ],
-    'translator': ['instructions', 'finetuned-simple', 'pipeline', 'agentic'],
+    'translator': [n for n in TRANSLATOR_NAMES.values()],
     'models': ['gpt-4o-mini', 'gpt-4o'],
 }
+
+COLORS = ['#7b3294', '#c2a5cf', '#a6dba0', '#008837']
 
 @lru_cache(maxsize=None)
 def load_data(do_save: bool = True,
@@ -38,7 +57,8 @@ def load_data(do_save: bool = True,
         for i, result in enumerate(data['results'], start=1):
             print(f"Computing semantic similarity for sentence {i}/{len(data['results'])} ({i/len(data['results'])*100:.2f}%)", end='\r')
             back_translation = result['translation']['back_translation']
-            if not back_translation: # translation cannot be provided because target sentence is grammatically incorrect
+            has_changed = False
+            if not back_translation:
                 if not skip_errors:
                     raise ValueError(f"Missing back translation for the following result:\n{json.dumps(result, indent=2, ensure_ascii=False)}\n")
                 logging.warning(f"Missing back translation for the following result:\n{json.dumps(result, indent=2, ensure_ascii=False)}\n")
@@ -54,6 +74,7 @@ def load_data(do_save: bool = True,
                         back_translation,
                         model="all-MiniLM-L6-v2"
                     )
+                    has_changed = True
 
                 if overwrite or 'semantic_similarity_comparator' not in result:
                     simple_sentences = split_sentence(
@@ -75,24 +96,26 @@ def load_data(do_save: bool = True,
                         comparator,
                         model="all-MiniLM-L6-v2"
                     )
+                    has_changed = True
 
             if 'semantic_similarity' not in result:
                 result['semantic_similarity'] = 0
     
-            if do_save:
+            if do_save and has_changed:
                 file_path.write_text(json.dumps(data, indent=2, ensure_ascii=False))
         
         print(" " * 100, end='\r')
         print("Semantic similarities computed successfully!")
 
-    # Step 2: Normalize the JSON data into a DataFrame
     df = pd.json_normalize(data['results'], sep='_')
+    # rename translator names
+    # print(df['translator'])
+    df['translator'] = df['translator'].apply(lambda x: TRANSLATOR_NAMES[x])
     return df
 
 def plot_translation_time():
     df = load_data(compute_semantic_similarity=False)
 
-    # Translation Time Analysis
     df_analysis = df[['translator', 'model', 'sentence_type', 'translation_translation_time']]
     grouped_data = df_analysis.groupby(['translator', 'model', 'sentence_type']).agg(
         median_translation_time=('translation_translation_time', 'median'),
@@ -102,80 +125,122 @@ def plot_translation_time():
     grouped_data['error_y_plus'] = grouped_data['q3_translation_time'] - grouped_data['median_translation_time']
     grouped_data['error_y_minus'] = grouped_data['median_translation_time'] - grouped_data['q1_translation_time']
 
-    fig = px.bar(
-        grouped_data,
-        x='sentence_type',
-        y='median_translation_time',
-        color='translator',
-        barmode='group',
-        facet_col='model',
-        error_y='error_y_plus',  # Upper bound of error bar (Q3 to median)
-        error_y_minus='error_y_minus',  # Lower bound of error bar (median to Q1)
-        labels={'median_translation_time': 'Median Translation Time (s)'},
-        title='Translation Time by Model, Translator, and Sentence Type',
-        template='simple_white',
-        category_orders=CATEGORY_ORDERS
-    )
+    bar_width = 0.2  # Width of each bar
+    x_positions = np.arange(len(CATEGORY_ORDERS['sentence_type']))  # X-axis positions for the sentence types
 
-    savepath = pathlib.Path('./plots/translation_time.png')
-    savepath.parent.mkdir(exist_ok=True, parents=True)
-    fig.write_image(str(savepath))
+    for model in grouped_data['model'].unique():
+        plt.figure(figsize=(10, 6))
+        subset = grouped_data[grouped_data['model'] == model]
+        
+        for i, translator in enumerate(CATEGORY_ORDERS['translator']):
+            data = subset[subset['translator'] == translator]
+            if not data.empty:
+                # Offset each translator's bars by its index position
+                plt.bar(
+                    x_positions + i * bar_width,
+                    data['median_translation_time'],
+                    width=bar_width,
+                    yerr=[data['error_y_minus'], data['error_y_plus']],
+                    label=translator,
+                    capsize=5,
+                    color=COLORS[i % len(COLORS)]  # Use colors from the list
+                )
 
+        plt.title(f'Translation Time by Sentence Type and Translator ({model})')
+        plt.xlabel('Sentence Type')
+        plt.ylabel('Median Translation Time (s)')
+        plt.xticks(x_positions + bar_width * (len(CATEGORY_ORDERS['translator']) - 1) / 2,
+                   CATEGORY_ORDERS['sentence_type'], rotation=45)
+        plt.legend(title='Translator')
+        plt.tight_layout()
+
+        savepath = thisdir / f'plots/translation_time_{model}.{FILETYPE}'
+        savepath.parent.mkdir(exist_ok=True, parents=True)
+        plt.savefig(savepath)
+        plt.close()
+
+import matplotlib.pyplot as plt
+import numpy as np
 
 def plot_semantic_similarity():
     df = load_data(compute_semantic_similarity=True)
-    for model in df['model'].unique():
+    bar_width = 0.2  # Adjust the width of each bar
+    x_positions = np.arange(len(CATEGORY_ORDERS['sentence_type']))  # Create fixed positions for sentence types
+
+    plots = [
+        {
+            'model': 'gpt-4o-mini',
+            'yval': 'semantic_similarity_comparator',
+            'title': 'Semantic Similarity w/ Comparator (gpt-4o-mini)',
+        },
+        {
+            'model': 'gpt-4o',
+            'yval': 'semantic_similarity_comparator',
+            'title': 'Semantic Similarity w/ Comparator (gpt-4o)',
+        },
+        {
+            'model': 'gpt-4o-mini',
+            'yval': 'semantic_similarity',
+            'title': 'Semantic Similarity w/ Backwards Translation (gpt-4o-mini)',
+        },
+        {
+            'model': 'gpt-4o',
+            'yval': 'semantic_similarity',
+            'title': 'Semantic Similarity w/ Backwards Translation (gpt-4o)',
+        },
+    ]
+
+    for plot in plots:
+        model = plot['model']
+        yval = plot['yval']
+        title = plot['title']
+
         df_model = df[df['model'] == model]
-        for yval in ['semantic_similarity', 'semantic_similarity_comparator']:
-            # Semantic Similarity Analysis
-            df_similarity = df_model[['translator', 'model', 'sentence_type', yval]]
-            similarity_data = df_similarity.groupby(['translator', 'model', 'sentence_type']).agg(
-                median_similarity=(yval, 'median'),
-                q1_similarity=(yval, lambda x: x.quantile(0.25)),
-                q3_similarity=(yval, lambda x: x.quantile(0.75))
-            ).reset_index()
+        df_similarity = df_model[['translator', 'model', 'sentence_type', yval]]
+        similarity_data = df_similarity.groupby(['translator', 'model', 'sentence_type']).agg(
+            median_similarity=(yval, 'median'),
+            q1_similarity=(yval, lambda x: x.quantile(0.25)),
+            q3_similarity=(yval, lambda x: x.quantile(0.75))
+        ).reset_index()
 
-            # Calculate the error bars based on IQR for semantic similarity
-            similarity_data['error_y_plus'] = similarity_data['q3_similarity'] - similarity_data['median_similarity']
-            similarity_data['error_y_minus'] = similarity_data['median_similarity'] - similarity_data['q1_similarity']
+        similarity_data['error_y_plus'] = similarity_data['q3_similarity'] - similarity_data['median_similarity']
+        similarity_data['error_y_minus'] = similarity_data['median_similarity'] - similarity_data['q1_similarity']
 
-            # Step 5: Plot semantic similarity with IQR-based error bars using Plotly
-            fig_similarity = px.bar(
-                similarity_data,
-                x='sentence_type',
-                y='median_similarity',
-                color='translator',
-                barmode='group',
-                error_y='error_y_plus',  # Upper bound of error bar (Q3 to median)
-                error_y_minus='error_y_minus',  # Lower bound of error bar (median to Q1)
-                labels={
-                    'median_similarity': 'Median Semantic Similarity',
-                    'sentence_type': 'Sentence Type',
-                    'translator': 'Translator',
-                    'model': 'Model',
-                },
-                title=f'Semantic Similarity by Translator and Sentence Type ({model})',
-                template='simple_white',
-                category_orders=CATEGORY_ORDERS
-            )
+        plt.figure(figsize=(10, 6))
+        for i, translator in enumerate(CATEGORY_ORDERS['translator']):
+            data = similarity_data[similarity_data['translator'] == translator]
+            if not data.empty:
+                plt.bar(
+                    x_positions + i * bar_width,
+                    data['median_similarity'],
+                    width=bar_width,
+                    yerr=[data['error_y_minus'], data['error_y_plus']],
+                    label=translator,
+                    capsize=5,
+                    color=COLORS[i % len(COLORS)]  # Use colors from the list
+                )
 
-            # Display the semantic similarity plot
-            savepath_similarity = pathlib.Path(f'./plots/{yval}-{model}.png')
-            savepath_similarity.parent.mkdir(exist_ok=True, parents=True)
-            fig_similarity.write_image(str(savepath_similarity))
+        plt.title(title)
+        plt.xlabel('Sentence Type')
+        plt.ylabel('Median Semantic Similarity')
+        plt.xticks(x_positions + bar_width * (len(CATEGORY_ORDERS['translator']) - 1) / 2,
+                    CATEGORY_ORDERS['sentence_type'], rotation=45)
+        plt.legend(title='Translator')
+        plt.tight_layout()
+
+        savepath = thisdir / f'plots/{yval}_{model}.{FILETYPE}'
+        savepath.parent.mkdir(exist_ok=True, parents=True)
+        plt.savefig(savepath)
+        plt.close()
+
+
 
 def plot_cost():
     df = load_data(compute_semantic_similarity=False)
 
-    model_prices = { # price per million tokens
-        "gpt-4o": {
-            "prompt": 2.50,
-            "completion": 10.00,
-        },
-        "gpt-4o-mini": {
-            "prompt": 0.150,
-            "completion": 0.600
-        }	
+    model_prices = {
+        "gpt-4o": {"prompt": 2.50, "completion": 10.00},
+        "gpt-4o-mini": {"prompt": 0.150, "completion": 0.600}
     }
 
     def get_cost(row, type: str):
@@ -190,7 +255,6 @@ def plot_cost():
     df['back_translation_cost'] = df.apply(lambda row: get_cost(row, 'back_translation'), axis=1)
     df['total_cost'] = df['translation_cost'] + df['back_translation_cost']
 
-    # Cost Analysis
     df_cost = df[['translator', 'model', 'sentence_type', 'total_cost']]
     grouped_data = df_cost.groupby(['translator', 'model', 'sentence_type']).agg(
         median_cost=('total_cost', 'median'),
@@ -200,31 +264,45 @@ def plot_cost():
     grouped_data['error_y_plus'] = grouped_data['q3_cost'] - grouped_data['median_cost']
     grouped_data['error_y_minus'] = grouped_data['median_cost'] - grouped_data['q1_cost']
 
-    fig = px.bar(
-        grouped_data,
-        x='sentence_type',
-        y='median_cost',
-        color='translator',
-        barmode='group',
-        facet_col='model',
-        error_y='error_y_plus',  # Upper bound of error bar (Q3 to median)
-        error_y_minus='error_y_minus',  # Lower bound of error bar (median to Q1)
-        labels={'median_cost': 'Median Cost ($)'},
-        title='Cost by Model, Translator, and Sentence Type',
-        template='simple_white',
-        category_orders=CATEGORY_ORDERS
-    )
+    bar_width = 0.2  # Width of each bar
+    x_positions = np.arange(len(CATEGORY_ORDERS['sentence_type']))  # X-axis positions for the sentence types
 
-    savepath = pathlib.Path('./plots/cost.png')
-    savepath.parent.mkdir(exist_ok=True, parents=True)
-    fig.write_image(str(savepath))
+    for model in grouped_data['model'].unique():
+        plt.figure(figsize=(10, 6))
+        subset = grouped_data[grouped_data['model'] == model]
+
+        for i, translator in enumerate(CATEGORY_ORDERS['translator']):
+            data = subset[subset['translator'] == translator]
+            if not data.empty:
+                # Offset each translator's bars by its index position
+                plt.bar(
+                    x_positions + i * bar_width,
+                    data['median_cost'],
+                    width=bar_width,
+                    yerr=[data['error_y_minus'], data['error_y_plus']],
+                    label=translator,
+                    capsize=5,
+                    color=COLORS[i % len(COLORS)]  # Use colors from the list
+                )
+
+        plt.title(f'Cost by Sentence Type and Translator ({model})')
+        plt.xlabel('Sentence Type')
+        plt.ylabel('Median Cost ($)')
+        plt.xticks(x_positions + bar_width * (len(CATEGORY_ORDERS['translator']) - 1) / 2,
+                   CATEGORY_ORDERS['sentence_type'], rotation=45)
+        plt.legend(title='Translator')
+        plt.tight_layout()
+
+        savepath = thisdir / f'plots/cost_{model}.{FILETYPE}'
+        savepath.parent.mkdir(exist_ok=True, parents=True)
+        plt.savefig(savepath)
+        plt.close()
+
 
 def main():
     plot_translation_time()
     plot_semantic_similarity()
     plot_cost()
-    
-
 
 if __name__ == '__main__':
     main()
