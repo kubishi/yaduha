@@ -1,17 +1,20 @@
 import json
 import logging
-from typing import Tuple
+from typing import List, Tuple
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import pathlib
 from itertools import combinations
 from functools import lru_cache
+import dotenv
 from yaduha.segment import make_sentence, semantic_similarity_sentence_transformers as semantic_similarity
 from yaduha.segment import (
     split_sentence, 
 )
 from yaduha.forward.pipeline import split_sentence, comparator_sentence
+
+dotenv.load_dotenv()
 
 thisdir = pathlib.Path(__file__).parent.resolve()
 
@@ -27,9 +30,10 @@ if FILETYPE == 'pdf':
 
 TRANSLATOR_NAMES = {
     'instructions': 'Instructions-Based',
-    'finetuned-simple': 'Finetuned',
+    # 'finetuned-simple': 'Finetuned',
     'pipeline': 'Pipeline',
     'agentic': 'Builder',
+    'finetuned': 'Finetuned',
 }
 
 CATEGORY_ORDERS = {
@@ -111,8 +115,9 @@ def load_data(do_save: bool = True,
         print("Semantic similarities computed successfully!")
 
     df = pd.json_normalize(data['results'], sep='_')
-    # rename translator names
-    # print(df['translator'])
+    # drop translators not in TRANSLATOR_NAMES.keys()
+    df = df[df['translator'].isin(TRANSLATOR_NAMES.keys())]
+    # rename translators
     df['translator'] = df['translator'].apply(lambda x: TRANSLATOR_NAMES[x])
     return df
 
