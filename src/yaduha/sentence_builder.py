@@ -647,10 +647,8 @@ def get_random_sentence(choices: Dict[str, Dict[str, Any]] = {}):
         random.shuffle(all_pos)
         for pos in all_pos:
             if not choices[pos]['choices'] or choices[pos]['value'] is not None:
-                print(f"Skipping {pos} ({choices[pos]['value']})")
                 continue
             choices[pos]['value'], _ = random.choice(list(choices[pos]['choices'].items()))
-            print(f"Choosing {pos} as {choices[pos]['value']}")
             choices = get_all_choices(**{k: v['value'] for k, v in choices.items()})
             i = 0
 
@@ -664,6 +662,8 @@ def get_random_sentence(choices: Dict[str, Dict[str, Any]] = {}):
             continue
 
 def get_random_simple_sentence(choices: Dict[str, Dict[str, Any]] = {}):
+    choices = deepcopy(choices)
+    choices = get_all_choices(**{k: v['value'] for k, v in choices.items()})
     word_choices = {pos: v.get('value') for pos, v in choices.items()}
     choices['subject_noun']['value'] = word_choices.get('subject_noun') or random.choice(list(NOUNS.keys()))
     choices['verb']['value'] = word_choices.get('verb') or random.choice([*Verb.TRANSITIVE_VERBS.keys(), *Verb.INTRANSITIVE_VERBS.keys()])
