@@ -2,6 +2,8 @@ import logging
 import pathlib
 import pandas as pd
 import random
+import dotenv
+import os
 
 from yaduha.sentence_builder import (
     NOUNS, Verb, Subject, Object,
@@ -9,6 +11,8 @@ from yaduha.sentence_builder import (
 )
 from yaduha.back_translate import translate as translate_ovp2eng
 from yaduha.forward.pipeline import PipelineTranslator
+
+dotenv.load_dotenv()
 
 thisdir = pathlib.Path(__file__).parent.absolute()
 datadir = thisdir / "data"
@@ -34,11 +38,15 @@ def random_good_translations(savepath: pathlib.Path,
             logging.info(f"random_good_translations: Overwriting {savepath}")
     
     # shuffle nouns
-    random_nouns = pd.Series(list(NOUNS.keys())).sample(frac=1)
+    random_nouns = pd.Series([
+        *NOUNS.keys(),
+        *Verb.TRANSITIVE_VERBS.keys(), 
+        *Verb.INTRANSITIVE_VERBS.keys()
+    ]).sample(frac=1)
     random_verbs = pd.Series([*Verb.TRANSITIVE_VERBS.keys(), *Verb.INTRANSITIVE_VERBS.keys()]).sample(frac=1)
 
     if n is None:
-        n = 6*max(len(random_nouns), len(random_verbs))
+        n = 3*max(len(random_nouns), len(random_verbs))
 
     if len(df) >= n:
         logging.info(f"random_good_translations: Already have at least {n} sentences.")
@@ -46,6 +54,7 @@ def random_good_translations(savepath: pathlib.Path,
     
     rows = []
     for i in range(n):
+        print(f"random_good_translations: {(i+1)}/{n} ({(i+1)/n*100:.2f}%)", end="\r")
         choices = get_all_choices()
         choices['subject_noun']['value'] = random_nouns[i % len(random_nouns)]
         choices['verb']['value'] = random_verbs[i % len(random_verbs)]
@@ -73,6 +82,9 @@ def random_good_translations(savepath: pathlib.Path,
 
         _df = pd.concat([df, pd.DataFrame(rows)], ignore_index=True)
         _df.to_csv(savepath, index=False)
+
+    print(" "*100, end="\r")
+    print(f"random_good_translations: Done! Saved to {savepath}")
 
 
 complex_sentences = {
@@ -125,6 +137,25 @@ def random_complex_translations(savepath: pathlib.Path,
 
         _df = pd.DataFrame(rows, columns=["ovp", "eng", "simple"])
         _df.to_csv(savepath, index=False)
+
+def random_subject_nominalizations(savepath: pathlib.Path,
+                                    n: int = 25,
+                                    overwrite: bool = False):
+     df = pd.DataFrame(columns=["ovp", "eng"])
+     if savepath.exists():
+          if not overwrite:
+                df = pd.read_csv(savepath)
+          else:
+                logging.info(f"random_nominalizations: Overwriting {savepath}")
+    
+     rows = []
+     for i in range(n):
+        choices = get_all_choices()
+        choices['subject_noun']['value'] = random.choice([
+            *Verb.TRANSITIVE_VERBS.keys(),
+            *Verb.INTRANSITIVE_VERBS.keys()
+        ])
+        choices['verb']['value'] = random.choice()
 
 def main():
     overwrite = False

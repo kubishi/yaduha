@@ -243,7 +243,7 @@ def plot_semantic_similarity():
             y=ss_mean + 3*ss_std,
             color='black',
             linestyle='--',
-            label='$\mu$ and $\mu \pm 3\sigma$'
+            label='$\mu$ and $\mu + 3\sigma$'
         )
 
         # make y-axis start at -0.02
