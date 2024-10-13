@@ -140,29 +140,29 @@ def comparator_sentence(simple_sentence: Dict[str, str]) -> str:
 
     return simple_sentence
 
-class PipelineTranslation(Translation):
-    simple: str
-    comparator: str
-
 class PipelineTranslator(Translator):
     def __init__(self, model: str):
         self.model = model
 
-    def translate(self, sentence: str) -> PipelineTranslation:
+    def translate(self, sentence: str) -> Translation:
         start_time = time.time()
         prompt_tokens = 0
         completion_tokens = 0
+        model_calls = 0
         def res_callback(res: ChatCompletion):
-            nonlocal prompt_tokens, completion_tokens
+            nonlocal prompt_tokens, completion_tokens, model_calls
             prompt_tokens += res.usage.prompt_tokens
             completion_tokens += res.usage.completion_tokens
+            model_calls += 1
 
         prompt_tokens_back = 0
         completion_tokens_back = 0
+        model_calls_back = 0
         def res_callback_backwards(res: ChatCompletion):
-            nonlocal prompt_tokens_back, completion_tokens_back
+            nonlocal prompt_tokens_back, completion_tokens_back, model_calls_back
             prompt_tokens_back += res.usage.prompt_tokens
             completion_tokens_back += res.usage.completion_tokens
+            model_calls_back += 1
 
         simple_sentences = split_sentence(sentence, model=self.model, res_callback=res_callback)
         comparator_sentences = []
@@ -197,7 +197,7 @@ class PipelineTranslator(Translator):
         backwards_translation_nl = ". ".join(backwards_translations) + '.'
 
         translation_time = (time.time() - start_time) - back_translation_time
-        return PipelineTranslation(
+        return Translation(
             source=sentence,
             target=target_simple_sentence_nl,
             back_translation=backwards_translation_nl,
@@ -207,6 +207,10 @@ class PipelineTranslator(Translator):
             back_translation_prompt_tokens=prompt_tokens_back,
             back_translation_completion_tokens=completion_tokens_back,
             back_translation_time=back_translation_time,
-            simple=simple_sentences_nl,
-            comparator=comparator_sentence_nl
+            metadata={
+                'simple': simple_sentences_nl,
+                'comparator': comparator_sentence_nl,
+                'model_calls': model_calls,
+                'back_model_calls': model_calls_back,
+            }
         )

@@ -184,13 +184,15 @@ class AgenticTranslator(Translator):
         choice_idx: int = 0
         prompt_tokens: int = 0
         completion_tokens: int = 0
+        model_calls: int = 0
         if self.openai_model is not None:
             def get_choice(choices: Union[Dict[str, str],List[str]],
                            prompt: str = "Options: ",
                            allow_wild: bool = False) -> str:
-                nonlocal prompt_tokens, completion_tokens
+                nonlocal prompt_tokens, completion_tokens, model_calls
                 messages.append({"role": "user", "content": prompt})
                 logging.info(f"{self.openai_model}: {prompt}")
+                model_calls += 1
                 res = self.openai_client.chat.completions.create(
                     model=self.openai_model,
                     messages=messages,
@@ -204,6 +206,7 @@ class AgenticTranslator(Translator):
                 try_count = 0
                 while choice not in choices and not (allow_wild and choice.startswith('[') and choice.endswith(']')):
                     messages.append({"role": "user", "content": f"Invalid choice. Please try again.\n{prompt}"})
+                    model_calls += 1
                     res = self.openai_client.chat.completions.create(
                         model=self.openai_model,
                         messages=messages,
@@ -286,10 +289,12 @@ class AgenticTranslator(Translator):
                         
                         backwards_prompt_tokens = 0
                         backwards_completion_tokens = 0
+                        backwards_model_calls = 0
                         def count_tokens(completion: ChatCompletion):
-                            nonlocal backwards_prompt_tokens, backwards_completion_tokens
+                            nonlocal backwards_prompt_tokens, backwards_completion_tokens, backwards_model_calls
                             backwards_prompt_tokens += completion.usage.prompt_tokens
                             backwards_completion_tokens += completion.usage.completion_tokens
+                            backwards_model_calls += 1
         
                         translation = ". ".join(sentences) + "."
                         translation_time = time.time() - start_time
@@ -308,7 +313,11 @@ class AgenticTranslator(Translator):
                             translation_time=translation_time,
                             back_translation_prompt_tokens=backwards_prompt_tokens,
                             back_translation_completion_tokens=backwards_completion_tokens,
-                            back_translation_time=back_translation_time
+                            back_translation_time=back_translation_time,
+                            metadata={
+                                "model_calls": model_calls,
+                                "back_model_calls": backwards_model_calls
+                            }
                         )
                     elif continue_choice == "n": # start a new sentence
                         word_choices = {}

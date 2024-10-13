@@ -30,10 +30,9 @@ if FILETYPE == 'pdf':
 
 TRANSLATOR_NAMES = {
     'instructions': 'Instructions-Based',
-    # 'finetuned-simple': 'Finetuned',
+    'finetuned': 'Finetuned',
     'pipeline': 'Pipeline',
     'agentic': 'Builder',
-    'finetuned': 'Finetuned',
 }
 
 CATEGORY_ORDERS = {
@@ -45,7 +44,7 @@ CATEGORY_ORDERS = {
         'complex',
         'nominalization',
     ],
-    'translator': [n for n in TRANSLATOR_NAMES.values()],
+    'translator': ['Instructions-Based', 'Finetuned', 'Pipeline', 'Builder'],
     'models': ['gpt-4o-mini', 'gpt-4o'],
 }
 
