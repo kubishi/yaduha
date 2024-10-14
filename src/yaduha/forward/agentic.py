@@ -381,7 +381,7 @@ class AgenticTranslator(Translator):
                     f"Please select a word for {part_of_speech}: " + ", ".join(
                         [f"{k} ({v})" for k, v in choices[part_of_speech]["choices"].items()]
                     ) + (
-                        f"\nBecuase this is a {part_of_speech} word, you can also choose to use a wildcard " + 
+                        f"\nBecause this is a {part_of_speech} word, you can also choose to use a wildcard " + 
                         "by putting the word in brackets. For example: [wildcard]"
                         if allow_wild else ""
                     ) + ". Respond only with your choices and no other text.",
