@@ -29,8 +29,8 @@ if FILETYPE == 'pdf':
     })
 
 TRANSLATOR_NAMES = {
-    'instructions': 'Instructions-Based',
-    'finetuned': 'Finetuned',
+    'instructions': 'Instructions',
+    'finetuned': 'Fine-tuned',
     'pipeline': 'Pipeline',
     'agentic': 'Builder',
 }
@@ -44,7 +44,7 @@ CATEGORY_ORDERS = {
         'complex',
         'nominalization',
     ],
-    'translator': ['Instructions-Based', 'Finetuned', 'Pipeline', 'Builder'],
+    'translator': ['Instructions', 'Fine-tuned', 'Pipeline', 'Builder'],
     'models': ['gpt-4o-mini', 'gpt-4o'],
 }
 
@@ -172,100 +172,107 @@ import numpy as np
 def plot_semantic_similarity():
     df = load_data(compute_semantic_similarity=True)
     bar_width = 0.2  # Adjust the width of each bar
+    fontsize = 16
     x_positions = np.arange(len(CATEGORY_ORDERS['sentence_type']))  # Create fixed positions for sentence types
 
     plots = [
         {
-            'model': 'gpt-4o-mini',
             'yval': 'semantic_similarity_comparator',
-            'title': 'Semantic Similarity w/ Comparator (gpt-4o-mini)',
+            'title': 'Semantic Similarity w/ Comparator',
         },
         {
-            'model': 'gpt-4o',
-            'yval': 'semantic_similarity_comparator',
-            'title': 'Semantic Similarity w/ Comparator (gpt-4o)',
-        },
-        {
-            'model': 'gpt-4o-mini',
             'yval': 'semantic_similarity',
-            'title': 'Semantic Similarity w/ Backwards Translation (gpt-4o-mini)',
-        },
-        {
-            'model': 'gpt-4o',
-            'yval': 'semantic_similarity',
-            'title': 'Semantic Similarity w/ Backwards Translation (gpt-4o)',
+            'title': 'Semantic Similarity w/ Backwards Translation',
         },
     ]
 
+    models = ['gpt-4o-mini', 'gpt-4o']  # Define models to iterate over
     OFFSET = 0.04
 
     for plot in plots:
-        model = plot['model']
         yval = plot['yval']
         title = plot['title']
 
-        df_model = df[df['model'] == model]
-        df_similarity = df_model[['translator', 'model', 'sentence_type', yval]]
-        
-        df_similarity.loc[:, yval] += OFFSET
+        # Create a figure with 2 subplots (one on top of the other), sharing the x-axis
+        fig, axes = plt.subplots(2, 1, figsize=(10, 8), sharex=True)
 
-        similarity_data = df_similarity.groupby(['translator', 'model', 'sentence_type']).agg(
-            median_similarity=(yval, 'median'),
-            q1_similarity=(yval, lambda x: x.quantile(0.25)),
-            q3_similarity=(yval, lambda x: x.quantile(0.75))
-        ).reset_index()
+        handles, labels = [], []  # To collect legend handles and labels
 
-        similarity_data['error_y_plus'] = similarity_data['q3_similarity'] - similarity_data['median_similarity']
-        similarity_data['error_y_minus'] = similarity_data['median_similarity'] - similarity_data['q1_similarity']
+        for i, model in enumerate(models):
+            ax = axes[i]  # Get the corresponding subplot
+            df_model = df[df['model'] == model]
+            df_similarity = df_model[['translator', 'model', 'sentence_type', yval]]
 
+            df_similarity.loc[:, yval] += OFFSET
 
-        plt.figure(figsize=(10, 4))
-        for i, translator in enumerate(CATEGORY_ORDERS['translator']):
-            data = similarity_data[similarity_data['translator'] == translator]
-            if not data.empty:
-                plt.bar(
-                    x_positions + i * bar_width,
-                    data['median_similarity'],
-                    width=bar_width,
-                    yerr=[data['error_y_minus'], data['error_y_plus']],
-                    label=translator,
-                    capsize=5,
-                    bottom=-OFFSET,
-                    color=COLORS[i % len(COLORS)]  # Use colors from the list
-                )
+            similarity_data = df_similarity.groupby(['translator', 'model', 'sentence_type']).agg(
+                median_similarity=(yval, 'median'),
+                q1_similarity=(yval, lambda x: x.quantile(0.25)),
+                q3_similarity=(yval, lambda x: x.quantile(0.75))
+            ).reset_index()
 
-        ss_mean, ss_std = semantic_similarity_baseline_analysis()
-        # add a horizontal line for the baseline
-        plt.axhline(
-            y=ss_mean,
-            color='black',
-            linestyle='--',
-            label=None
-        )
-        
-        plt.axhline(
-            y=ss_mean + 3*ss_std,
-            color='black',
-            linestyle='--',
-            label='$\mu$ and $\mu + 3\sigma$'
-        )
+            similarity_data['error_y_plus'] = similarity_data['q3_similarity'] - similarity_data['median_similarity']
+            similarity_data['error_y_minus'] = similarity_data['median_similarity'] - similarity_data['q1_similarity']
 
-        # make y-axis start at -0.02
-        plt.ylim(-OFFSET, 1+OFFSET)
+            # Plot bars with error bars
+            for j, translator in enumerate(CATEGORY_ORDERS['translator']):
+                data = similarity_data[similarity_data['translator'] == translator]
+                if not data.empty:
+                    bars = ax.bar(
+                        x_positions + j * bar_width,
+                        data['median_similarity'],
+                        width=bar_width,
+                        yerr=[data['error_y_minus'], data['error_y_plus']],
+                        capsize=5,
+                        bottom=-OFFSET,
+                        color=COLORS[j % len(COLORS)]  # Use colors from the list
+                    )
 
-        plt.title(title)
-        plt.xlabel('Sentence Type')
-        plt.ylabel('Median Semantic Similarity')
+                    # Add the handles and labels from the last plot (avoiding duplicates)
+                    if i == len(models) - 1:
+                        handle = bars[0]
+                        handles.append(handle)
+                        labels.append(translator)
+
+            # Add baseline horizontal line for the semantic similarity baseline analysis
+            ss_mean, ss_std = semantic_similarity_baseline_analysis()
+            ax.axhline(
+                y=ss_mean,
+                color='black',
+                linestyle='--',
+                label=None
+            )
+            ax.axhline(
+                y=ss_mean + 3 * ss_std,
+                color='black',
+                linestyle='--',
+                label='$\mu$ and $\mu + 3\sigma$'
+            )
+
+            # Set plot title and axis labels
+            ax.set_ylim(-OFFSET, 1 + OFFSET)
+            ax.set_title(f'Model: {model}', fontsize=fontsize)
+            ax.set_ylabel('Median Semantic Similarity', fontsize=fontsize)
+
+        # Configure shared x-axis labels and ticks
+        axes[-1].set_xlabel('Sentence Type', fontsize=fontsize)
         plt.xticks(x_positions + bar_width * (len(CATEGORY_ORDERS['translator']) - 1) / 2,
-                    CATEGORY_ORDERS['sentence_type'], rotation=45)
-        plt.legend(title='Translator') #, loc='upper left')
-        # legend outside of plot
-        plt.legend(title='Translator', bbox_to_anchor=(1.05, 1), loc='upper left')
-        plt.tight_layout()
+                   CATEGORY_ORDERS['sentence_type'], rotation=45, fontsize=fontsize)
 
-        savepath = thisdir / f'plots/{yval}_{model}.{FILETYPE}'
+        # Adjust layout and add the figure-wide legend
+        fig.tight_layout()
+        fig.legend(
+            handles, labels,
+            title='Translator',
+            bbox_to_anchor=(1.0, 0.95),
+            loc='upper left',
+            fontsize=fontsize,
+            title_fontsize=fontsize
+        )
+
+        savepath = thisdir / f'plots/{yval}.{FILETYPE}'
         savepath.parent.mkdir(exist_ok=True, parents=True)
-        plt.savefig(savepath)
+        plt.savefig(savepath, bbox_inches='tight')  # Ensure everything fits including the legend
         plt.close()
 
 
@@ -532,7 +539,7 @@ def get_interesting_examples():
     # get examples where back_translation is "N/A"
     print(f"=== Examples where back translation is N/A ===")
     df_5 = df[(df['translation_back_translation'] == "N/A") & 
-              (df['translator'] == 'Instructions-Based') & 
+              (df['translator'] == 'Instructions') & 
               (df['model'] == 'gpt-4o-mini')]
     df_5 = df_5.sort_values('semantic_similarity', ascending=False).head(5)
     for i, example in df_5.iterrows():

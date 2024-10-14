@@ -10,11 +10,13 @@ from yaduha.forward import AgenticTranslator, PipelineTranslator
 dotenv.load_dotenv()
 
 thisdir = pathlib.Path(__file__).parent.resolve()
-savepath = thisdir / 'results/evaluation_results.csv'
+savepath = thisdir / 'results/model_calls.csv'
 
 def run(overwrite: bool = False):
+    df_results = pandas.DataFrame()
     if savepath.exists() and not overwrite:
-        return
+        df_results = pandas.read_csv(savepath)
+    
     translators: Dict[str, Translator] = {
         'pipeline': PipelineTranslator(model='gpt-4o-mini'),
         'agentic': AgenticTranslator(model='gpt-4o-mini')
@@ -22,7 +24,7 @@ def run(overwrite: bool = False):
 
     df = pandas.read_csv(thisdir / 'data/evaluation_sentences.csv')
     # get first 3 sentences of each type
-    sentences = df.groupby('type').head(3)['sentence'].tolist()
+    sentences = df.groupby('type').head(2)['sentence'].tolist()
 
     rows = []
     print('Translating sentences...')
@@ -30,6 +32,8 @@ def run(overwrite: bool = False):
         print(f'[TRANSLATOR] {i}/{len(translators)}')
         for j, sentence in enumerate(sentences, start=1):
             print(f'  [SENTENCE] {j}/{len(sentences)}', end='\r')
+            if df_results[(df_results['translator'] == translator_name) & (df_results['sentence'] == sentence)].shape[0] > 0:
+                continue
             translation = translator.translate(sentence)
             rows.append({
                 'translator': translator_name,
@@ -49,7 +53,7 @@ def analyze():
     print(df)
 
     # get stats on model call by translator and sentence type
-    stats = df.groupby(['translator', 'sentence_type']).agg({
+    stats = df.groupby(['translator']).agg({
         'model_calls': ['mean', 'std'],
         'back_model_calls': ['mean', 'std'],
     })
