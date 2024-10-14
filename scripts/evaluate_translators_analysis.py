@@ -259,8 +259,6 @@ def plot_semantic_similarity():
         plt.ylabel('Median Semantic Similarity')
         plt.xticks(x_positions + bar_width * (len(CATEGORY_ORDERS['translator']) - 1) / 2,
                     CATEGORY_ORDERS['sentence_type'], rotation=45)
-        plt.legend(title='Translator') #, loc='upper left')
-        # legend outside of plot
         plt.legend(title='Translator', bbox_to_anchor=(1.05, 1), loc='upper left')
         plt.tight_layout()
 
