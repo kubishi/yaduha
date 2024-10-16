@@ -133,12 +133,12 @@ def translate(subject_noun: str,
         {
             'role': 'user',
             'content': json.dumps(
-                [{'part_of_speech': 'subject', 'positional': 'distal', 'word': 'read', 'agent_nominalizer': 'have x-ed, am x-ed'},
+                [{'part_of_speech': 'subject', 'positional': 'distal', 'word': 'read', 'agent_nominalizer': 'future'},
                  {'part_of_speech': 'object', 'positional': 'proximal', 'word': 'hear', 'agent_nominalizer': 'future'},
                  {'part_of_speech': 'verb', 'tense': 'future', 'word': 'climb'}]
             )
         },
-        {'role': 'assistant', 'content': '(That one who has read) will climb (the one who will hear).'},
+        {'role': 'assistant', 'content': '(That one who will read) will climb (the one who will hear).'},
     ]
     logging.debug(json.dumps(structure, indent=2))
     messages = [
