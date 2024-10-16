@@ -40,18 +40,20 @@ def main():
     ]
     translators: Dict[str, Dict[str, Translator]] = {
         'gpt-4o-mini': {
-            'pipeline': PipelineTranslator(model='gpt-4o-mini'),
-            'instructions': InstructionsTranslator(model='gpt-4o-mini'),
-            'agentic': AgenticTranslator(model='gpt-4o-mini'),
+            # 'pipeline': PipelineTranslator(model='gpt-4o-mini'),
+            # 'instructions': InstructionsTranslator(model='gpt-4o-mini'),
+            # 'agentic': AgenticTranslator(model='gpt-4o-mini'),
             # 'finetuned-simple': FinetunedTranslator(model='ft:gpt-4o-mini-2024-07-18:kubishi:brackets-plus-prompt-merged:AFvrmkic'),
-            # 'finetuned': FinetunedTranslator(model='ft:gpt-4o-mini-2024-07-18:kubishi::AHxZJd3A')
+            # 'finetuned-old': FinetunedTranslator(model='ft:gpt-4o-mini-2024-07-18:kubishi::AHxZJd3A')
+            'finetuned': FinetunedTranslator(model='ft:gpt-4o-mini-2024-07-18:kubishi::AInrzzLW')
         },
         'gpt-4o': {
-            'pipeline': PipelineTranslator(model='gpt-4o'),
-            'instructions': InstructionsTranslator(model='gpt-4o'),
-            'agentic': AgenticTranslator(model='gpt-4o'),
+            # 'pipeline': PipelineTranslator(model='gpt-4o'),
+            # 'instructions': InstructionsTranslator(model='gpt-4o'),
+            # 'agentic': AgenticTranslator(model='gpt-4o'),
             # 'finetuned-simple': FinetunedTranslator(model='ft:gpt-4o-2024-08-06:kubishi:brackets-plus-prompt-merged-4o:AGCTD0Ao'),
-            # 'finetuned': FinetunedTranslator(model='ft:gpt-4o-2024-08-06:kubishi::AHxjqcsb')
+            # 'finetuned-old': FinetunedTranslator(model='ft:gpt-4o-2024-08-06:kubishi::AHxjqcsb')
+            'finetuned': FinetunedTranslator(model='ft:gpt-4o-2024-08-06:kubishi::AInyiTpj')
         },
     }
 

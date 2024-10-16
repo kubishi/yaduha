@@ -250,10 +250,10 @@ def split_sentence(sentence: str, model: str, res_callback: Optional[Callable[[C
             'The set of simple sentences should be as semantically equivalent as possible to the user input sentence. ',
             'No adjectives, adverbs, prepositions, or conjunctions should be added to the simple sentences. ',
             'Indirect objects and objects of prepositions should not be included in the simple sentences. ',
-            'Subjects and objects can be verbs IF they are "nominalized" as "past", "present", or "future" ',
+            'Subjects and objects can be verbs IF they are "nominalized" as "present" or "future" ',
             '(e.g., "run" -> "the runner", "the one who ran", "the one who will run"). ',
             'The present nominalizer should be used to describe those who always do the action (runner, drinker, cook(er), etc.). ',
-            'nominalizer_tense must be either None or one of "past", "present", "future". ',
+            'nominalizer_tense must be either None or one of "present" or "future". ',
         ])},
         {'role': 'user', 'content': 'I am sitting in a chair.'},
         {

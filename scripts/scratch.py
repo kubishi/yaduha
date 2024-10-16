@@ -6,6 +6,23 @@ import pandas as pd
 
 thisdir = pathlib.Path(__file__).parent.resolve()
 
+def remove_old_translators(to_remove: List[str]):
+    resultspath = thisdir / 'results/evaluation_results.json'
+    results = json.loads(resultspath.read_text())
+    results['results'] = [
+        res for res in results['results']
+        if res['translator'] not in to_remove
+    ]
+    resultspath.write_text(json.dumps(results, indent=2, ensure_ascii=False))
+
+def rename_translator(old: str, new: str):
+    resultspath = thisdir / 'results/evaluation_results.json'
+    results = json.loads(resultspath.read_text())
+    for res in results['results']:
+        if res['translator'] == old:
+            res['translator'] = new
+    resultspath.write_text(json.dumps(results, indent=2, ensure_ascii=False))
+
 def remove_old_sentences():
     resultspath = thisdir / 'results/evaluation_results.json'
     datapath = thisdir / 'data/evaluation_sentences.csv'
@@ -47,8 +64,10 @@ def combine_results():
     path_new.write_text(json.dumps(combined, indent=2, ensure_ascii=False))
 
 def main():
-    remove_old_sentences()
-    # combine_results()
+    # remove_old_sentences()
+    combine_results()
+    # remove_old_translators(['finetuned-simple'])
+    # rename_translator('finetuned', 'finetuned-old')
 
 if __name__ == "__main__":
     main()
