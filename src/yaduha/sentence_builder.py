@@ -158,7 +158,6 @@ class Verb:
     }
     NOMINALIZER_TENSES = {
         'dü': 'present',
-        'pü': 'have x-ed, am x-ed',
         'weidü': 'future (will)',
     }
     TRANSITIVE_VERBS = {

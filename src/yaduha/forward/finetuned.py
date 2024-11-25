@@ -12,7 +12,7 @@ class FinetunedTranslator(Translator):
     DEFAULT_EXAMPLES = [
         ("The sleet climbs that rafter.", "[sleet]-uu [rafter]-noka u-dsibui-dü"),
         ("The pouch has smelled this ledge.", "[pouch]-uu [ledge]-neika a-gwana-pü"),
-        ("The jackrabbit is eating the bread.", "kamü-uu tüwoobü-neika a-düka-ti")
+        ("The jackrabbit is eating the pinenuts.", "kamü-uu tüba-neika a-düka-ti")
     ]
 
     @classmethod

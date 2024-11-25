@@ -20,12 +20,12 @@ datadir = thisdir / "data"
 uncommon_nouns = pd.read_csv(datadir / "uncommon_nouns.csv")
 uncommon_verbs = pd.read_csv(datadir / "uncommon_verbs.csv")
 
-def random_good_translations(savepath: pathlib.Path,
-                             n: int = None,
-                             overwrite: bool = False,
-                             replace_subject_noun: bool = False,
-                             replace_object_noun: bool = False,
-                             replace_verb: bool = False):
+def random_translations(savepath: pathlib.Path,
+                        n: int = None,
+                        overwrite: bool = False,
+                        replace_subject_noun: bool = False,
+                        replace_object_noun: bool = False,
+                        replace_verb: bool = False):
     _get_random_sentence = get_random_sentence
     if replace_object_noun or replace_subject_noun or replace_verb:
         _get_random_sentence = get_random_simple_sentence
@@ -35,10 +35,11 @@ def random_good_translations(savepath: pathlib.Path,
         if not overwrite:
             df = pd.read_csv(savepath)
         else:
-            logging.info(f"random_good_translations: Overwriting {savepath}")
+            logging.info(f"random_translations: Overwriting {savepath}")
     
     # shuffle nouns
     random_nouns = pd.Series([
+        *Subject.PRONOUNS.keys(),
         *NOUNS.keys(),
         *Verb.TRANSITIVE_VERBS.keys(), 
         *Verb.INTRANSITIVE_VERBS.keys()
@@ -49,12 +50,12 @@ def random_good_translations(savepath: pathlib.Path,
         n = 3*max(len(random_nouns), len(random_verbs))
 
     if len(df) >= n:
-        logging.info(f"random_good_translations: Already have at least {n} sentences.")
+        logging.info(f"random_translations: Already have at least {n} sentences.")
         return df
     
     rows = []
     for i in range(n):
-        print(f"random_good_translations: {(i+1)}/{n} ({(i+1)/n*100:.2f}%)", end="\r")
+        print(f"random_translations: {(i+1)}/{n} ({(i+1)/n*100:.2f}%)", end="\r")
         choices = get_all_choices()
         choices['subject_noun']['value'] = random_nouns[i % len(random_nouns)]
         choices['verb']['value'] = random_verbs[i % len(random_verbs)]
@@ -76,15 +77,15 @@ def random_good_translations(savepath: pathlib.Path,
 
         if eng is not None:
             rows.append({"ovp": ovp, "eng": eng})
-            logging.info(f"random_good_translations: {len(df)} / {n}")
+            logging.info(f"random_translations: {len(df)} / {n}")
         else:
-            logging.info(f"random_good_translations: Failed to translate {ovp}")
+            logging.info(f"random_translations: Failed to translate {ovp}")
 
         _df = pd.concat([df, pd.DataFrame(rows)], ignore_index=True)
         _df.to_csv(savepath, index=False)
 
     print(" "*100, end="\r")
-    print(f"random_good_translations: Done! Saved to {savepath}")
+    print(f"random_translations: Done! Saved to {savepath}")
 
 
 complex_sentences = {
@@ -122,7 +123,7 @@ def random_complex_translations(savepath: pathlib.Path,
         if not overwrite:
             df = pd.read_csv(savepath)
         else:
-            logging.info(f"random_good_translations: Overwriting {savepath}")
+            logging.info(f"random_translations: Overwriting {savepath}")
 
     # remove any rows where ovp['eng'] is not in the complex_sentences
     df = df[~df["eng"].isin(complex_sentences)]
@@ -138,68 +139,49 @@ def random_complex_translations(savepath: pathlib.Path,
         _df = pd.DataFrame(rows, columns=["ovp", "eng", "simple"])
         _df.to_csv(savepath, index=False)
 
-def random_subject_nominalizations(savepath: pathlib.Path,
-                                    n: int = 25,
-                                    overwrite: bool = False):
-     df = pd.DataFrame(columns=["ovp", "eng"])
-     if savepath.exists():
-          if not overwrite:
-                df = pd.read_csv(savepath)
-          else:
-                logging.info(f"random_nominalizations: Overwriting {savepath}")
-    
-     rows = []
-     for i in range(n):
-        choices = get_all_choices()
-        choices['subject_noun']['value'] = random.choice([
-            *Verb.TRANSITIVE_VERBS.keys(),
-            *Verb.INTRANSITIVE_VERBS.keys()
-        ])
-        choices['verb']['value'] = random.choice()
-
 def main():
     overwrite = False
-    random_good_translations(
+    random_translations(
         datadir / "random_good_translations.csv",
         overwrite=overwrite
     )
-    random_good_translations(
-        datadir / "random_no_subject_noun.csv",
-        n=25,
-        overwrite=overwrite,
-        replace_subject_noun=True
-    )
-    random_good_translations(
-        datadir / "random_no_object_noun.csv",
-        n=25,
-        overwrite=overwrite,
-        replace_object_noun=True
-    )
-    random_good_translations(
-        datadir / "random_no_verb.csv",
-        n=25,
-        overwrite=overwrite,
-        replace_verb=True
-    )
-    random_good_translations(
-        datadir / "random_no_nouns.csv",
-        n=25,
-        overwrite=overwrite,
-        replace_subject_noun=True,
-        replace_object_noun=True
-    )
-    random_good_translations(
-        datadir / "random_no_vocab.csv",
-        n=25,
-        overwrite=overwrite,
-        replace_subject_noun=True,
-        replace_object_noun=True,
-        replace_verb=True
-    )
-    random_complex_translations(
-        datadir / "random_complex_translations.csv",
-        overwrite=overwrite
-    )
+    # random_translations(
+    #     datadir / "random_no_subject_noun.csv",
+    #     n=25,
+    #     overwrite=overwrite,
+    #     replace_subject_noun=True
+    # )
+    # random_translations(
+    #     datadir / "random_no_object_noun.csv",
+    #     n=25,
+    #     overwrite=overwrite,
+    #     replace_object_noun=True
+    # )
+    # random_translations(
+    #     datadir / "random_no_verb.csv",
+    #     n=25,
+    #     overwrite=overwrite,
+    #     replace_verb=True
+    # )
+    # random_translations(
+    #     datadir / "random_no_nouns.csv",
+    #     n=25,
+    #     overwrite=overwrite,
+    #     replace_subject_noun=True,
+    #     replace_object_noun=True
+    # )
+    # random_translations(
+    #     datadir / "random_no_vocab.csv",
+    #     n=25,
+    #     overwrite=overwrite,
+    #     replace_subject_noun=True,
+    #     replace_object_noun=True,
+    #     replace_verb=True
+    # )
+    # random_complex_translations(
+    #     datadir / "random_complex_translations.csv",
+    #     overwrite=overwrite
+    # )
 
 
 
