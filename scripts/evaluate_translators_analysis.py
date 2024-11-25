@@ -14,6 +14,12 @@ from yaduha.segment import (
 )
 from yaduha.forward.pipeline import split_sentence, comparator_sentence
 
+import nltk
+from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
+
+# Ensure the NLTK package is ready
+nltk.download(quiet=True)
+
 dotenv.load_dotenv()
 
 thisdir = pathlib.Path(__file__).parent.resolve()
@@ -51,10 +57,32 @@ CATEGORY_ORDERS = {
 
 COLORS = ['#7b3294', '#c2a5cf', '#a6dba0', '#008837']
 
+# Function to compute BLEU score
+def compute_bleu(reference: str, candidate: str) -> float:
+    """
+    Compute the BLEU score between a reference sentence and a candidate sentence.
+    
+    Parameters:
+    - reference (str): The reference sentence (ground truth).
+    - candidate (str): The candidate sentence (generated sentence).
+    
+    Returns:
+    - float: BLEU score
+    """
+    # Tokenize the sentences
+    reference_tokens = nltk.word_tokenize(reference.lower())
+    candidate_tokens = nltk.word_tokenize(candidate.lower())
+    
+    # BLEU score calculation
+    smooth = SmoothingFunction().method1
+    score = sentence_bleu([reference_tokens], candidate_tokens, smoothing_function=smooth)
+    return score
+
 @lru_cache(maxsize=None)
 def load_data(do_save: bool = True,
               overwrite: bool = False,
               compute_semantic_similarity: bool = False,
+              compute_bleu_score: bool = False,
               skip_errors: bool = False) -> pd.DataFrame:
     file_path = pathlib.Path('./results/evaluation_results.json')
     data = json.loads(file_path.read_text())
@@ -113,6 +141,28 @@ def load_data(do_save: bool = True,
         
         print(" " * 100, end='\r')
         print("Semantic similarities computed successfully!")
+
+    if compute_bleu_score: # Compute BLEU score between the source and back translation
+        print(f"Computing BLEU scores for {len(data['results'])} sentences...")
+        for i, result in enumerate(data['results'], start=1):
+            print(f"Computing BLEU score for sentence {i}/{len(data['results'])} ({i/len(data['results'])*100:.2f}%)", end='\r')
+            # if bleu score is already computed, skip
+            if 'bleu_score' in result:
+                continue
+            back_translation = result['translation']['back_translation']
+            if not back_translation:
+                if not skip_errors:
+                    raise ValueError(f"Missing back translation for the following result:\n{json.dumps(result, indent=2, ensure_ascii=False)}\n")
+                logging.warning(f"Missing back translation for the following result:\n{json.dumps(result, indent=2, ensure_ascii=False)}\n")
+                result['bleu_score'] = 0
+            elif back_translation == "N/A":
+                result['bleu_score'] = 0
+            else:
+                result['bleu_score'] = compute_bleu(result['translation']['source'], back_translation)
+            if do_save:
+                file_path.write_text(json.dumps(data, indent=2, ensure_ascii=False))
+        print(" " * 100, end='\r')
+        print("BLEU scores computed successfully!")
 
     df = pd.json_normalize(data['results'], sep='_')
     # drop translators not in TRANSLATOR_NAMES.keys()
@@ -267,6 +317,51 @@ def plot_semantic_similarity():
         plt.savefig(savepath)
         plt.close()
 
+def plot_bleu_score():
+    df = load_data(compute_bleu_score=True)
+
+    df_bleu = df[['translator', 'model', 'sentence_type', 'bleu_score']]
+    grouped_data = df_bleu.groupby(['translator', 'model', 'sentence_type']).agg(
+        median_bleu=('bleu_score', 'median'),
+        q1_bleu=('bleu_score', lambda x: x.quantile(0.25)),
+        q3_bleu=('bleu_score', lambda x: x.quantile(0.75))
+    ).reset_index()
+    grouped_data['error_y_plus'] = grouped_data['q3_bleu'] - grouped_data['median_bleu']
+    grouped_data['error_y_minus'] = grouped_data['median_bleu'] - grouped_data['q1_bleu']
+
+    bar_width = 0.2  # Width of each bar
+    x_positions = np.arange(len(CATEGORY_ORDERS['sentence_type']))  # X-axis positions for the sentence types
+
+    for model in grouped_data['model'].unique():
+        plt.figure(figsize=(10, 6))
+        subset = grouped_data[grouped_data['model'] == model]
+
+        for i, translator in enumerate(CATEGORY_ORDERS['translator']):
+            data = subset[subset['translator'] == translator]
+            if not data.empty:
+                # Offset each translator's bars by its index position
+                plt.bar(
+                    x_positions + i * bar_width,
+                    data['median_bleu'],
+                    width=bar_width,
+                    yerr=[data['error_y_minus'], data['error_y_plus']],
+                    label=translator,
+                    capsize=5,
+                    color=COLORS[i % len(COLORS)]  # Use colors from the list
+                )
+
+        plt.title(f'BLEU Score by Sentence Type and Translator ({model})')
+        plt.xlabel('Sentence Type')
+        plt.ylabel('Median BLEU Score')
+        plt.xticks(x_positions + bar_width * (len(CATEGORY_ORDERS['translator']) - 1) / 2,
+                   CATEGORY_ORDERS['sentence_type'], rotation=45)
+        plt.legend(title='Translator')
+        plt.tight_layout()
+
+        savepath = thisdir / f'plots/bleu_score_{model}.{FILETYPE}'
+        savepath.parent.mkdir(exist_ok=True, parents=True)
+        plt.savefig(savepath)
+        plt.close()
 
 def plot_cost():
     df = load_data(compute_semantic_similarity=False)
@@ -548,13 +643,15 @@ def get_interesting_examples():
 
 
 def main():
-    plot_semantic_similarity()
-    plot_translation_time()
-    plot_cost()
-    generate_cost_latex_table()
-    generate_translation_time_latex_table()
-    semantic_similarity_baseline_analysis()
-    get_interesting_examples()
+    load_data(compute_semantic_similarity=True, compute_bleu_score=True)
+    plot_bleu_score()
+    # plot_semantic_similarity()
+    # plot_translation_time()
+    # plot_cost()
+    # generate_cost_latex_table()
+    # generate_translation_time_latex_table()
+    # semantic_similarity_baseline_analysis()
+    # get_interesting_examples()
 
 if __name__ == '__main__':
     main()
