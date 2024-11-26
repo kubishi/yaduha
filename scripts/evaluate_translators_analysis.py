@@ -16,7 +16,7 @@ from yaduha.forward.pipeline import split_sentence, comparator_sentence
 
 import nltk
 from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
-
+import sacrebleu # pip install sacrebleu
 # Ensure the NLTK package is ready
 # nltk.download(quiet=True)
 
@@ -57,7 +57,7 @@ CATEGORY_ORDERS = {
 COLORS = ['#7b3294', '#c2a5cf', '#a6dba0', '#008837']
 import sacrebleu
 
-def compute_chrf(reference: str, candidate: str, word_count: int = 2):
+def compute_chrf(reference: str, candidate: str, word_order: int = 2):
     """
     Compute the chrF++ score between a reference sentence and a candidate sentence.
     
@@ -72,7 +72,7 @@ def compute_chrf(reference: str, candidate: str, word_count: int = 2):
     references = [reference]
         
     # Compute chrF++ score
-    chrf_score = sacrebleu.metrics.chrf.CHRF(word_count = word_count).sentence_score(candidate, references)
+    chrf_score = sacrebleu.metrics.chrf.CHRF(word_order = word_order).sentence_score(candidate, references)
     return chrf_score.score
 
 # Function to compute BLEU score
@@ -203,7 +203,7 @@ def load_data(do_save: bool = True,
             if do_save:
                 file_path.write_text(json.dumps(data, indent=2, ensure_ascii=False))
         print(" " * 100, end='\r')
-        print("BLEU scores computed successfully!")
+        print("chrF++ scores computed successfully!")
 
     df = pd.json_normalize(data['results'], sep='_')
     # drop translators not in TRANSLATOR_NAMES.keys()
@@ -742,6 +742,7 @@ def get_interesting_examples():
 def main():
     load_data(compute_semantic_similarity=True, compute_bleu_score=True, compute_chrf_score=True)
     plot_bleu_score()
+    plot_chrf_score()
     # plot_semantic_similarity()
     # plot_translation_time()
     # plot_cost()
