@@ -420,9 +420,9 @@ def plot_chrf_score():
 
     df_bleu = df[['translator', 'model', 'sentence_type', 'chrf_score']]
     grouped_data = df_bleu.groupby(['translator', 'model', 'sentence_type']).agg(
-        median_bleu=('chrf_score', 'median'),
-        q1_bleu=('chrf_score', lambda x: x.quantile(0.25)),
-        q3_bleu=('chrf_score', lambda x: x.quantile(0.75))
+        median_chrf=('chrf_score', 'median'),
+        q1_chrf=('chrf_score', lambda x: x.quantile(0.25)),
+        q3_chrf=('chrf_score', lambda x: x.quantile(0.75))
     ).reset_index()
     grouped_data['error_y_plus'] = grouped_data['q3_chrf'] - grouped_data['median_chrf']
     grouped_data['error_y_minus'] = grouped_data['median_chrf'] - grouped_data['q1_chrf']
