@@ -55,6 +55,25 @@ CATEGORY_ORDERS = {
 }
 
 COLORS = ['#7b3294', '#c2a5cf', '#a6dba0', '#008837']
+import sacrebleu
+
+def compute_chrf(reference: str, candidate: str, word_count: int = 2):
+    """
+    Compute the chrF++ score between a reference sentence and a candidate sentence.
+    
+    Parameters:
+    - reference (str): The reference sentence (ground truth).
+    - candidate (str): The candidate sentence (generated sentence).
+    
+    Returns:
+    - float: chrF++ score
+    """
+    # Sacrebleu expects reference to be a list of references
+    references = [reference]
+        
+    # Compute chrF++ score
+    chrf_score = sacrebleu.metrics.chrf.CHRF(word_count = word_count).sentence_score(candidate, references)
+    return chrf_score.score
 
 # Function to compute BLEU score
 def compute_bleu(reference: str, candidate: str) -> float:
@@ -82,6 +101,7 @@ def load_data(do_save: bool = True,
               overwrite: bool = False,
               compute_semantic_similarity: bool = False,
               compute_bleu_score: bool = False,
+              compute_chrf_score: bool = False,
               skip_errors: bool = False) -> pd.DataFrame:
     file_path = pathlib.Path('./results/evaluation_results.json')
     data = json.loads(file_path.read_text())
@@ -158,6 +178,28 @@ def load_data(do_save: bool = True,
                 result['bleu_score'] = 0
             else:
                 result['bleu_score'] = compute_bleu(result['translation']['source'], back_translation)
+            if do_save:
+                file_path.write_text(json.dumps(data, indent=2, ensure_ascii=False))
+        print(" " * 100, end='\r')
+        print("BLEU scores computed successfully!")
+
+    if compute_chrf_score: # Compute BLEU score between the source and back translation
+        print(f"Computing chrF++ scores for {len(data['results'])} sentences...")
+        for i, result in enumerate(data['results'], start=1):
+            print(f"Computing chrF++ score for sentence {i}/{len(data['results'])} ({i/len(data['results'])*100:.2f}%)", end='\r')
+            # if bleu score is already computed, skip
+            if 'chrf_score' in result:
+                continue
+            back_translation = result['translation']['back_translation']
+            if not back_translation:
+                if not skip_errors:
+                    raise ValueError(f"Missing back translation for the following result:\n{json.dumps(result, indent=2, ensure_ascii=False)}\n")
+                logging.warning(f"Missing back translation for the following result:\n{json.dumps(result, indent=2, ensure_ascii=False)}\n")
+                result['chrf_score'] = 0
+            elif back_translation == "N/A":
+                result['chrf_score'] = 0
+            else:
+                result['chrf_score'] = compute_chrf(result['translation']['source'], back_translation)
             if do_save:
                 file_path.write_text(json.dumps(data, indent=2, ensure_ascii=False))
         print(" " * 100, end='\r')
@@ -373,6 +415,51 @@ def plot_bleu_score():
         plt.savefig(savepath)
         plt.close()
 
+def plot_chrf_score():
+    df = load_data(compute_chrf_score=True)
+
+    df_bleu = df[['translator', 'model', 'sentence_type', 'chrf_score']]
+    grouped_data = df_bleu.groupby(['translator', 'model', 'sentence_type']).agg(
+        median_bleu=('chrf_score', 'median'),
+        q1_bleu=('chrf_score', lambda x: x.quantile(0.25)),
+        q3_bleu=('chrf_score', lambda x: x.quantile(0.75))
+    ).reset_index()
+    grouped_data['error_y_plus'] = grouped_data['q3_chrf'] - grouped_data['median_chrf']
+    grouped_data['error_y_minus'] = grouped_data['median_chrf'] - grouped_data['q1_chrf']
+
+    bar_width = 0.2  # Width of each bar
+    x_positions = np.arange(len(CATEGORY_ORDERS['sentence_type']))  # X-axis positions for the sentence types
+
+    for model in grouped_data['model'].unique():
+        plt.figure(figsize=(10, 6))
+        subset = grouped_data[grouped_data['model'] == model]
+
+        for i, translator in enumerate(CATEGORY_ORDERS['translator']):
+            data = subset[subset['translator'] == translator]
+            if not data.empty:
+                # Offset each translator's bars by its index position
+                plt.bar(
+                    x_positions + i * bar_width,
+                    data['median_chrf'],
+                    width=bar_width,
+                    yerr=[data['error_y_minus'], data['error_y_plus']],
+                    label=translator,
+                    capsize=5,
+                    color=COLORS[i % len(COLORS)]  # Use colors from the list
+                )
+
+        plt.title(f'chrF++ Score by Sentence Type and Translator ({model})')
+        plt.xlabel('Sentence Type')
+        plt.ylabel('Median chrF++ Score')
+        plt.xticks(x_positions + bar_width * (len(CATEGORY_ORDERS['translator']) - 1) / 2,
+                   CATEGORY_ORDERS['sentence_type'], rotation=45)
+        plt.legend(title='Translator')
+        plt.tight_layout()
+
+        savepath = thisdir / f'plots/chrf_score_{model}.{FILETYPE}'
+        savepath.parent.mkdir(exist_ok=True, parents=True)
+        plt.savefig(savepath)
+        plt.close()
 def plot_cost():
     df = load_data(compute_semantic_similarity=False)
 
@@ -653,7 +740,7 @@ def get_interesting_examples():
 
 
 def main():
-    load_data(compute_semantic_similarity=True, compute_bleu_score=True)
+    load_data(compute_semantic_similarity=True, compute_bleu_score=True, compute_chrf_score=True)
     plot_bleu_score()
     # plot_semantic_similarity()
     # plot_translation_time()
