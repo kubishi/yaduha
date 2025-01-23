@@ -4,7 +4,7 @@ An LLM-RBMT tool for translating between English and Owens Valley Paiute (OVP).
 ## Installation
 1. Clone the repository
 ```bash	
-git clone git@github.com:kubishi/yaduha
+git clone https://github.com/kubishi/yaduha.git
 ```
 2. Install the package
 ```bash
