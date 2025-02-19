@@ -5,6 +5,7 @@ import numpy as np
 import pandas as pd
 from yaduha.rbo import RankingSimilarity
 import pathlib
+import argparse
 
 from yaduha.segment import (
     semantic_similarity_spacy, semantic_similarity_bert, 
@@ -44,7 +45,8 @@ def avg_displacement(truth: np.ndarray, arr: np.ndarray) -> float:
     return np.mean(np.abs(np.argsort(truth) - np.argsort(arr)))    
 
 def test_similarity():
-    sentences = json.loads((thisdir.parent / 'data' / 'semantic_sentences.json').read_text())
+    # prev: sentences = json.loads((thisdir.parent / 'scripts' /'data' / 'semantic_sentences.json').read_text())
+    sentences = json.loads((thisdir.parent / 'scripts' / 'data' / 'semantic_sentences.json').read_text())
     similarity_funcs = {
         "spacy": semantic_similarity_spacy,
         "bert": semantic_similarity_bert,
@@ -80,13 +82,16 @@ def test_similarity():
         
 
 def test_split_sentence():
-    sentence = "The writer is writing a book."
-    simple_sentences = split_sentence(sentence, model=os.environ['OPENAI_MODEL'])
-    print(simple_sentences)
-    simple_nl_sentence = '. '.join([make_sentence(sentence) for sentence in simple_sentences]) + '.'
-    print(simple_nl_sentence)
+    # Allow user to pass in example sentence to be segmented, or use default.
+    parser = argparse.ArgumentParser()
+    parser.add_argument("user_input", nargs="?", default="The dog fell yesterday", help="The input string to parse")
+    args = parser.parse_args()
+    sentence = args.user_input
+    simple_sentence = split_sentence(sentence, model=os.environ.get('OPENAI_MODEL', 'default_model'))
+
+    print(simple_sentence)
 
 if __name__ == '__main__':
     # main()
-    test_similarity()
+    # test_similarity()
     test_split_sentence()
