@@ -58,6 +58,11 @@ R_VERB_NOMINALIZERS = {
     'future': 'weidü',
 }
 
+R_POSSESSIVE_DETERMINERS = {
+    'my': ['i'],
+    'your': ['ü'],
+}
+
 def translate_simple(sentence: Dict[str, str]) -> Tuple[Subject, Verb, Object]:
     """Translate a simple English sentence to Paiute.
 
@@ -77,6 +82,9 @@ def translate_simple(sentence: Dict[str, str]) -> Tuple[Subject, Verb, Object]:
     verb = Verb(verb_stem, verb_tense, object_pronoun_prefix=None)
 
     _object = None
+    object_possessive = None
+    if (sentence.get('object_possessive_determiner')):
+        object_possessive = R_POSSESSIVE_DETERMINERS.get(sentence.get('object_possessive_determiner'))[0]         
     if (sentence.get('object') or '').strip(): # if there is an object
         if sentence['object'] in R_OBJECT_PRONOUNS:
             object_pronoun = random.choice(R_OBJECT_PRONOUNS.get(sentence['object'], [sentence['object']]))
@@ -85,29 +93,32 @@ def translate_simple(sentence: Dict[str, str]) -> Tuple[Subject, Verb, Object]:
             _object = {**R_TRANSITIVE_VERBS, **R_INTRANSITIVE_VERBS}.get(sentence['object'], f"[{sentence['object']}]")
             object_suffix = random.choice(['eika', 'oka'])
             object_nominalizer = R_VERB_NOMINALIZERS.get(sentence['object_nominalizer'], "dü")
-            _object = Object(_object, object_nominalizer, object_suffix)
+            _object = Object(_object, object_nominalizer, object_suffix, object_possessive)
         else:
             _object = R_NOUNS.get(sentence['object'], f"[{sentence['object']}]")
             object_pronoun = random.choice(R_OBJECT_PRONOUNS['it'])
             object_suffix = Object.get_matching_suffix(object_pronoun)
-            _object = Object(_object, None, object_suffix)
+            _object = Object(_object, None, object_suffix, object_possessive)
             # verb = f"{object_pronoun}-{verb}"
             verb = Verb(verb_stem, verb_tense, object_pronoun_prefix=object_pronoun)
 
+    subject_possessive = None
+    if (sentence.get('subject_possessive_determiner')):
+        subject_possessive = R_POSSESSIVE_DETERMINERS.get(sentence.get('subject_possessive_determiner'))[0]         
     if sentence.get('subject_nominalizer'):
         subject = {**R_TRANSITIVE_VERBS, **R_INTRANSITIVE_VERBS}.get(sentence['subject'], f"[{sentence['subject']}]")
         subject_suffix = random.choice(['ii', 'uu'])
         subject_nominalizer = R_VERB_NOMINALIZERS.get(sentence['subject_nominalizer'], "dü")
         # subject = f"{subject}-{subject_suffix}"
-        subject = Subject(subject, subject_nominalizer, subject_suffix)
+        subject = Subject(subject, subject_nominalizer, subject_suffix, subject_possessive=subject_possessive)
     elif sentence['subject'] in R_SUBJECT_PRONOUNS:
         subject = random.choice(R_SUBJECT_PRONOUNS.get(sentence['subject'], [sentence['subject']]))
-        subject = Subject(subject, subject_noun_nominalizer=None, subject_suffix=None)
+        subject = Subject(subject, subject_noun_nominalizer=None, subject_suffix=None, subject_possessive=subject_possessive)
     else:
         subject = R_NOUNS.get(sentence['subject'], f"[{sentence['subject']}]")
         subject_suffix = random.choice(['ii', 'uu'])
         # subject = f"{subject}-{subject_suffix}"
-        subject = Subject(subject, None, subject_suffix)
+        subject = Subject(subject, None, subject_suffix, subject_possessive=subject_possessive)
 
     return subject, verb, _object
 
