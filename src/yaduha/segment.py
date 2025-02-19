@@ -254,6 +254,8 @@ def split_sentence(sentence: str, model: str, res_callback: Optional[Callable[[C
             '(e.g., "run" -> "the runner", "the one who ran", "the one who will run"). ',
             'The present nominalizer should be used to describe those who always do the action (runner, drinker, cook(er), etc.). ',
             'nominalizer_tense must be either None or one of "present" or "future". ',
+            'Subjects and objects may be modified by possesive determiners. For example, "my house" or "their dog".',
+            'Tag possessive determiners which modify the subject with "subject_possessive_determiner" and those that modify the object with "object_possessive_determiner"',
         ])},
         {'role': 'user', 'content': 'I am sitting in a chair.'},
         {
@@ -356,6 +358,45 @@ def split_sentence(sentence: str, model: str, res_callback: Optional[Callable[[C
                 "arguments": json.dumps({
                     'sentences': [
                         {'subject': 'run', 'subject_nominalizer': 'present', 'verb': 'eat', 'verb_tense': 'future', 'object': 'fall', 'object_nominalizer': 'past'},
+                    ]
+                }),
+                "name": "set_sentences"
+            },
+        },
+        {'role': 'user', 'content': 'I saw my mom.'},
+        {
+            "role": "assistant",
+            "content": None,
+            "function_call": {
+                "arguments": json.dumps({
+                    'sentences': [
+                        {'subject': 'I', 'verb': 'see', 'verb_tense': 'past', 'object': 'mom', 'object_possessive_determiner': 'my'}
+                    ]
+                }),
+                "name": "set_sentences"
+            },
+        },
+        {'role': 'user', 'content': 'My dog chased her tail.'},
+        {
+            "role": "assistant",
+            "content": None,
+            "function_call": {
+                "arguments": json.dumps({
+                    'sentences': [
+                        {'subject': 'dog', 'subject_possessive_determiner': 'my', 'verb': 'chased', 'verb_tense': 'past', 'object': 'tail', 'object_possessive_determiner': 'her'}
+                    ]
+                }),
+                "name": "set_sentences"
+            },
+        },
+        {'role': 'user', 'content': 'Their family will go to the park next week.'},
+        {
+            "role": "assistant",
+            "content": None,
+            "function_call": {
+                "arguments": json.dumps({
+                    'sentences': [
+                        {'subject': 'family', 'subject_possessive_determiner': 'their', 'verb': 'go', 'verb_tense': 'future', 'object': 'park', 'object_determiner': 'the', 'time': 'next week'}
                     ]
                 }),
                 "name": "set_sentences"
