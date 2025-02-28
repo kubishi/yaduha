@@ -2,6 +2,7 @@ import json
 import logging
 from typing import Callable, Optional
 from openai.types.chat import ChatCompletion
+from litellm import completion
 
 import dotenv
 import openai
@@ -151,7 +152,14 @@ def translate(subject_noun: str,
         *examples,
         {'role': 'user', 'content': json.dumps(structure)}
     ]
-    res = openai.chat.completions.create(
+
+    # res = openai.chat.completions.create(
+    #     model=model,
+    #     messages=messages,
+    #     timeout=10,
+    #     temperature=0.0
+    # )
+    res = completion(
         model=model,
         messages=messages,
         timeout=10,
@@ -163,3 +171,4 @@ def translate(subject_noun: str,
     # remove '(' and ')' from the translation
     translation = translation.replace('(', '').replace(')', '')
     return translation
+

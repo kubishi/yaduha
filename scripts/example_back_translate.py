@@ -13,7 +13,7 @@ from yaduha.sentence_builder import format_sentence, get_random_sentence, get_ra
 def translate_random(_get_random_sentence: Optional[Callable[[], dict]] = get_random_sentence):
     choices = _get_random_sentence()
     sentence_details = format_sentence(**{key: value['value'] for key, value in choices.items()})
-    translation = translate(**{key: value['value'] for key, value in choices.items()})
+    translation = translate(**{key: value['value'] for key, value in choices.items()}, model="gemini/gemini-1.5-flash")
     print(f"Sentence: {sentence_to_str(sentence_details)}")
     print(f"Translation: {translation}")
 
