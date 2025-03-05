@@ -1,14 +1,16 @@
 import time
-import openai
 import os
 
 from yaduha.base import Translation, Translator
 from yaduha.sentence_builder import LENIS_MAP, NOUNS, Verb, Subject, Object
 
+import openai
+from litellm import completion
+
 class InstructionsTranslator(Translator):
     def __init__(self, model: str):
         self.model = model
-        self.client = openai.Client(api_key=os.environ.get('OPENAI_API_KEY'))
+        self.client = completion#openai.Client(api_key=os.environ.get('OPENAI_API_KEY'))
 
     def translate(self, text: str) -> str:
         start_time = time.time()
@@ -76,7 +78,8 @@ class InstructionsTranslator(Translator):
             }
         ]
 
-        res = self.client.chat.completions.create(
+        # res = self.client.chat.completions.create(
+        res = self.client(
             model=self.model,
             messages=messages,
             temperature=0.0,

@@ -13,6 +13,7 @@ from ..sentence_builder import format_sentence, get_all_choices, sentence_to_str
 from ..back_translate import translate as translate_ovp2eng
 from ..base import Translator, Translation
 
+from litellm import completion
 
 class AgenticTranslator(Translator):
     """Translator that takes an agentive approach to translation.
@@ -36,7 +37,7 @@ class AgenticTranslator(Translator):
         # create temporary directory for examples that doesn't delete automatically
         self._examples_dir = None
         if model is not None:
-            self.openai_client = openai.Client(api_key=os.environ.get("OPENAI_API_KEY"))
+            self.openai_client = completion #openai.Client(api_key=os.environ.get("OPENAI_API_KEY"))
             self._examples_dir = tempfile.TemporaryDirectory()
             self._build_examples()
 
@@ -193,7 +194,8 @@ class AgenticTranslator(Translator):
                 messages.append({"role": "user", "content": prompt})
                 logging.info(f"{self.openai_model}: {prompt}")
                 model_calls += 1
-                res = self.openai_client.chat.completions.create(
+                # res = self.openai_client.chat.completions.create(
+                res = self.openai_client(
                     model=self.openai_model,
                     messages=messages,
                     temperature=0.0
@@ -207,7 +209,8 @@ class AgenticTranslator(Translator):
                 while choice not in choices and not (allow_wild and choice.startswith('[') and choice.endswith(']')):
                     messages.append({"role": "user", "content": f"Invalid choice. Please try again.\n{prompt}"})
                     model_calls += 1
-                    res = self.openai_client.chat.completions.create(
+                    # res = self.openai_client.chat.completions.create(
+                    res = self.openai_client(
                         model=self.openai_model,
                         messages=messages,
                         temperature=0.0

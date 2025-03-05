@@ -11,6 +11,7 @@ import numpy as np
 import openai
 from openai.types.chat import ChatCompletion
 import numpy as np
+from litellm import completion, embedding
 
 if TYPE_CHECKING:
     from sentence_transformers import SentenceTransformer
@@ -160,7 +161,8 @@ def _get_openai_embeddings(model: str, *sentences: str) -> Dict[str, np.ndarray]
 
     new_sentences = [s for s in sentences if s not in embeddings]
     if new_sentences:
-        res = get_openai_client().embeddings.create(
+        # res = get_openai_client().embeddings.create(
+        res = embedding(
             input=new_sentences,
             model=model,
             encoding_format="float"
@@ -259,7 +261,7 @@ def split_sentence(sentence: str, model: str, res_callback: Optional[Callable[[C
         {
             "role": "assistant",
             "content": None,
-            "function_call": {
+            "functionCall": {
                 "arguments": json.dumps({
                     'sentences': [
                         {'subject': 'I', 'verb': 'sit', 'verb_tense': 'present_continuous', 'object': None},
@@ -272,7 +274,7 @@ def split_sentence(sentence: str, model: str, res_callback: Optional[Callable[[C
         {
             "role": "assistant",
             "content": None,
-            "function_call": {
+            "functionCall": {
                 "arguments": json.dumps({
                     'sentences': [
                         {'subject': 'run', 'subject_nominalizer': 'past', 'verb': 'sit', 'verb_tense': 'present_continuous', 'object': None},
@@ -285,7 +287,7 @@ def split_sentence(sentence: str, model: str, res_callback: Optional[Callable[[C
         {
             "role": "assistant",
             "content": None,
-            "function_call": {
+            "functionCall": {
                 "arguments": json.dumps({
                     'sentences': [
                         {'subject': 'dog', 'verb': 'chase', 'verb_tense': 'past_continuous', 'object': 'tail'},
@@ -298,7 +300,7 @@ def split_sentence(sentence: str, model: str, res_callback: Optional[Callable[[C
         {
             "role": "assistant",
             "content": None,
-            "function_call": {
+            "functionCall": {
                 "arguments": json.dumps({
                     'sentences': [
                         {'subject': 'drink', 'subject_nominalizer': 'present', 'verb': 'eat', 'verb_tense': 'present', 'object': None},
@@ -311,7 +313,7 @@ def split_sentence(sentence: str, model: str, res_callback: Optional[Callable[[C
         {
             "role": "assistant",
             "content": None,
-            "function_call": {
+            "functionCall": {
                 "arguments": json.dumps({
                     'sentences': [
                         {'subject': 'book', 'verb': 'sit', 'verb_tense': 'present', 'object': None},
@@ -324,7 +326,7 @@ def split_sentence(sentence: str, model: str, res_callback: Optional[Callable[[C
         {
             "role": "assistant",
             "content": None,
-            "function_call": {
+            "functionCall": {
                 "arguments": json.dumps({
                     'sentences': [
                         {'subject': 'boy', 'verb': 'talk', 'verb_tense': 'past', 'object': None},
@@ -337,7 +339,7 @@ def split_sentence(sentence: str, model: str, res_callback: Optional[Callable[[C
         {
             "role": "assistant",
             "content": None,
-            "function_call": {
+            "functionCall": {
                 "arguments": json.dumps({
                     'sentences': [
                         {'subject': 'I', 'verb': 'see', 'verb_tense': 'past', 'object': 'man'},
@@ -352,7 +354,7 @@ def split_sentence(sentence: str, model: str, res_callback: Optional[Callable[[C
         {
             "role": "assistant",
             "content": None,
-            "function_call": {
+            "functionCall": {
                 "arguments": json.dumps({
                     'sentences': [
                         {'subject': 'run', 'subject_nominalizer': 'present', 'verb': 'eat', 'verb_tense': 'future', 'object': 'fall', 'object_nominalizer': 'past'},
@@ -363,19 +365,24 @@ def split_sentence(sentence: str, model: str, res_callback: Optional[Callable[[C
         },
         {'role': 'user', 'content': sentence},
     ]
-    response = get_openai_client().chat.completions.create(
+    response = completion(
         model=model,
         messages=messages,
-        functions=functions,
-        function_call={'name': 'set_sentences'},
+        tools=functions,
+        # tool_choice={'name': 'set_sentences'},
+        tool_choice={"type": "function", "function": {"name": "set_sentences"}},
         temperature=0.0,
         timeout=10,
     )
     if res_callback:
         res_callback(response)
     response_message = response.choices[0].message
-    function_args = json.loads(response_message.function_call.arguments)
-    return function_args.get('sentences')
+
+    #NOTE: tool_use is a list im only grabbing the first item
+    function_args = json.loads(response_message.tool_calls[0].function.arguments)
+
+    # function_args = json.loads(response_message.function_call.arguments)
+    return [function_args.get('sentences')] # NOTE: is this supposed to be a list?
 
 def hash_dict(func):
     """Transform mutable dictionnary
@@ -436,7 +443,7 @@ def make_sentence(sentence: Dict, model: str, res_callback: Optional[Callable[[C
         {
             'role': 'assistant',
             'content': None,
-            'function_call': {
+            'functionCall': {
                 'arguments': json.dumps({'sentence': 'He [VERB]-ed a dog'}),
                 'name': 'make_sentence'
             }
@@ -448,7 +455,7 @@ def make_sentence(sentence: Dict, model: str, res_callback: Optional[Callable[[C
         {
             'role': 'assistant',
             'content': None,
-            'function_call': {
+            'functionCall': {
                 'arguments': json.dumps({'sentence': '[SUBJECT] was drinking'}),
                 'name': 'make_sentence'
             }
@@ -460,7 +467,7 @@ def make_sentence(sentence: Dict, model: str, res_callback: Optional[Callable[[C
         {
             'role': 'assistant',
             'content': None,
-            'function_call': {
+            'functionCall': {
                 'arguments': json.dumps({'sentence': 'I saw a man'}),
                 'name': 'make_sentence'
             }
@@ -472,7 +479,7 @@ def make_sentence(sentence: Dict, model: str, res_callback: Optional[Callable[[C
         {
             'role': 'assistant',
             'content': None,
-            'function_call': {
+            'functionCall': {
                 'arguments': json.dumps({'sentence': 'The one who drank stood'}),
                 'name': 'make_sentence'
             }
@@ -484,7 +491,7 @@ def make_sentence(sentence: Dict, model: str, res_callback: Optional[Callable[[C
         {
             'role': 'assistant',
             'content': None,
-            'function_call': {
+            'functionCall': {
                 'arguments': json.dumps({'sentence': 'The walker drank'}),
                 'name': 'make_sentence'
             }
@@ -494,16 +501,21 @@ def make_sentence(sentence: Dict, model: str, res_callback: Optional[Callable[[C
             'content': json.dumps(sentence)
         }
     ]
-    response = get_openai_client().chat.completions.create(
+    # response = get_openai_client().chat.completions.create(
+    response = completion(
         model=model,
         messages=messages,
-        functions=functions,
-        function_call={'name': 'make_sentence'},
+        # functions=functions,
+        # functionCall={'name': 'make_sentence'},
+        tools=functions,
+        tool_choice={"type": "function", "function": {"name": "make_sentence"}},
         temperature=0.0,
         timeout=10,
     )
     if res_callback:
         res_callback(response)
     response_message = response.choices[0].message
-    function_args = json.loads(response_message.function_call.arguments)
+    # function_args = json.loads(response_message.functionCall.arguments)
+    function_args = json.loads(response_message.tool_calls[0].function.arguments)
+    print(function_args)
     return function_args.get('sentence')

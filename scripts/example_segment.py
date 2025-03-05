@@ -11,6 +11,8 @@ from yaduha.segment import (
     semantic_similarity_sentence_transformers, semantic_similarity_openai,
     split_sentence, make_sentence, nlp
 )
+import dotenv
+dotenv.load_dotenv()
 
 thisdir = pathlib.Path(__file__).parent.absolute()
 
@@ -25,9 +27,9 @@ def main(): # pylint: disable=missing-function-docstring
         "The dog and the cat were running."
     ]
     for source_sentence in source_sentences:
-        simple_sentences = split_sentence(source_sentence, model=os.environ['OPENAI_MODEL'])
+        simple_sentences = split_sentence(source_sentence, model=model)
         print(simple_sentences)
-        simple_nl_sentence = '. '.join([make_sentence(sentence) for sentence in simple_sentences]) + '.'
+        simple_nl_sentence = '. '.join([make_sentence(sentence, model=model) for sentence in simple_sentences]) + '.'
 
         print(f"Source sentence: {source_sentence}")
         print(f"Simple sentences: {simple_nl_sentence}")
@@ -81,12 +83,13 @@ def test_similarity():
 
 def test_split_sentence():
     sentence = "The writer is writing a book."
-    simple_sentences = split_sentence(sentence, model=os.environ['OPENAI_MODEL'])
+    model = "gemini/gemini-1.5-flash" #os.environ['OPENAI_MODEL']
+    simple_sentences = split_sentence(sentence, model=model)
     print(simple_sentences)
-    simple_nl_sentence = '. '.join([make_sentence(sentence) for sentence in simple_sentences]) + '.'
+    simple_nl_sentence = '. '.join([make_sentence(sentence, model=model) for sentence in simple_sentences]) + '.'
     print(simple_nl_sentence)
 
 if __name__ == '__main__':
     # main()
-    test_similarity()
+    # test_similarity()
     test_split_sentence()

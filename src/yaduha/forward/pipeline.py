@@ -186,7 +186,8 @@ class PipelineTranslator(Translator):
                     object_noun=_object.noun if _object else None,
                     object_noun_nominalizer=_object.object_noun_nominalizer if _object else None,
                     object_suffix=_object.object_suffix if _object else None,
-                    res_callback=res_callback_backwards
+                    res_callback=res_callback_backwards,
+                    model = self.model
                 ).strip(".")
             )
             back_translation_time += time.time() - back_translation_start_time

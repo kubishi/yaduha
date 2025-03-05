@@ -116,8 +116,9 @@ complex_sentences = {
     "The birds fluttered around and chirped in the tree.": "The birds fluttered. The birds chirped.",
 }
 def random_complex_translations(savepath: pathlib.Path,
+                                model: str = "gpt-4o-mini",
                                 overwrite: bool = False):
-    translator = PipelineTranslator(model="gpt-4o-mini")
+    translator = PipelineTranslator(model=model)
     df = pd.DataFrame(columns=["ovp", "eng", "simple"])
     if savepath.exists():
         if not overwrite:
@@ -141,10 +142,11 @@ def random_complex_translations(savepath: pathlib.Path,
 
 def main():
     overwrite = False
-    random_translations(
-        datadir / "random_good_translations.csv",
-        overwrite=overwrite
-    )
+    model = "gemini/gemini-1.5-flash"
+    # random_translations(
+    #     datadir / "random_good_translations.csv",
+    #     overwrite=overwrite
+    # )
     # random_translations(
     #     datadir / "random_no_subject_noun.csv",
     #     n=25,
@@ -178,10 +180,11 @@ def main():
     #     replace_object_noun=True,
     #     replace_verb=True
     # )
-    # random_complex_translations(
-    #     datadir / "random_complex_translations.csv",
-    #     overwrite=overwrite
-    # )
+    random_complex_translations(
+        datadir / "random_complex_translations.csv",
+        overwrite=overwrite,
+        model=model
+    )
 
 
 
