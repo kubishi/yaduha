@@ -1,0 +1,38 @@
+[
+    {
+        "role": "user",
+        "content": "Give me a prompt"
+    },
+    {
+        "role": "assistant",
+        "content": "where is my dog?"
+    },
+    {
+        "role": "user",
+        "content": "Hanno 'i-doogü'?"
+    },
+    {
+        "role": "assistant",
+        "content": "The sun is shining brightly."
+    },
+    {
+        "role": "user",
+        "content": "Tabedua' kusida tagammi"
+    },
+    {
+        "role": "assistant",
+        "content": "I like apples"
+    },
+    {
+        "role": "user",
+        "content": "Nü'ü 'aaponu'-na pijabi-ti."
+    },
+    {
+        "role": "assistant",
+        "content": "This dog is jumping"
+    },
+    {
+        "role": "user",
+        "content": "'ikka toogü' wooppi-ti"
+    }
+]

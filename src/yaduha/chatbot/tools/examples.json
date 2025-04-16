@@ -1,0 +1,194 @@
+[
+    {
+        "query": "How do you say 'where is my dog?' in Paiute?",
+        "tool_calls": [
+            {
+                "function": "search_sentences",
+                "arguments": {
+                    "query": "where is my dog?"
+                }
+            },
+            {
+                "function": "search_grammar",
+                "arguments": {
+                    "query": "question words, possessive pronouns"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "where"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "dog"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "to be, is, am, are"
+                }
+            }
+        ]
+    },
+    {
+        "query": "What are some words for different animals in Paiute?",
+        "tool_calls": [
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "animal, bear, dog, rabbit, eagle, snake"
+                }
+            }
+        ]
+    },
+    {
+        "query": "How does sentence structure work in Paiute?",
+        "tool_calls": [
+            {
+                "function": "search_grammar",
+                "arguments": {
+                    "query": "sentence structure"
+                }
+            }
+        ]
+    },
+    {
+        "query": "That rock is going to hit this cat.' in Paiute?",
+        "tool_calls": [
+            {
+                "function": "search_sentences",
+                "arguments": {
+                    "query": "That rock is going to hit this cat."
+                }
+            },
+            {
+                "function": "search_grammar",
+                "arguments": {
+                    "query": "verb tenses"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "That"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "Rock"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "Hit"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "Cat"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "Going"
+                }
+            }
+        ]
+    },
+    {
+        "query": "That dog is chasing that bear.' in Paiute?",
+        "tool_calls": [
+            {
+                "function": "search_sentences",
+                "arguments": {
+                    "query": "That dog is chasing that bear."
+                }
+            },
+            {
+                "function": "search_grammar",
+                "arguments": {
+                    "query": "question words, possessive pronouns"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "That"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "Dog"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "Chase"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "Bear"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "is"
+                }
+            }
+        ]
+    },
+    {
+        "query": "They are visiting the jackrabbit.' in Paiute?",
+        "tool_calls": [
+            {
+                "function": "search_sentences",
+                "arguments": {
+                    "query": "They are visiting the jackrabbit."
+                }
+            },
+            {
+                "function": "search_grammar",
+                "arguments": {
+                    "query": "question words, possessive pronouns"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "They"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "visit"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "jackrabbit"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "are, visiting, the"
+                }
+            }
+        ]
+    }
+]

@@ -1,0 +1,272 @@
+Query: Dog eats cat
+
+Function: search_sentences
+Arguments: {'query': 'Dog eats cat.'}
+Result: [{'Feed the dog.': "'Ishabugu-neikka 'a-ŵaka."}, {'Pet your dog.': "'Ü-bugu-neikka 'a-ŵattanigi."}, {'Pet your dog.': "'Ü-bugu-neikka a-ŵattanügi."}, {'His cat went underneath the house.': "'U-giidi'-uu nobi-neikka 'a-duha-gwee mia-ti."}, {'Go feed your dog.': "'Ü-bugu-nokka 'u-ŵakka-gaa."}]
+
+Function: search_grammar
+Arguments: {'query': 'subject-verb-object order'}
+Result: ['Pronominal subjects tend to gravitate to the position following the first word of the clause.', '3.4.4.1. Subject relative clauses', '2.3.1. Word order\nThe predominant order of Eastern Mono is SOV when the subject and object are both fully specified nominals. Word order is not rigid, however. The pronominal subject of a main clause as well as stylistic considerations, such as focus, quite frequently correlate with variations in word order.', 'clausal verb, and may take either accusative or possessive morphology. As the final example illustrates, subject complement clauses are not morphologically distinct from headless object relative clauses.', 'The pronominal subject of the Western Mono example, as often happens, follows the first constituent, which happens to be object of the adverbial clause.']
+
+Function: search_english
+Arguments: {'query': 'Dog'}
+Result: {'kwidapugu': 'dog', "toogü'": 'dog', "'ishabugu": 'dog', "pukkupida'": 'pet', "'uunuppi": 'wolf'}
+
+Function: search_english
+Arguments: {'query': 'Eats'}
+Result: {'tüka': 'eat', "su'a": 'eat up', 'nakkamu': 'eat (gluttonously)', "pagwidüka'": 'fish eater', 'küttaŵa': 'eat with bread'}
+
+Function: search_english
+Arguments: {'query': 'Cat'}
+Result: {"kiidi'": 'cat', "'ishabugu": 'dog', 'kwidapugu': 'dog', "ka'udza'": 'fox sp.', 'wiheetsiti': 'mountain lion'}
+
+Paiute: kwidapugu-uu kiidi'-noka tükati
+
+Query: That dog sleeps
+
+Function: search_sentences
+Arguments: {'query': 'That dog sleeps.'}
+Result: [{'Pet your dog.': "'Ü-bugu-neikka 'a-ŵattanigi."}, {'Pet your dog.': "'Ü-bugu-neikka a-ŵattanügi."}, {"Where's your dog?": "Hanno 'ü-gwidapugu-uu?"}, {'Go feed your dog.': "'Ü-bugu-nokka 'u-ŵakka-gaa."}, {'Feed the dog.': "'Ishabugu-neikka 'a-ŵaka."}]
+
+Function: search_grammar
+Arguments: {'query': 'question words, possessive pronouns'}
+Result: ['3.1.4.3. Possessive pronouns', 'Independent possessive pronouns are mildly emphatic. When used in construction with a possessed nominal, they precede that nominal.', '2.13. Possessives', 'Independent possessive pronouns may be used to form an emphatic expression of possession. The independent possessive pronoun directly precedes the possessed noun and must be reiterated by a possessive pronominal prefix.', 'In possessive constructions, the possessed nominal must take a possessive pronominal prefix indicating the person and number of the possessor. If present, the possessor nominal may be marked for either accusative or possessive case. Possessive morphology is used to mark the subject of certain nominalizations as well as the object of some postpositions.']
+
+Function: search_english
+Arguments: {'query': 'That'}
+Result: {"'ukkahu(na)": 'that', 'mii': 'that', 'miihi': 'that (quotative)', "'aannihi": 'that, like', "'aanni'": 'that kind'}
+
+Function: search_english
+Arguments: {'query': 'Dog'}
+Result: {'kwidapugu': 'dog', "toogü'": 'dog', "'ishabugu": 'dog', "pukkupida'": 'pet', "'uunuppi": 'wolf'}
+
+Function: search_english
+Arguments: {'query': 'Sleep'}
+Result: {"'üwi": 'sleep', 'nüngahabi': 'nap', 'sooŵei': 'rest', "'üpaya'i": 'sleepy', "'ütsaddaduha": 'talk in sleep'}
+
+Paiute: 'ukkahu kwidapugu 'üwi
+
+Query: I eat bread
+
+Function: search_sentences
+Arguments: {'query': 'I eat bread.'}
+Result: [{'Once I get my bread.': "'I-gumasaa'-aa wüü-ku-si."}, {'We sure do have a lot of bread.': "Taagwa-dii awa-ggu kumasaa'a-ga."}, {'Go and bake some bread.': "'A-gumasaa-gaa."}, {"After I cook a large amount of bread, I'll go over there.": "Awa-kida'a-ggu kumasaa-tei-shi 'aannaha mia-wei."}, {"I'm baking bread to show (how it's made).": 'Kumasaa-si nüü tü-zapitaŵa-ti.'}]
+
+Function: search_grammar
+Arguments: {'query': 'verb tenses'}
+Result: ['verb stem - ADV - PL - MODAL - TENSE/ASPECT', '3.2.3.2. Future tense', '2.24.5. Tense and aspect', '3.2.3.1. Present/Past tense x-"ti ', '3.2.3. Tense and aspect marking']
+
+Function: search_english
+Arguments: {'query': 'I'}
+Result: {'nüü': 'I', "'uhuŵa": 'they', '-honno': 'with', 'pahükkabü': 'ice', 'watsü': 'four'}
+
+Function: search_english
+Arguments: {'query': 'eat'}
+Result: {'tüka': 'eat', "su'a": 'eat up', 'nakkamu': 'eat (gluttonously)', 'küttaŵa': 'eat with bread', 'makka': 'feed'}
+
+Function: search_english
+Arguments: {'query': 'bread'}
+Result: {"kumasaa'": 'bread', "kummapada'": 'pan bread', 'kummapada': 'bread', "tümatsipanga'": 'bread pan', 'kumasawa': 'bake'}
+
+Paiute: Nü tüka kumasaa'.Query: This dog is jumping
+
+Function: search_sentences
+Arguments: {'query': 'This dog is jumping.'}
+Result: [{'My dog always does that, makes water splash.': "'I-doogü-uu-düa-su 'unnihi mani-ki'ei paya-wee-tugu pattagwüna'i-ti."}, {"There's your dog again, hungry, coming in a hurry.": "Ia-düa ü-'ishabugu-uu tsihaaya'i-shi kimma-ddabi-taa'i-dü."}, {'The frogs jump into the water.': 'Yagwaza-ii wooppi-ti paya-wee-tugu.'}, {'My dog is going alongside the house.': "'I-doogü'-uu 'a-güŵa-duha nobi-neikka mia-ti."}, {"Your dog, he doesn't like diving into the water each time?": "'Ümikkana-ya' ü-doogü-mü-uu kadu'-wa' uhu-büü panattahabi-kaa-'ei?"}]
+
+Function: search_grammar
+Arguments: {'query': 'question words, possessive pronouns'}
+Result: ['3.1.4.3. Possessive pronouns', 'Independent possessive pronouns are mildly emphatic. When used in construction with a possessed nominal, they precede that nominal.', '2.13. Possessives', 'Independent possessive pronouns may be used to form an emphatic expression of possession. The independent possessive pronoun directly precedes the possessed noun and must be reiterated by a possessive pronominal prefix.', 'In possessive constructions, the possessed nominal must take a possessive pronominal prefix indicating the person and number of the possessor. If present, the possessor nominal may be marked for either accusative or possessive case. Possessive morphology is used to mark the subject of certain nominalizations as well as the object of some postpositions.']
+
+Function: search_english
+Arguments: {'query': 'This'}
+Result: {"'ukkahu(na)": 'that', "'ikka": 'this', "'inno'oiddu": 'this (amount)', 'inniddunihi': 'this, like', "'inni'iggu": 'this kind (object)'}
+
+Function: search_english
+Arguments: {'query': 'Dog'}
+Result: {'kwidapugu': 'dog', "toogü'": 'dog', "'ishabugu": 'dog', "pukkupida'": 'pet', "'uunuppi": 'wolf'}
+
+Function: search_english
+Arguments: {'query': 'Jumping'}
+Result: {'wubuki': 'jump', "nattagwüna'i": 'jump', 'wooppi': 'jump', 'yotsi': 'fly', "masooma'i": 'bounce'}
+
+Function: search_english
+Arguments: {'query': 'is'}
+Result: {'-honno': 'with', "'ukkahu(na)": 'that', 'hii': 'what', "'uhuŵa": 'they', 'miihi': 'that (quotative)'}
+
+Paiute: 'ikka toogü' wooppi-ti
+
+Query: I like apples.
+
+Function: search_sentences
+Arguments: {'query': 'I like apples.'}
+Result: [{'And they will eat the apples that have been mashed up.': "'Aaponu-neikka 'a-sawa-nna 'oonno'oho 'a-na-wügiju'u-nna tüka-wei."}, {'I like sugar.': 'Nüü suga-na pijabi-ti.'}, {"I'll scape (the skin) off the apples and make pie.": "Nüü aaponu'-eikka a-wüsiba-si pai'i-du-wei."}, {'I like school.': "Nüü 'a-bijabi-ti 'i-na-düniwaa-nna."}, {'Yes! I like you.': "Nüü-dei 'ü-sutsamaa'i-ti."}]
+
+Function: search_grammar
+Arguments: {'query': 'question words, possessive pronouns'}
+Result: ['3.1.4.3. Possessive pronouns', 'Independent possessive pronouns are mildly emphatic. When used in construction with a possessed nominal, they precede that nominal.', '2.13. Possessives', 'Independent possessive pronouns may be used to form an emphatic expression of possession. The independent possessive pronoun directly precedes the possessed noun and must be reiterated by a possessive pronominal prefix.', 'In possessive constructions, the possessed nominal must take a possessive pronominal prefix indicating the person and number of the possessor. If present, the possessor nominal may be marked for either accusative or possessive case. Possessive morphology is used to mark the subject of certain nominalizations as well as the object of some postpositions.']
+
+Function: search_english
+Arguments: {'query': 'I'}
+Result: {'nüü': 'I', "'uhuŵa": 'they', '-honno': 'with', 'pahükkabü': 'ice', 'watsü': 'four'}
+
+Function: search_english
+Arguments: {'query': 'like'}
+Result: {'-nikku': 'like (object)', "-manni'i": 'like', '-niddu': 'like', "'unnihi": 'like that', '-ni': 'like'}
+
+Function: search_english
+Arguments: {'query': 'apples'}
+Result: {"'aaponu'": 'apple', 'sonotobü': 'grapes', 'wia': 'acorn', "wadümaana'": 'watermelon', "wia'ikibi": 'acorn mush'}
+
+Paiute: Nü'ü 'aaponu'-na pijabi-ti.
+
+User response: The sun is shining bright today.
+
+Function: search_sentences
+Arguments: {'query': 'The sun is shining bright today.'}
+Result: [{'The sun is coming out.': "Tei-dabedua'-ii tapona-kini."}, {'The sun is coming out now.': 'Tsibui-ti müha tabedua-dü-ii.'}, {'The sun is now coming up.': 'Tsibui-dü muŵaha tabedua-dü-ii.'}, {'It was sunny for one day.': "Sümü'ü-gwee-su tabedua-ti."}, {'On the other hand, it might be a sunny day.': 'Subaa-düa tsaŵu tabe-dua-weidü-ii-su-düa.'}]
+
+Function: search_grammar
+Arguments: {'query': 'question words, possessive pronouns'}
+Result: ['3.1.4.3. Possessive pronouns', 'Independent possessive pronouns are mildly emphatic. When used in construction with a possessed nominal, they precede that nominal.', '2.13. Possessives', 'Independent possessive pronouns may be used to form an emphatic expression of possession. The independent possessive pronoun directly precedes the possessed noun and must be reiterated by a possessive pronominal prefix.', 'In possessive constructions, the possessed nominal must take a possessive pronominal prefix indicating the person and number of the possessor. If present, the possessor nominal may be marked for either accusative or possessive case. Possessive morphology is used to mark the subject of certain nominalizations as well as the object of some postpositions.']
+
+Function: search_english
+Arguments: {'query': 'The sun'}
+Result: {"tabedua'": 'sun', "tabesu'a": 'sunshine', 'tadugubaattü': 'sky', 'tabedua': 'sunlight', 'tabedzibui': 'sunrise'}
+
+Function: search_english
+Arguments: {'query': 'is shining'}
+Result: {'paddadziga': 'shimmer', 'kusida': 'light', 'tazinuba': 'star', "tabesu'a": 'sunshine', "ütsabaya'i": 'show off'}
+
+Function: search_english
+Arguments: {'query': 'bright'}
+Result: {'kusida': 'light', 'pusuwi': 'hazy', 'mutsukiha': 'blink', "'oha-": 'yellow', 'naamüdüyaa': 'lively'}
+
+Function: search_english
+Arguments: {'query': 'today'}
+Result: {"mii'i": 'now a days', "miinno'oho": 'this time', "'inno'ohosu": 'currently (these days)', 'yongo': 'yesterday', "'annikku": 'now'}
+
+Paiute: Tabedua' kusida mii'i.
+
+User response: The sun is shining brightly.
+
+Function: search_sentences
+Arguments: {'query': 'The sun is shining brightly.'}
+Result: [{'The sun is coming out.': "Tei-dabedua'-ii tapona-kini."}, {'The sun is coming out now.': 'Tsibui-ti müha tabedua-dü-ii.'}, {'The sun is now coming up.': 'Tsibui-dü muŵaha tabedua-dü-ii.'}, {'Done snowed (sun shining).': 'Nübaa-kaa-pü.'}, {'On the other hand, it might be a sunny day.': 'Subaa-düa tsaŵu tabe-dua-weidü-ii-su-düa.'}]
+
+Function: search_grammar
+Arguments: {'query': 'question words, possessive pronouns'}
+Result: ['3.1.4.3. Possessive pronouns', 'Independent possessive pronouns are mildly emphatic. When used in construction with a possessed nominal, they precede that nominal.', '2.13. Possessives', 'Independent possessive pronouns may be used to form an emphatic expression of possession. The independent possessive pronoun directly precedes the possessed noun and must be reiterated by a possessive pronominal prefix.', 'In possessive constructions, the possessed nominal must take a possessive pronominal prefix indicating the person and number of the possessor. If present, the possessor nominal may be marked for either accusative or possessive case. Possessive morphology is used to mark the subject of certain nominalizations as well as the object of some postpositions.']
+
+Function: search_english
+Arguments: {'query': 'The sun'}
+Result: {"tabedua'": 'sun', "tabesu'a": 'sunshine', 'tadugubaattü': 'sky', 'tabedua': 'sunlight', 'tabedzibui': 'sunrise'}
+
+Function: search_english
+Arguments: {'query': 'is shining'}
+Result: {'paddadziga': 'shimmer', 'kusida': 'light', 'tazinuba': 'star', "tabesu'a": 'sunshine', "ütsabaya'i": 'show off'}
+
+Function: search_english
+Arguments: {'query': 'brightly'}
+Result: {'tagammi': 'openly', 'mutsukiha': 'blink', 'kusida': 'light', "'oha-": 'yellow', 'tabedua': 'sunlight'}
+
+Paiute: Tabedua' kusida tagammi.
+
+User response: The sun is bright today.
+
+Function: search_sentences
+Arguments: {'query': 'The sun is bright today.'}
+Result: [{'The sun is coming out.': "Tei-dabedua'-ii tapona-kini."}, {'The sun is coming out now.': 'Tsibui-ti müha tabedua-dü-ii.'}, {'The sun is now coming up.': 'Tsibui-dü muŵaha tabedua-dü-ii.'}, {'It was sunny for one day.': "Sümü'ü-gwee-su tabedua-ti."}, {'On the other hand, it might be a sunny day.': 'Subaa-düa tsaŵu tabe-dua-weidü-ii-su-düa.'}]
+
+Function: search_grammar
+Arguments: {'query': 'question words, possessive pronouns'}
+Result: ['3.1.4.3. Possessive pronouns', 'Independent possessive pronouns are mildly emphatic. When used in construction with a possessed nominal, they precede that nominal.', '2.13. Possessives', 'Independent possessive pronouns may be used to form an emphatic expression of possession. The independent possessive pronoun directly precedes the possessed noun and must be reiterated by a possessive pronominal prefix.', 'In possessive constructions, the possessed nominal must take a possessive pronominal prefix indicating the person and number of the possessor. If present, the possessor nominal may be marked for either accusative or possessive case. Possessive morphology is used to mark the subject of certain nominalizations as well as the object of some postpositions.']
+
+Query: The cat is sleeping.
+
+Function: search_sentences
+Arguments: {'query': 'The cat is sleeping.'}
+Result: [{'He slept the whole time.': "Süŵüttünaa 'uhu 'üwi-tei-pü."}, {'The one pretending to sleep is laying down with his eyes closed but\n                            not sleeping.': "'Isha-'üwi-dü-uu mutsuga-si habi-tügü-ti püünuhu ka' 'üwi-dü."}, {'The bears are all *sleeping at this time.': "Mii'ukka pahabichi-uu-büü 'ükooi-nawi-ti."}, {'I am sitting down *sleeping.': "Nüü 'üwi-katü-dü."}, {'Maybe everyone is asleep not making no noise.': "Tu'ihaga-ii subaa 'ükkooi-shi kadu' tü-zinakai-ti."}]
+
+Function: search_grammar
+Arguments: {'query': 'question words, possessive pronouns'}
+Result: ['3.1.4.3. Possessive pronouns', 'Independent possessive pronouns are mildly emphatic. When used in construction with a possessed nominal, they precede that nominal.', '2.13. Possessives', 'Independent possessive pronouns may be used to form an emphatic expression of possession. The independent possessive pronoun directly precedes the possessed noun and must be reiterated by a possessive pronominal prefix.', 'In possessive constructions, the possessed nominal must take a possessive pronominal prefix indicating the person and number of the possessor. If present, the possessor nominal may be marked for either accusative or possessive case. Possessive morphology is used to mark the subject of certain nominalizations as well as the object of some postpositions.']
+
+Function: search_english
+Arguments: {'query': 'The'}
+Result: {"'uhuŵa": 'they', 'ui-': 'them', 'mahuŵa': 'those', "'üü": 'you', '-honno': 'with'}
+
+Function: search_english
+Arguments: {'query': 'Cat'}
+Result: {"kiidi'": 'cat', "'ishabugu": 'dog', 'kwidapugu': 'dog', "ka'udza'": 'fox sp.', 'wiheetsiti': 'mountain lion'}
+
+Function: search_english
+Arguments: {'query': 'Sleep'}
+Result: {"'üwi": 'sleep', 'nüngahabi': 'nap', 'sooŵei': 'rest', "'üpaya'i": 'sleepy', "'ütsaddaduha": 'talk in sleep'}
+
+Function: search_english
+Arguments: {'query': 'is'}
+Result: {'-honno': 'with', "'ukkahu(na)": 'that', 'hii': 'what', "'uhuŵa": 'they', 'miihi': 'that (quotative)'}
+
+Paiute: kiidi'-uu '\u00fcwi-ti
+
+User response: The cat is sleeping.
+
+Paiute: kiidi'-uu '\u00fcwi-ti
+
+User response: The cat is sleeping.
+
+Paiute: kiidi'-uu '\u00fcwi-ti
+
+User response: The sky is blue.
+
+Function: search_sentences
+Arguments: {'query': 'The sky is blue.'}
+Result: [{'Everything is green.': "Tu'ihii puhidua-dü."}, {"Yesterday, it was cloudy. It's good though today.": 'Yongo-ukka tongo-a-ti. Tabewano-ikka-büü tsaŵu-ddu.'}, {'(Cloudy) Yesterday was cloudy. Today though is nice.': 'Tongo-a (cloudy) Yongo-ukka tongo-a-ti. Tabewano-ikka-büü tsaŵu-ddu.'}, {'Are your pants black or are they blue?': "Mahu-wa' ü-gusa-ii tupanagi-dü yeishi-wa' mahu puhibanagi-dü?"}, {'On the other hand, it might be a sunny day.': 'Subaa-düa tsaŵu tabe-dua-weidü-ii-su-düa.'}]
+
+Function: search_grammar
+Arguments: {'query': 'question words, possessive pronouns'}
+Result: ['3.1.4.3. Possessive pronouns', 'Independent possessive pronouns are mildly emphatic. When used in construction with a possessed nominal, they precede that nominal.', '2.13. Possessives', 'Independent possessive pronouns may be used to form an emphatic expression of possession. The independent possessive pronoun directly precedes the possessed noun and must be reiterated by a possessive pronominal prefix.', 'In possessive constructions, the possessed nominal must take a possessive pronominal prefix indicating the person and number of the possessor. If present, the possessor nominal may be marked for either accusative or possessive case. Possessive morphology is used to mark the subject of certain nominalizations as well as the object of some postpositions.']
+
+Function: search_english
+Arguments: {'query': 'The'}
+Result: {"'uhuŵa": 'they', 'ui-': 'them', 'mahuŵa': 'those', "'üü": 'you', '-honno': 'with'}
+
+Function: search_english
+Arguments: {'query': 'Sky'}
+Result: {'tadugupaadabe': 'sky', 'tugubaattü': 'sky', 'tadugubaattü': 'sky', 'tongoa': 'cloudy', 'tugubaa': 'high up'}
+
+Function: search_english
+Arguments: {'query': 'Blue'}
+Result: {"kotsokotso'": 'blue jay', "'oha-": 'yellow', 'tadugubaattü': 'sky', "'ubuu'iha": 'liver (blue thing)', 'tadugupaadabe': 'sky'}
+
+Query: The bird is flying.
+
+Function: search_sentences
+Arguments: {'query': 'The bird is flying.'}
+Result: [{'The bird is flying.': "Tsiipa'-uu yotsi-ti."}, {'The bird is flying over the house.': "Tsiidoopi-ii süngaabü-neikka 'a-ba'a-gwee yotsi-ti."}, {'The bird flew over the tree.': "Tsiidoopi'-ii süngaabü-neikka 'a-ba'a-gwee yotsi-ti."}, {'The bird just went over the house.': "Tsiidoopi-uu nobi-neikka 'a-ba'a-gwee mia-hu."}, {'She sees the green bird.': "Mahu puhibanagi-dü-eikka tsiidoopi'-eikka 'a-buni-ti."}]
+
+Function: search_grammar
+Arguments: {'query': 'verb tenses'}
+Result: ['verb stem - ADV - PL - MODAL - TENSE/ASPECT', '3.2.3.2. Future tense', '2.24.5. Tense and aspect', '3.2.3.1. Present/Past tense x-"ti ', '3.2.3. Tense and aspect marking']
+
+Function: search_english
+Arguments: {'query': 'The'}
+Result: {"'uhuŵa": 'they', 'ui-': 'them', 'mahuŵa': 'those', "'üü": 'you', '-honno': 'with'}
+
+Function: search_english
+Arguments: {'query': 'Bird'}
+Result: {"tsiipa'": 'bird', "tsiidoopi'": 'bird', 'pakkodopa': 'black bird', "hiichizho'": 'dragonfly', "hiichido'": 'dragonfly'}
+
+Function: search_english
+Arguments: {'query': 'Fly'}
+Result: {"hiichido'": 'dragonfly', "hiichizho'": 'dragonfly', 'yotsi': 'fly', "kwatsa'i": 'fall', 'pattahabi': 'float'}
+
+Function: search_english
+Arguments: {'query': 'is'}
+Result: {'-honno': 'with', "'ukkahu(na)": 'that', 'hii': 'what', "'uhuŵa": 'they', 'miihi': 'that (quotative)'}
+
+Paiute: Tsiipa'-uu yotsi-ti.
+
+User response: The cat is sleeping
+
