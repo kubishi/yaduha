@@ -2,14 +2,12 @@ import logging
 from openai import OpenAI
 import os
 from dotenv import load_dotenv
-from tools.tools import tools, messages, messages_b, messages_translator, messages_translator_b
-from tools.functions import search_english 
+from .tools.tools import tools, messages, messages_b, messages_translator, messages_translator_b
+from .tools.functions import search_english 
 import json
 import argparse
-import readline
-import time
 
-from tools.functions import search_english, search_grammar, search_paiute, search_sentences
+from .tools.functions import search_english, search_grammar, search_paiute, search_sentences
 
 functions = {
     "search_english": search_english,
@@ -20,7 +18,6 @@ functions = {
 
 load_dotenv()
 
-OPENAI_MODEL = "gpt-4o"
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"),)
 
 welcome_art = r"""
@@ -52,7 +49,7 @@ def get_parser():
 
     return parser
 
-def run_chatbot(user: bool):
+def run_chatbot(user: bool, model: str = "gpt-4o-mini"):
     print(welcome_art)
 
     if user:
@@ -70,7 +67,7 @@ def run_chatbot(user: bool):
 
     while True:
         completion = client.chat.completions.create(
-            model=OPENAI_MODEL,
+            model=model,
             messages=messages,
             tools=tools,
             temperature=0.0,
@@ -116,7 +113,7 @@ def run_chatbot(user: bool):
             messages.append({"role": "user", "content": user_response})
             add_chatlog("User response: " + user_response + "\n\n", chatbot=True)
 
-def query_chatbot_b(message):
+def query_chatbot_b(message, model: str = "gpt-4o-mini"):
     query = {
         "role": "user",
         "content": message
@@ -124,7 +121,7 @@ def query_chatbot_b(message):
     messages_b.append(query)
 
     completion = client.chat.completions.create(
-        model=OPENAI_MODEL,
+        model=model,
         messages=messages_b,
         temperature=0.7,
     )
@@ -132,7 +129,7 @@ def query_chatbot_b(message):
     print("Query: " + completion.choices[0].message.content)
     return completion.choices[0].message.content
 
-def query_translator_b(message):
+def query_translator_b(message, model: str = "gpt-4o-mini"):
     query = {
         "role": "user",
         "content": message
@@ -140,7 +137,7 @@ def query_translator_b(message):
     messages_translator_b.append(query)
 
     completion = client.chat.completions.create(
-        model=OPENAI_MODEL,
+        model=model,
         messages=messages_translator_b,
         temperature=1.0,
     )
@@ -149,7 +146,7 @@ def query_translator_b(message):
 
     return completion.choices[0].message.content
 
-def run_translator(user):
+def run_translator(user, model: str = "gpt-4o-mini"):
     
     if user:
         query_question = input("Sentence: ")
@@ -167,7 +164,7 @@ def run_translator(user):
 
     while True:
         completion = client.chat.completions.create(
-            model=OPENAI_MODEL,
+            model=model,
             messages=messages_translator,
             tools=tools,
             temperature=0.0,
@@ -213,16 +210,18 @@ def run_translator(user):
             messages_translator.append({"role": "user", "content": user_response})
             add_chatlog("User response: " + user_response + "\n\n", chatbot=False)
 
-def translate(message):
-    query = {
-        "role": "user",
-        "content": message
-    }
-    messages_translator.append(query)
+def translate(message: str, model: str = "gpt-4o-mini"):
+    messages = [
+        *messages_translator,
+        {
+            "role": "user",
+            "content": message
+        }
+    ]
 
     completion = client.chat.completions.create(
-        model=OPENAI_MODEL,
-        messages=messages_translator,
+        model=model,
+        messages=messages,
         temperature=0.0,
     )
 
@@ -230,7 +229,8 @@ def translate(message):
         "translation_prompt_tokens": completion.usage.prompt_tokens,
         "translation_completion_tokens": completion.usage.completion_tokens,
         "translation_total_tokens": completion.usage.total_tokens,
-        "translation": completion.choices[0].message.content
+        "translation": completion.choices[0].message.content,
+        "messages": messages_translator
     }
     return response
 

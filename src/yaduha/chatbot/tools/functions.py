@@ -2,9 +2,10 @@ import requests
 import pathlib
 import dotenv
 from openai import OpenAI
-from tools.grammar import search_grammar as _search_grammar
 import json
 import os
+
+from yaduha.chatbot.tools.grammar import search_grammar as _search_grammar
 
 dotenv.load_dotenv()
 

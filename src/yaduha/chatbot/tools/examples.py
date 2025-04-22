@@ -3,7 +3,7 @@ import pathlib
 import random
 import string
 
-from tools.functions import search_english, search_grammar, search_paiute, search_sentences
+from .functions import search_english, search_grammar, search_paiute, search_sentences
 
 
 
