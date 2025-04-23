@@ -18,7 +18,7 @@ def main():
     args = parser.parse_args()
     translator = PipelineTranslator(model=args.model)
     translation = translator.translate(args.sentence)
-    print(translation.model_dump_json())
+    print(translation)
 
 if __name__ == '__main__':
     main()

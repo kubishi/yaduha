@@ -10,7 +10,7 @@ def main():
     ]
     for sentence in sentences:
         translation = translator.translate(sentence)
-        print(translation, end='\n\n')
+        print(translation)
 
 if __name__ == '__main__':
     main()

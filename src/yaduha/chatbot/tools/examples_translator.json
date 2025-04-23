@@ -1,0 +1,37 @@
+[
+    {
+        "query": "I am sitting in a chair.",
+        "tool_calls": [
+            {
+                "function": "search_sentences",
+                "arguments": {
+                    "query": "I am sitting in a chair."
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "I, me"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "sit"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "chair"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "in, on"
+                }
+            }
+        ]
+    }
+]

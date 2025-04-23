@@ -1,0 +1,88 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "GrammaticalParse",
+    "type": "object",
+    "required": ["sentence", "subject", "verb"],
+    "properties": {
+      "sentence": {
+        "type": "string"
+      },
+      "subject": {
+        "type": "object",
+        "required": ["head", "proximity", "part_of_speech", "number", "person"],
+        "properties": {
+          "head": { "type": "string" },
+          "determiner": { "type": "string" },
+          "proximity": {
+            "type": "string",
+            "enum": ["proximal", "distal"]
+          },
+          "adjectives": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "part_of_speech": { "type": "string" },
+          "number": {
+            "type": "string",
+            "enum": ["singular", "plural"]
+          },
+          "person": {
+            "type": "string",
+            "enum": ["first", "second", "third", "inclusive", "exclusive"]
+          },
+          "flags": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["plural", "inclusive", "exclusive"]
+            }
+          }
+        }
+      },
+      "verb": {
+        "type": "object",
+        "required": ["text", "lemma", "part_of_speech", "tense", "aspect", "mood", "voice"],
+        "properties": {
+          "text": { "type": "string" },
+          "lemma": { "type": "string" },
+          "part_of_speech": {
+            "type": "string",
+            "const": "verb"
+          },
+          "tense": { "type": "string" },
+          "aspect": { "type": "string" },
+          "mood": { "type": "string" },
+          "voice": { "type": "string" }
+        }
+      },
+      "object": {
+        "type": "object",
+        "required": ["head", "determiner", "part_of_speech", "number", "adjectives"],
+        "properties": {
+          "head": { "type": "string" },
+          "determiner": {
+            "type": "object",
+            "required": ["text", "reflexive"],
+            "properties": {
+              "text": { "type": "string" },
+              "reflexive": { "type": "boolean" }
+            }
+          },
+          "part_of_speech": {
+            "type": "string",
+            "const": "noun"
+          },
+          "number": {
+            "type": "string",
+            "enum": ["singular", "plural"]
+          },
+          "adjectives": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "additionalProperties": false
+  }
+  

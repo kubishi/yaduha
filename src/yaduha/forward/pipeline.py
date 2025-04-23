@@ -1,15 +1,24 @@
 """Functions for translating simple sentences from English to Paiute."""
+from copy import deepcopy
 from dataclasses import dataclass
 from functools import partial
+import json
 import os
+import pathlib
 import random
 import time
-from typing import Dict, List, Optional, Tuple, Union
+from typing import Callable, Dict, List, Optional, Tuple, Union
 
 from openai.types.chat import ChatCompletion
 
 from ..sentence_builder import NOUNS, Object, Subject, Verb
-from ..segment import make_sentence, semantic_similarity_transformers, semantic_similarity_openai, split_sentence
+from ..segment import (
+    EXAMPLE_SENTENCES, Sentence, SubjectNoun, Proximity, Person, Plurality,
+    Inclusivity, Tense, Aspect,
+    Pronoun, ObjectNoun, SentenceList, get_openai_client, 
+    semantic_similarity_transformers, semantic_similarity_openai, split_sentence
+)
+from ..segment import Verb as SegmentVerb
 from ..back_translate import translate as translate_ovp_to_english
 from ..base import Translator, Translation
 
@@ -24,92 +33,346 @@ R_TRANSITIVE_VERBS = {v: k for k, v in Verb.TRANSITIVE_VERBS.items()}
 R_INTRANSITIVE_VERBS = {v: k for k, v in Verb.INTRANSITIVE_VERBS.items()}
 R_NOUNS = {v: k for k, v in NOUNS.items()}
 
-R_OBJECT_PRONOUNS = {
-    'me': ['i'],
-    'you': ['ü'],
-    'him': ['u', 'a', 'ma'],
-    'her': ['u', 'a', 'ma'],
-    'it': ['u', 'a', 'ma'],
-    'us': ['tei', 'ni'],
-    'them': ['ui', 'ai', 'mai'],
-    'you all': ['üi'],
-}
 R_VERB_TENSES = {
-    'present': 'dü',
-    'past': 'ku',
-    'future': 'wei',
-    'past_continuous': 'ti',
-    'present_continuous': 'ti'
-}
-R_SUBJECT_PRONOUNS = {
-    'i': ['nüü'],
-    'you': ['üü'],
-    'he': ['uhu', 'mahu'],
-    'she': ['uhu', 'mahu'],
-    'it': ['uhu', 'mahu'],
-    'we': ['nüügwa', 'taagwa'],
-    'they': ['uhuw̃a', 'mahuw̃a'],
-    'you all': ['üügwa'],
-    'this': ['ihi']
-}
-R_VERB_NOMINALIZERS = {
-    'present': 'dü',
-    'past': 'pü',
-    'future': 'weidü',
+    Tense.present: {
+        Aspect.continuous: "ti",
+        Aspect.completive: "ti",
+        Aspect.simple: "dü",
+        Aspect.perfect: "pü"
+    },
+    Tense.past: {
+        Aspect.continuous: "ti",
+        Aspect.completive: "ku",
+        Aspect.simple: "ti",
+        Aspect.perfect: "pü"
+    },
+    Tense.future: {
+        Aspect.continuous: "wei",
+        Aspect.completive: "wei",
+        Aspect.simple: "wei",
+        Aspect.perfect: "wei"
+    },
 }
 
-def translate_simple(sentence: Dict[str, str]) -> Tuple[Subject, Verb, Object]:
-    """Translate a simple English sentence to Paiute.
+OBJECT_PRONOUN_MAP = {
+    'i': {
+        'person': Person.first,
+        'plurality': Plurality.singular,
+        'inclusivity': None,
+        'proximity': None,
+        'reflexive': None,
+    },
+    'ü': {
+        'person': Person.second,
+        'plurality': Plurality.singular,
+        'inclusivity': None,
+        'proximity': None,
+        'reflexive': None,
+    },
+    'u': {
+        'person': Person.third,
+        'plurality': Plurality.singular,
+        'inclusivity': None,
+        'proximity': Proximity.distal,
+        'reflexive': False,
+    },
+    'a': {
+        'person': Person.third,
+        'plurality': Plurality.singular,
+        'inclusivity': None,
+        'proximity': Proximity.proximal,
+        'reflexive': False,
+    },
+    'ma': {
+        'person': Person.third,
+        'plurality': Plurality.singular,
+        'inclusivity': None,
+        'proximity': Proximity.proximal,
+        'reflexive': False,
+    },
+    'ui': {
+        'person': Person.third,
+        'plurality': Plurality.plural,
+        'inclusivity': None,
+        'proximity': Proximity.distal,
+        'reflexive': False,
+    },
+    'ai': {
+        'person': Person.third,
+        'plurality': Plurality.plural,
+        'inclusivity': None,
+        'proximity': Proximity.proximal,
+        'reflexive': False,
+    },
+    'mai': {
+        'person': Person.third,
+        'plurality': Plurality.plural,
+        'inclusivity': None,
+        'proximity': Proximity.proximal,
+        'reflexive': False,
+    },
+    'ni': {
+        'person': Person.first,
+        'plurality': Plurality.plural,
+        'inclusivity': Inclusivity.exclusive,
+        'proximity': None,
+        'reflexive': None,
+    },
+    'tei': {
+        'person': Person.first,
+        'plurality': Plurality.plural,
+        'inclusivity': Inclusivity.inclusive,
+        'proximity': None,
+        'reflexive': None,
+    },
+    'ta': {
+        'person': Person.first,
+        'plurality': Plurality.dual,
+        'inclusivity': Inclusivity.inclusive,
+        'proximity': None,
+        'reflexive': None,
+    },
+    'üi': {
+        'person': Person.second,
+        'plurality': Plurality.plural,
+        'inclusivity': None,
+        'proximity': None,
+        'reflexive': None,
+    },
+    'tü': {
+        'person': Person.third,
+        'plurality': Plurality.singular,
+        'inclusivity': None,
+        'proximity': None,
+        'reflexive': True,
+    },
+    'tüi': {
+        'person': Person.third,
+        'plurality': Plurality.plural,
+        'inclusivity': None,
+        'proximity': None,
+        'reflexive': True,
+    },
+}
 
-    Args:
-        sentence (Dict[str, str]): A simple English sentence.
 
-    Returns:
-        List[Union[Subject, Verb, Object]]: A list of Paiute words.
-    """
-    sentence = {k: v.strip().lower() for k, v in sentence.items() if v}
-    if sentence.get('object'):
-        verb_stem = R_TRANSITIVE_VERBS.get(sentence['verb'], f"[{sentence['verb']}]")
-    else:
-        verb_stem = R_INTRANSITIVE_VERBS.get(sentence['verb'], R_TRANSITIVE_VERBS.get(sentence['verb'], f"[{sentence['verb']}]"))
+SUBJECT_PRONOUN_MAP = {
+    'nüü': {
+        'person': Person.first,
+        'plurality': Plurality.singular,
+        'inclusivity': None,
+        'proximity': None,
+        'reflexive': None,
+    },
+    'üü': {
+        'person': Person.second,
+        'plurality': Plurality.singular,
+        'inclusivity': None,
+        'proximity': None,
+        'reflexive': None,
+    },
+    'uhu': {
+        'person': Person.third,
+        'plurality': Plurality.singular,
+        'inclusivity': None,
+        'proximity': Proximity.distal,
+        'reflexive': False,
+    },
+    'mahu': {
+        'person': Person.third,
+        'plurality': Plurality.singular,
+        'inclusivity': None,
+        'proximity': Proximity.proximal,
+        'reflexive': False,
+    },
+    'uhuw̃a': {
+        'person': Person.third,
+        'plurality': Plurality.plural,
+        'inclusivity': None,
+        'proximity': Proximity.distal,
+        'reflexive': False,
+    },
+    'mahuw̃a': {
+        'person': Person.third,
+        'plurality': Plurality.plural,
+        'inclusivity': None,
+        'proximity': Proximity.proximal,
+        'reflexive': False,
+    },
+    'nüügwa': {
+        'person': Person.first,
+        'plurality': Plurality.plural,
+        'inclusivity': Inclusivity.exclusive,
+        'proximity': None,
+        'reflexive': None,
+    },
+    'taagwa': {
+        'person': Person.first,
+        'plurality': Plurality.plural,
+        'inclusivity': Inclusivity.inclusive,
+        'proximity': None,
+        'reflexive': None,
+    },
+    'taa': {
+        'person': Person.first,
+        'plurality': Plurality.dual,
+        'inclusivity': Inclusivity.inclusive,
+        'proximity': None,
+        'reflexive': None,
+    },
+    'üügwa': {
+        'person': Person.second,
+        'plurality': Plurality.plural,
+        'inclusivity': None,
+        'proximity': None,
+        'reflexive': None,
+    }
+}
 
-    verb_tense = R_VERB_TENSES.get(sentence['verb_tense'], f"[{sentence['verb_tense']}]")
-    verb = Verb(verb_stem, verb_tense, object_pronoun_prefix=None)
+POSSESSIVE_PRONOUN_MAP = OBJECT_PRONOUN_MAP.copy()
 
-    _object = None
-    if (sentence.get('object') or '').strip(): # if there is an object
-        if sentence['object'] in R_OBJECT_PRONOUNS:
-            object_pronoun = random.choice(R_OBJECT_PRONOUNS.get(sentence['object'], [sentence['object']]))
-            verb = Verb(verb_stem, verb_tense, object_pronoun_prefix=object_pronoun)
-        elif sentence.get('object_nominalizer'):
-            _object = {**R_TRANSITIVE_VERBS, **R_INTRANSITIVE_VERBS}.get(sentence['object'], f"[{sentence['object']}]")
-            object_suffix = random.choice(['eika', 'oka'])
-            object_nominalizer = R_VERB_NOMINALIZERS.get(sentence['object_nominalizer'], "dü")
-            _object = Object(_object, object_nominalizer, object_suffix)
+def _map_pronoun_to_string(object_pronoun: Pronoun, mapping: Dict[str, str]) -> str:
+    """Map an object pronoun to its Paiute string representation."""
+    matches = []
+    for paiute, attributes in mapping.items():
+        does_match = all(
+            attributes[attr] is None or attributes[attr] == getattr(object_pronoun, attr)
+            for attr in ['person', 'plurality', 'inclusivity', 'proximity', 'reflexive']
+        )
+        if does_match:
+            matches.append(paiute)
+
+    return random.choice(matches)
+
+def _map_subject_pronoun_to_string(subject_pronoun: Pronoun) -> str:
+    return _map_pronoun_to_string(subject_pronoun, SUBJECT_PRONOUN_MAP)
+
+def _map_object_pronoun_to_string(object_pronoun: Pronoun) -> str:
+    return _map_pronoun_to_string(object_pronoun, OBJECT_PRONOUN_MAP)
+
+def _map_possessive_pronoun_to_string(possessive_pronoun: Pronoun) -> str:
+    return _map_pronoun_to_string(possessive_pronoun, POSSESSIVE_PRONOUN_MAP)
+
+def _map_proximity_to_subject_suffix(proximity: Proximity) -> str:
+    return {'proximal': 'ii', 'distal': 'uu'}.get(proximity, 'ii')
+
+def _map_proximity_to_object_suffix(proximity: Proximity) -> str:
+    return {'proximal': 'eika', 'distal': 'oka'}.get(proximity, 'eika')
+
+def _map_tense_to_suffix(tense: str, aspect: str) -> str:
+    return R_VERB_TENSES.get(tense, {}).get(aspect, "dü")
+
+def _map_tense_to_nominalizer(tense: Tense) -> str:
+    return {
+        Tense.present: 'dü',
+        Tense.future: 'weidü',
+    }.get(tense, "dü")
+
+def translate_simple(sentence: Sentence) -> Tuple[Subject, Verb, Optional[Object]]:
+    """Translate a structured English sentence (Sentence object) to Paiute."""
+
+    # === SUBJECT ===
+    subj = sentence.subject
+    if isinstance(subj, Pronoun):
+        pronoun_form = _map_subject_pronoun_to_string(subj)
+        subject = Subject(pronoun_form, subject_noun_nominalizer=None, subject_suffix=None)
+    elif isinstance(subj, SubjectNoun):
+        head = subj.head
+        if isinstance(head, str):
+            noun = R_NOUNS.get(head.lower(), f"[{head}]")
+            nominalizer = None
+        elif isinstance(head, SegmentVerb):
+            eng_lemma = head.lemma.lower().strip()
+            noun = (
+                R_INTRANSITIVE_VERBS.get(eng_lemma) or
+                R_TRANSITIVE_VERBS.get(eng_lemma) or
+                f"[{eng_lemma}]"
+            )
+            nominalizer = _map_tense_to_nominalizer(head.tense)
         else:
-            _object = R_NOUNS.get(sentence['object'], f"[{sentence['object']}]")
-            object_pronoun = random.choice(R_OBJECT_PRONOUNS['it'])
-            object_suffix = Object.get_matching_suffix(object_pronoun)
-            _object = Object(_object, None, object_suffix)
-            # verb = f"{object_pronoun}-{verb}"
-            verb = Verb(verb_stem, verb_tense, object_pronoun_prefix=object_pronoun)
+            raise ValueError("Unsupported subject head type")
 
-    if sentence.get('subject_nominalizer'):
-        subject = {**R_TRANSITIVE_VERBS, **R_INTRANSITIVE_VERBS}.get(sentence['subject'], f"[{sentence['subject']}]")
-        subject_suffix = random.choice(['ii', 'uu'])
-        subject_nominalizer = R_VERB_NOMINALIZERS.get(sentence['subject_nominalizer'], "dü")
-        # subject = f"{subject}-{subject_suffix}"
-        subject = Subject(subject, subject_nominalizer, subject_suffix)
-    elif sentence['subject'] in R_SUBJECT_PRONOUNS:
-        subject = random.choice(R_SUBJECT_PRONOUNS.get(sentence['subject'], [sentence['subject']]))
-        subject = Subject(subject, subject_noun_nominalizer=None, subject_suffix=None)
+        subj_possessive_pronoun = None
+        if subj.possessive_determiner:
+            subj_possessive_pronoun = _map_possessive_pronoun_to_string(subj.possessive_determiner)
+
+        suffix = _map_proximity_to_subject_suffix(subj.proximity)
+        subject = Subject(
+            noun,
+            subject_noun_nominalizer=nominalizer,
+            subject_suffix=suffix,
+            possessive_pronoun=subj_possessive_pronoun
+        )
     else:
-        subject = R_NOUNS.get(sentence['subject'], f"[{sentence['subject']}]")
-        subject_suffix = random.choice(['ii', 'uu'])
-        # subject = f"{subject}-{subject_suffix}"
-        subject = Subject(subject, None, subject_suffix)
+        raise ValueError("Invalid subject structure")
+
+    # === VERB ===
+    verb_input = sentence.verb
+    eng_verb = verb_input.lemma.lower().strip()
+    paiute_stem = R_TRANSITIVE_VERBS.get(eng_verb)
+    if sentence.object is None:
+        paiute_stem = R_INTRANSITIVE_VERBS.get(eng_verb, paiute_stem)
+
+    if paiute_stem is None:
+        paiute_stem = f"[{eng_verb}]"
+
+    tense = _map_tense_to_suffix(verb_input.tense, verb_input.aspect)
+    object_pronoun_prefix = None
+    _object = None
+
+    # === OBJECT ===
+    if sentence.object:
+        obj = sentence.object
+        if isinstance(obj, Pronoun):
+            object_pronoun_prefix = _map_object_pronoun_to_string(obj)
+            matching_suffix = Object.get_matching_suffix(object_pronoun_prefix)
+            verb = Verb(paiute_stem, tense, object_pronoun_prefix=object_pronoun_prefix)
+            _object = None
+        elif isinstance(obj, ObjectNoun):
+            head = obj.head
+            if isinstance(head, str):
+                noun = R_NOUNS.get(head.lower(), f"[{head}]")
+                nominalizer = None
+            elif isinstance(head, SegmentVerb):
+                eng_lemma = head.lemma.lower().strip()
+                noun = (
+                    R_TRANSITIVE_VERBS.get(eng_lemma) or
+                    R_INTRANSITIVE_VERBS.get(eng_lemma) or
+                    f"[{eng_lemma}]"
+                )
+                nominalizer = _map_tense_to_nominalizer(head.tense.value)
+            else:
+                raise ValueError("Unsupported object head type")
+            
+            obj_possessive_pronoun = None
+            if obj.possessive_determiner:
+                obj_possessive_pronoun = _map_possessive_pronoun_to_string(obj.possessive_determiner)
+
+            suffix = _map_proximity_to_object_suffix(obj.proximity)
+            _object = Object(
+                noun,
+                object_noun_nominalizer=nominalizer,
+                object_suffix=suffix,
+                possessive_pronoun=obj_possessive_pronoun
+            )
+
+            object_pronoun_prefix = _map_object_pronoun_to_string(
+                Pronoun(
+                    person=Person.third,
+                    plurality=obj.plurality,
+                    proximity=obj.proximity,
+                    inclusivity=Inclusivity.exclusive,
+                    reflexive=False,
+                )
+            )
+            verb = Verb(paiute_stem, tense, object_pronoun_prefix=object_pronoun_prefix)
+        else:
+            raise ValueError("Invalid object structure")
+    else:
+        verb = Verb(paiute_stem, tense, object_pronoun_prefix=None)
 
     return subject, verb, _object
+
 
 def order_sentence(subject: Subject, verb: Verb, _object: Optional[Object] = None) -> List[Union[Subject, Verb, Object]]:
     if subject.noun in Subject.PRONOUNS:
@@ -118,27 +381,82 @@ def order_sentence(subject: Subject, verb: Verb, _object: Optional[Object] = Non
         sentence = [verb, subject] if _object is None else [_object, subject, verb]
     return sentence
 
-def comparator_sentence(simple_sentence: Dict[str, str]) -> str:
-    simple_sentence = {k: v.strip().lower() for k, v in simple_sentence.items() if v}
-    subject_nominalizer = simple_sentence.get('subject_nominalizer')
-    object_nominalizer = simple_sentence.get('object_nominalizer')
-    if subject_nominalizer is None:
-        if simple_sentence['subject'] not in {*R_SUBJECT_PRONOUNS, *R_NOUNS}:
-            simple_sentence['subject'] = '[SUBJECT]'
-    else:
-        if simple_sentence['subject'] not in {*R_TRANSITIVE_VERBS, *R_INTRANSITIVE_VERBS}:
-            simple_sentence['subject'] = '[SUBJECT]'
-    if simple_sentence['verb'] not in R_TRANSITIVE_VERBS and simple_sentence['verb'] not in R_INTRANSITIVE_VERBS:
-        simple_sentence['verb'] = '[VERB]'
+def comparator_sentence(simple_sentence: Sentence) -> Sentence:
+    simple_sentence = deepcopy(simple_sentence)
+
+    if isinstance(simple_sentence.subject, SubjectNoun):
+        head = simple_sentence.subject.head
+        if isinstance(head, str):
+            if head not in R_NOUNS:
+                simple_sentence.subject.head = "[SUBJECT]"
+        elif isinstance(head, SegmentVerb):
+            if head.lemma not in {*R_TRANSITIVE_VERBS, *R_INTRANSITIVE_VERBS}:
+                simple_sentence.subject.head.lemma = "[VERB]"
+
+    if isinstance(simple_sentence.verb, SegmentVerb):
+        if simple_sentence.verb.lemma not in {*R_TRANSITIVE_VERBS, *R_INTRANSITIVE_VERBS}:
+            simple_sentence.verb.lemma = "[VERB]"
     
-    if object_nominalizer is None:
-        if (simple_sentence.get('object') or '').strip() and simple_sentence['object'] not in {*R_NOUNS, *R_OBJECT_PRONOUNS}:
-            simple_sentence['object'] = '[OBJECT]'
-    else:
-        if (simple_sentence.get('object') or '').strip() and simple_sentence['object'] not in R_NOUNS:
-            simple_sentence['object'] = '[OBJECT]'
+    if simple_sentence.object:
+        if isinstance(simple_sentence.object, ObjectNoun):
+            head = simple_sentence.object.head
+            if isinstance(head, str):
+                if head not in R_NOUNS:
+                    simple_sentence.object.head = "[OBJECT]"
+            elif isinstance(head, SegmentVerb):
+                if head.lemma not in {*R_TRANSITIVE_VERBS, *R_INTRANSITIVE_VERBS}:
+                    simple_sentence.object.head.lemma = "[VERB]"
 
     return simple_sentence
+
+
+# create new make_sentence function using pydantic
+def make_sentence(sentence: Sentence, model: str, res_callback: Optional[Callable[[ChatCompletion], None]] = None) -> str:
+    messages = [
+        {
+            'role': 'system',
+            'content': (
+                'You are an assistant that takes structured data and generates simple SVO or SV natural language sentence. '
+                'Only add necessary articles and conjugations. '
+                'Do not add any other words.'
+                'When a subject or object is a verb, they are "nominalized" verbs as "past", "present", or "future" '
+                '(e.g., "run" -> "the runner", "the one who ran", "the one who will run"; "drink" -> "the drinker", "the one who drank", "the one who will drink"). '
+                'Leave words wrapped in square brackets (e.g. [SUBJECT]) as they are. '
+            )
+        }
+    ]
+
+    for example in EXAMPLE_SENTENCES:
+        sentences_obj: SentenceList = example['response']
+        comparator_sentences = SentenceList(
+            sentences=[
+                comparator_sentence(sentence) for sentence in sentences_obj.sentences
+            ]
+        )
+        messages.append({
+            'role': 'user',
+            'content': comparator_sentences.model_dump_json()
+        })
+        messages.append({
+            'role': 'assistant',
+            'content': example['comparator']
+        })
+
+    messages.append({
+        'role': 'user',
+        'content': sentence.model_dump_json()
+    })
+
+    client = get_openai_client()
+    response = client.chat.completions.create(
+        model=model,
+        messages=messages
+    )
+
+    if res_callback:
+        res_callback(response)
+
+    return response.choices[0].message.content
 
 class PipelineTranslator(Translator):
     def __init__(self, model: str):
@@ -169,7 +487,7 @@ class PipelineTranslator(Translator):
         target_simple_sentences = []
         backwards_translations = []
         back_translation_time = 0
-        for simple_sentence in simple_sentences:
+        for simple_sentence in simple_sentences.sentences:
             comparator_sentences.append(comparator_sentence(simple_sentence))
             subject, verb, _object = translate_simple(simple_sentence)
             target_simple_sentence = order_sentence(subject, verb, _object)
@@ -180,19 +498,22 @@ class PipelineTranslator(Translator):
                     subject_noun=subject.noun,
                     subject_noun_nominalizer=subject.subject_noun_nominalizer,
                     subject_suffix=subject.subject_suffix,
+                    subject_possessive_pronoun=subject.possessive_pronoun,
                     verb=verb.verb_stem,
                     verb_tense=verb.tense_suffix,
                     object_pronoun=verb.object_pronoun_prefix,
                     object_noun=_object.noun if _object else None,
                     object_noun_nominalizer=_object.object_noun_nominalizer if _object else None,
                     object_suffix=_object.object_suffix if _object else None,
+                    object_possessive_pronoun=_object.possessive_pronoun if _object else None,
                     res_callback=res_callback_backwards
                 ).strip(".")
             )
             back_translation_time += time.time() - back_translation_start_time
 
-        simple_sentences_nl = ". ".join([make_sentence(sentence, model=self.model, res_callback=res_callback) for sentence in simple_sentences]) + '.'
-        comparator_sentence_nl = ". ".join([make_sentence(sentence, model=self.model, res_callback=res_callback_backwards) for sentence in comparator_sentences]) + '.'
+        # simple_sentences_nl = ". ".join([make_sentence(sentence, model=self.model, res_callback=res_callback) for sentence in simple_sentences]) + '.'
+        simple_sentences_nl = make_sentence(simple_sentences, model=self.model, res_callback=res_callback)
+        comparator_sentence_nl = make_sentence(SentenceList(sentences=comparator_sentences), model=self.model, res_callback=res_callback_backwards)
         target_simple_sentence_nl = ". ".join(target_simple_sentences) + '.'
         backwards_translation_nl = ". ".join(backwards_translations) + '.'
 

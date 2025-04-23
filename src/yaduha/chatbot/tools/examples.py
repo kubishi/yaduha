@@ -2,6 +2,7 @@ import json
 import pathlib
 import random
 import string
+import argparse
 
 from .functions import search_english, search_grammar, search_paiute, search_sentences
 
@@ -22,12 +23,24 @@ functions = {
 }
 
 def main():
-    examples = json.loads((thisdir / "examples.json").read_text())
+    parser = argparse.ArgumentParser(description="Generate examples for the chatbot")
+    parser.add_argument("--input", default="examples.json", help="Path to the examples file")
+
+    args = parser.parse_args()
+
+    path_input = pathlib.Path(args.input).resolve()
+    if not path_input.exists():
+        raise FileNotFoundError(f"Input file {path_input} does not exist.")
+    
+    path_hydrated = path_input.parent / f"{path_input.stem}_hydrated.json"
+    path_output = path_input.parent / f"{path_input.stem}_messages.json"
+
+    examples = json.loads(path_input.read_text())
     prev_responses = {}
-    if (thisdir / "examples_hydrated.json").exists():
+    if path_hydrated.exists():
         prev_responses = {
             example["query"]: example["response"]
-            for example in json.loads((thisdir / "examples_hydrated.json").read_text())
+            for example in json.loads(path_hydrated.read_text())
         }
     for example in examples:
         print(f"Query: {example['query']}")
@@ -48,7 +61,7 @@ def main():
         print(f"Response: {example['response']}")
         print()
 
-    (thisdir / "examples_hydrated.json").write_text(json.dumps(examples, indent=2, ensure_ascii=False))
+    path_hydrated.write_text(json.dumps(examples, indent=2, ensure_ascii=False))
 
     # format as messages
     messages = []
@@ -85,7 +98,7 @@ def main():
             "content": example["response"]
         })
 
-    (thisdir / "example_messages.json").write_text(json.dumps(messages, indent=2, ensure_ascii=False))
+    path_output.write_text(json.dumps(messages, indent=2, ensure_ascii=False))
 
 
 if __name__ == "__main__":

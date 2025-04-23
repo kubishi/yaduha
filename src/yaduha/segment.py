@@ -1,11 +1,13 @@
 """Functions for segmenting complex sentences into sets of simple SVO or SV sentences."""
 import functools
 import hashlib
-import json
 import logging
 import os
 import pathlib
-from typing import Callable, Dict, List, Optional, TYPE_CHECKING
+from typing import Callable, Dict, List, Optional, TYPE_CHECKING, Union
+
+from enum import Enum
+from pydantic import BaseModel, ValidationError
 
 import numpy as np
 import openai
@@ -195,187 +197,440 @@ def semantic_similarity_openai_all_combinations(sentences: List[str], model: str
     similarities = (similarities + 1) / 2
     return similarities
 
-sentence_schema = {
-  "type": "object",
-  "properties": {
-    "subject": {
-      "type": "string",
-      "description": "The subject of the sentence. Must be a single word and singular (not plural)."
-    },
-    "verb": {
-      "type": "string",
-      "description": "The present-tense verb of the sentence. Must be a single word (infinitive without 'to')."
-    },
-    "verb_tense": {
-        "type": "string",
-        "description": "The tense of the verb. Must be one of: past, present, future.",
-        "enum": ["past", "present", "future", "past_continuous", "present_continuous"]
-    },
-    "object": {
-      "type": "string",
-      "description": "The object of the sentence (optional). Must be a single word and singular (not plural)."
-    }
-  },
-  "required": ["subject", "verb", "verb_tense"]
-}
+# Enumerations
+class Proximity(str, Enum):
+    proximal = "proximal"
+    distal = "distal"
 
-# @functools.lru_cache(maxsize=1000)
-def split_sentence(sentence: str, model: str, res_callback: Optional[Callable[[ChatCompletion], None]] = None) -> List[Dict]:
-    """Split a sentence into a set of simple SVO or SV sentences.
+class Person(str, Enum):
+    first = "first"
+    second = "second"
+    third = "third"
 
-    Args:
-        sentence (str): The sentence to split.
-        res_callback (Optional[Callable[[ChatCompletion], None]]): Callback function to be called with the completion response.
+class Plurality(str, Enum):
+    singular = "singular"
+    dual = "dual"
+    plural = "plural"
 
-    Returns:
-        list: A list of simple sentences.
-    """
-    functions = [
+class Inclusivity(str, Enum):
+    inclusive = "inclusive"
+    exclusive = "exclusive"
+
+class Tense(str, Enum):
+    past = "past"
+    present = "present"
+    future = "future"
+
+class Aspect(str, Enum):
+    completive = "completive"
+    continuous = "continuous"
+    simple = "simple"
+    perfect = "perfect"
+    
+
+class Verb(BaseModel):
+    text: str
+    lemma: str
+    tense: Tense
+    aspect: Aspect
+
+# Models
+class Pronoun(BaseModel):
+    person: Person
+    plurality: Plurality
+    proximity: Proximity
+    inclusivity: Inclusivity
+    reflexive: bool
+
+class Verb(BaseModel):
+    lemma: str
+    tense: Tense
+    aspect: Aspect
+
+class SubjectNoun(BaseModel):
+    head: Union[str, Verb]
+    possessive_determiner: Optional[Pronoun] = None
+    proximity: Proximity
+    plurality: Plurality
+
+class ObjectNoun(BaseModel):
+    head: Union[str, Verb]
+    possessive_determiner: Optional[Pronoun] = None
+    proximity: Proximity
+    plurality: Plurality
+
+class Sentence(BaseModel):
+    subject: Union[SubjectNoun, Pronoun]
+    verb: Verb
+    object: Optional[Union[ObjectNoun, Pronoun]] = None
+
+class SentenceList(BaseModel):
+    sentences: List[Sentence]
+
+# new split_sentence function using pydantic
+try:
+    EXAMPLE_SENTENCES = [
         {
-            'name': 'set_sentences',
-            'description': 'Set the simple sentences.',
-            'parameters': {
-                'type': 'object',
-                'properties': {
-                    'sentences': sentence_schema
-                },
-                'required': ['sentences']
-            }
+            "sentence": "I am sitting in a chair.",
+            "simple": "I am sitting.",
+            "comparator": "I am sitting.",
+            "response": SentenceList(
+                sentences=[
+                    Sentence(
+                        subject=Pronoun(
+                            person=Person.first,
+                            plurality=Plurality.singular,
+                            proximity=Proximity.proximal,
+                            inclusivity=Inclusivity.exclusive,
+                            reflexive=False
+                        ),
+                        verb=Verb(
+                            lemma="sit",
+                            tense=Tense.present,
+                            aspect=Aspect.continuous
+                        ),
+                        object=None
+                    )
+                ]
+            )
+        },
+        {
+            "sentence": "The one who ran has seen Rebecca and met her.",
+            "simple": "The one who ran has seen Rebecca. He met her.",
+            "comparator": "The one who ran has seen [OBJECT]. He [VERB] her.",
+            "response": SentenceList(
+                sentences=[
+                    Sentence(
+                        subject=SubjectNoun(
+                            head=Verb(
+                                lemma="run",
+                                tense=Tense.past,
+                                aspect=Aspect.completive
+                            ),
+                            possessive_determiner=None,
+                            proximity=Proximity.proximal,
+                            plurality=Plurality.singular  
+                        ),
+                        verb=Verb(
+                            lemma="see",
+                            tense=Tense.present,
+                            aspect=Aspect.perfect
+                        ),
+                        object=ObjectNoun(
+                            head="Rebecca",
+                            possessive_determiner=None,
+                            proximity=Proximity.proximal,
+                            plurality=Plurality.singular
+                        )
+                    ),
+                    Sentence(
+                        subject=Pronoun(
+                            person=Person.third,
+                            plurality=Plurality.singular,
+                            proximity=Proximity.proximal,
+                            inclusivity=Inclusivity.exclusive,
+                            reflexive=False
+                        ),
+                        verb=Verb(
+                            lemma="meet",
+                            tense=Tense.past,
+                            aspect=Aspect.simple
+                        ),
+                        object=Pronoun(
+                            person=Person.third,
+                            plurality=Plurality.singular,
+                            proximity=Proximity.proximal,
+                            inclusivity=Inclusivity.exclusive,
+                            reflexive=True
+                        ),
+                    )
+                ]
+            )
+        },
+        {
+            "sentence": "The dogs were chasing their tails.",
+            "simple": "The dogs were chasing their tails.",
+            "comparator": "The dogs were chasing their tails.",
+            "response": SentenceList(
+                sentences=[
+                    Sentence(
+                        subject=SubjectNoun(
+                            head="dog",
+                            proximity=Proximity.proximal,
+                            plurality=Plurality.plural
+                        ),
+                        verb=Verb(
+                            lemma="chase",
+                            tense=Tense.past,
+                            aspect=Aspect.continuous
+                        ),
+                        object=ObjectNoun(
+                            head="tail",
+                            possessive_determiner=Pronoun(
+                                person=Person.third,
+                                plurality=Plurality.plural,
+                                proximity=Proximity.proximal,
+                                inclusivity=Inclusivity.exclusive,
+                                reflexive=True
+                            ),
+                            proximity=Proximity.proximal,
+                            plurality=Plurality.plural
+                        )
+                    )
+                ]
+            )
+        },
+        {
+            "sentence": "The fighter is eating his red apple.",
+            "simple": "The fighter is eating his apple.",
+            "comparator": "The [VERB]-er is eating his apple.",
+            "response": SentenceList(
+                sentences=[
+                    Sentence(
+                        subject=SubjectNoun(
+                            head=Verb(
+                                lemma="fight",
+                                tense=Tense.present,
+                                aspect=Aspect.simple
+                            ),
+                            possessive_determiner=None,
+                            proximity=Proximity.proximal,
+                            plurality=Plurality.singular
+                        ),
+                        verb=Verb(
+                            lemma="eat",
+                            tense=Tense.present,
+                            aspect=Aspect.continuous
+                        ),
+                        object=ObjectNoun(
+                            head="apple",
+                            possessive_determiner=Pronoun(
+                                person=Person.first,
+                                plurality=Plurality.singular,
+                                proximity=Proximity.proximal,
+                                inclusivity=Inclusivity.exclusive,
+                                reflexive=True
+                            ),
+                            proximity=Proximity.proximal,
+                            plurality=Plurality.singular
+                        )
+                    )
+                ]
+            )
+        },
+        {
+            "sentence": "The book sits on the table.",
+            "simple": "The book sits.",
+            "comparator": "The [SUBJECT] sits.",
+            "response": SentenceList(
+                sentences=[
+                    Sentence(
+                        subject=SubjectNoun(
+                            head="book",
+                            possessive_determiner=None,
+                            proximity=Proximity.proximal,
+                            plurality=Plurality.singular
+                        ),
+                        verb=Verb(
+                            lemma="sit",
+                            tense=Tense.present,
+                            aspect=Aspect.simple
+                        ),
+                        object=None
+                    )
+                ]
+            )
+        },
+        {
+            "sentence": "The boy saw it.",
+            "simple": "The boy saw it.",
+            "comparator": "The [SUBJECT] saw it.",
+            "response": SentenceList(
+                sentences=[
+                    Sentence(
+                        subject=SubjectNoun(
+                            head="boy",
+                            possessive_determiner=None,
+                            proximity=Proximity.proximal,
+                            plurality=Plurality.singular
+                        ),
+                        verb=Verb(
+                            lemma="see",
+                            tense=Tense.past,
+                            aspect=Aspect.completive
+                        ),
+                        object=Pronoun(
+                            person=Person.third,
+                            plurality=Plurality.singular,
+                            proximity=Proximity.distal,
+                            inclusivity=Inclusivity.exclusive,
+                            reflexive=False
+                        )
+                    )
+                ]
+            )
+        },
+        {
+            "sentence": "I saw two men walking their dogs yesterday at Starbucks while drinking a cup of coffee",
+            "simple": "I saw men. They were walking dogs. They were drinking coffee.",
+            "comparator": "I saw [OBJECT]. They were walking dogs. They were drinking coffee.",
+            "response": SentenceList(
+                sentences=[
+                    Sentence(
+                        subject=Pronoun(
+                            person=Person.first,
+                            plurality=Plurality.singular,
+                            proximity=Proximity.proximal,
+                            inclusivity=Inclusivity.exclusive,
+                            reflexive=False
+                        ),
+                        verb=Verb(
+                            lemma="see",
+                            tense=Tense.past,
+                            aspect=Aspect.simple
+                        ),
+                        object=ObjectNoun(
+                            head="man",
+                            proximity=Proximity.distal,
+                            plurality=Plurality.dual
+                        )
+                    ),
+                    Sentence(
+                        subject=Pronoun(
+                            person=Person.third,
+                            plurality=Plurality.dual,
+                            proximity=Proximity.distal,
+                            inclusivity=Inclusivity.exclusive,
+                            reflexive=False
+                        ),
+                        verb=Verb(
+                            lemma="walk",
+                            tense=Tense.past,
+                            aspect=Aspect.continuous
+                        ),
+                        object=ObjectNoun(
+                            head="dog",
+                            possessive_determiner=Pronoun(
+                                person=Person.third,
+                                plurality=Plurality.dual,
+                                proximity=Proximity.proximal,
+                                inclusivity=Inclusivity.exclusive,
+                                reflexive=True
+                            ),
+                            proximity=Proximity.proximal,
+                            plurality=Plurality.plural
+                        )
+                    ),
+                    Sentence(
+                        subject=Pronoun(
+                            person=Person.third,
+                            plurality=Plurality.singular,
+                            proximity=Proximity.proximal,
+                            inclusivity=Inclusivity.exclusive,
+                            reflexive=False
+                        ),
+                        verb=Verb(
+                            lemma="drink",
+                            tense=Tense.past,
+                            aspect=Aspect.continuous
+                        ),
+                        object=ObjectNoun(
+                            head="coffee",
+                            possessive_determiner=None,
+                            proximity=Proximity.proximal,
+                            plurality=Plurality.singular
+                        )
+                    )
+                ]
+            )
+        },
+        {
+            "sentence": "That runner down the street will eat the one that has fallen.",
+            "simple": "That runner will eat the one that has fallen.",
+            "comparator": "That runner will eat the one that has fallen.",
+            "response": SentenceList(
+                sentences=[
+                    Sentence(
+                        subject=SubjectNoun(
+                            head=Verb(
+                                lemma="run",
+                                tense=Tense.present,
+                                aspect=Aspect.simple
+                            ),
+                            possessive_determiner=None,
+                            proximity=Proximity.distal,
+                            plurality=Plurality.singular
+                        ),
+                        verb=Verb(
+                            lemma="eat",
+                            tense=Tense.future,
+                            aspect=Aspect.simple
+                        ),
+                        object=ObjectNoun(
+                            head=Verb(
+                                lemma="fall",
+                                tense=Tense.present,
+                                aspect=Aspect.perfect
+                            ),
+                            possessive_determiner=None,
+                            proximity=Proximity.proximal,
+                            plurality=Plurality.singular
+                        )
+                    )
+                ]
+            )
+        },
+    ]
+except ValidationError as exc:
+    print(exc.errors())
+    raise exc
+
+def split_sentence(sentence: str, model: str, res_callback: Optional[Callable[[ChatCompletion], None]] = None) -> SentenceList:
+    messages = [
+        {
+            "role": "system",
+            "content": (
+                'You are an assistant that splits user input sentences into a set of simple SVO or SV sentences. '
+                'The set of simple sentences should be as semantically equivalent as possible to the user input sentence. '
+                'No adjectives, adverbs, prepositions, or conjunctions should be added to the simple sentences. '
+                'Indirect objects and objects of prepositions should not be included in the simple sentences. '
+                'Subjects and objects can be verbs (via nominalization) '
+                '(e.g., "run" -> "the runner", "the one who ran", "the one who will run"). '
+            )
         }
     ]
 
-    messages = [
-        {'role': 'system', 'content': "".join([
-            'You are an assistant that splits user input sentences into a set of simple SVO or SV sentences. ',
-            'The set of simple sentences should be as semantically equivalent as possible to the user input sentence. ',
-            'No adjectives, adverbs, prepositions, or conjunctions should be added to the simple sentences. ',
-            'Indirect objects and objects of prepositions should not be included in the simple sentences. ',
-            'Subjects and objects can be verbs IF they are "nominalized" as "present" or "future" ',
-            '(e.g., "run" -> "the runner", "the one who ran", "the one who will run"). ',
-            'The present nominalizer should be used to describe those who always do the action (runner, drinker, cook(er), etc.). ',
-            'nominalizer_tense must be either None or one of "present" or "future". ',
-        ])},
-        {'role': 'user', 'content': 'I am sitting in a chair.'},
-        {
-            "role": "assistant",
-            "content": None,
-            "function_call": {
-                "arguments": json.dumps({
-                    'sentences': [
-                        {'subject': 'I', 'verb': 'sit', 'verb_tense': 'present_continuous', 'object': None},
-                    ]
-                }),
-                "name": "set_sentences"
-            },
-        },
-        {'role': 'user', 'content': 'The one who ran is sitting.'},
-        {
-            "role": "assistant",
-            "content": None,
-            "function_call": {
-                "arguments": json.dumps({
-                    'sentences': [
-                        {'subject': 'run', 'subject_nominalizer': 'past', 'verb': 'sit', 'verb_tense': 'present_continuous', 'object': None},
-                    ]
-                }),
-                "name": "set_sentences"
-            },
-        },
-        {'role': 'user', 'content': 'The dogs were chasing their tails.'},
-        {
-            "role": "assistant",
-            "content": None,
-            "function_call": {
-                "arguments": json.dumps({
-                    'sentences': [
-                        {'subject': 'dog', 'verb': 'chase', 'verb_tense': 'past_continuous', 'object': 'tail'},
-                    ]
-                }),
-                "name": "set_sentences"
-            },
-        },
-        {'role': 'user', 'content': 'The drinker is eating.'},
-        {
-            "role": "assistant",
-            "content": None,
-            "function_call": {
-                "arguments": json.dumps({
-                    'sentences': [
-                        {'subject': 'drink', 'subject_nominalizer': 'present', 'verb': 'eat', 'verb_tense': 'present', 'object': None},
-                    ]
-                }),
-                "name": "set_sentences"
-            },
-        },
-        {'role': 'user', 'content': 'The book sits on the table.'},
-        {
-            "role": "assistant",
-            "content": None,
-            "function_call": {
-                "arguments": json.dumps({
-                    'sentences': [
-                        {'subject': 'book', 'verb': 'sit', 'verb_tense': 'present', 'object': None},
-                    ]
-                }),
-                "name": "set_sentences"
-            },
-        },
-        {'role': 'user', 'content': 'The boy talked about the girl.'},
-        {
-            "role": "assistant",
-            "content": None,
-            "function_call": {
-                "arguments": json.dumps({
-                    'sentences': [
-                        {'subject': 'boy', 'verb': 'talk', 'verb_tense': 'past', 'object': None},
-                    ]
-                }),
-                "name": "set_sentences"
-            },
-        },
-        {'role': 'user', 'content': 'I saw two men walking their dogs yesterday at Starbucks while drinking a cup of coffee'},
-        {
-            "role": "assistant",
-            "content": None,
-            "function_call": {
-                "arguments": json.dumps({
-                    'sentences': [
-                        {'subject': 'I', 'verb': 'see', 'verb_tense': 'past', 'object': 'man'},
-                        {'subject': 'man', 'verb': 'walk', 'verb_tense': 'past_continuous', 'object': 'dog'},
-                        {'subject': 'man', 'verb': 'drink', 'verb_tense': 'past_continuous', 'object': 'coffee'}
-                    ]
-                }),
-                "name": "set_sentences"
-            },
-        },
-        {'role': 'user', 'content': 'That runner down the street will eat the one that fell.'},
-        {
-            "role": "assistant",
-            "content": None,
-            "function_call": {
-                "arguments": json.dumps({
-                    'sentences': [
-                        {'subject': 'run', 'subject_nominalizer': 'present', 'verb': 'eat', 'verb_tense': 'future', 'object': 'fall', 'object_nominalizer': 'past'},
-                    ]
-                }),
-                "name": "set_sentences"
-            },
-        },
-        {'role': 'user', 'content': sentence},
-    ]
-    response = get_openai_client().chat.completions.create(
+    for example in EXAMPLE_SENTENCES:
+        sentences_obj: SentenceList = example['response']
+        messages.append({
+            'role': 'user',
+            'content': example['sentence']
+        })
+        messages.append({
+            'role': 'assistant',
+            'content': sentences_obj.model_dump_json(),
+        })
+
+    messages.append({
+        'role': 'user',
+        'content': sentence
+    })
+
+    client = get_openai_client()
+    response = client.beta.chat.completions.parse(
         model=model,
         messages=messages,
-        functions=functions,
-        function_call={'name': 'set_sentences'},
-        temperature=0.0,
-        timeout=10,
+        response_format=SentenceList
     )
+
     if res_callback:
         res_callback(response)
-    response_message = response.choices[0].message
-    function_args = json.loads(response_message.function_call.arguments)
-    return function_args.get('sentences')
+
+    sentences = response.choices[0].message.parsed
+
+    return sentences
+
+
 
 def hash_dict(func):
     """Transform mutable dictionnary
@@ -393,117 +648,3 @@ def hash_dict(func):
         return func(*args, **kwargs)
     return wrapped
 
-@hash_dict
-# @functools.lru_cache(maxsize=1000)
-def make_sentence(sentence: Dict, model: str, res_callback: Optional[Callable[[ChatCompletion], None]] = None) -> str:
-    """Generate a simple SVO or SV sentence from a schema.
-
-    Args:
-        sentence (dict): The sentence schema.
-
-    Returns:
-        str: The generated sentence.
-    """
-    functions = [
-        {
-            'name': 'make_sentence',
-            'description': 'Write a simple natural language sentence.',
-            'parameters': {
-                'type': 'object',
-                'properties': {
-                    'sentence': {'type': 'string'}
-                },
-                'required': ['sentence']
-            }
-        }
-    ]
-    messages = [
-        {
-            'role': 'system',
-            'content': (
-                'You are an assistant takes structured data and generates simple SVO or SV natural language sentence. '
-                'Only add add necessary articles and conjugations. '
-                'Do not add any other words.'
-                'When a subject_nominalizer or object_nominalizer is present, subjects are "nominalized" verbs as "past", "present", or "future" '
-                '(e.g., "run" -> "the runner", "the one who ran", "the one who will run"; "drink" -> "the drinker", "the one who drank", "the one who will drink"). '
-
-            )
-        },
-        {
-            'role': 'user',
-            'content': "{'subject': 'He', 'verb': '[VERB]', 'verb_tense': 'past', 'object': 'dog'}"
-        },
-        {
-            'role': 'assistant',
-            'content': None,
-            'function_call': {
-                'arguments': json.dumps({'sentence': 'He [VERB]-ed a dog'}),
-                'name': 'make_sentence'
-            }
-        },
-        {
-            'role': 'user',
-            'content': "{'subject': '[SUBJECT]', 'verb': 'drink', 'verb_tense': 'present_continuous'}"
-        },
-        {
-            'role': 'assistant',
-            'content': None,
-            'function_call': {
-                'arguments': json.dumps({'sentence': '[SUBJECT] was drinking'}),
-                'name': 'make_sentence'
-            }
-        },
-        {
-            'role': 'user',
-            'content': "{'subject': 'I', 'verb': 'see', 'verb_tense': 'past', 'object': 'man'}"
-        },
-        {
-            'role': 'assistant',
-            'content': None,
-            'function_call': {
-                'arguments': json.dumps({'sentence': 'I saw a man'}),
-                'name': 'make_sentence'
-            }
-        },
-        {
-            'role': 'user',
-            'content': "{'subject': 'drink', 'subject_nominalizer': 'past', 'verb': 'stand', 'verb_tense': 'present', 'object': None}"
-        },
-        {
-            'role': 'assistant',
-            'content': None,
-            'function_call': {
-                'arguments': json.dumps({'sentence': 'The one who drank stood'}),
-                'name': 'make_sentence'
-            }
-        },
-        {
-            'role': 'user',
-            'content': "{'subject': 'walk', 'subject_nominalizer': 'present', 'verb': 'drink', 'verb_tense': 'past', 'object': None}"
-        },
-        {
-            'role': 'assistant',
-            'content': None,
-            'function_call': {
-                'arguments': json.dumps({'sentence': 'The walker drank'}),
-                'name': 'make_sentence'
-            }
-        },
-        {
-            'role': 'user',
-            'content': json.dumps(sentence)
-        }
-    ]
-    response = get_openai_client().chat.completions.create(
-        model=model,
-        messages=messages,
-        functions=functions,
-        function_call={'name': 'make_sentence'},
-        temperature=0.0,
-        timeout=10,
-    )
-    if res_callback:
-        res_callback(response)
-    response_message = response.choices[0].message
-    function_args = json.loads(response_message.function_call.arguments)
-    return function_args.get('sentence')

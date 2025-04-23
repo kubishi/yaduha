@@ -1,0 +1,74 @@
+[
+  {
+    "role": "system",
+    "content": "You are an assistant that takes structured data and generates simple SVO or SV natural language sentence. Only add necessary articles and conjugations. Do not add any other words.When a subject or object is a verb, they are \"nominalized\" verbs as \"past\", \"present\", or \"future\" (e.g., \"run\" -> \"the runner\", \"the one who ran\", \"the one who will run\"; \"drink\" -> \"the drinker\", \"the one who drank\", \"the one who will drink\"). Leave words wrapped in square brackets (e.g. [SUBJECT]) as they are. "
+  },
+  {
+    "role": "user",
+    "content": "{\"sentences\":[{\"subject\":{\"person\":\"first\",\"plurality\":\"singular\",\"proximity\":\"proximal\",\"inclusivity\":\"exclusive\",\"reflexive\":false},\"verb\":{\"lemma\":\"sit\",\"tense\":\"present\",\"aspect\":\"continuous\"},\"object\":null}]}"
+  },
+  {
+    "role": "assistant",
+    "content": "I am sitting."
+  },
+  {
+    "role": "user",
+    "content": "{\"sentences\":[{\"subject\":{\"head\":{\"lemma\":\"run\",\"tense\":\"past\",\"aspect\":\"completive\"},\"possessive_determiner\":null,\"proximity\":\"proximal\",\"plurality\":\"singular\"},\"verb\":{\"lemma\":\"see\",\"tense\":\"present\",\"aspect\":\"perfect\"},\"object\":{\"head\":\"[OBJECT]\",\"possessive_determiner\":null,\"proximity\":\"proximal\",\"plurality\":\"singular\"}},{\"subject\":{\"person\":\"third\",\"plurality\":\"singular\",\"proximity\":\"proximal\",\"inclusivity\":\"exclusive\",\"reflexive\":false},\"verb\":{\"lemma\":\"[VERB]\",\"tense\":\"past\",\"aspect\":\"simple\"},\"object\":{\"person\":\"third\",\"plurality\":\"singular\",\"proximity\":\"proximal\",\"inclusivity\":\"exclusive\",\"reflexive\":true}}]}"
+  },
+  {
+    "role": "assistant",
+    "content": "The one who ran has seen [OBJECT]. He [VERB] her."
+  },
+  {
+    "role": "user",
+    "content": "{\"sentences\":[{\"subject\":{\"head\":\"dog\",\"possessive_determiner\":null,\"proximity\":\"proximal\",\"plurality\":\"plural\"},\"verb\":{\"lemma\":\"chase\",\"tense\":\"past\",\"aspect\":\"continuous\"},\"object\":{\"head\":\"tail\",\"possessive_determiner\":{\"person\":\"third\",\"plurality\":\"plural\",\"proximity\":\"proximal\",\"inclusivity\":\"exclusive\",\"reflexive\":true},\"proximity\":\"proximal\",\"plurality\":\"plural\"}}]}"
+  },
+  {
+    "role": "assistant",
+    "content": "The dogs were chasing their tails."
+  },
+  {
+    "role": "user",
+    "content": "{\"sentences\":[{\"subject\":{\"head\":{\"lemma\":\"[VERB]\",\"tense\":\"present\",\"aspect\":\"simple\"},\"possessive_determiner\":null,\"proximity\":\"proximal\",\"plurality\":\"singular\"},\"verb\":{\"lemma\":\"eat\",\"tense\":\"present\",\"aspect\":\"continuous\"},\"object\":{\"head\":\"apple\",\"possessive_determiner\":{\"person\":\"first\",\"plurality\":\"singular\",\"proximity\":\"proximal\",\"inclusivity\":\"exclusive\",\"reflexive\":true},\"proximity\":\"proximal\",\"plurality\":\"singular\"}}]}"
+  },
+  {
+    "role": "assistant",
+    "content": "The [VERB]-er is eating his apple."
+  },
+  {
+    "role": "user",
+    "content": "{\"sentences\":[{\"subject\":{\"head\":\"[SUBJECT]\",\"possessive_determiner\":null,\"proximity\":\"proximal\",\"plurality\":\"singular\"},\"verb\":{\"lemma\":\"sit\",\"tense\":\"present\",\"aspect\":\"simple\"},\"object\":null}]}"
+  },
+  {
+    "role": "assistant",
+    "content": "The [SUBJECT] sits."
+  },
+  {
+    "role": "user",
+    "content": "{\"sentences\":[{\"subject\":{\"head\":\"[SUBJECT]\",\"possessive_determiner\":null,\"proximity\":\"proximal\",\"plurality\":\"singular\"},\"verb\":{\"lemma\":\"see\",\"tense\":\"past\",\"aspect\":\"completive\"},\"object\":{\"person\":\"third\",\"plurality\":\"singular\",\"proximity\":\"distal\",\"inclusivity\":\"exclusive\",\"reflexive\":false}}]}"
+  },
+  {
+    "role": "assistant",
+    "content": "The [SUBJECT] saw it."
+  },
+  {
+    "role": "user",
+    "content": "{\"sentences\":[{\"subject\":{\"person\":\"first\",\"plurality\":\"singular\",\"proximity\":\"proximal\",\"inclusivity\":\"exclusive\",\"reflexive\":false},\"verb\":{\"lemma\":\"see\",\"tense\":\"past\",\"aspect\":\"simple\"},\"object\":{\"head\":\"[OBJECT]\",\"possessive_determiner\":null,\"proximity\":\"distal\",\"plurality\":\"dual\"}},{\"subject\":{\"person\":\"third\",\"plurality\":\"dual\",\"proximity\":\"distal\",\"inclusivity\":\"exclusive\",\"reflexive\":false},\"verb\":{\"lemma\":\"walk\",\"tense\":\"past\",\"aspect\":\"continuous\"},\"object\":{\"head\":\"dog\",\"possessive_determiner\":{\"person\":\"third\",\"plurality\":\"dual\",\"proximity\":\"proximal\",\"inclusivity\":\"exclusive\",\"reflexive\":true},\"proximity\":\"proximal\",\"plurality\":\"plural\"}},{\"subject\":{\"person\":\"third\",\"plurality\":\"singular\",\"proximity\":\"proximal\",\"inclusivity\":\"exclusive\",\"reflexive\":false},\"verb\":{\"lemma\":\"drink\",\"tense\":\"past\",\"aspect\":\"continuous\"},\"object\":{\"head\":\"coffee\",\"possessive_determiner\":null,\"proximity\":\"proximal\",\"plurality\":\"singular\"}}]}"
+  },
+  {
+    "role": "assistant",
+    "content": "I saw [OBJECT]. They were walking dogs. They were drinking coffee."
+  },
+  {
+    "role": "user",
+    "content": "{\"sentences\":[{\"subject\":{\"head\":{\"lemma\":\"run\",\"tense\":\"present\",\"aspect\":\"simple\"},\"possessive_determiner\":null,\"proximity\":\"distal\",\"plurality\":\"singular\"},\"verb\":{\"lemma\":\"eat\",\"tense\":\"future\",\"aspect\":\"simple\"},\"object\":{\"head\":{\"lemma\":\"fall\",\"tense\":\"present\",\"aspect\":\"perfect\"},\"possessive_determiner\":null,\"proximity\":\"proximal\",\"plurality\":\"singular\"}}]}"
+  },
+  {
+    "role": "assistant",
+    "content": "That runner will eat the one that has fallen."
+  },
+  {
+    "role": "user",
+    "content": "{\"sentences\":[{\"subject\":{\"head\":\"coyote\",\"possessive_determiner\":null,\"proximity\":\"proximal\",\"plurality\":\"singular\"},\"verb\":{\"lemma\":\"[VERB]\",\"tense\":\"past\",\"aspect\":\"simple\"},\"object\":{\"head\":\"jackrabbit\",\"possessive_determiner\":null,\"proximity\":\"proximal\",\"plurality\":\"singular\"}},{\"subject\":{\"head\":\"coyote\",\"possessive_determiner\":null,\"proximity\":\"proximal\",\"plurality\":\"singular\"},\"verb\":{\"lemma\":\"cook\",\"tense\":\"past\",\"aspect\":\"simple\"},\"object\":{\"person\":\"third\",\"plurality\":\"singular\",\"proximity\":\"distal\",\"inclusivity\":\"exclusive\",\"reflexive\":false}}]}"
+  }
+]

@@ -19,15 +19,17 @@ def search_english(query):
     response = requests.get(f"{KUBISHI_API_URL}/search/english", params={"query": query})
     response.raise_for_status()
     res_json = response.json()
-    words = {word["lexical_unit"]: word["senses"][0].get("gloss") for word in res_json if word.get("senses")}
-    return words
+    return res_json
+    # words = {word["lexical_unit"]: word["senses"][0].get("gloss") for word in res_json if word.get("senses")}
+    # return words
 
 def search_paiute(query):
     response = requests.get(f"{KUBISHI_API_URL}/search/paiute", params={"query": query})
     response.raise_for_status()
     res_json = response.json()
-    words = {word["lexical_unit"]: word["senses"][0].get("gloss") for word in res_json if word.get("senses")}
-    return words
+    return res_json
+    # words = {word["lexical_unit"]: word["senses"][0].get("gloss") for word in res_json if word.get("senses")}
+    # return words
 
 def search_grammar(query):
     return _search_grammar(
@@ -39,10 +41,11 @@ def search_sentences(query):
     response = requests.get(f"{KUBISHI_API_URL}/search/sentence", params={"query": query})
     response.raise_for_status()
     res_json = response.json()
+    return res_json
 
-    top_sentences = []
+    # top_sentences = []
 
-    for sentence in res_json:
-        top_sentences.append({sentence["translation"]: sentence["sentence"]})
+    # for sentence in res_json:
+    #     top_sentences.append({sentence["translation"]: sentence["sentence"]})
     
-    return top_sentences
+    # return top_sentences
