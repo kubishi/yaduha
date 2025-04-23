@@ -1,6 +1,7 @@
 [
     {
         "query": "I am sitting in a chair.",
+        "response": "Nüü katünnu-ba' katü-ti.",
         "tool_calls": [
             {
                 "function": "search_sentences",
@@ -31,7 +32,344 @@
                 "arguments": {
                     "query": "in, on"
                 }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "present continuous tense"
+                }
+            }
+        ]
+    },
+    {
+        "query": "The one who ran has seen Rebecca and met her.",
+        "response": "Poyoha-dü-ii Rebecca-noka u-buni-pü. Mahu a-[met]-ku.",
+        "tool_calls": [
+            {
+                "function": "search_sentences",
+                "arguments": {
+                    "query": "The one who ran has seen Rebecca and met her."
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "past tense, present perfect tense"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "run"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "see"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "meet, know"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "verb tense, doer of an action"
+                }
+            }
+        ]
+    },
+    {
+        "query": "The dogs were chasing their tails.",
+        "response": "Isha'pugu-ii tüi-kwadzi-neika a-maŵia-ti.",
+        "tool_calls": [
+            {
+                "function": "search_sentences",
+                "arguments": {
+                    "query": "The dogs were chasing their tails."
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "past continuous tense"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "dog"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "chase"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "tail"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "their own, reflexive possessive pronoun"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "plural"
+                }
+            }
+        ]
+    },
+    {
+        "query": "The fighter is eating his red apple.",
+        "response": "Nappidügü-dü-ii tü-aapono'-eika a-düka-ti.",
+        "tool_calls": [
+            {
+                "function": "search_sentences",
+                "arguments": {
+                    "query": "The fighter is eating his red apple."
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "present continuous tense"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "fighter"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "eat"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "red"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "apple"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "his own, reflexive possessive pronoun"
+                }
+            }
+        ]	
+    },
+    {
+        "query": "The book sits on the table.",
+        "response": "[book]-uu tibo-ba' katü-ti.",
+        "tool_calls": [
+            {
+                "function": "search_sentences",
+                "arguments": {
+                    "query": "The book sits on the table."
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "present tense"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "book"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "sit"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "table"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "on, in"
+                }
+            }
+        ]	
+    },
+    {
+        "query": "The boy saw it.",
+        "response": "Naatsi'-ii a-buni-ku.",
+        "tool_calls": [
+            {
+                "function": "search_sentences",
+                "arguments": {
+                    "query": "The boy saw it."
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "past tense"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "see"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "it, object pronoun"
+                }
+            }
+        ]
+    },
+    {
+        "query": "I saw two men walking their dogs yesterday at Starbucks while drinking a cup of coffee.",
+        "response": "Yongo' nüü waha-ggu naana-noka u-buni-ti Starbucks-wae. Uhuŵa tüi-koopi'neika ui-hibi-ti, tüi-isha'pugu-hodokka a-hukaŵia-ti.",
+        "tool_calls": [
+            {
+                "function": "search_sentences",
+                "arguments": {
+                    "query": "I saw two men walking their dogs yesterday at Starbucks while drinking a cup of coffee."
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "past tense, complex sentence structure, temporal clauses"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "see"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "man, men"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "walk"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "dog"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "possessive pronoun, their"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "yesterday, temporal adverb"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "while"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "drink"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "coffee"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "Starbucks"
+                }
+            }
+        ]
+    },
+    {
+        "query": "That runner down the street will eat the one that has fallen.",
+        "response": "Poyoha-dü-ii kwattühi-doka u-düka-wei.",
+        "tool_calls": [
+            {
+                "function": "search_sentences",
+                "arguments": {
+                    "query": "That runner down the street will eat the one that has fallen."
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "future tense"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "nominalization, noun clause, agentive"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "run, runner"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "eat"
+                }
+            },
+            {
+                "function": "search_english",
+                "arguments": {
+                    "query": "fall"
+                }
             }
         ]
     }
+        
 ]

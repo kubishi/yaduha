@@ -53,10 +53,11 @@ def main():
             print(f"Result: {tool_call['result']}")
             print()
 
-        if example["query"] in prev_responses:
-            example["response"] = prev_responses[example["query"]]
-        else:
-            example["response"] = input("Enter the desired response: ")
+        if "response" not in example:
+            if example["query"] in prev_responses:
+                example["response"] = prev_responses[example["query"]]
+            else:
+                example["response"] = input("Enter the desired response: ")
             
         print(f"Response: {example['response']}")
         print()
