@@ -1,4 +1,4 @@
-from .syntax import (
+from yaduha.syntax import (
     SentenceList, Sentence,
     Pronoun, Verb, SubjectNoun, ObjectNoun,
     Person, Plurality, Proximity, Inclusivity,

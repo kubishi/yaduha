@@ -3,9 +3,9 @@ import os
 import json
 import argparse
 
-from .tools.tools import tools, messages, messages_b, messages_translator, messages_translator_b
-from .tools.functions import search_english, search_grammar, search_paiute, search_sentences
-from ..common import get_openai_client
+from yaduha.chatbot.tools.tools import tools, messages, messages_b, messages_translator, messages_translator_b
+from yaduha.chatbot.tools.functions import search_english, search_grammar, search_paiute, search_sentences
+from yaduha.common import get_openai_client
 
 functions = {
     "search_english": search_english,

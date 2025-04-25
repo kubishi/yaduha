@@ -4,7 +4,6 @@ import os
 from dotenv import load_dotenv
 import pathlib
 
-# Load environment variables from .env file
 load_dotenv(pathlib.Path(__file__).parent.parent / '.env')
 load_dotenv(pathlib.Path.cwd() / '.env')
 

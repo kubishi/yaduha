@@ -4,7 +4,7 @@ import random
 import string
 import argparse
 
-from .functions import search_english, search_grammar, search_paiute, search_sentences
+from yaduha.chatbot.tools.functions import search_english, search_grammar, search_paiute, search_sentences
 
 
 

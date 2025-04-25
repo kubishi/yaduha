@@ -5,7 +5,7 @@ import pathlib
 from typing import Dict, List, TYPE_CHECKING
 
 import numpy as np
-from .common import get_openai_client
+from yaduha.common import get_openai_client
 
 if TYPE_CHECKING:
     from sentence_transformers import SentenceTransformer

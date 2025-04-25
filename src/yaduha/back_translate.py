@@ -5,8 +5,8 @@ from openai.types.chat import ChatCompletion
 
 import dotenv
 
-from .common import get_openai_client
-from .sentence_builder import NOUNS, Object, Subject, Verb, POSSESSIVE_PRONOUNS
+from yaduha.common import get_openai_client
+from yaduha.sentence_builder import NOUNS, Object, Subject, Verb, POSSESSIVE_PRONOUNS
 
 dotenv.load_dotenv()
 

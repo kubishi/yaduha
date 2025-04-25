@@ -8,21 +8,21 @@ from typing import Callable, Dict, List, Optional, Tuple, Union
 
 from openai.types.chat import ChatCompletion
 
-from ..sentence_builder import NOUNS, Object, Subject, Verb
-from ..examples import EXAMPLE_SENTENCES
-from ..common import get_openai_client
-from ..syntax import (
+from yaduha.sentence_builder import NOUNS, Object, Subject, Verb
+from yaduha.examples import EXAMPLE_SENTENCES
+from yaduha.common import get_openai_client
+from yaduha.syntax import (
     Sentence, SubjectNoun, Proximity, Person, Plurality,
     Inclusivity, Tense, Aspect,
     Pronoun, ObjectNoun, SentenceList
 )
-from ..syntax import Verb as SegmentVerb
-from ..semantic_similarity import (
+from yaduha.syntax import Verb as SegmentVerb
+from yaduha.semantic_similarity import (
     semantic_similarity_transformers,
     semantic_similarity_openai
 )
-from ..back_translate import translate as translate_ovp_to_english
-from ..base import Translator, Translation
+from yaduha.back_translate import translate as translate_ovp_to_english
+from yaduha.base import Translator, Translation
 
 SS_MODE = os.getenv('SS_MODE', 'sentence-transformers')
 
