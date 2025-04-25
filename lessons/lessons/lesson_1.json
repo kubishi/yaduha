@@ -1,0 +1,403 @@
+{
+  "key": "lesson_1",
+  "title": "Lesson 1: Pronouns",
+  "description": "Pronouns",
+  "sentences": [
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tüka-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tüka",
+              "definition": "eat"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "nüü",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "nüü",
+              "definition": "I"
+            }
+          ]
+        }
+      ],
+      "paiute": "tüka-ti nüü.",
+      "english": "I am eating."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tüka-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tüka",
+              "definition": "eat"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "mahu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "mahu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "tüka-ti mahu.",
+      "english": "He/She/It is eating."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tüka-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tüka",
+              "definition": "eat"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "taagwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "taagwa",
+              "definition": "we (inclusive)"
+            }
+          ]
+        }
+      ],
+      "paiute": "tüka-ti taagwa.",
+      "english": "We are eating."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tüka-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tüka",
+              "definition": "eat"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "ihiw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "ihiw̃a",
+              "definition": "these"
+            }
+          ]
+        }
+      ],
+      "paiute": "tüka-ti ihiw̃a.",
+      "english": "These are eating."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tüka-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tüka",
+              "definition": "eat"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "uhu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "uhu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "tüka-ti uhu.",
+      "english": "He/She/It is eating."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tüka-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tüka",
+              "definition": "eat"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "uhuw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "uhuw̃a",
+              "definition": "they"
+            }
+          ]
+        }
+      ],
+      "paiute": "tüka-ti uhuw̃a.",
+      "english": "They are eating."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tüka-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tüka",
+              "definition": "eat"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "nüügwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "nüügwa",
+              "definition": "we (exclusive)"
+            }
+          ]
+        }
+      ],
+      "paiute": "tüka-ti nüügwa.",
+      "english": "We are eating."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tüka-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tüka",
+              "definition": "eat"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "üü",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "üü",
+              "definition": "you"
+            }
+          ]
+        }
+      ],
+      "paiute": "tüka-ti üü.",
+      "english": "You are eating."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tüka-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tüka",
+              "definition": "eat"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "ihi",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "ihi",
+              "definition": "this"
+            }
+          ]
+        }
+      ],
+      "paiute": "tüka-ti ihi.",
+      "english": "This is eating."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tüka-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tüka",
+              "definition": "eat"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "taa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "taa",
+              "definition": "you and I"
+            }
+          ]
+        }
+      ],
+      "paiute": "tüka-ti taa.",
+      "english": "You and I are eating."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tüka-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tüka",
+              "definition": "eat"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "üügwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "üügwa",
+              "definition": "you (plural)"
+            }
+          ]
+        }
+      ],
+      "paiute": "tüka-ti üügwa.",
+      "english": "You are eating."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tüka-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tüka",
+              "definition": "eat"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "mahuw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "mahuw̃a",
+              "definition": "they"
+            }
+          ]
+        }
+      ],
+      "paiute": "tüka-ti mahuw̃a.",
+      "english": "They are eating."
+    }
+  ]
+}

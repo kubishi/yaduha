@@ -1,0 +1,4007 @@
+{
+  "key": "lesson_5",
+  "title": "Lesson 5: Subject Nouns",
+  "description": "Transitive Verbs",
+  "sentences": [
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "tüsüga-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "tüsüga",
+              "definition": "weasle"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "üi-zawa-ti",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "üi",
+              "definition": "you (plural), you all"
+            },
+            {
+              "type": "verb_stem",
+              "text": "sawa",
+              "definition": "cook"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        }
+      ],
+      "paiute": "tüsüga-uu üi-zawa-ti.",
+      "english": "That weasel is cooking you all."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "pasohobü-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "pasohobü",
+              "definition": "tree"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "tei-w̃ui-ti",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "tei",
+              "definition": "us (plural, inclusive)"
+            },
+            {
+              "type": "verb_stem",
+              "text": "mui",
+              "definition": "write"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        }
+      ],
+      "paiute": "pasohobü-uu tei-w̃ui-ti.",
+      "english": "That tree is writing to us."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "pagwi-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "pagwi",
+              "definition": "fish"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "ma-dsibui-dü",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "ma",
+              "definition": "him/her/it (proximal)"
+            },
+            {
+              "type": "verb_stem",
+              "text": "tsibui",
+              "definition": "climb"
+            },
+            {
+              "type": "tense",
+              "text": "dü",
+              "definition": "present"
+            }
+          ]
+        }
+      ],
+      "paiute": "pagwi-ii ma-dsibui-dü.",
+      "english": "The fish climbs it."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "tuunapi-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "tuunapi",
+              "definition": "food"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "yadoha-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "yadoha",
+              "definition": "talk"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        }
+      ],
+      "paiute": "tuunapi-uu yadoha-ti.",
+      "english": "That food is talking."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "payahuupü-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "payahuupü",
+              "definition": "river"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "katü-ku",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "katü",
+              "definition": "sit"
+            },
+            {
+              "type": "tense",
+              "text": "ku",
+              "definition": "completive (past)"
+            }
+          ]
+        }
+      ],
+      "paiute": "payahuupü-uu katü-ku.",
+      "english": "The river sat."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "toyabi-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "toyabi",
+              "definition": "mountain"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "yotsi-pü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "yotsi",
+              "definition": "fly"
+            },
+            {
+              "type": "tense",
+              "text": "pü",
+              "definition": "have x-ed, am x-ed"
+            }
+          ]
+        }
+      ],
+      "paiute": "toyabi-ii yotsi-pü.",
+      "english": "The mountain has flown."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "pugu-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "pugu",
+              "definition": "horse"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "u-buni-wei",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "u",
+              "definition": "him/her/it (distal)"
+            },
+            {
+              "type": "verb_stem",
+              "text": "puni",
+              "definition": "see"
+            },
+            {
+              "type": "tense",
+              "text": "wei",
+              "definition": "future (will)"
+            }
+          ]
+        }
+      ],
+      "paiute": "pugu-ii u-buni-wei.",
+      "english": "The horse will see him/her/it."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "kwadzi-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "kwadzi",
+              "definition": "tail"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "ui-gwana-ku",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "ui",
+              "definition": "them (distal)"
+            },
+            {
+              "type": "verb_stem",
+              "text": "kwana",
+              "definition": "smell"
+            },
+            {
+              "type": "tense",
+              "text": "ku",
+              "definition": "completive (past)"
+            }
+          ]
+        }
+      ],
+      "paiute": "kwadzi-ii ui-gwana-ku.",
+      "english": "The tail smelled them."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "wo'abi-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "wo'abi",
+              "definition": "worm"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "ai-buni-wei",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "ai",
+              "definition": "them (proximal)"
+            },
+            {
+              "type": "verb_stem",
+              "text": "puni",
+              "definition": "see"
+            },
+            {
+              "type": "tense",
+              "text": "wei",
+              "definition": "future (will)"
+            }
+          ]
+        }
+      ],
+      "paiute": "wo'abi-ii ai-buni-wei.",
+      "english": "The worm will see them."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "tsiipa-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "tsiipa",
+              "definition": "bird"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "tei-w̃ui-dü",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "tei",
+              "definition": "us (plural, inclusive)"
+            },
+            {
+              "type": "verb_stem",
+              "text": "mui",
+              "definition": "write"
+            },
+            {
+              "type": "tense",
+              "text": "dü",
+              "definition": "present"
+            }
+          ]
+        }
+      ],
+      "paiute": "tsiipa-ii tei-w̃ui-dü.",
+      "english": "The bird writes to us."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "wükada-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "wükada",
+              "definition": "bird snake"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "ma-w̃ui-dü",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "ma",
+              "definition": "him/her/it (proximal)"
+            },
+            {
+              "type": "verb_stem",
+              "text": "mui",
+              "definition": "write"
+            },
+            {
+              "type": "tense",
+              "text": "dü",
+              "definition": "present"
+            }
+          ]
+        }
+      ],
+      "paiute": "wükada-uu ma-w̃ui-dü.",
+      "english": "That bird snake is writing it."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "wo'abi-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "wo'abi",
+              "definition": "worm"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "nishua'i-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "nishua'i",
+              "definition": "laugh"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        }
+      ],
+      "paiute": "wo'abi-ii nishua'i-ti.",
+      "english": "The worm is laughing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "kwadzi-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "kwadzi",
+              "definition": "tail"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "ü-zawa-dü",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "ü",
+              "definition": "you (singular)"
+            },
+            {
+              "type": "verb_stem",
+              "text": "sawa",
+              "definition": "cook"
+            },
+            {
+              "type": "tense",
+              "text": "dü",
+              "definition": "present"
+            }
+          ]
+        }
+      ],
+      "paiute": "kwadzi-ii ü-zawa-dü.",
+      "english": "The tail cooks you."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "kamü-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "kamü",
+              "definition": "jackrabbit"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "a-dama'i-pü",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "a",
+              "definition": "him/her/it (proximal)"
+            },
+            {
+              "type": "verb_stem",
+              "text": "tama'i",
+              "definition": "find"
+            },
+            {
+              "type": "tense",
+              "text": "pü",
+              "definition": "have x-ed, am x-ed"
+            }
+          ]
+        }
+      ],
+      "paiute": "kamü-uu a-dama'i-pü.",
+      "english": "The jackrabbit has found him/her/it."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "nobi-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "nobi",
+              "definition": "house"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "üwi-ku",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "üwi",
+              "definition": "sleep"
+            },
+            {
+              "type": "tense",
+              "text": "ku",
+              "definition": "completive (past)"
+            }
+          ]
+        }
+      ],
+      "paiute": "nobi-ii üwi-ku.",
+      "english": "The house slept."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "aingwü-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "aingwü",
+              "definition": "squirrel"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "habi-gaa-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "habi",
+              "definition": "lie down"
+            },
+            {
+              "type": "tense",
+              "text": "gaa-wei",
+              "definition": "future (going to)"
+            }
+          ]
+        }
+      ],
+      "paiute": "aingwü-ii habi-gaa-wei.",
+      "english": "The squirrel is going to lie down."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "küna-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "küna",
+              "definition": "wood"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "kwisha'i-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "kwisha'i",
+              "definition": "sneeze"
+            },
+            {
+              "type": "tense",
+              "text": "wei",
+              "definition": "future (will)"
+            }
+          ]
+        }
+      ],
+      "paiute": "küna-ii kwisha'i-wei.",
+      "english": "This wood will sneeze."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "kwadzi-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "kwadzi",
+              "definition": "tail"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "tei-buni-ku",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "tei",
+              "definition": "us (plural, inclusive)"
+            },
+            {
+              "type": "verb_stem",
+              "text": "puni",
+              "definition": "see"
+            },
+            {
+              "type": "tense",
+              "text": "ku",
+              "definition": "completive (past)"
+            }
+          ]
+        }
+      ],
+      "paiute": "kwadzi-ii tei-buni-ku.",
+      "english": "The tail saw us."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "payahuupü-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "payahuupü",
+              "definition": "river"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "ü-nobini-pü",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "ü",
+              "definition": "you (singular)"
+            },
+            {
+              "type": "verb_stem",
+              "text": "nobini",
+              "definition": "visit"
+            },
+            {
+              "type": "tense",
+              "text": "pü",
+              "definition": "have x-ed, am x-ed"
+            }
+          ]
+        }
+      ],
+      "paiute": "payahuupü-uu ü-nobini-pü.",
+      "english": "The river has visited you."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "katünu-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "katünu",
+              "definition": "chair"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "kwatsa'i-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "kwatsa'i",
+              "definition": "fall"
+            },
+            {
+              "type": "tense",
+              "text": "wei",
+              "definition": "future (will)"
+            }
+          ]
+        }
+      ],
+      "paiute": "katünu-uu kwatsa'i-wei.",
+      "english": "That chair will fall."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "mukita-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "mukita",
+              "definition": "lizard"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "ta-zawa-ku",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "ta",
+              "definition": "us (dual), you and I"
+            },
+            {
+              "type": "verb_stem",
+              "text": "sawa",
+              "definition": "cook"
+            },
+            {
+              "type": "tense",
+              "text": "ku",
+              "definition": "completive (past)"
+            }
+          ]
+        }
+      ],
+      "paiute": "mukita-uu ta-zawa-ku.",
+      "english": "That lizard cooked us."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "pagwi-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "pagwi",
+              "definition": "fish"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "ni-zawa-ti",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "ni",
+              "definition": "us (plural, exclusive)"
+            },
+            {
+              "type": "verb_stem",
+              "text": "sawa",
+              "definition": "cook"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        }
+      ],
+      "paiute": "pagwi-ii ni-zawa-ti.",
+      "english": "The fish is cooking us."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "tüwoobü-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "tüwoobü",
+              "definition": "earth"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "yadoha-gaa-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "yadoha",
+              "definition": "talk"
+            },
+            {
+              "type": "tense",
+              "text": "gaa-wei",
+              "definition": "future (going to)"
+            }
+          ]
+        }
+      ],
+      "paiute": "tüwoobü-uu yadoha-gaa-wei.",
+      "english": "That earth is going to talk."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "tüsüga-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "tüsüga",
+              "definition": "weasle"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "ni-dama'i-wei",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "ni",
+              "definition": "us (plural, exclusive)"
+            },
+            {
+              "type": "verb_stem",
+              "text": "tama'i",
+              "definition": "find"
+            },
+            {
+              "type": "tense",
+              "text": "wei",
+              "definition": "future (will)"
+            }
+          ]
+        }
+      ],
+      "paiute": "tüsüga-uu ni-dama'i-wei.",
+      "english": "That weasel will find us."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "tuunapi-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "tuunapi",
+              "definition": "food"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "u-buni-dü",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "u",
+              "definition": "him/her/it (distal)"
+            },
+            {
+              "type": "verb_stem",
+              "text": "puni",
+              "definition": "see"
+            },
+            {
+              "type": "tense",
+              "text": "dü",
+              "definition": "present"
+            }
+          ]
+        }
+      ],
+      "paiute": "tuunapi-ii u-buni-dü.",
+      "english": "The food sees him/her/it."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "pugu-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "pugu",
+              "definition": "horse"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "tsiipe'i-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tsiipe'i",
+              "definition": "chirp"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        }
+      ],
+      "paiute": "pugu-uu tsiipe'i-ti.",
+      "english": "That horse is chirping."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "apo-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "apo",
+              "definition": "cup"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "yadoha-dü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "yadoha",
+              "definition": "talk"
+            },
+            {
+              "type": "tense",
+              "text": "dü",
+              "definition": "present"
+            }
+          ]
+        }
+      ],
+      "paiute": "apo-ii yadoha-dü.",
+      "english": "This cup is talking."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "wükada-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "wükada",
+              "definition": "bird snake"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "yadoha-gaa-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "yadoha",
+              "definition": "talk"
+            },
+            {
+              "type": "tense",
+              "text": "gaa-wei",
+              "definition": "future (going to)"
+            }
+          ]
+        }
+      ],
+      "paiute": "wükada-ii yadoha-gaa-wei.",
+      "english": "This bird snake is going to talk."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "aingwü-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "aingwü",
+              "definition": "squirrel"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "a-naki-pü",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "a",
+              "definition": "him/her/it (proximal)"
+            },
+            {
+              "type": "verb_stem",
+              "text": "naki",
+              "definition": "chase"
+            },
+            {
+              "type": "tense",
+              "text": "pü",
+              "definition": "have x-ed, am x-ed"
+            }
+          ]
+        }
+      ],
+      "paiute": "aingwü-ii a-naki-pü.",
+      "english": "The squirrel has chased him/her/it."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "tuunapi-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "tuunapi",
+              "definition": "food"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "tünia-ku",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tünia",
+              "definition": "read"
+            },
+            {
+              "type": "tense",
+              "text": "ku",
+              "definition": "completive (past)"
+            }
+          ]
+        }
+      ],
+      "paiute": "tuunapi-ii tünia-ku.",
+      "english": "The food has been read."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "pugu-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "pugu",
+              "definition": "horse"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "wünü-dü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "wünü",
+              "definition": "stand"
+            },
+            {
+              "type": "tense",
+              "text": "dü",
+              "definition": "present"
+            }
+          ]
+        }
+      ],
+      "paiute": "pugu-ii wünü-dü.",
+      "english": "The horse is standing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "maishibü-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "maishibü",
+              "definition": "corn"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "hukaw̃ia-dü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "hukaw̃ia",
+              "definition": "walk"
+            },
+            {
+              "type": "tense",
+              "text": "dü",
+              "definition": "present"
+            }
+          ]
+        }
+      ],
+      "paiute": "maishibü-uu hukaw̃ia-dü.",
+      "english": "That corn is walking."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "tabuutsi'-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "tabuutsi'",
+              "definition": "cottontail"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "ui-dama'i-pü",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "ui",
+              "definition": "them (distal)"
+            },
+            {
+              "type": "verb_stem",
+              "text": "tama'i",
+              "definition": "find"
+            },
+            {
+              "type": "tense",
+              "text": "pü",
+              "definition": "have x-ed, am x-ed"
+            }
+          ]
+        }
+      ],
+      "paiute": "tabuutsi'-uu ui-dama'i-pü.",
+      "english": "The cottontail has found those."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "maishibü-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "maishibü",
+              "definition": "corn"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "nishua'i-ku",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "nishua'i",
+              "definition": "laugh"
+            },
+            {
+              "type": "tense",
+              "text": "ku",
+              "definition": "completive (past)"
+            }
+          ]
+        }
+      ],
+      "paiute": "maishibü-uu nishua'i-ku.",
+      "english": "That corn laughed."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "katünu-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "katünu",
+              "definition": "chair"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "tünia-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tünia",
+              "definition": "read"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        }
+      ],
+      "paiute": "katünu-uu tünia-ti.",
+      "english": "That chair is reading."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "tübbi-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "tübbi",
+              "definition": "rock"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "waakü-gaa-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "waakü",
+              "definition": "work"
+            },
+            {
+              "type": "tense",
+              "text": "gaa-wei",
+              "definition": "future (going to)"
+            }
+          ]
+        }
+      ],
+      "paiute": "tübbi-ii waakü-gaa-wei.",
+      "english": "This rock is going to work."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "tsiipa-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "tsiipa",
+              "definition": "bird"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "tsiipe'i-pü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tsiipe'i",
+              "definition": "chirp"
+            },
+            {
+              "type": "tense",
+              "text": "pü",
+              "definition": "have x-ed, am x-ed"
+            }
+          ]
+        }
+      ],
+      "paiute": "tsiipa-uu tsiipe'i-pü.",
+      "english": "That bird has chirped."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "koopi'-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "koopi'",
+              "definition": "coffee"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "habi-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "habi",
+              "definition": "lie down"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        }
+      ],
+      "paiute": "koopi'-uu habi-ti.",
+      "english": "That coffee is lying down."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "payahuupü-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "payahuupü",
+              "definition": "river"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "a-düka-gaa-wei",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "a",
+              "definition": "him/her/it (proximal)"
+            },
+            {
+              "type": "verb_stem",
+              "text": "tüka",
+              "definition": "eat"
+            },
+            {
+              "type": "tense",
+              "text": "gaa-wei",
+              "definition": "future (going to)"
+            }
+          ]
+        }
+      ],
+      "paiute": "payahuupü-ii a-düka-gaa-wei.",
+      "english": "The river is going to eat him/her/it."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "wai-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "wai",
+              "definition": "rice"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "ai-naki-ku",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "ai",
+              "definition": "them (proximal)"
+            },
+            {
+              "type": "verb_stem",
+              "text": "naki",
+              "definition": "chase"
+            },
+            {
+              "type": "tense",
+              "text": "ku",
+              "definition": "completive (past)"
+            }
+          ]
+        }
+      ],
+      "paiute": "wai-ii ai-naki-ku.",
+      "english": "Rice chased them."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "tsiipa-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "tsiipa",
+              "definition": "bird"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "kwisha'i-ku",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "kwisha'i",
+              "definition": "sneeze"
+            },
+            {
+              "type": "tense",
+              "text": "ku",
+              "definition": "completive (past)"
+            }
+          ]
+        }
+      ],
+      "paiute": "tsiipa-uu kwisha'i-ku.",
+      "english": "The bird sneezed."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "wükada-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "wükada",
+              "definition": "bird snake"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "tei-gwati-dü",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "tei",
+              "definition": "us (plural, inclusive)"
+            },
+            {
+              "type": "verb_stem",
+              "text": "kwati",
+              "definition": "hit"
+            },
+            {
+              "type": "tense",
+              "text": "dü",
+              "definition": "present"
+            }
+          ]
+        }
+      ],
+      "paiute": "wükada-ii tei-gwati-dü.",
+      "english": "The bird snake hits us."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "apo-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "apo",
+              "definition": "cup"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "tünia-ku",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tünia",
+              "definition": "read"
+            },
+            {
+              "type": "tense",
+              "text": "ku",
+              "definition": "completive (past)"
+            }
+          ]
+        }
+      ],
+      "paiute": "apo-uu tünia-ku.",
+      "english": "That cup has read."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "tsiipa-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "tsiipa",
+              "definition": "bird"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "ai-naki-wei",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "ai",
+              "definition": "them (proximal)"
+            },
+            {
+              "type": "verb_stem",
+              "text": "naki",
+              "definition": "chase"
+            },
+            {
+              "type": "tense",
+              "text": "wei",
+              "definition": "future (will)"
+            }
+          ]
+        }
+      ],
+      "paiute": "tsiipa-uu ai-naki-wei.",
+      "english": "That bird will chase them."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "pagwi-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "pagwi",
+              "definition": "fish"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "a-naki-dü",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "a",
+              "definition": "him/her/it (proximal)"
+            },
+            {
+              "type": "verb_stem",
+              "text": "naki",
+              "definition": "chase"
+            },
+            {
+              "type": "tense",
+              "text": "dü",
+              "definition": "present"
+            }
+          ]
+        }
+      ],
+      "paiute": "pagwi-uu a-naki-dü.",
+      "english": "That fish is chasing it."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "wo'abi-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "wo'abi",
+              "definition": "worm"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "nishua'i-pü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "nishua'i",
+              "definition": "laugh"
+            },
+            {
+              "type": "tense",
+              "text": "pü",
+              "definition": "have x-ed, am x-ed"
+            }
+          ]
+        }
+      ],
+      "paiute": "wo'abi-ii nishua'i-pü.",
+      "english": "The worm has laughed."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "koopi'-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "koopi'",
+              "definition": "coffee"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "nüga-gaa-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "nüga",
+              "definition": "dance"
+            },
+            {
+              "type": "tense",
+              "text": "gaa-wei",
+              "definition": "future (going to)"
+            }
+          ]
+        }
+      ],
+      "paiute": "koopi'-uu nüga-gaa-wei.",
+      "english": "That coffee is going to dance."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "toyabi-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "toyabi",
+              "definition": "mountain"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "hubiadu-pü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "hubiadu",
+              "definition": "sing"
+            },
+            {
+              "type": "tense",
+              "text": "pü",
+              "definition": "have x-ed, am x-ed"
+            }
+          ]
+        }
+      ],
+      "paiute": "toyabi-ii hubiadu-pü.",
+      "english": "The mountain has sung."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "aaponu'-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "aaponu'",
+              "definition": "apple"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "yadoha-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "yadoha",
+              "definition": "talk"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        }
+      ],
+      "paiute": "aaponu'-uu yadoha-ti.",
+      "english": "That apple is talking."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "katünu-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "katünu",
+              "definition": "chair"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "mia-dü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "mia",
+              "definition": "go"
+            },
+            {
+              "type": "tense",
+              "text": "dü",
+              "definition": "present"
+            }
+          ]
+        }
+      ],
+      "paiute": "katünu-uu mia-dü.",
+      "english": "That chair is going."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "wo'ada-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "wo'ada",
+              "definition": "mosquito"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "pahabi-pü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "pahabi",
+              "definition": "swim"
+            },
+            {
+              "type": "tense",
+              "text": "pü",
+              "definition": "have x-ed, am x-ed"
+            }
+          ]
+        }
+      ],
+      "paiute": "wo'ada-uu pahabi-pü.",
+      "english": "The mosquito has swum."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "tüba-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "tüba",
+              "definition": "pinenuts"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "mai-dama'i-ti",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "mai",
+              "definition": "them (proximal)"
+            },
+            {
+              "type": "verb_stem",
+              "text": "tama'i",
+              "definition": "find"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        }
+      ],
+      "paiute": "tüba-uu mai-dama'i-ti.",
+      "english": "Those pinenuts are finding them."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "tüba-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "tüba",
+              "definition": "pinenuts"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "i-nobini-gaa-wei",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "i",
+              "definition": "me"
+            },
+            {
+              "type": "verb_stem",
+              "text": "nobini",
+              "definition": "visit"
+            },
+            {
+              "type": "tense",
+              "text": "gaa-wei",
+              "definition": "future (going to)"
+            }
+          ]
+        }
+      ],
+      "paiute": "tüba-ii i-nobini-gaa-wei.",
+      "english": "The pinenuts are going to visit me."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "tüwoobü-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "tüwoobü",
+              "definition": "earth"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "pahabi-ku",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "pahabi",
+              "definition": "swim"
+            },
+            {
+              "type": "tense",
+              "text": "ku",
+              "definition": "completive (past)"
+            }
+          ]
+        }
+      ],
+      "paiute": "tüwoobü-ii pahabi-ku.",
+      "english": "The earth swam."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "kwadzi-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "kwadzi",
+              "definition": "tail"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "ni-naka-pü",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "ni",
+              "definition": "us (plural, exclusive)"
+            },
+            {
+              "type": "verb_stem",
+              "text": "naka",
+              "definition": "hear"
+            },
+            {
+              "type": "tense",
+              "text": "pü",
+              "definition": "have x-ed, am x-ed"
+            }
+          ]
+        }
+      ],
+      "paiute": "kwadzi-uu ni-naka-pü.",
+      "english": "The tail has heard us."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "tüba-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "tüba",
+              "definition": "pinenuts"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "ai-naka-ti",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "ai",
+              "definition": "them (proximal)"
+            },
+            {
+              "type": "verb_stem",
+              "text": "naka",
+              "definition": "hear"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        }
+      ],
+      "paiute": "tüba-ii ai-naka-ti.",
+      "english": "The pinenuts are hearing them."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "wo'abi-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "wo'abi",
+              "definition": "worm"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "habi-pü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "habi",
+              "definition": "lie down"
+            },
+            {
+              "type": "tense",
+              "text": "pü",
+              "definition": "have x-ed, am x-ed"
+            }
+          ]
+        }
+      ],
+      "paiute": "wo'abi-ii habi-pü.",
+      "english": "The worm has lied down."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "kwadzi-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "kwadzi",
+              "definition": "tail"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "tei-dama'i-dü",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "tei",
+              "definition": "us (plural, inclusive)"
+            },
+            {
+              "type": "verb_stem",
+              "text": "tama'i",
+              "definition": "find"
+            },
+            {
+              "type": "tense",
+              "text": "dü",
+              "definition": "present"
+            }
+          ]
+        }
+      ],
+      "paiute": "kwadzi-ii tei-dama'i-dü.",
+      "english": "The tail finds us."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "küna-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "küna",
+              "definition": "wood"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "tümui-ku",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tümui",
+              "definition": "write"
+            },
+            {
+              "type": "tense",
+              "text": "ku",
+              "definition": "completive (past)"
+            }
+          ]
+        }
+      ],
+      "paiute": "küna-uu tümui-ku.",
+      "english": "That wood wrote."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "tabuutsi'-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "tabuutsi'",
+              "definition": "cottontail"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "üi-nobini-ti",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "üi",
+              "definition": "you (plural), you all"
+            },
+            {
+              "type": "verb_stem",
+              "text": "nobini",
+              "definition": "visit"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        }
+      ],
+      "paiute": "tabuutsi'-ii üi-nobini-ti.",
+      "english": "The cottontail is visiting you all."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "wai-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "wai",
+              "definition": "rice"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "waakü-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "waakü",
+              "definition": "work"
+            },
+            {
+              "type": "tense",
+              "text": "wei",
+              "definition": "future (will)"
+            }
+          ]
+        }
+      ],
+      "paiute": "wai-uu waakü-wei.",
+      "english": "That rice will work."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "koopi'-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "koopi'",
+              "definition": "coffee"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "a-dsibui-dü",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "a",
+              "definition": "him/her/it (proximal)"
+            },
+            {
+              "type": "verb_stem",
+              "text": "tsibui",
+              "definition": "climb"
+            },
+            {
+              "type": "tense",
+              "text": "dü",
+              "definition": "present"
+            }
+          ]
+        }
+      ],
+      "paiute": "koopi'-ii a-dsibui-dü.",
+      "english": "Coffee climbs it."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "wai-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "wai",
+              "definition": "rice"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "tei-naka-ku",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "tei",
+              "definition": "us (plural, inclusive)"
+            },
+            {
+              "type": "verb_stem",
+              "text": "naka",
+              "definition": "hear"
+            },
+            {
+              "type": "tense",
+              "text": "ku",
+              "definition": "completive (past)"
+            }
+          ]
+        }
+      ],
+      "paiute": "wai-ii tei-naka-ku.",
+      "english": "Rice heard us."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "kidi'-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "kidi'",
+              "definition": "cat"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "üi-gwati-wei",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "üi",
+              "definition": "you (plural), you all"
+            },
+            {
+              "type": "verb_stem",
+              "text": "kwati",
+              "definition": "hit"
+            },
+            {
+              "type": "tense",
+              "text": "wei",
+              "definition": "future (will)"
+            }
+          ]
+        }
+      ],
+      "paiute": "kidi'-uu üi-gwati-wei.",
+      "english": "That cat will hit you all."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "koopi'-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "koopi'",
+              "definition": "coffee"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "waakü-dü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "waakü",
+              "definition": "work"
+            },
+            {
+              "type": "tense",
+              "text": "dü",
+              "definition": "present"
+            }
+          ]
+        }
+      ],
+      "paiute": "koopi'-uu waakü-dü.",
+      "english": "That coffee works."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "paya-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "paya",
+              "definition": "water"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "yotsi-pü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "yotsi",
+              "definition": "fly"
+            },
+            {
+              "type": "tense",
+              "text": "pü",
+              "definition": "have x-ed, am x-ed"
+            }
+          ]
+        }
+      ],
+      "paiute": "paya-uu yotsi-pü.",
+      "english": "That water has flown."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "tübbi-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "tübbi",
+              "definition": "rock"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "üi-dama'i-dü",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "üi",
+              "definition": "you (plural), you all"
+            },
+            {
+              "type": "verb_stem",
+              "text": "tama'i",
+              "definition": "find"
+            },
+            {
+              "type": "tense",
+              "text": "dü",
+              "definition": "present"
+            }
+          ]
+        }
+      ],
+      "paiute": "tübbi-uu üi-dama'i-dü.",
+      "english": "That rock finds you all."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "payahuupü-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "payahuupü",
+              "definition": "river"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "nüga-ku",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "nüga",
+              "definition": "dance"
+            },
+            {
+              "type": "tense",
+              "text": "ku",
+              "definition": "completive (past)"
+            }
+          ]
+        }
+      ],
+      "paiute": "payahuupü-ii nüga-ku.",
+      "english": "The river danced."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "kidi'-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "kidi'",
+              "definition": "cat"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "u-gwati-dü",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "u",
+              "definition": "him/her/it (distal)"
+            },
+            {
+              "type": "verb_stem",
+              "text": "kwati",
+              "definition": "hit"
+            },
+            {
+              "type": "tense",
+              "text": "dü",
+              "definition": "present"
+            }
+          ]
+        }
+      ],
+      "paiute": "kidi'-ii u-gwati-dü.",
+      "english": "The cat hits him/her/it."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "koopi'-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "koopi'",
+              "definition": "coffee"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "üi-yadohi-ti",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "üi",
+              "definition": "you (plural), you all"
+            },
+            {
+              "type": "verb_stem",
+              "text": "yadohi",
+              "definition": "talk to"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        }
+      ],
+      "paiute": "koopi'-ii üi-yadohi-ti.",
+      "english": "Coffee is talking to you all."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "katünu-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "katünu",
+              "definition": "chair"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "ü-buni-ku",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "ü",
+              "definition": "you (singular)"
+            },
+            {
+              "type": "verb_stem",
+              "text": "puni",
+              "definition": "see"
+            },
+            {
+              "type": "tense",
+              "text": "ku",
+              "definition": "completive (past)"
+            }
+          ]
+        }
+      ],
+      "paiute": "katünu-uu ü-buni-ku.",
+      "english": "That chair saw you."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "paya-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "paya",
+              "definition": "water"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "kwatsa'i-pü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "kwatsa'i",
+              "definition": "fall"
+            },
+            {
+              "type": "tense",
+              "text": "pü",
+              "definition": "have x-ed, am x-ed"
+            }
+          ]
+        }
+      ],
+      "paiute": "paya-ii kwatsa'i-pü.",
+      "english": "The water has fallen."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "tuunapi-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "tuunapi",
+              "definition": "food"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "katü-gaa-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "katü",
+              "definition": "sit"
+            },
+            {
+              "type": "tense",
+              "text": "gaa-wei",
+              "definition": "future (going to)"
+            }
+          ]
+        }
+      ],
+      "paiute": "tuunapi-uu katü-gaa-wei.",
+      "english": "That food is going to sit."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "tüsüga-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "tüsüga",
+              "definition": "weasle"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "nüga-pü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "nüga",
+              "definition": "dance"
+            },
+            {
+              "type": "tense",
+              "text": "pü",
+              "definition": "have x-ed, am x-ed"
+            }
+          ]
+        }
+      ],
+      "paiute": "tüsüga-ii nüga-pü.",
+      "english": "This weasel has danced."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "tüwoobü-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "tüwoobü",
+              "definition": "earth"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "hubiadu-pü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "hubiadu",
+              "definition": "sing"
+            },
+            {
+              "type": "tense",
+              "text": "pü",
+              "definition": "have x-ed, am x-ed"
+            }
+          ]
+        }
+      ],
+      "paiute": "tüwoobü-uu hubiadu-pü.",
+      "english": "The earth has sung."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "kamü-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "kamü",
+              "definition": "jackrabbit"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "wünü-dü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "wünü",
+              "definition": "stand"
+            },
+            {
+              "type": "tense",
+              "text": "dü",
+              "definition": "present"
+            }
+          ]
+        }
+      ],
+      "paiute": "kamü-ii wünü-dü.",
+      "english": "The jackrabbit is standing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "pugu-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "pugu",
+              "definition": "horse"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "yadoha-gaa-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "yadoha",
+              "definition": "talk"
+            },
+            {
+              "type": "tense",
+              "text": "gaa-wei",
+              "definition": "future (going to)"
+            }
+          ]
+        }
+      ],
+      "paiute": "pugu-ii yadoha-gaa-wei.",
+      "english": "The horse is going to talk."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "kwadzi-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "kwadzi",
+              "definition": "tail"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "waakü-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "waakü",
+              "definition": "work"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        }
+      ],
+      "paiute": "kwadzi-uu waakü-ti.",
+      "english": "The tail is working."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "tüwoobü-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "tüwoobü",
+              "definition": "earth"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "üwi-pü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "üwi",
+              "definition": "sleep"
+            },
+            {
+              "type": "tense",
+              "text": "pü",
+              "definition": "have x-ed, am x-ed"
+            }
+          ]
+        }
+      ],
+      "paiute": "tüwoobü-ii üwi-pü.",
+      "english": "The earth is sleeping."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "pagwi-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "pagwi",
+              "definition": "fish"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "tünia-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tünia",
+              "definition": "read"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        }
+      ],
+      "paiute": "pagwi-ii tünia-ti.",
+      "english": "The fish is reading."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "wükada-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "wükada",
+              "definition": "bird snake"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "üwi-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "üwi",
+              "definition": "sleep"
+            },
+            {
+              "type": "tense",
+              "text": "wei",
+              "definition": "future (will)"
+            }
+          ]
+        }
+      ],
+      "paiute": "wükada-ii üwi-wei.",
+      "english": "The bird snake will sleep."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "tüba-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "tüba",
+              "definition": "pinenuts"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "pahabi-ku",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "pahabi",
+              "definition": "swim"
+            },
+            {
+              "type": "tense",
+              "text": "ku",
+              "definition": "completive (past)"
+            }
+          ]
+        }
+      ],
+      "paiute": "tüba-ii pahabi-ku.",
+      "english": "The pinenuts swam."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "wo'abi-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "wo'abi",
+              "definition": "worm"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "hubiadu-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "hubiadu",
+              "definition": "sing"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        }
+      ],
+      "paiute": "wo'abi-ii hubiadu-ti.",
+      "english": "The worm is singing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "kamü-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "kamü",
+              "definition": "jackrabbit"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "tübinohi-dü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tübinohi",
+              "definition": "play"
+            },
+            {
+              "type": "tense",
+              "text": "dü",
+              "definition": "present"
+            }
+          ]
+        }
+      ],
+      "paiute": "kamü-ii tübinohi-dü.",
+      "english": "The jackrabbit is playing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "maishibü-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "maishibü",
+              "definition": "corn"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "ni-yadohi-gaa-wei",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "ni",
+              "definition": "us (plural, exclusive)"
+            },
+            {
+              "type": "verb_stem",
+              "text": "yadohi",
+              "definition": "talk to"
+            },
+            {
+              "type": "tense",
+              "text": "gaa-wei",
+              "definition": "future (going to)"
+            }
+          ]
+        }
+      ],
+      "paiute": "maishibü-ii ni-yadohi-gaa-wei.",
+      "english": "Corn is going to talk to us."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "pugu-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "pugu",
+              "definition": "horse"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "ai-dsibui-pü",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "ai",
+              "definition": "them (proximal)"
+            },
+            {
+              "type": "verb_stem",
+              "text": "tsibui",
+              "definition": "climb"
+            },
+            {
+              "type": "tense",
+              "text": "pü",
+              "definition": "have x-ed, am x-ed"
+            }
+          ]
+        }
+      ],
+      "paiute": "pugu-uu ai-dsibui-pü.",
+      "english": "That horse has climbed them."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "wai-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "wai",
+              "definition": "rice"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "nüga-pü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "nüga",
+              "definition": "dance"
+            },
+            {
+              "type": "tense",
+              "text": "pü",
+              "definition": "have x-ed, am x-ed"
+            }
+          ]
+        }
+      ],
+      "paiute": "wai-uu nüga-pü.",
+      "english": "That rice is dancing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "kamü-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "kamü",
+              "definition": "jackrabbit"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "üi-buni-dü",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "üi",
+              "definition": "you (plural), you all"
+            },
+            {
+              "type": "verb_stem",
+              "text": "puni",
+              "definition": "see"
+            },
+            {
+              "type": "tense",
+              "text": "dü",
+              "definition": "present"
+            }
+          ]
+        }
+      ],
+      "paiute": "kamü-uu üi-buni-dü.",
+      "english": "That jackrabbit sees you all."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "wai-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "wai",
+              "definition": "rice"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "üwi-gaa-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "üwi",
+              "definition": "sleep"
+            },
+            {
+              "type": "tense",
+              "text": "gaa-wei",
+              "definition": "future (going to)"
+            }
+          ]
+        }
+      ],
+      "paiute": "wai-uu üwi-gaa-wei.",
+      "english": "That rice is going to sleep."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "toni-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "toni",
+              "definition": "wickiup"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "üwi-gaa-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "üwi",
+              "definition": "sleep"
+            },
+            {
+              "type": "tense",
+              "text": "gaa-wei",
+              "definition": "future (going to)"
+            }
+          ]
+        }
+      ],
+      "paiute": "toni-uu üwi-gaa-wei.",
+      "english": "That wickiup is going to sleep."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "paya-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "paya",
+              "definition": "water"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "habi-gaa-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "habi",
+              "definition": "lie down"
+            },
+            {
+              "type": "tense",
+              "text": "gaa-wei",
+              "definition": "future (going to)"
+            }
+          ]
+        }
+      ],
+      "paiute": "paya-ii habi-gaa-wei.",
+      "english": "The water is going to lie down."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "maishibü-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "maishibü",
+              "definition": "corn"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "tümui-pü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tümui",
+              "definition": "write"
+            },
+            {
+              "type": "tense",
+              "text": "pü",
+              "definition": "have x-ed, am x-ed"
+            }
+          ]
+        }
+      ],
+      "paiute": "maishibü-uu tümui-pü.",
+      "english": "That corn has been written."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "tübbi-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "tübbi",
+              "definition": "rock"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "mia-gaa-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "mia",
+              "definition": "go"
+            },
+            {
+              "type": "tense",
+              "text": "gaa-wei",
+              "definition": "future (going to)"
+            }
+          ]
+        }
+      ],
+      "paiute": "tübbi-ii mia-gaa-wei.",
+      "english": "This rock is going to go."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "apo-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "apo",
+              "definition": "cup"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "nüga-gaa-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "nüga",
+              "definition": "dance"
+            },
+            {
+              "type": "tense",
+              "text": "gaa-wei",
+              "definition": "future (going to)"
+            }
+          ]
+        }
+      ],
+      "paiute": "apo-ii nüga-gaa-wei.",
+      "english": "This cup is going to dance."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "paya-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "paya",
+              "definition": "water"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "yotsi-gaa-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "yotsi",
+              "definition": "fly"
+            },
+            {
+              "type": "tense",
+              "text": "gaa-wei",
+              "definition": "future (going to)"
+            }
+          ]
+        }
+      ],
+      "paiute": "paya-uu yotsi-gaa-wei.",
+      "english": "That water is going to fly."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "aaponu'-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "aaponu'",
+              "definition": "apple"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "tsiipe'i-ku",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tsiipe'i",
+              "definition": "chirp"
+            },
+            {
+              "type": "tense",
+              "text": "ku",
+              "definition": "completive (past)"
+            }
+          ]
+        }
+      ],
+      "paiute": "aaponu'-uu tsiipe'i-ku.",
+      "english": "That apple chirped."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "maishibü-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "maishibü",
+              "definition": "corn"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "tünia-pü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tünia",
+              "definition": "read"
+            },
+            {
+              "type": "tense",
+              "text": "pü",
+              "definition": "have x-ed, am x-ed"
+            }
+          ]
+        }
+      ],
+      "paiute": "maishibü-uu tünia-pü.",
+      "english": "That corn has been read."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "payahuupü-uu",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "payahuupü",
+              "definition": "river"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "uu",
+              "definition": "distal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "ma-hibi-ti",
+          "parts": [
+            {
+              "type": "object_pronoun",
+              "text": "ma",
+              "definition": "him/her/it (proximal)"
+            },
+            {
+              "type": "verb_stem",
+              "text": "hibi",
+              "definition": "drink"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        }
+      ],
+      "paiute": "payahuupü-uu ma-hibi-ti.",
+      "english": "The river is drinking it."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "isha'-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "isha'",
+              "definition": "coyote"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "hubiadu-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "hubiadu",
+              "definition": "sing"
+            },
+            {
+              "type": "tense",
+              "text": "wei",
+              "definition": "future (will)"
+            }
+          ]
+        }
+      ],
+      "paiute": "isha'-ii hubiadu-wei.",
+      "english": "The coyote will sing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "subject",
+          "text": "wo'abi-ii",
+          "parts": [
+            {
+              "type": "noun",
+              "text": "wo'abi",
+              "definition": "worm"
+            },
+            {
+              "type": "subject_suffix",
+              "text": "ii",
+              "definition": "proximal"
+            }
+          ]
+        },
+        {
+          "type": "verb",
+          "text": "hukaw̃ia-pü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "hukaw̃ia",
+              "definition": "walk"
+            },
+            {
+              "type": "tense",
+              "text": "pü",
+              "definition": "have x-ed, am x-ed"
+            }
+          ]
+        }
+      ],
+      "paiute": "wo'abi-ii hukaw̃ia-pü.",
+      "english": "The worm has walked."
+    }
+  ]
+}

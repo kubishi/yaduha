@@ -6,14 +6,16 @@ import pandas as pd
 from yaduha.rbo import RankingSimilarity
 import pathlib
 
-from yaduha.segment import (
+from yaduha.forward.pipeline import split_sentence
+from yaduha.semantic_similarity import (
     semantic_similarity_spacy, semantic_similarity_bert, 
-    semantic_similarity_sentence_transformers, semantic_similarity_openai,
-    split_sentence
+    semantic_similarity_sentence_transformers, semantic_similarity_openai
 )
 from yaduha.forward.pipeline import make_sentence
 
 thisdir = pathlib.Path(__file__).parent.absolute()
+
+OPENAI_MODEL = "gpt-4o-mini"
 
 def main(): # pylint: disable=missing-function-docstring
     source_sentences = [
@@ -26,8 +28,8 @@ def main(): # pylint: disable=missing-function-docstring
         "The dog and the cat were running."
     ]
     for source_sentence in source_sentences:
-        simple_sentences = split_sentence(source_sentence, model=os.environ['OPENAI_MODEL'])
-        simple_nl_sentence = make_sentence(simple_sentences, model=os.environ['OPENAI_MODEL'])
+        simple_sentences = split_sentence(source_sentence, model=OPENAI_MODEL)
+        simple_nl_sentence = make_sentence(simple_sentences, model=OPENAI_MODEL)
 
         print(f"Simple sentences: {simple_nl_sentence}")
         similarity = semantic_similarity_spacy(source_sentence, simple_nl_sentence)
@@ -43,7 +45,7 @@ def avg_displacement(truth: np.ndarray, arr: np.ndarray) -> float:
     return np.mean(np.abs(np.argsort(truth) - np.argsort(arr)))    
 
 def test_similarity():
-    sentences = json.loads((thisdir.parent / 'data' / 'semantic_sentences.json').read_text())
+    sentences = json.loads((thisdir / 'data' / 'semantic_sentences.json').read_text())
     similarity_funcs = {
         "spacy": semantic_similarity_spacy,
         "bert": semantic_similarity_bert,
@@ -81,12 +83,12 @@ def test_similarity():
 def test_split_sentence():
     sentence = "The writer is writing his book."
     print(sentence)
-    simple_sentences = split_sentence(sentence, model=os.environ['OPENAI_MODEL'])
+    simple_sentences = split_sentence(sentence, model=OPENAI_MODEL)
     print(simple_sentences)
-    simple_nl_sentence = make_sentence(simple_sentences, model=os.environ['OPENAI_MODEL'])
+    simple_nl_sentence = make_sentence(simple_sentences, model=OPENAI_MODEL)
     print(simple_nl_sentence)
 
 if __name__ == '__main__':
-    # main()
-    # test_similarity()
+    main()
+    test_similarity()
     test_split_sentence()

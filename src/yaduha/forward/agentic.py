@@ -72,9 +72,9 @@ class AgenticTranslator(Translator):
         ).translate(target_sentence)
         logging.info(f"{target_sentence} => {sentence}")
 
-        target_sentence = "Jared will eat an apple."
+        target_sentence = "Jared will eat my apple."
         sentence = AgenticTranslator(
-            savepath= savedir / "messages=jared-apple.json",
+            savepath= savedir / "messages-jared-apple.json",
             auto_choices=[
                 "subject_noun",
                 "[Jared]",
@@ -91,6 +91,9 @@ class AgenticTranslator(Translator):
                 "eika",
                 "object_pronoun",
                 "a",
+                "c",
+                "object_possessive_pronoun",
+                "i",
                 "t", # terminate
             ]
         ).translate(target_sentence)

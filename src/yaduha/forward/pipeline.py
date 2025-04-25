@@ -1,10 +1,7 @@
 """Functions for translating simple sentences from English to Paiute."""
 from copy import deepcopy
-from dataclasses import dataclass
 from functools import partial
-import json
 import os
-import pathlib
 import random
 import time
 from typing import Callable, Dict, List, Optional, Tuple, Union
@@ -12,13 +9,18 @@ from typing import Callable, Dict, List, Optional, Tuple, Union
 from openai.types.chat import ChatCompletion
 
 from ..sentence_builder import NOUNS, Object, Subject, Verb
-from ..segment import (
-    EXAMPLE_SENTENCES, Sentence, SubjectNoun, Proximity, Person, Plurality,
+from ..examples import EXAMPLE_SENTENCES
+from ..common import get_openai_client
+from ..syntax import (
+    Sentence, SubjectNoun, Proximity, Person, Plurality,
     Inclusivity, Tense, Aspect,
-    Pronoun, ObjectNoun, SentenceList, get_openai_client, 
-    semantic_similarity_transformers, semantic_similarity_openai, split_sentence
+    Pronoun, ObjectNoun, SentenceList
 )
-from ..segment import Verb as SegmentVerb
+from ..syntax import Verb as SegmentVerb
+from ..semantic_similarity import (
+    semantic_similarity_transformers,
+    semantic_similarity_openai
+)
 from ..back_translate import translate as translate_ovp_to_english
 from ..base import Translator, Translation
 
@@ -457,6 +459,51 @@ def make_sentence(sentence: Sentence, model: str, res_callback: Optional[Callabl
         res_callback(response)
 
     return response.choices[0].message.content
+
+def split_sentence(sentence: str, model: str, res_callback: Optional[Callable[[ChatCompletion], None]] = None) -> SentenceList:
+    messages = [
+        {
+            "role": "system",
+            "content": (
+                'You are an assistant that splits user input sentences into a set of simple SVO or SV sentences. '
+                'The set of simple sentences should be as semantically equivalent as possible to the user input sentence. '
+                'No adjectives, adverbs, prepositions, or conjunctions should be added to the simple sentences. '
+                'Indirect objects and objects of prepositions should not be included in the simple sentences. '
+                'Subjects and objects can be verbs (via nominalization) '
+                '(e.g., "run" -> "the runner", "the one who ran", "the one who will run"). '
+            )
+        }
+    ]
+
+    for example in EXAMPLE_SENTENCES:
+        sentences_obj: SentenceList = example['response']
+        messages.append({
+            'role': 'user',
+            'content': example['sentence']
+        })
+        messages.append({
+            'role': 'assistant',
+            'content': sentences_obj.model_dump_json(),
+        })
+
+    messages.append({
+        'role': 'user',
+        'content': sentence
+    })
+
+    client = get_openai_client()
+    response = client.beta.chat.completions.parse(
+        model=model,
+        messages=messages,
+        response_format=SentenceList
+    )
+
+    if res_callback:
+        res_callback(response)
+
+    sentences = response.choices[0].message.parsed
+
+    return sentences
 
 class PipelineTranslator(Translator):
     def __init__(self, model: str):

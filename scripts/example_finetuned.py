@@ -4,8 +4,10 @@ def main():
     models = [
         # 'ft:gpt-4o-mini-2024-07-18:kubishi:brackets-plus-prompt-merged:AFvrmkic',
         # 'ft:gpt-4o-2024-08-06:kubishi:brackets-plus-prompt-merged-4o:AGCTD0Ao',
-        'ft:gpt-4o-mini-2024-07-18:kubishi::AGvA83su',
-        'ft:gpt-4o-2024-08-06:kubishi::AGvLgN91'
+        # 'ft:gpt-4o-mini-2024-07-18:kubishi::AGvA83su',
+        # 'ft:gpt-4o-2024-08-06:kubishi::AGvLgN91'
+        'ft:gpt-4o-mini-2024-07-18:kubishi::AInrzzLW',
+        'ft:gpt-4o-2024-08-06:kubishi::AInyiTpj',
     ]
     for model in models:
         translator = FinetunedTranslator(model=model)

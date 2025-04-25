@@ -1,13 +1,11 @@
 import logging
-from openai import OpenAI
 import os
-from dotenv import load_dotenv
-from .tools.tools import tools, messages, messages_b, messages_translator, messages_translator_b
-from .tools.functions import search_english 
 import json
 import argparse
 
+from .tools.tools import tools, messages, messages_b, messages_translator, messages_translator_b
 from .tools.functions import search_english, search_grammar, search_paiute, search_sentences
+from ..common import get_openai_client
 
 functions = {
     "search_english": search_english,
@@ -16,10 +14,7 @@ functions = {
     "search_sentences": search_sentences
 }
 
-load_dotenv()
-
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"),)
-
+client = get_openai_client(api_key=os.getenv("OPENAI_API_KEY"))
 welcome_art = r"""
                                     Welcome To
      ____   _    ___ _   _ _____ _____    ____ _   _    _  _____ ____   ___ _____ 
@@ -219,17 +214,47 @@ def translate(message: str, model: str = "gpt-4o-mini"):
         }
     ]
 
-    completion = client.chat.completions.create(
-        model=model,
-        messages=messages,
-        temperature=0.0,
-    )
+    translation = ""
+    while True:
+        completion = client.chat.completions.create(
+            model=model,
+            messages=messages,
+            temperature=0.0,
+            tools=[
+                tool for tool in tools if tool['function']['name'] == "search_english"	
+            ],
+        )
+
+        messages.append(json.loads(completion.choices[0].message.model_dump_json()))
+
+        if completion.choices[0].message.content:
+            logging.info("Response: " + completion.choices[0].message.content)
+
+        if not completion.choices[0].message.tool_calls:
+            translation = completion.choices[0].message.content
+            break
+        
+        for tool_call in completion.choices[0].message.tool_calls:
+            kwargs = json.loads(tool_call.function.arguments)
+            logging.info(f"Function: {tool_call.function.name}")
+            # logging.info(f"Arguments: {kwargs}")
+            function = functions.get(tool_call.function.name)
+            if not function:
+                logging.error(f"Function {tool_call.function.name} not found.")
+                continue
+            res = function(**kwargs)
+            # logging.info(f"Result: {res}")
+            messages.append({
+                "role": "tool",
+                "content": json.dumps(res, ensure_ascii=False),
+                "tool_call_id": tool_call.id
+            })
 
     response = {
         "translation_prompt_tokens": completion.usage.prompt_tokens,
         "translation_completion_tokens": completion.usage.completion_tokens,
         "translation_total_tokens": completion.usage.total_tokens,
-        "translation": completion.choices[0].message.content,
+        "translation": translation,
         "messages": messages_translator
     }
     return response

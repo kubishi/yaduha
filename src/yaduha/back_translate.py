@@ -4,11 +4,13 @@ from typing import Callable, Optional
 from openai.types.chat import ChatCompletion
 
 import dotenv
-import openai
 
+from .common import get_openai_client
 from .sentence_builder import NOUNS, Object, Subject, Verb, POSSESSIVE_PRONOUNS
 
 dotenv.load_dotenv()
+
+client = get_openai_client()
 
 def get_english_structure(subject_noun: str,
                           subject_noun_nominalizer: Optional[str],
@@ -84,7 +86,7 @@ def translate(subject_noun: str,
               object_noun_nominalizer: Optional[str],
               object_suffix: Optional[str],
               object_possessive_pronoun: Optional[str],
-              model: str = 'gpt-4o-mini',
+              model: str = 'gpt-4o',
               res_callback: Optional[Callable[[ChatCompletion], None]] = None) -> str:
     choices = dict(
         subject_noun=subject_noun,
@@ -114,21 +116,21 @@ def translate(subject_noun: str,
         {
             'role': 'user',
             'content': json.dumps(
-                [{'part_of_speech': 'subject', 'positional': 'proximal', 'word': 'cup'},
+                [{'part_of_speech': 'subject', 'positional': 'proximal', 'word': 'cup', 'possessive': 'my'},
                  {'part_of_speech': 'object', 'positional': 'distal', 'word': 'cup', 'plural': True},
                  {'part_of_speech': 'verb', 'tense': 'future (will)', 'word': 'eat'}]
             )
         },
-        {'role': 'assistant', 'content': '(This cup) will eat (those cups).'},
+        {'role': 'assistant', 'content': '(My cup) will eat (those cups).'},
         {
             'role': 'user',
             'content': json.dumps(
-                [{'part_of_speech': 'subject', 'positional': 'distal', 'word': 'pinenuts'},
+                [{'part_of_speech': 'subject', 'positional': 'distal', 'word': 'pinenuts', 'possessive': 'their own'},
                  {'part_of_speech': 'object', 'positional': 'distal', 'word': 'horse'},
                  {'part_of_speech': 'verb', 'tense': 'future (will)', 'word': 'see'}]
             )
         },
-        {'role': 'assistant', 'content': '(Those pinenuts) will see (that horse).'},
+        {'role': 'assistant', 'content': '(Their own pinenuts) will see (that horse).'},
         # sawa-dü-ii kwati-deika ma-buni-ku 
         {
             'role': 'user',
@@ -143,12 +145,12 @@ def translate(subject_noun: str,
         {
             'role': 'user',
             'content': json.dumps(
-                [{'part_of_speech': 'subject', 'positional': 'distal', 'word': 'read', 'agent_nominalizer': 'future'},
+                [{'part_of_speech': 'subject', 'positional': 'distal', 'word': 'read', 'agent_nominalizer': 'future', 'possessive': 'our'},
                  {'part_of_speech': 'object', 'positional': 'proximal', 'word': 'hear', 'agent_nominalizer': 'future'},
                  {'part_of_speech': 'verb', 'tense': 'future', 'word': 'climb'}]
             )
         },
-        {'role': 'assistant', 'content': '(That one who will read) will climb (the one who will hear).'},
+        {'role': 'assistant', 'content': '(Our future reader) will climb (the one who will hear).'},
     ]
     logging.debug(json.dumps(structure, indent=2))
     messages = [
@@ -161,7 +163,7 @@ def translate(subject_noun: str,
         *examples,
         {'role': 'user', 'content': json.dumps(structure)}
     ]
-    res = openai.chat.completions.create(
+    res = client.chat.completions.create(
         model=model,
         messages=messages,
         timeout=10,

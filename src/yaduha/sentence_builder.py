@@ -1,5 +1,4 @@
 from copy import deepcopy
-import logging
 import random
 from typing import Any, Dict, List, Optional
 
@@ -444,12 +443,14 @@ class Object:
 def get_all_choices(subject_noun: Optional[str] = None,
                     subject_noun_nominalizer: Optional[str] = None,
                     subject_suffix: Optional[str] = None,
+                    subject_possessive_pronoun: Optional[str] = None,
                     verb: Optional[str] = None,
                     verb_tense: Optional[str] = None,
                     object_pronoun: Optional[str] = None,
                     object_noun: Optional[str] = None,
                     object_noun_nominalizer: Optional[str] = None,
-                    object_suffix: Optional[str] = None) -> Dict[str, Any]:
+                    object_suffix: Optional[str] = None,
+                    object_possessive_pronoun: Optional[str] = None) -> Dict[str, Any]:
     is_verb_wild = verb is not None and verb.startswith('[') and verb.endswith(']')
     is_subject_noun_wild = subject_noun is not None and subject_noun.startswith('[') and subject_noun.endswith(']')
     is_object_noun_wild = object_noun is not None and object_noun.startswith('[') and object_noun.endswith(']')
@@ -507,11 +508,21 @@ def get_all_choices(subject_noun: Optional[str] = None,
             'requirement': "disabled"
         }
         subject_suffix = None
+        choices['subject_possessive_pronoun'] = {
+            'choices': {},
+            'value': None,
+            'requirement': "disabled"
+        }
     else:
         choices['subject_suffix'] = {
             'choices': Subject.SUFFIXES,
             'value': subject_suffix,
             'requirement': "required"
+        }
+        choices['subject_possessive_pronoun'] = {
+            'choices': POSSESSIVE_PRONOUNS,
+            'value': subject_possessive_pronoun,
+            'requirement': "optional"
         }
 
     if subject_noun in [*Verb.TRANSITIVE_VERBS.keys(), *Verb.INTRANSITIVE_VERBS.keys()]:
@@ -642,18 +653,35 @@ def get_all_choices(subject_noun: Optional[str] = None,
             'requirement': "required"
         }
 
+    # Object possessive pronoun
+    if object_noun is None:
+        choices['object_possessive_pronoun'] = {
+            'choices': {},
+            'value': None,
+            'requirement': "disabled"
+        }
+        object_possessive_pronoun = None
+    else:
+        choices['object_possessive_pronoun'] = {
+            'choices': POSSESSIVE_PRONOUNS,
+            'value': object_possessive_pronoun,
+            'requirement': "optional"
+        }
+
     return choices
 
 def format_sentence(subject_noun: Optional[str],
                     subject_noun_nominalizer: Optional[str],
                     subject_suffix: Optional[str],
+                    subject_possessive_pronoun: Optional[str],
                     verb: Optional[str],
                     verb_tense: Optional[str],
                     object_pronoun: Optional[str],
                     object_noun: Optional[str],
                     object_noun_nominalizer: Optional[str],
-                    object_suffix: Optional[str]) -> List[Dict]:
-    subject = Subject(subject_noun, subject_noun_nominalizer, subject_suffix)
+                    object_suffix: Optional[str],
+                    object_possessive_pronoun: Optional[str]) -> List[Dict]:
+    subject = Subject(subject_noun, subject_noun_nominalizer, subject_suffix, subject_possessive_pronoun)
     _verb = Verb(verb, verb_tense, object_pronoun)
 
     # check object_pronoun and object_suffix match
@@ -663,7 +691,7 @@ def format_sentence(subject_noun: Optional[str],
 
     object = None
     try:
-        object = Object(object_noun, object_noun_nominalizer, object_suffix)
+        object = Object(object_noun, object_noun_nominalizer, object_suffix, object_possessive_pronoun)
     except ValueError as e: # could not create object
         if object_noun is not None:
             raise e
