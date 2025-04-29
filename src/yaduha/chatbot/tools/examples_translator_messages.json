@@ -1,0 +1,808 @@
+[
+  {
+    "role": "user",
+    "content": "I am sitting in a chair."
+  },
+  {
+    "role": "assistant",
+    "tool_calls": [
+      {
+        "id": "call_rkwdr5JMbkyh5ZwMBRcmwQO0",
+        "function": {
+          "name": "search_sentences",
+          "arguments": "{\"query\": \"I am sitting in a chair.\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_veFSVTVtMbJJuiKrfItrmffN",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"I, me\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_SucYHRucmBcYsYS9mqJf7qV2",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"sit\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_x0TgETAxpIuXntxxPDYnVtQw",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"chair\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_PqX3OwrMmKglGP78KezJlMVq",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"in, on\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_xK5XhrpD1PmmUHG7Bw5UvIqA",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"present continuous tense\"}"
+        },
+        "type": "function"
+      }
+    ]
+  },
+  {
+    "role": "tool",
+    "content": "[{\"sentence\": \"Mahu tü-katünnu-gwee-ddu-ikka sooma'i-dü.\", \"translation\": \"He's rocking in his chair.\"}, {\"sentence\": \"Katünnu-ba'-ikka nüü katü-ni-ukka tasinguyubi-ti.\", \"translation\": \"While I sat on that chair, my legs fell asleep.\"}, {\"sentence\": \"Mii'ukka nüü 'adaamudüdi'i-wee-tugu katü-wei.\", \"translation\": \"I am going to sit in the car now.\"}, {\"sentence\": \"Nüü 'üwi-katü-dü.\", \"translation\": \"I am sitting down *sleeping.\"}, {\"sentence\": \"Nüü pagatü-dei-wei.\", \"translation\": \"I'll sit in the water.\"}]",
+    "tool_call_id": "call_rkwdr5JMbkyh5ZwMBRcmwQO0"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"nükka\", \"senses\": [{\"gloss\": \"me\", \"definition\": \"Me, to me, mine, demonstrative pronoun, possessive pronoun.\", \"examples\": [{\"form\": \"Tu'ihiinno' nükka-su yaduhi-ti.\", \"translation\": \"He's always spoken to me.\"}, {\"form\": \"Nükkana-sü' i-düniwaa-wei.\", \"translation\": \"He'll only teach me.\"}, {\"form\": \"Nüü nükkana-sü' nawahii-maa-gü-ti.\", \"translation\": \"I'm buying clothes just for myself.\"}, {\"form\": \"Mahu nükkana.\", \"translation\": \"That one's mine.\"}]}]}, {\"lexical_unit\": \"nükkana\", \"senses\": [{\"gloss\": \"me\", \"definition\": \"Me, to me, demonstrative pronoun, possessive pronoun.\", \"examples\": []}]}, {\"lexical_unit\": \"nüü\", \"senses\": [{\"gloss\": \"I\", \"definition\": \"I, first person, subject pronoun.\", \"examples\": [{\"form\": \"Nüü tsaŵu-iddu.\", \"translation\": \"I am good.\"}, {\"form\": \"Tsaŵu nüü naama-ti.\", \"translation\": \"I'm feeling good.\"}, {\"form\": \"Nüügwa nasümü tutuapi-ii payahuupü-wee mia-ti.\", \"translation\": \"We and all the kids went to the river.\"}, {\"form\": \"Nüügwa nüümü-neikka 'a-nobi-gwee-ddu 'ia kimma-dü.\", \"translation\": \"We are coming back from their Indian community there.\"}]}]}, {\"lexical_unit\": \"nü\", \"senses\": [{\"gloss\": \"me\", \"definition\": \"Me, prefixes to postpositions.\", \"examples\": [{\"form\": \"Nü-baa katü-gi.\", \"translation\": \"Come sit by me.\"}, {\"form\": \"Songayabi-ii nü-mama tsibui-ti.\", \"translation\": \"The spider is climbing on my.\"}]}]}, {\"lexical_unit\": \"'i\", \"senses\": [{\"gloss\": \"me\", \"definition\": \"To me (attaches to transitive verbs).\", \"examples\": [{\"form\": \"'Oonno'oho 'uhu 'i-düngü-ti hüüpi'i-baa-tugu-ukka yeishi 'uhu 'awa-ggu\\n                        'uhu 'i-gia-ti.\", \"translation\": \"And then, he asked me to go over to the lady and then she gave me a\\n                            lot.\"}, {\"form\": \"Maattü-eika 'i-gia.\", \"translation\": \"Give that to me.\"}]}]}]",
+    "tool_call_id": "call_veFSVTVtMbJJuiKrfItrmffN"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"katü\", \"senses\": [{\"gloss\": \"sit\", \"definition\": \"To sit down.\", \"examples\": [{\"form\": \"'Io katü-gi nü-baa.\", \"translation\": \"Come sit here by me.\"}]}, {\"gloss\": \"stay\", \"definition\": \"To stay at a certain place, to reside at a place.\", \"examples\": [{\"form\": \"Kadu' nüü katü-baa sugwei-ti pünebü nüü mia-wei.\", \"translation\": \"I don't want to stay around. I should get going.\"}, {\"form\": \"'Uhu-dii-büü 'u-wee katü-ni-ukka na-gia-dua-pü subaa.\", \"translation\": \"Maybe she could indeed be given (that land) if she'd stay there.\"}, {\"form\": \"Subaa 'uhu toya-ŵa katü-dü.\", \"translation\": \"Maybe he lives in the mountains.\"}, {\"form\": \"Nüü 'i-ŵu'a-ŵü-neikka 'ihutsi'i-ŵü-neikka tü-gatü-gü-dü.\", \"translation\": \"I'm going to have my grandchildren stay (so that I can watch them).\"}, {\"form\": \"'Iannaha nüü 'i-gaani'i-naha-neikka tü-gatü-gü-wei 'ü-düwoobü-wee-ukka.\", \"translation\": \"I'm going to keep my cows over there in your field.\"}]}]}, {\"lexical_unit\": \"tsakatügü\", \"senses\": [{\"gloss\": \"sit (something) down\", \"definition\": \"To sit something down (in a sitting position), to have someone stay at a\\n                        certain place or location.\", \"examples\": [{\"form\": null, \"translation\": null}]}]}, {\"lexical_unit\": \"yuuna\", \"senses\": [{\"gloss\": \"put\", \"definition\": null, \"examples\": []}, {\"gloss\": \"put\", \"definition\": null, \"examples\": []}]}, {\"lexical_unit\": \"-yükwi\", \"senses\": [{\"gloss\": \"sit (plural)\", \"definition\": \"To sit (plural) doing something, to stay/reside (plural) while doing\\n                        something.\", \"examples\": [{\"form\": \"U-'aaŵoho-ukka-düa-büü hühüübichi'-uu tüzoo-yükwi-ti.\", \"translation\": \"The next day, the old ladies were sitting around sad/lonely.\"}]}]}, {\"lexical_unit\": \"yükwi\", \"senses\": [{\"gloss\": \"sit (plural)\", \"definition\": \"To sit plural, to sit in a group, to say/reside of a number of people.\", \"examples\": [{\"form\": \"Tu'ihaga-ii kimma-si-ukka 'oonno'oho yükwi-ti tübina.\", \"translation\": \"Once everyone came they sat down on the ground.\"}, {\"form\": \"'Iattü-ii nüümü-ii tünaa-dugu yükwi-tügü-ti kadu' i-düŵaabü'a-dei-shi.\", \"translation\": \"Those people over there are just sitting down and not helping.\"}]}]}]",
+    "tool_call_id": "call_SucYHRucmBcYsYS9mqJf7qV2"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"katünnu\", \"senses\": [{\"gloss\": \"chair\", \"definition\": \"A chair or seat, something to sit on.\", \"examples\": [{\"form\": \"Tibo-neikka 'a-nahuwee katünnu-neikka 'a-dügü 'oonno'oho nüümü-ii 'a-ba'\\n                        katü-wei.\", \"translation\": \"Place the chairs around the table and then the people will sit on\\n                            them.\"}, {\"form\": \"Mahu katünnu-neikka 'a-ŵama natsakkadü-pü.\", \"translation\": \"She's using the chair to brace hereself/keep herself in place.\"}]}]}, {\"lexical_unit\": \"tibo\", \"senses\": [{\"gloss\": \"table\", \"definition\": \"Table.\", \"examples\": [{\"form\": \"Tibo-neikka 'a-düka-dduna.\", \"translation\": \"Set the table.\"}, {\"form\": \"Wihi-ii tibo-ba' na-dügü-ti.\", \"translation\": \"The knife was placed on the table.\"}, {\"form\": \"Nüügwa nasümü katü-dei-shi tibo-wee-ukka 'oonnoho nüügwa wanaaha'i-ti.\", \"translation\": \"We all sat at the table and we played cards.\"}, {\"form\": \"Tibo-ba'a-ddü-eikka-daagwa tüka-wei müha.\", \"translation\": \"We will now eat what is on the table.\"}]}]}, {\"lexical_unit\": \"'adaamubüdi'\", \"senses\": [{\"gloss\": \"automobile, car\", \"definition\": null, \"examples\": []}]}, {\"lexical_unit\": \"hibinobi\", \"senses\": [{\"gloss\": \"bar (saloon)\", \"definition\": null, \"examples\": []}]}, {\"lexical_unit\": \"huubü\", \"senses\": [{\"gloss\": \"cradle board\", \"definition\": \"Cradle board basket, baby basket.\", \"examples\": [{\"form\": \"Tsaŵu huubü-uu 'u-wüü-'i-da'.\", \"translation\": \"The cradle board secures him well.\"}, {\"form\": \"Bibi'-aa 'u-wee-kku 'u-na-dutta-nna huubü-uu. Püdü-bibi'-okka tsaŵu-su\\n                        'uhu tüüchi'i-nia-ggu na-ŵaappa'i-gü-si 'oonno'oho tsaŵu na-hida-'i-dü.\", \"translation\": \"That cradle board is what a baby is laced in. It's made better for a\\n                            newborn that is a little smaller and it is held well (speaking of\\n                            cradleboard for newborn with naval still attached).\"}]}]}]",
+    "tool_call_id": "call_x0TgETAxpIuXntxxPDYnVtQw"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"-pa'\", \"senses\": [{\"gloss\": \"on\", \"definition\": \"On top, up, above.\", \"examples\": [{\"form\": \"Mahu tü-hiibü-neikka nobi-ba'a-ddü-eikka 'a-basei-wei-neikka 'a-buhei-ti.\", \"translation\": \"He's looking for the leak on top of the roof of the house.\"}, {\"form\": \"Nüü 'a-ba' katü-wei tübipü-neikka.\", \"translation\": \"I'm going to sit on the dirt.\"}, {\"form\": \"Tübbi-ba'a-ikka 'a-dügü-dei-shi 'a-hani.\", \"translation\": \"Place it on top of that rock, then do it.\"}, {\"form\": \"'Ikkana nüü nana-papa' a-dügü-ti.\", \"translation\": \"I'm putting these on top of one another.\"}]}, {\"gloss\": \"above\", \"definition\": \"Up above.\", \"examples\": [{\"form\": \"Püyü-ii pa'a 'ia na-bakia-ti paya-neikka.\", \"translation\": \"The duck is over there on top the water bathing.\"}, {\"form\": \"Nüü-büü 'u-düüya-'ei pa'a 'ia 'i-dügü-wei-nokka.\", \"translation\": \"I'm afraid each time to place it high above over there.\"}, {\"form\": \"Pa'a-su nüü 'aannaha mia-ni pitü-hu-gaa-wei.\", \"translation\": \"I'll go higher there, then arrive.\"}, {\"form\": \"Nüü pa'a-su 'ia mia-wei 'u-tugu.\", \"translation\": \"I'll go a higher way/route.\"}, {\"form\": \"'Uhuŵa-su pa'a-su nobi-püga.\", \"translation\": \"They used to live higher up on their own.\"}, {\"form\": \"Pa'a'ube.\", \"translation\": \"Up above, back in here.\"}, {\"form\": \"Taagwa tei-kootsi'i-naha-neikka 'aattaga 'a-damühü-wei yeishi-daa\\n                        'a-wee-kku 'a-wükütsü'i-shi-ukka 'oonno'oho 'a-ba'a-nia-su 'a-'üdzü'ü-hu-si\\n                        taagwa tü-batsa-wei.\", \"translation\": \"We'll round up our pigs and confine them in that (pen), and then if\\n                            the cold temperature become more so, we'll butcher one.\"}]}]}, {\"lexical_unit\": \"'iiga\", \"senses\": [{\"gloss\": \"enter\", \"definition\": \"To enter, to go inside.\", \"examples\": [{\"form\": \"Tü-zagwünü-gü-si 'üügwa pipaa-ttugu 'iiga.\", \"translation\": \"Park and then enter through the back.\"}]}]}, {\"lexical_unit\": \"hiiga\", \"senses\": [{\"gloss\": \"enter\", \"definition\": \"To enter, to go inside.\", \"examples\": []}]}, {\"lexical_unit\": \"-'aka\", \"senses\": [{\"gloss\": \"among, in the midst of\", \"definition\": \"Among, within a group, in the midst of.\", \"examples\": [{\"form\": \"Oonno' ukkahu 'uhu sühü-'aga-tugu 'uhu tsupa-ka' u-be oonno'oho\\n                        sümü'ü-su-düa tapona-kini.\", \"translation\": \"Then that one disappeared into the willows and then one other started\\n                            to appeared/come out.\"}]}]}, {\"lexical_unit\": \"tabe-\", \"senses\": [{\"gloss\": \"sun (in)\", \"definition\": \"To do (action) in the sun, adverbial prefix, prefixes to verbs.\", \"examples\": [{\"form\": \"Nüü-büü tabe-wünü-dü. Nüü 'üdzü'ü-gaa-ni 'ionnoho kimma-ti\\n                        tabe-wünü-gi-dü.\", \"translation\": \"I'm standing in the sun. Once I became cold, I came right here to\\n                            stand in the sun.\"}]}]}]",
+    "tool_call_id": "call_PqX3OwrMmKglGP78KezJlMVq"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"-dü\", \"senses\": [{\"gloss\": \"present\", \"definition\": \"Verbal suffix ending that indicates the action is happening in the present\\n                        tense, or in the process of doing it; also makes verbs into nouns by\\n                        indicating the doer of the action. Also, signifies habitual tense.\", \"examples\": [{\"form\": \"Sawa-dü-eikka 'a-düŵaabü'a.\", \"translation\": \"Help the one that's cooking.\"}, {\"form\": \"'Uhu tü-nawahii-nokka 'u-zamüna-gaa-dü.\", \"translation\": \"He's going to go change his clothes.\"}, {\"form\": \"Haga mii 'üni-dü-uu?\", \"translation\": \"Who's the one who said that?\"}, {\"form\": \"Haga 'aaŵahu-ukka sawa-wei-dü-ii?\", \"translation\": \"Who will be the one to cook tomorrow?\"}, {\"form\": \"Haga 'i-bida-gü-weidü-ii 'i-sawa-ku-su-ukka.\", \"translation\": \"Who will make me fire when I cook.\"}]}]}, {\"lexical_unit\": \"mane'i\", \"senses\": [{\"gloss\": \"continuously\", \"definition\": \"Describes an action happening continuously, also attaches to verbs stating\\n                        that action happening continously or uninterrupted.\", \"examples\": [{\"form\": \"'Awazu-ukka pabahaanno-su mane'i-dü.\", \"translation\": \"Later on, it continously became wider (speaking of the land).\"}, {\"form\": \"'Oonno'oho nüügwa 'aannaha pitü-bitü-gaa-si-ukka 'uhuŵa tüka-mane'i-ti\\n                        (mano'oi-ti).\", \"translation\": \"And then, once we arrived there, they were eating uninterrupted.\"}]}]}, {\"lexical_unit\": \"-ttü'\", \"senses\": [{\"gloss\": \"continuous\", \"definition\": \"Suffixes to a verb stating that the action is in a continuous state or\\n                        uninterrupted.\", \"examples\": [{\"form\": \"Yeishi 'uhu tü-kwadzi-nokka paya-wee-ukka 'u-dügü-ti. 'Oonno'oho-ya' uhu\\n                        'aannaha katü-ttü' katü-ttü'.\", \"translation\": \"Then he placed his tail in the water. And then, there he apparently\\n                            sat and sat.\"}, {\"form\": \"'Oonno'oho saki-chi'i-wee-ddu kahiinno'o-iddu hüü-iddu 'oonno'oho\\n                        moo-ttü'.\", \"translation\": \"At that time, there were a small amount (of people) in a boat,\\n                            continuously traveling.\"}, {\"form\": \"Isha’-uu mii nana-’itawa-ti. Nana-küsidua-si na-pidügü-ttü’. “Nüü-büü\\n                        isha’ üü-büü küma’a-su” mii nana-’itawa-nna, Oo-togo-ho nana-küsidua-si\\n                        na-pidügü-ti.\", \"translation\": \"The coyotes were saying to one another. Growling at each other,\\n                            fighting. \\\"I'm coyote, you're another one,\\\" they said to one another,\\n                            growling at each and other fighting.\"}]}]}, {\"lexical_unit\": \"-kuka'\", \"senses\": [{\"gloss\": \"progress\", \"definition\": \"Expresses advancement of an action, or moving toward stages do that\\n                        action, present tense.\", \"examples\": [{\"form\": \"Nana-'adaŵi mahuŵa miŵia-ku-ka'.\", \"translation\": \"Moving forward in different ways from one another (towards different\\n                            outcome/goals).\"}, {\"form\": \"'Uhu subaa kahinno'o-ttogo na-boyoha-tüngü-ti oonno'oho küma'a-su-düa\\n                        poyoha-ku-ka'a-su-düa.\", \"translation\": \"Maybe he's told to run for a short time and then someone else then\\n                            runs further (said of runners running relay style).\"}, {\"form\": \"Hüzamaa' üü 'oonno'oho 'u-hani-kugaa-wei.\", \"translation\": \"At that time, you move ahead doing it (task) slowly.\"}, {\"form\": \"Wiga-du-wei-daagwa kammü-ga-kugaa-si.\", \"translation\": \"We'll make a rabbit blanket, upon collecting the rabbits (needed).\"}, {\"form\": \"Taagwa kuma-kukaa-wei toyabi-nokka.\", \"translation\": \"We'll make our way up over that mountain.\"}, {\"form\": \"Nüü 'u-ho-ddo yaduha-maa-ku-si tüka-ku-ka'.\", \"translation\": \"I'd cease talking with her and then continue eating.\"}]}]}, {\"lexical_unit\": \"-ti\", \"senses\": [{\"gloss\": \"ing\", \"definition\": \"Present/Past tense, \\\"This marker does not make a distinction between\\n                        present and past tense. It is a realis marker, and asserts that some\\n                        activity has begun, and may or may not have been brought to completion,\\\"\\n                        from Evan J. Noris A Grammar Sketch and Comparative of Eastern Mono.\", \"examples\": [{\"form\": \"Nüü natügünaa yaduha-ti.\", \"translation\": \"I'm continuously talking.\"}]}]}]",
+    "tool_call_id": "call_xK5XhrpD1PmmUHG7Bw5UvIqA"
+  },
+  {
+    "role": "assistant",
+    "content": "Nüü katünnu-ba' katü-ti."
+  },
+  {
+    "role": "user",
+    "content": "The one who ran has seen Rebecca and met her."
+  },
+  {
+    "role": "assistant",
+    "tool_calls": [
+      {
+        "id": "call_L4iQKAJ5P2wTe2Oz33p5Ean4",
+        "function": {
+          "name": "search_sentences",
+          "arguments": "{\"query\": \"The one who ran has seen Rebecca and met her.\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_OfmHGj7D8HTqrzD69DQRDUxd",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"past tense, present perfect tense\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_WwNuHEU5xm86I8cjBGSpJWdc",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"run\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_Ug3wv4c2i2ziSrDRvqjCxXsL",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"see\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_ekFjANm1t6FFTadkwFO10hEN",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"meet, know\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_ZBuBqT2XCAtB65ZUehwClY8W",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"verb tense, doer of an action\"}"
+        },
+        "type": "function"
+      }
+    ]
+  },
+  {
+    "role": "tool",
+    "content": "[{\"sentence\": \"'Ui-güŵabaa mia-dü-uu 'ui-wüküna-kaayugi-ti.\", \"translation\": \"The one who went beside them almost ran them over.\"}, {\"sentence\": \"'Oonno'oho bibi'-ki-uu mii'uka poyoha-'i-mia-boo-ti\\n                        'u-na-ŵaatta-tei-nna-uu.\", \"translation\": \"And then the baby that she left is now running around.\"}, {\"sentence\": \"Carol-uu 'u-dapenno'o-ti 'aanna-iddu-hu yeishi 'uhuŵa naŵi-ddu\\n                        nana-ppipinna kigimma-ti.\", \"translation\": \"Carol met them, and from there they both came behind one another.\"}, {\"sentence\": \"'Uhu nii-buni-shi-ukka nii-hida-bitü.\", \"translation\": \"Once she saw us, she came over/arrived to hug us.\"}, {\"sentence\": \"Siipü'-maanna'-uu 'u-buni-kaa-si-ukka 'unni-ggu-hu 'uhu\\n                        nuhi-zhügwüda-kida' mia-tei-ti 'u-gahinno 'oonno'oho tü-bitaŵa-tuha.\", \"translation\": \"Once the sheep man noticed that he ran really fast toward him and then\\n                            checked on him.\"}]",
+    "tool_call_id": "call_L4iQKAJ5P2wTe2Oz33p5Ean4"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"-du'i\", \"senses\": [{\"gloss\": \"PAST\", \"definition\": \"Expression word making phrases in past-tense context.\", \"examples\": [{\"form\": \"Mahu 'i-wüü-kaa-wei-du'i.\", \"translation\": \"He was going to catch me.\"}, {\"form\": \"Kadu' tsügwüda-du'i.\", \"translation\": \"It was not nearly as fast.\"}, {\"form\": \"Tuihii-du'i 'aannaha püünuhu-daagwa ka'a-su 'u-bbumaadzi-dua-pü.\", \"translation\": \"Just about everything was there, however we wouldn't recognize it yet.\"}, {\"form\": \"Süŵübaa nüü-du'i.\", \"translation\": \"I think I can (I just may be able to).\"}, {\"form\": \"Nüü-du'i 'ü-dzakoonohi-gü-dua-pü 'u-subasa-ni-ukka 'üü hupinagwa\\n                        'ü-gwünü-nokka.\", \"translation\": \"I could have openned the door for you had I known you were standing\\n                            outside.\"}, {\"form\": \"Kadu' nüü-du'i yaduha-nna.\", \"translation\": \"Excuse me, I didn't mean it.\"}]}]}, {\"lexical_unit\": \"-pü\", \"senses\": [{\"gloss\": \"PAST\", \"definition\": \"Past tense particle, attaches to end of verbs. Shows an action has been\\n                        done and the results of that action is still felt or evident. The one or\\n                        thing that does the action.\", \"examples\": [{\"form\": \"Nüü muasu koopi'-aa hibi-pü.\", \"translation\": \"I already drank some coffee.\"}, {\"form\": \"Nüü 'üi-dü-gwati-pü-aa tü-zoba-wei.\", \"translation\": \"I'll pick up what you've all shot (bullets/arrows).\"}, {\"form\": \"Tei-ddaduha-pü-ii koobenno-ttü-aa 'ionnoho ma-na-dügü-pü.\", \"translation\": \"The language (we speak) was first to be placed here.\"}, {\"form\": \"Hüügwa-pü-uu nadüüya-ti.\", \"translation\": \"That wind was scary/strong.\"}]}]}, {\"lexical_unit\": \"-dü\", \"senses\": [{\"gloss\": \"present\", \"definition\": \"Verbal suffix ending that indicates the action is happening in the present\\n                        tense, or in the process of doing it; also makes verbs into nouns by\\n                        indicating the doer of the action. Also, signifies habitual tense.\", \"examples\": [{\"form\": \"Sawa-dü-eikka 'a-düŵaabü'a.\", \"translation\": \"Help the one that's cooking.\"}, {\"form\": \"'Uhu tü-nawahii-nokka 'u-zamüna-gaa-dü.\", \"translation\": \"He's going to go change his clothes.\"}, {\"form\": \"Haga mii 'üni-dü-uu?\", \"translation\": \"Who's the one who said that?\"}, {\"form\": \"Haga 'aaŵahu-ukka sawa-wei-dü-ii?\", \"translation\": \"Who will be the one to cook tomorrow?\"}, {\"form\": \"Haga 'i-bida-gü-weidü-ii 'i-sawa-ku-su-ukka.\", \"translation\": \"Who will make me fire when I cook.\"}]}]}, {\"lexical_unit\": \"-wei\", \"senses\": [{\"gloss\": \"will (future tense)\", \"definition\": \"Verb ending for future tense.\", \"examples\": [{\"form\": \"Nüü 'ube mia-wei.\", \"translation\": \"I'll go back in there.\"}, {\"form\": \"Tsaŵu-baa-su tu'ihii mia-wei-dü.\", \"translation\": \"Everything is intended to go well.\"}, {\"form\": \"Hiibü-na nüü 'ü-düükwii-ti 'iattü-okka 'i-nakka-nna? Kwiŵi mia-binaa-ti\\n                        'uhuŵa Carson-wee tü-dühiibü-nokka na-duhu-gaa-wei-shi.\", \"translation\": \"What was it that I told you I heard from over there? They were wanting\\n                            to go north to Carson, in order to sell something of theirs.\"}, {\"form\": \"'Uhu tü-doogü'-tsi'-okka na-wütaŵa-pü tü-ma-ggu yeishi 'uhu na-waadzi-ti\\n                        'uhu 'u-na-pidügü-wei-shi.\", \"translation\": \"He had his dog secured/tied to his person, and then he hid being that\\n                            he'd get into a fight.\"}, {\"form\": \"Nününü'-uu tei-nakka-gü-wei-shi tei-bei-pihaaŵi-ti.\", \"translation\": \"That white person was beconing each one of us over, in order to give\\n                            us a chance to listen (or be heard?).\"}]}]}, {\"lexical_unit\": \"-ti\", \"senses\": [{\"gloss\": \"ing\", \"definition\": \"Present/Past tense, \\\"This marker does not make a distinction between\\n                        present and past tense. It is a realis marker, and asserts that some\\n                        activity has begun, and may or may not have been brought to completion,\\\"\\n                        from Evan J. Noris A Grammar Sketch and Comparative of Eastern Mono.\", \"examples\": [{\"form\": \"Nüü natügünaa yaduha-ti.\", \"translation\": \"I'm continuously talking.\"}]}]}]",
+    "tool_call_id": "call_OfmHGj7D8HTqrzD69DQRDUxd"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"poyoha\", \"senses\": [{\"gloss\": \"run\", \"definition\": \"To run using the legs.\", \"examples\": [{\"form\": \"Nüü sakwa 'i-nobi-gwee-tugu poyoha-tei-ku.\", \"translation\": \"I should've ran home.\"}, {\"form\": \"Poboyoha-ti 'uhuŵa 'u-duamü-uu.\", \"translation\": \"His children are all running.\"}]}]}, {\"lexical_unit\": \"huuseinna\", \"senses\": [{\"gloss\": \"run off\", \"definition\": \"Run off (from newly melted snow).\", \"examples\": []}]}, {\"lexical_unit\": \"wüküna\", \"senses\": [{\"gloss\": \"run over\", \"definition\": \"To run over or hit with a vehicle, to hold down applying pressure to\\n                        something.\", \"examples\": [{\"form\": \"'Oonno'oho 'uhu payubü-ŵa 'u-wüküna-ti 'oonno'oho 'u-wüttaŵa-ti tsaŵu.\", \"translation\": \"He uses the cloth to apply pressure (to the wound), and then bandages\\n                            it well.\"}, {\"form\": \"'Awa-iddu tühidda-ii mia-dü-ii 'uwagattü kadu' yabi mia-dü-uu\\n                        na-wüküna-ku.\", \"translation\": \"Some of the many deer that migrate, and don't move fast enough get run\\n                            over.\"}, {\"form\": \"'Üü 'ai-na-wüküna-gü-wei 'annihi 'ai-'itaŵa-ni-ukka.\", \"translation\": \"By saying it like that to them, you'll get them run over.\"}]}]}, {\"lexical_unit\": \"-dui\", \"senses\": [{\"gloss\": \"continue\", \"definition\": \"To continue an action, course, or state.\", \"examples\": [{\"form\": \"'A-ŵia-dui.\", \"translation\": \"Keep going.\"}]}]}, {\"lexical_unit\": \"hukkaŵia\", \"senses\": [{\"gloss\": \"walk\", \"definition\": null, \"examples\": []}]}]",
+    "tool_call_id": "call_WwNuHEU5xm86I8cjBGSpJWdc"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"puni\", \"senses\": [{\"gloss\": \"see\", \"definition\": \"To see.\", \"examples\": [{\"form\": \"Tsaŵu-iddu i-buni-ku-nna-ii.\", \"translation\": \"It's good to see you.\"}, {\"form\": \"Tsaŵu naama-ti nüü 'ü-buni-si-ukka ('ü-buni-ku-si-ukka).\", \"translation\": \"I was happy to see you.\"}, {\"form\": \"'Ü-buni-kwaa-ti nüü 'u-binna-tugu-su-ukka.\", \"translation\": \"I'll see you the next time.\"}, {\"form\": \"Nüü 'ionnoho wünü-si-ukka kadu' ui-buni-ti.\", \"translation\": \"When I stood here, I couldn't see them.\"}]}]}, {\"lexical_unit\": \"pitaŵa\", \"senses\": [{\"gloss\": \"look\", \"definition\": \"To look at something.\", \"examples\": [{\"form\": \"Naatsi'-ii-bünno' 'a-dübinuhi-wei-gwee-ikka 'iga-tei-ku-si tei-bitaŵa-ti.\", \"translation\": \"The boy entered the playhouse then look at us.\"}, {\"form\": \"Kadu' üügwa tsaŵu tü-bitaŵa-ti.\", \"translation\": \"You guys aren't looking around good (enough).\"}, {\"form\": \"Tü-baagwa-na na-bitaŵa-gü-gaa-dü.\", \"translation\": \"He's going to get his blood looked at (check up on at the doctors).\"}]}]}, {\"lexical_unit\": \"tsapuni\", \"senses\": [{\"gloss\": \"look\", \"definition\": \"To take a look while using the hand(s) to move something aside to get a\\n                        better look.\", \"examples\": []}]}, {\"lexical_unit\": \"puttabühi\", \"senses\": [{\"gloss\": \"see well\", \"definition\": \"To be able to see something well, to clearly see something.\", \"examples\": [{\"form\": \"'Oonno'oho nüü ka' tü-buttabühi-ni-ukka 'u-ŵan-dugu mia-ddabi-tei-ti\\n                        'oonno'oho na-mutsuku'i-bitü-ga'.\", \"translation\": \"And then, while I couldn't see clearly, I went right into it, and then\\n                            bumped my head.\"}, {\"form\": \"Hanni'i-tugu mahu tü-bittabühi-wei annikku?\", \"translation\": \"How is he going to see it now?\"}]}]}, {\"lexical_unit\": \"tsapitaŵagü\", \"senses\": [{\"gloss\": \"show\", \"definition\": \"To show someone by hand, to showcase something, to cause someone to look\\n                        at something.\", \"examples\": [{\"form\": \"Kadu'u-büü 'ai-zhapitaŵa-gü-dua-pü?\", \"translation\": \"Would you show them?\"}]}]}]",
+    "tool_call_id": "call_Ug3wv4c2i2ziSrDRvqjCxXsL"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"tapenno'o\", \"senses\": [{\"gloss\": \"meet up\", \"definition\": \"To meet up with someone, to encounter or meet face to face.\", \"examples\": [{\"form\": \"Nüümü-uu-düa tei-dapinno'o-wei-nna-uu.\", \"translation\": \"Those are the Indian people we will meet.\"}, {\"form\": \"'U-dapenno'o-ti nüügwa 'oonno-kko-ho Lone-Pine-wee-kku pinnahei nüügwa\\n                        sibi-mia-weidü.\", \"translation\": \"We met them there in Lone Pine because we were to go east (from\\n                            there).\"}, {\"form\": \"Hanno 'üü 'i-dapenno'o-dua-pü?\", \"translation\": \"Where could/would you meet me?\"}, {\"form\": \"Tsaŵu-iddu 'i-dapinno'o-ko-nna-ii.\", \"translation\": \"It's good to have met (you).\"}]}]}, {\"lexical_unit\": \"subasa\", \"senses\": [{\"gloss\": \"know\", \"definition\": \"To know something, to understand something.\", \"examples\": [{\"form\": \"'U-subasa-ti nüü haŵutta 'ü-mia-neikka.\", \"translation\": \"I know where you were going/went.\"}, {\"form\": \"'Üü-bü' u-subasa-ti hanni'i-tugu 'unnihi 'u-mani-nokka?\", \"translation\": \"Would you know how that happened?\"}, {\"form\": \"Hubia-dui-wei nüü-büü. Ma-subasa-wei 'üü 'ikka.\", \"translation\": \"I'm going to sing a song. You'll learn (come to know) this one.\"}]}]}, {\"lexical_unit\": \"sudabühi\", \"senses\": [{\"gloss\": \"know (learn)\", \"definition\": \"To know in the way of learning something, to come to know or comprehend.\", \"examples\": [{\"form\": \"Püünuhu-daa ka' u-sudabühi-ti.\", \"translation\": \"However, we don't know/understand that one.\"}, {\"form\": \"'Üü-bü' tü-sudabühi-gi-dü nüümü-na 'a-ddaduha-nna?\", \"translation\": \"Did you come to learn the Paiute language?\"}]}]}, {\"lexical_unit\": \"tsamaddahi\", \"senses\": [{\"gloss\": \"know (skill)\", \"definition\": \"To know how to work a certain skill.\", \"examples\": [{\"form\": \"Kadu' uhuŵa 'u-zamaddahi-ti.\", \"translation\": \"They don't know how to work/perform that.\"}]}]}, {\"lexical_unit\": \"maddahi\", \"senses\": [{\"gloss\": \"know (how)\", \"definition\": \"To know how to do something.\", \"examples\": [{\"form\": \"'Unni-tugu-hu nüügwa tü-maddahi-püga.\", \"translation\": \"We knew how to do it like that.\"}, {\"form\": \"'U-ŵaddahi-ni-shu 'u-yügwi.\", \"translation\": \"When you know more how to do it, act on it.\"}]}]}]",
+    "tool_call_id": "call_ekFjANm1t6FFTadkwFO10hEN"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"-dü\", \"senses\": [{\"gloss\": \"present\", \"definition\": \"Verbal suffix ending that indicates the action is happening in the present\\n                        tense, or in the process of doing it; also makes verbs into nouns by\\n                        indicating the doer of the action. Also, signifies habitual tense.\", \"examples\": [{\"form\": \"Sawa-dü-eikka 'a-düŵaabü'a.\", \"translation\": \"Help the one that's cooking.\"}, {\"form\": \"'Uhu tü-nawahii-nokka 'u-zamüna-gaa-dü.\", \"translation\": \"He's going to go change his clothes.\"}, {\"form\": \"Haga mii 'üni-dü-uu?\", \"translation\": \"Who's the one who said that?\"}, {\"form\": \"Haga 'aaŵahu-ukka sawa-wei-dü-ii?\", \"translation\": \"Who will be the one to cook tomorrow?\"}, {\"form\": \"Haga 'i-bida-gü-weidü-ii 'i-sawa-ku-su-ukka.\", \"translation\": \"Who will make me fire when I cook.\"}]}]}, {\"lexical_unit\": \"-tügü\", \"senses\": [{\"gloss\": \"in a position\", \"definition\": \"In a position doing that action, attaches to a verb.\", \"examples\": [{\"form\": \"'Ionnoho nüü tü-wütui-dei-ni ibettü-eikka katü-tügü-ti.\", \"translation\": \"I'm sitting down here waiting for someone inside.\"}, {\"form\": \"Oonno'oho na-gwükaŵu-tügü-ti.\", \"translation\": \"And then, he landed injuring his head.\"}, {\"form\": \"Taa maano-kko habi-tügü-dua-pü tsaŵu tü-ŵaappa'i-shi.\", \"translation\": \"We could stay/lay down there (for the night) if we fixed it up good.\"}, {\"form\": \"'Uhu-düa aanna-iddu-hu nüü katü-tügü-ti tüka-ku-maa-si-ukka yeishi nüü\\n                        katü-tügü-ti oonno'oho 'ia müha tutuapi'-ii pibitü-tügü-ti.\", \"translation\": \"He was there and I was there sitting down, having finished eating.\\n                            Then I was sitting and then there kids started to arrived.\"}]}]}, {\"lexical_unit\": \"-pü\", \"senses\": [{\"gloss\": \"PAST\", \"definition\": \"Past tense particle, attaches to end of verbs. Shows an action has been\\n                        done and the results of that action is still felt or evident. The one or\\n                        thing that does the action.\", \"examples\": [{\"form\": \"Nüü muasu koopi'-aa hibi-pü.\", \"translation\": \"I already drank some coffee.\"}, {\"form\": \"Nüü 'üi-dü-gwati-pü-aa tü-zoba-wei.\", \"translation\": \"I'll pick up what you've all shot (bullets/arrows).\"}, {\"form\": \"Tei-ddaduha-pü-ii koobenno-ttü-aa 'ionnoho ma-na-dügü-pü.\", \"translation\": \"The language (we speak) was first to be placed here.\"}, {\"form\": \"Hüügwa-pü-uu nadüüya-ti.\", \"translation\": \"That wind was scary/strong.\"}]}]}, {\"lexical_unit\": \"-wei\", \"senses\": [{\"gloss\": \"will (future tense)\", \"definition\": \"Verb ending for future tense.\", \"examples\": [{\"form\": \"Nüü 'ube mia-wei.\", \"translation\": \"I'll go back in there.\"}, {\"form\": \"Tsaŵu-baa-su tu'ihii mia-wei-dü.\", \"translation\": \"Everything is intended to go well.\"}, {\"form\": \"Hiibü-na nüü 'ü-düükwii-ti 'iattü-okka 'i-nakka-nna? Kwiŵi mia-binaa-ti\\n                        'uhuŵa Carson-wee tü-dühiibü-nokka na-duhu-gaa-wei-shi.\", \"translation\": \"What was it that I told you I heard from over there? They were wanting\\n                            to go north to Carson, in order to sell something of theirs.\"}, {\"form\": \"'Uhu tü-doogü'-tsi'-okka na-wütaŵa-pü tü-ma-ggu yeishi 'uhu na-waadzi-ti\\n                        'uhu 'u-na-pidügü-wei-shi.\", \"translation\": \"He had his dog secured/tied to his person, and then he hid being that\\n                            he'd get into a fight.\"}, {\"form\": \"Nününü'-uu tei-nakka-gü-wei-shi tei-bei-pihaaŵi-ti.\", \"translation\": \"That white person was beconing each one of us over, in order to give\\n                            us a chance to listen (or be heard?).\"}]}]}, {\"lexical_unit\": \"yügwi\", \"senses\": [{\"gloss\": \"do\", \"definition\": \"To do to something/someone, to act on, to treat in a manner.\", \"examples\": [{\"form\": \"Kadu' nüü hiimü-na 'aannihi-mana yügwi-dua-pü.\", \"translation\": \"I couldn't do anything like that to something.\"}, {\"form\": \"Kadu' ihi togawano-ukka 'üdzü'ü-ti pinnahei nününü'-ii tei-düwoobü-neikka\\n                        süta 'a-yügwi-ti.\", \"translation\": \"It doesn't get cold at night because the Euro-American people who done\\n                            bad to our lands (causing it to be warmer).\"}, {\"form\": \"Hanni'-wa' mahu 'a-yügwi-dü?\", \"translation\": \"What is he doing to him?\"}, {\"form\": \"Kadu' uhuŵa 'unnihi tü-na-yügwi-wei-nna suga-ti.\", \"translation\": \"They didn't expect that to happend to themselves.\"}]}]}]",
+    "tool_call_id": "call_ZBuBqT2XCAtB65ZUehwClY8W"
+  },
+  {
+    "role": "assistant",
+    "content": "Poyoha-dü-ii Rebecca-noka u-buni-pü. Mahu a-[met]-ku."
+  },
+  {
+    "role": "user",
+    "content": "The dogs were chasing their tails."
+  },
+  {
+    "role": "assistant",
+    "tool_calls": [
+      {
+        "id": "call_WLU7Bu71rOHN65fq3ALqA2s7",
+        "function": {
+          "name": "search_sentences",
+          "arguments": "{\"query\": \"The dogs were chasing their tails.\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_BzH0cTDvm5unELZnF75Lnwu2",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"past continuous tense\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_2lr8UsT1GG7PkYbfa2ITn29W",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"dog\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_ph2lDQmdaonQUAsennPc7fua",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"chase\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_V2RTKNmjp0x2l0S1Qg6bQE90",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"tail\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_KA7trElsSxcI93FSYyWHMKqH",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"their own, reflexive possessive pronoun\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_FyMYhCl5jWGH1404GgM9WQGg",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"plural\"}"
+        },
+        "type": "function"
+      }
+    ]
+  },
+  {
+    "role": "tool",
+    "content": "[{\"sentence\": \"Nana-mamia-bodo-dü.\", \"translation\": \"They chase one another around.\"}, {\"sentence\": \"'Oonno'oho püü-gwa-su habi-tügü-dei-shi tü-(gü)-nakka-ddabi-ti.\", \"translation\": \"They were laying down by themselves, making clattery noises with their\\n                            teeth (biting at the fleas).\"}, {\"sentence\": \"'Oonno'oho 'uhu kwinnanu-pa'i-ti kwinnanu-pa'i-ka' nana-pipinna.\", \"translation\": \"And then, they twirled and twirled repeatedly behind one another.\"}, {\"sentence\": \"'Isha'-uu-bünno' naamüdüyaa-dü.\", \"translation\": \"The coyote was acting ambitiously.\"}, {\"sentence\": \"Yeishi 'uhu 'u-doogü'-uu 'u-bioga-tei-ku-ka'.\", \"translation\": \"Then his dog pulled him along.\"}]",
+    "tool_call_id": "call_WLU7Bu71rOHN65fq3ALqA2s7"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"-du'i\", \"senses\": [{\"gloss\": \"PAST\", \"definition\": \"Expression word making phrases in past-tense context.\", \"examples\": [{\"form\": \"Mahu 'i-wüü-kaa-wei-du'i.\", \"translation\": \"He was going to catch me.\"}, {\"form\": \"Kadu' tsügwüda-du'i.\", \"translation\": \"It was not nearly as fast.\"}, {\"form\": \"Tuihii-du'i 'aannaha püünuhu-daagwa ka'a-su 'u-bbumaadzi-dua-pü.\", \"translation\": \"Just about everything was there, however we wouldn't recognize it yet.\"}, {\"form\": \"Süŵübaa nüü-du'i.\", \"translation\": \"I think I can (I just may be able to).\"}, {\"form\": \"Nüü-du'i 'ü-dzakoonohi-gü-dua-pü 'u-subasa-ni-ukka 'üü hupinagwa\\n                        'ü-gwünü-nokka.\", \"translation\": \"I could have openned the door for you had I known you were standing\\n                            outside.\"}, {\"form\": \"Kadu' nüü-du'i yaduha-nna.\", \"translation\": \"Excuse me, I didn't mean it.\"}]}]}, {\"lexical_unit\": \"-pü\", \"senses\": [{\"gloss\": \"PAST\", \"definition\": \"Past tense particle, attaches to end of verbs. Shows an action has been\\n                        done and the results of that action is still felt or evident. The one or\\n                        thing that does the action.\", \"examples\": [{\"form\": \"Nüü muasu koopi'-aa hibi-pü.\", \"translation\": \"I already drank some coffee.\"}, {\"form\": \"Nüü 'üi-dü-gwati-pü-aa tü-zoba-wei.\", \"translation\": \"I'll pick up what you've all shot (bullets/arrows).\"}, {\"form\": \"Tei-ddaduha-pü-ii koobenno-ttü-aa 'ionnoho ma-na-dügü-pü.\", \"translation\": \"The language (we speak) was first to be placed here.\"}, {\"form\": \"Hüügwa-pü-uu nadüüya-ti.\", \"translation\": \"That wind was scary/strong.\"}]}]}, {\"lexical_unit\": \"-wei\", \"senses\": [{\"gloss\": \"will (future tense)\", \"definition\": \"Verb ending for future tense.\", \"examples\": [{\"form\": \"Nüü 'ube mia-wei.\", \"translation\": \"I'll go back in there.\"}, {\"form\": \"Tsaŵu-baa-su tu'ihii mia-wei-dü.\", \"translation\": \"Everything is intended to go well.\"}, {\"form\": \"Hiibü-na nüü 'ü-düükwii-ti 'iattü-okka 'i-nakka-nna? Kwiŵi mia-binaa-ti\\n                        'uhuŵa Carson-wee tü-dühiibü-nokka na-duhu-gaa-wei-shi.\", \"translation\": \"What was it that I told you I heard from over there? They were wanting\\n                            to go north to Carson, in order to sell something of theirs.\"}, {\"form\": \"'Uhu tü-doogü'-tsi'-okka na-wütaŵa-pü tü-ma-ggu yeishi 'uhu na-waadzi-ti\\n                        'uhu 'u-na-pidügü-wei-shi.\", \"translation\": \"He had his dog secured/tied to his person, and then he hid being that\\n                            he'd get into a fight.\"}, {\"form\": \"Nününü'-uu tei-nakka-gü-wei-shi tei-bei-pihaaŵi-ti.\", \"translation\": \"That white person was beconing each one of us over, in order to give\\n                            us a chance to listen (or be heard?).\"}]}]}, {\"lexical_unit\": \"-dü\", \"senses\": [{\"gloss\": \"present\", \"definition\": \"Verbal suffix ending that indicates the action is happening in the present\\n                        tense, or in the process of doing it; also makes verbs into nouns by\\n                        indicating the doer of the action. Also, signifies habitual tense.\", \"examples\": [{\"form\": \"Sawa-dü-eikka 'a-düŵaabü'a.\", \"translation\": \"Help the one that's cooking.\"}, {\"form\": \"'Uhu tü-nawahii-nokka 'u-zamüna-gaa-dü.\", \"translation\": \"He's going to go change his clothes.\"}, {\"form\": \"Haga mii 'üni-dü-uu?\", \"translation\": \"Who's the one who said that?\"}, {\"form\": \"Haga 'aaŵahu-ukka sawa-wei-dü-ii?\", \"translation\": \"Who will be the one to cook tomorrow?\"}, {\"form\": \"Haga 'i-bida-gü-weidü-ii 'i-sawa-ku-su-ukka.\", \"translation\": \"Who will make me fire when I cook.\"}]}]}, {\"lexical_unit\": \"-ttü'\", \"senses\": [{\"gloss\": \"continuous\", \"definition\": \"Suffixes to a verb stating that the action is in a continuous state or\\n                        uninterrupted.\", \"examples\": [{\"form\": \"Yeishi 'uhu tü-kwadzi-nokka paya-wee-ukka 'u-dügü-ti. 'Oonno'oho-ya' uhu\\n                        'aannaha katü-ttü' katü-ttü'.\", \"translation\": \"Then he placed his tail in the water. And then, there he apparently\\n                            sat and sat.\"}, {\"form\": \"'Oonno'oho saki-chi'i-wee-ddu kahiinno'o-iddu hüü-iddu 'oonno'oho\\n                        moo-ttü'.\", \"translation\": \"At that time, there were a small amount (of people) in a boat,\\n                            continuously traveling.\"}, {\"form\": \"Isha’-uu mii nana-’itawa-ti. Nana-küsidua-si na-pidügü-ttü’. “Nüü-büü\\n                        isha’ üü-büü küma’a-su” mii nana-’itawa-nna, Oo-togo-ho nana-küsidua-si\\n                        na-pidügü-ti.\", \"translation\": \"The coyotes were saying to one another. Growling at each other,\\n                            fighting. \\\"I'm coyote, you're another one,\\\" they said to one another,\\n                            growling at each and other fighting.\"}]}]}]",
+    "tool_call_id": "call_BzH0cTDvm5unELZnF75Lnwu2"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"kwidapugu\", \"senses\": [{\"gloss\": \"dog\", \"definition\": \"Dog\", \"examples\": []}]}, {\"lexical_unit\": \"'ishabugu\", \"senses\": [{\"gloss\": \"dog\", \"definition\": \"Dog (domestic), coyote-pet.\", \"examples\": [{\"form\": \"Ia-düa ü-'ishabugu-uu tsihaaya'i-shi kimma-ddabi-taa'i-dü.\", \"translation\": \"There's your dog again, hungry, coming in a hurry.\"}, {\"form\": \"Hanno 'i-doogü'?\", \"translation\": \"Where is my dog?\"}, {\"form\": \"Hanno-kko 'üü 'i-buni-ggü-ti 'i-doogü-tsi'-aa?\", \"translation\": \"Where did you spot my dog at?\"}, {\"form\": \"Hanno 'ü-gwidapugu-uu?\", \"translation\": \"Where's your dog?\"}, {\"form\": \"'Ishabugu-neikka 'a-ŵaka.\", \"translation\": \"Feed the dog.\"}, {\"form\": \"Toogü'-uu tsihaya'i-shi paya-na 'uhu tü-gwana-mia-bodo-ti.\", \"translation\": \"The dog became hungry, going around smelling for water.\"}, {\"form\": \"Nüü 'i-doogü'-tsi'-eikka noo-pü pipaa-kku.\", \"translation\": \"I brought my dog in the back (of the pickup).\"}]}]}, {\"lexical_unit\": \"toogü'\", \"senses\": [{\"gloss\": \"dog\", \"definition\": \"Dog, from English \\\"dog.\\\"\", \"examples\": []}]}, {\"lexical_unit\": \"pukkupida'\", \"senses\": [{\"gloss\": \"pet\", \"definition\": \"Pet, dog or horse (possibly a worthless pet).\", \"examples\": [{\"form\": null, \"translation\": null}]}]}, {\"lexical_unit\": \"toopi\", \"senses\": [{\"gloss\": \"wolf\", \"definition\": \"wolf\", \"examples\": [{\"form\": null, \"translation\": null}]}]}]",
+    "tool_call_id": "call_2lr8UsT1GG7PkYbfa2ITn29W"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"maŵia\", \"senses\": [{\"gloss\": \"chase\", \"definition\": \"To chase.\", \"examples\": [{\"form\": \"Kaani'-ii püdü'ü-su 'ü-maŵia-wei.\", \"translation\": \"The cow will soon chase you.\"}]}]}, {\"lexical_unit\": \"manüŵi\", \"senses\": [{\"gloss\": \"chase\", \"definition\": \"To chase around a certain area (in an area with obstructions).\", \"examples\": [{\"form\": null, \"translation\": null}]}]}, {\"lexical_unit\": \"magimma\", \"senses\": [{\"gloss\": \"chase\", \"definition\": \"To chase (hitherto or towards the speaker), to come chasing\", \"examples\": [{\"form\": \"'Oonno'oho 'isha'-uu 'i-ŵagimma-si-ukka 'oonno'oho nüü süngaabü-ba' ia\\n                        tsibui-ti 'oonno'oho nüü 'aanna-iddu-hu 'u-bitaŵa-hu-da'.\", \"translation\": \"And then the coyote came chasing me, then I climbed the tree there,\\n                            and then I watched him from there.\"}]}]}, {\"lexical_unit\": \"tümahi\", \"senses\": [{\"gloss\": \"pursue\", \"definition\": \"To pursue.\", \"examples\": [{\"form\": \"'Io tei-düŵahi-gimma-ti. Kwidaa-tei-ku 'uhu.\", \"translation\": \"Here he came in pursuit of us. He (then) turned back.\"}]}, {\"gloss\": \"gamble\", \"definition\": \"To gamble.\", \"examples\": [{\"form\": \"'I-bia-uu tümahi-bitü-ti.\", \"translation\": \"My mother arrived to gamble.\"}]}]}, {\"lexical_unit\": \"tatsee\", \"senses\": [{\"gloss\": \"catch up\", \"definition\": null, \"examples\": []}]}]",
+    "tool_call_id": "call_ph2lDQmdaonQUAsennPc7fua"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"kwadzi\", \"senses\": [{\"gloss\": \"tail\", \"definition\": \"The tail of an animal.\", \"examples\": [{\"form\": \"'Üdü-ggu kwadzi-ga.\", \"translation\": \"It has a long tail.\"}, {\"form\": \"'Uhu na-wüttaŵa-gü-si-ukka tü-kwadzi-nokka subaa kamma-ti-du'i.\", \"translation\": \"It (dragonfly) may be hurt if it has its tail tied.\"}, {\"form\": \"Kwadzi-ga-ggu witua-neikka a-wüü.\", \"translation\": \"Grab the pot which has a handle.\"}]}]}, {\"lexical_unit\": \"pi'wüdü\", \"senses\": [{\"gloss\": \"tailbone\", \"definition\": \"Tailbone (of the body), tail feathers of a bird (Norma Nelson).\", \"examples\": [{\"form\": null, \"translation\": null}]}]}, {\"lexical_unit\": \"tasidu\", \"senses\": [{\"gloss\": \"toenail\", \"definition\": \"Toenail of the foot.\", \"examples\": [{\"form\": \"'Ü-dasidu-neikka 'ü-dogoobi-gü-wei nüü.\", \"translation\": \"I'll clip your toenails for you.\"}, {\"form\": \"Pungiji'-chi'-uu 'i-ŵubi-neikka 'i-zhakino'o-tei-ka' tü-dasidu-ŵa-ikka.\", \"translation\": \"That little mouse scratched me on my nose with it's toenails/claws.\"}]}]}, {\"lexical_unit\": \"tattanigi\", \"senses\": [{\"gloss\": \"tap (foot)\", \"definition\": \"To tap lightly with the foot, as in certain dance moves or techniques.\", \"examples\": [{\"form\": \"'Oonno'oho-'üügwa-düa 'üi-sigi-ŵa-ikka tattanigi-ku-ka'.\", \"translation\": \"And then you all got to tapping around with you shoes.\"}]}]}, {\"lexical_unit\": \"takkazu\", \"senses\": [{\"gloss\": \"toes\", \"definition\": \"Toes (of the body).\", \"examples\": [{\"form\": null, \"translation\": null}]}]}]",
+    "tool_call_id": "call_V2RTKNmjp0x2l0S1Qg6bQE90"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"tüi-\", \"senses\": [{\"gloss\": \"their own\", \"definition\": \"Their own, belonging to the subject of the sentence. Logophor pronoun. It\\n                        is co-referential to the subject of the clause.\", \"examples\": []}]}, {\"lexical_unit\": \"tümikkana\", \"senses\": [{\"gloss\": \"his/her own\", \"definition\": \"His, her, or its own, belonging to the subject of the sentence. Logophor\\n                        pronoun. It is co-referential to the subject of the clause.\", \"examples\": [{\"form\": null, \"translation\": null}]}, {\"gloss\": \"him/her\", \"definition\": \"To/for him, her, or it, referring back to the subject of the sentence.\\n                        Logophor pronoun. It is co-referential to the subject of the clause.\", \"examples\": [{\"form\": \"Mahu 'aaŵahusu-ikka kuna-noo-pü-su-düa. Subaa mahu hakka-soo-mana\\n                        kutsa-gü-tuha. Subaa tümikka-sü'.\", \"translation\": \"He brought a load of wood early this morning. Maybe he's getting wood\\n                            for someone. Maybe just for himself.\"}]}, {\"gloss\": null, \"definition\": null, \"examples\": []}]}, {\"lexical_unit\": \"tü-\", \"senses\": [{\"gloss\": \"his/her own\", \"definition\": \"His or her own, belonging to the subject of the sentence. Logophor\\n                        pronoun. It is co-referential to the subject of the clause.\", \"examples\": [{\"form\": \"Tü-bia-ni-ukka na-buni-ti.\", \"translation\": \"(She) looks like her mother.\"}, {\"form\": \"Mahu-bünno' tü-nobi-neikka 'a-makoobenno katü-ti tü-bitaŵa-da'.\", \"translation\": \"He's sitting in front of his (own) house, watching.\"}, {\"form\": \"Na-gwatti-pü 'uhu tü-hanno-kko-sa-mana.\", \"translation\": \"He's been shot somewhere on his person.\"}, {\"form\": \"Tüi-nobi-na-su 'uhu nobi-ga. Tüi-nobi-tu-nna.\", \"translation\": \"They have homes of there own. Homes they've built themselves.\"}]}]}, {\"lexical_unit\": \"'a-\", \"senses\": [{\"gloss\": \"his\", \"definition\": \"His, hers, its (possessive pronoun), prefixes to nouns to express\\n                        belonging.\", \"examples\": [{\"form\": \"Nüü a-'apo-man-ddü-aa kooppi'-aa a-wee tuuŵa-ti.\", \"translation\": \"I'm pouring some coffee from her up into it.\"}]}, {\"gloss\": \"hers\", \"definition\": null, \"examples\": []}]}, {\"lexical_unit\": \"teimikkana\", \"senses\": [{\"gloss\": \"our\", \"definition\": \"Ours, possessive pronoun (object form), plural and inclusive.\", \"examples\": [{\"form\": \"Teimikkana-su tei-ddaduha-wei-nna-uu.\", \"translation\": \"It is our own language that we will speak.\"}]}, {\"gloss\": \"us\", \"definition\": \"To us, object pronoun, plural and inclusive.\", \"examples\": []}]}]",
+    "tool_call_id": "call_KA7trElsSxcI93FSYyWHMKqH"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"-mü\", \"senses\": [{\"gloss\": \"plural\", \"definition\": \"Pluralizes kinship terms. Only used with relationship terms and people\\n                        pronouns.\", \"examples\": [{\"form\": \"'Uhuŵa na-duhu-dü-mü-uu kwiŵi-ddu 'a-bitü-nna.\", \"translation\": \"The ones that are selling have arrived from the north.\"}, {\"form\": \"'I-babi'i-ŵü.\", \"translation\": \"My older brothers.\"}, {\"form\": \"'I-hama'a-ŵü.\", \"translation\": \"My older sisters.\"}, {\"form\": \"'I-yahii-mü.\", \"translation\": \"My inlaws.\"}]}]}, {\"lexical_unit\": \"na-\", \"senses\": [{\"gloss\": \"plural\", \"definition\": \"Attaches to verbs to show those verbs are done in a group, by a community,\\n                        or as a whole.\", \"examples\": [{\"form\": \"'Uhu 'u-ttugu na-gimma-weidü nii-gimma-wei-nna.\", \"translation\": \"It'll around whenever we come through there.\"}, {\"form\": \"Hiinno'o-wa' na-zaputuhi-ti?\", \"translation\": \"When will they be playing chuptuhi?\"}, {\"form\": \"Naadüüya-ti mii'ukka 'a-na-nüŵi-nna-ii.\", \"translation\": \"It's dangerous now for those traveling (these days, this time).\"}, {\"form\": \"Paba na-ŵani-wei. Tuihanni' na-ŵani-wei.\", \"translation\": \"There'll be big doings. They'll be doing whatever.\"}]}]}, {\"lexical_unit\": \"tammi-\", \"senses\": [{\"gloss\": \"our (plural)\", \"definition\": \"Our plural (inclusive).\", \"examples\": []}]}, {\"lexical_unit\": \"taagwa\", \"senses\": [{\"gloss\": \"we (plural)\", \"definition\": \"We plural and inclusive.\", \"examples\": [{\"form\": \"Taagw-sü' paenae-pü.\", \"translation\": \"We are the only ones left.\"}]}]}, {\"lexical_unit\": \"-hiimü\", \"senses\": [{\"gloss\": \"family (plural)\", \"definition\": null, \"examples\": []}]}]",
+    "tool_call_id": "call_FyMYhCl5jWGH1404GgM9WQGg"
+  },
+  {
+    "role": "assistant",
+    "content": "Isha'pugu-ii tüi-kwadzi-neika a-maŵia-ti."
+  },
+  {
+    "role": "user",
+    "content": "The fighter is eating his red apple."
+  },
+  {
+    "role": "assistant",
+    "tool_calls": [
+      {
+        "id": "call_iYaRW0CQQJrpIyT3TiDBl2vp",
+        "function": {
+          "name": "search_sentences",
+          "arguments": "{\"query\": \"The fighter is eating his red apple.\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_Noek3LOgQCcWPVIboYewh2cB",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"present continuous tense\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_Pzo9jRhZ1H1hvuacY2NIoLvu",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"fighter\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_TuUvGT5yVnpkQFUiIiw5BdqK",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"eat\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_xvlxnOBZ0U7NmRbfhe1FQKKs",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"red\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_pAqfitqFmte5rgM8lm9ji1bY",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"apple\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_6nMBYGBa9Ed7xZZIE3MtbQvR",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"his own, reflexive possessive pronoun\"}"
+        },
+        "type": "function"
+      }
+    ]
+  },
+  {
+    "role": "tool",
+    "content": "[{\"sentence\": \"Saakkaggu tüka-ti.\", \"translation\": \"He's eating (it) raw.\"}, {\"sentence\": \"'Aaponu-neikka 'a-sawa-nna 'oonno'oho 'a-na-wügiju'u-nna tüka-wei.\", \"translation\": \"And they will eat the apples that have been mashed up.\"}, {\"sentence\": \"Na-ppidügütü'.\", \"translation\": \"Trained fighter/warrior.\"}, {\"sentence\": \"Naatsi'-ii 'awa-kida'a-ggu tüka-tei-ti.\", \"translation\": \"The boy's eating so much.\"}, {\"sentence\": \"Wia-na taagwa tüka-wei.\", \"translation\": \"Let's eat acorn.\"}]",
+    "tool_call_id": "call_iYaRW0CQQJrpIyT3TiDBl2vp"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"-dü\", \"senses\": [{\"gloss\": \"present\", \"definition\": \"Verbal suffix ending that indicates the action is happening in the present\\n                        tense, or in the process of doing it; also makes verbs into nouns by\\n                        indicating the doer of the action. Also, signifies habitual tense.\", \"examples\": [{\"form\": \"Sawa-dü-eikka 'a-düŵaabü'a.\", \"translation\": \"Help the one that's cooking.\"}, {\"form\": \"'Uhu tü-nawahii-nokka 'u-zamüna-gaa-dü.\", \"translation\": \"He's going to go change his clothes.\"}, {\"form\": \"Haga mii 'üni-dü-uu?\", \"translation\": \"Who's the one who said that?\"}, {\"form\": \"Haga 'aaŵahu-ukka sawa-wei-dü-ii?\", \"translation\": \"Who will be the one to cook tomorrow?\"}, {\"form\": \"Haga 'i-bida-gü-weidü-ii 'i-sawa-ku-su-ukka.\", \"translation\": \"Who will make me fire when I cook.\"}]}]}, {\"lexical_unit\": \"mane'i\", \"senses\": [{\"gloss\": \"continuously\", \"definition\": \"Describes an action happening continuously, also attaches to verbs stating\\n                        that action happening continously or uninterrupted.\", \"examples\": [{\"form\": \"'Awazu-ukka pabahaanno-su mane'i-dü.\", \"translation\": \"Later on, it continously became wider (speaking of the land).\"}, {\"form\": \"'Oonno'oho nüügwa 'aannaha pitü-bitü-gaa-si-ukka 'uhuŵa tüka-mane'i-ti\\n                        (mano'oi-ti).\", \"translation\": \"And then, once we arrived there, they were eating uninterrupted.\"}]}]}, {\"lexical_unit\": \"-ttü'\", \"senses\": [{\"gloss\": \"continuous\", \"definition\": \"Suffixes to a verb stating that the action is in a continuous state or\\n                        uninterrupted.\", \"examples\": [{\"form\": \"Yeishi 'uhu tü-kwadzi-nokka paya-wee-ukka 'u-dügü-ti. 'Oonno'oho-ya' uhu\\n                        'aannaha katü-ttü' katü-ttü'.\", \"translation\": \"Then he placed his tail in the water. And then, there he apparently\\n                            sat and sat.\"}, {\"form\": \"'Oonno'oho saki-chi'i-wee-ddu kahiinno'o-iddu hüü-iddu 'oonno'oho\\n                        moo-ttü'.\", \"translation\": \"At that time, there were a small amount (of people) in a boat,\\n                            continuously traveling.\"}, {\"form\": \"Isha’-uu mii nana-’itawa-ti. Nana-küsidua-si na-pidügü-ttü’. “Nüü-büü\\n                        isha’ üü-büü küma’a-su” mii nana-’itawa-nna, Oo-togo-ho nana-küsidua-si\\n                        na-pidügü-ti.\", \"translation\": \"The coyotes were saying to one another. Growling at each other,\\n                            fighting. \\\"I'm coyote, you're another one,\\\" they said to one another,\\n                            growling at each and other fighting.\"}]}]}, {\"lexical_unit\": \"-kuka'\", \"senses\": [{\"gloss\": \"progress\", \"definition\": \"Expresses advancement of an action, or moving toward stages do that\\n                        action, present tense.\", \"examples\": [{\"form\": \"Nana-'adaŵi mahuŵa miŵia-ku-ka'.\", \"translation\": \"Moving forward in different ways from one another (towards different\\n                            outcome/goals).\"}, {\"form\": \"'Uhu subaa kahinno'o-ttogo na-boyoha-tüngü-ti oonno'oho küma'a-su-düa\\n                        poyoha-ku-ka'a-su-düa.\", \"translation\": \"Maybe he's told to run for a short time and then someone else then\\n                            runs further (said of runners running relay style).\"}, {\"form\": \"Hüzamaa' üü 'oonno'oho 'u-hani-kugaa-wei.\", \"translation\": \"At that time, you move ahead doing it (task) slowly.\"}, {\"form\": \"Wiga-du-wei-daagwa kammü-ga-kugaa-si.\", \"translation\": \"We'll make a rabbit blanket, upon collecting the rabbits (needed).\"}, {\"form\": \"Taagwa kuma-kukaa-wei toyabi-nokka.\", \"translation\": \"We'll make our way up over that mountain.\"}, {\"form\": \"Nüü 'u-ho-ddo yaduha-maa-ku-si tüka-ku-ka'.\", \"translation\": \"I'd cease talking with her and then continue eating.\"}]}]}, {\"lexical_unit\": \"-ti\", \"senses\": [{\"gloss\": \"ing\", \"definition\": \"Present/Past tense, \\\"This marker does not make a distinction between\\n                        present and past tense. It is a realis marker, and asserts that some\\n                        activity has begun, and may or may not have been brought to completion,\\\"\\n                        from Evan J. Noris A Grammar Sketch and Comparative of Eastern Mono.\", \"examples\": [{\"form\": \"Nüü natügünaa yaduha-ti.\", \"translation\": \"I'm continuously talking.\"}]}]}]",
+    "tool_call_id": "call_Noek3LOgQCcWPVIboYewh2cB"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"nappidügü\", \"senses\": [{\"gloss\": \"fight\", \"definition\": \"To fight, to go into war or battle.\", \"examples\": [{\"form\": \"'Ukkahuna 'uhuŵa-büü na-ppidügü-tei-ku 'u-ba'.\", \"translation\": \"They got into a fight over that.\"}, {\"form\": \"Na-ppidügübodo.\", \"translation\": \"War club.\"}, {\"form\": \"Na-ppidügütü'.\", \"translation\": \"Trained fighter/warrior.\"}, {\"form\": \"Kadu' u-na-ppidügü-nna.\", \"translation\": \"Cannot be beat/fought.\"}]}]}, {\"lexical_unit\": \"tümu'\", \"senses\": [{\"gloss\": \"enemy\", \"definition\": \"Enemy, opponent, or challenger.\", \"examples\": [{\"form\": \"Pohidda-uu tü-kwana-ma-ukka 'uhu süŵüsu tü-dümu'u-ŵü-neikka süta\\n                        'a-yügwi-dü.\", \"translation\": \"The skunk immediately does harm to his enemies using his stench.\"}, {\"form\": \"Subaa tei-dümu'-uu pitü-pü.\", \"translation\": \"Our opponents may have arrived.\"}, {\"form\": \"'Üügwa nii-dümu'.\", \"translation\": \"You are our challengers.\"}, {\"form\": \"'Ui-dümu'-uu 'ui-gahinno kimma-ti. 'Ui-batsa-gi-dü.\", \"translation\": \"Their enemies came towards them. (They) came to kill them.\"}]}]}, {\"lexical_unit\": \"toopi\", \"senses\": [{\"gloss\": \"wolf\", \"definition\": \"wolf\", \"examples\": [{\"form\": null, \"translation\": null}]}]}, {\"lexical_unit\": \"hiichizho'\", \"senses\": [{\"gloss\": \"dragonfly\", \"definition\": null, \"examples\": []}]}, {\"lexical_unit\": \"hiichido'\", \"senses\": [{\"gloss\": \"dragonfly\", \"definition\": null, \"examples\": []}]}]",
+    "tool_call_id": "call_Pzo9jRhZ1H1hvuacY2NIoLvu"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"tüka\", \"senses\": [{\"gloss\": \"eat\", \"definition\": \"To eat.\", \"examples\": [{\"form\": \"Nüü tsikini'-aa tüka-wei.\", \"translation\": \"I'll eat some chicken.\"}, {\"form\": \"Nüügwa tüka-kaa-maa-pü.\", \"translation\": \"We have finished eating.\"}, {\"form\": \"Tüka-wei nüü müha.\", \"translation\": \"I'm going to eat now.\"}]}]}, {\"lexical_unit\": \"su'a\", \"senses\": [{\"gloss\": \"eat up\", \"definition\": \"To eat up, comsume, or devour.\", \"examples\": [{\"form\": \"Nüü-düa kadu' u-su'a-dua-pü.\", \"translation\": \"I wouldn't be able to eat that up.\"}, {\"form\": \"Nüügwa tünaa-dugu tsikiini'i-chi'i-ga püünuhu toogü-tsi'-uu 'u-su'a-da'.\", \"translation\": \"All we have are chickens, however the dogs have been eating them.\"}]}]}, {\"lexical_unit\": \"nakkamu\", \"senses\": [{\"gloss\": \"eat (gluttonously)\", \"definition\": \"To eat gluttonously, to over eat, to pig out.\", \"examples\": [{\"form\": \"Miina' nakkamu-dei-ni!\", \"translation\": \"Don't eat so much!\"}]}]}, {\"lexical_unit\": \"küttaŵa\", \"senses\": [{\"gloss\": \"eat with bread\", \"definition\": \"To eat using bread or tortillas to grasp food.\", \"examples\": [{\"form\": \"Tü-güttaŵa-ti 'üügwa tüa kaani'i-ho-kko-ukka 'inni' u-yügwi-nna 'oonno'oho\\n                        'u-dotsaa-ni nohoŵa.\", \"translation\": \"You are eating (tortilla) with the meat, doing like this (showing how)\\n                            and then dipping it (into meat juices/stew).\"}]}]}, {\"lexical_unit\": \"makka\", \"senses\": [{\"gloss\": \"feed\", \"definition\": \"To feed (someone/something), to give food.\", \"examples\": [{\"form\": \"Io 'i-ŵakka-nna.\", \"translation\": \"Here is what I have to give (of food).\"}, {\"form\": \"Taagwa 'ai-ŵakka-ku-si koobeno subaa tei-düŵaabü'a-wei.\", \"translation\": \"Maybe if we feed them first, they'll help us out.\"}, {\"form\": \"Nana-makka-ti 'uhuŵa.\", \"translation\": \"They're providing each other food.\"}]}]}]",
+    "tool_call_id": "call_TuUvGT5yVnpkQFUiIiw5BdqK"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"'akabanagi\", \"senses\": [{\"gloss\": \"red\", \"definition\": \"To be the color red.\", \"examples\": [{\"form\": \"'Iannaha tübipü-uu 'akabanagi-ti 'u-wee 'u-katü-pü-uu.\", \"translation\": \"The dirt there is red where they stayed.\"}]}]}, {\"lexical_unit\": \"'oha-\", \"senses\": [{\"gloss\": \"yellow\", \"definition\": null, \"examples\": []}]}, {\"lexical_unit\": \"huunnitta\", \"senses\": [{\"gloss\": \"ant (red)\", \"definition\": \"Red ant species.\", \"examples\": [{\"form\": null, \"translation\": null}]}]}, {\"lexical_unit\": \"tasümuiddabü\", \"senses\": [{\"gloss\": \"ant (red)\", \"definition\": \"Red ant species.\", \"examples\": [{\"form\": null, \"translation\": null}]}]}, {\"lexical_unit\": \"ishagwanga'\", \"senses\": [{\"gloss\": \"fox sp.\", \"definition\": \"Red fox\", \"examples\": [{\"form\": null, \"translation\": null}]}]}]",
+    "tool_call_id": "call_xvlxnOBZ0U7NmRbfhe1FQKKs"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"'aaponu'\", \"senses\": [{\"gloss\": \"apple\", \"definition\": \"Apple\", \"examples\": [{\"form\": \"Nüü aaponu'-eikka a-wüsiba-si pai'i-du-wei.\", \"translation\": \"I'll scape (the skin) off the apples and make pie.\"}]}]}, {\"lexical_unit\": \"wia\", \"senses\": [{\"gloss\": \"acorn\", \"definition\": \"Acorn, of the oak tree. Food source gathered an processed into mush.\", \"examples\": [{\"form\": \"Wia-na taagwa tüka-wei.\", \"translation\": \"Let's eat acorn.\"}]}]}, {\"lexical_unit\": \"wia'ikibi\", \"senses\": [{\"gloss\": \"acorn mush\", \"definition\": \"Acorn much.\", \"examples\": [{\"form\": null, \"translation\": null}]}]}, {\"lexical_unit\": \"sonotobü\", \"senses\": [{\"gloss\": \"grapes\", \"definition\": \"Grapes\", \"examples\": []}]}, {\"lexical_unit\": \"wiabü\", \"senses\": [{\"gloss\": \"oak\", \"definition\": \"Oak tree.\", \"examples\": [{\"form\": null, \"translation\": null}]}]}]",
+    "tool_call_id": "call_pAqfitqFmte5rgM8lm9ji1bY"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"tü-\", \"senses\": [{\"gloss\": \"his/her own\", \"definition\": \"His or her own, belonging to the subject of the sentence. Logophor\\n                        pronoun. It is co-referential to the subject of the clause.\", \"examples\": [{\"form\": \"Tü-bia-ni-ukka na-buni-ti.\", \"translation\": \"(She) looks like her mother.\"}, {\"form\": \"Mahu-bünno' tü-nobi-neikka 'a-makoobenno katü-ti tü-bitaŵa-da'.\", \"translation\": \"He's sitting in front of his (own) house, watching.\"}, {\"form\": \"Na-gwatti-pü 'uhu tü-hanno-kko-sa-mana.\", \"translation\": \"He's been shot somewhere on his person.\"}, {\"form\": \"Tüi-nobi-na-su 'uhu nobi-ga. Tüi-nobi-tu-nna.\", \"translation\": \"They have homes of there own. Homes they've built themselves.\"}]}]}, {\"lexical_unit\": \"tümikkana\", \"senses\": [{\"gloss\": \"his/her own\", \"definition\": \"His, her, or its own, belonging to the subject of the sentence. Logophor\\n                        pronoun. It is co-referential to the subject of the clause.\", \"examples\": [{\"form\": null, \"translation\": null}]}, {\"gloss\": \"him/her\", \"definition\": \"To/for him, her, or it, referring back to the subject of the sentence.\\n                        Logophor pronoun. It is co-referential to the subject of the clause.\", \"examples\": [{\"form\": \"Mahu 'aaŵahusu-ikka kuna-noo-pü-su-düa. Subaa mahu hakka-soo-mana\\n                        kutsa-gü-tuha. Subaa tümikka-sü'.\", \"translation\": \"He brought a load of wood early this morning. Maybe he's getting wood\\n                            for someone. Maybe just for himself.\"}]}, {\"gloss\": null, \"definition\": null, \"examples\": []}]}, {\"lexical_unit\": \"'a-\", \"senses\": [{\"gloss\": \"his\", \"definition\": \"His, hers, its (possessive pronoun), prefixes to nouns to express\\n                        belonging.\", \"examples\": [{\"form\": \"Nüü a-'apo-man-ddü-aa kooppi'-aa a-wee tuuŵa-ti.\", \"translation\": \"I'm pouring some coffee from her up into it.\"}]}, {\"gloss\": \"hers\", \"definition\": null, \"examples\": []}]}, {\"lexical_unit\": \"tüi-\", \"senses\": [{\"gloss\": \"their own\", \"definition\": \"Their own, belonging to the subject of the sentence. Logophor pronoun. It\\n                        is co-referential to the subject of the clause.\", \"examples\": []}]}, {\"lexical_unit\": \"nükka\", \"senses\": [{\"gloss\": \"me\", \"definition\": \"Me, to me, mine, demonstrative pronoun, possessive pronoun.\", \"examples\": [{\"form\": \"Tu'ihiinno' nükka-su yaduhi-ti.\", \"translation\": \"He's always spoken to me.\"}, {\"form\": \"Nükkana-sü' i-düniwaa-wei.\", \"translation\": \"He'll only teach me.\"}, {\"form\": \"Nüü nükkana-sü' nawahii-maa-gü-ti.\", \"translation\": \"I'm buying clothes just for myself.\"}, {\"form\": \"Mahu nükkana.\", \"translation\": \"That one's mine.\"}]}]}]",
+    "tool_call_id": "call_6nMBYGBa9Ed7xZZIE3MtbQvR"
+  },
+  {
+    "role": "assistant",
+    "content": "Nappidügü-dü-ii tü-aapono'-eika a-düka-ti."
+  },
+  {
+    "role": "user",
+    "content": "The book sits on the table."
+  },
+  {
+    "role": "assistant",
+    "tool_calls": [
+      {
+        "id": "call_d58FiNbbG19P72GwXM5SPLwK",
+        "function": {
+          "name": "search_sentences",
+          "arguments": "{\"query\": \"The book sits on the table.\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_qae58mItdhKxTiroeyLPx74V",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"present tense\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_6rHutzdXhuwS5iGfi7lgFrwC",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"book\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_OIekI96XuKsl4nCf60uwAUUA",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"sit\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_1gUrauvF8VyLZZBrQ5VUPuX2",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"table\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_uNaM9itTi76wgCAo2YJNQkp9",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"on, in\"}"
+        },
+        "type": "function"
+      }
+    ]
+  },
+  {
+    "role": "tool",
+    "content": "[{\"sentence\": \"Wihi-ii tibo-ba' na-dügü-ti.\", \"translation\": \"The knife was placed on the table.\"}, {\"sentence\": \"'Oonno'oho 'uhu kwatsa'i-ti tibo-ŵan-ddu-ukka.\", \"translation\": \"And then it fell from on the table.\"}, {\"sentence\": \"Paya-'ossa-neikka tibo-doha 'a-dügü-dei-wei.\", \"translation\": \"I'll place the water jug under the table.\"}, {\"sentence\": \"Tibo-neikka 'a-düka-dduna.\", \"translation\": \"Set the table.\"}, {\"sentence\": \"'A-düka-dduuna. Püdü'üsu-daagwa tüka-wei.\", \"translation\": \"Set the table. We are going to eat soon.\"}]",
+    "tool_call_id": "call_d58FiNbbG19P72GwXM5SPLwK"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"-dü\", \"senses\": [{\"gloss\": \"present\", \"definition\": \"Verbal suffix ending that indicates the action is happening in the present\\n                        tense, or in the process of doing it; also makes verbs into nouns by\\n                        indicating the doer of the action. Also, signifies habitual tense.\", \"examples\": [{\"form\": \"Sawa-dü-eikka 'a-düŵaabü'a.\", \"translation\": \"Help the one that's cooking.\"}, {\"form\": \"'Uhu tü-nawahii-nokka 'u-zamüna-gaa-dü.\", \"translation\": \"He's going to go change his clothes.\"}, {\"form\": \"Haga mii 'üni-dü-uu?\", \"translation\": \"Who's the one who said that?\"}, {\"form\": \"Haga 'aaŵahu-ukka sawa-wei-dü-ii?\", \"translation\": \"Who will be the one to cook tomorrow?\"}, {\"form\": \"Haga 'i-bida-gü-weidü-ii 'i-sawa-ku-su-ukka.\", \"translation\": \"Who will make me fire when I cook.\"}]}]}, {\"lexical_unit\": \"-wei\", \"senses\": [{\"gloss\": \"will (future tense)\", \"definition\": \"Verb ending for future tense.\", \"examples\": [{\"form\": \"Nüü 'ube mia-wei.\", \"translation\": \"I'll go back in there.\"}, {\"form\": \"Tsaŵu-baa-su tu'ihii mia-wei-dü.\", \"translation\": \"Everything is intended to go well.\"}, {\"form\": \"Hiibü-na nüü 'ü-düükwii-ti 'iattü-okka 'i-nakka-nna? Kwiŵi mia-binaa-ti\\n                        'uhuŵa Carson-wee tü-dühiibü-nokka na-duhu-gaa-wei-shi.\", \"translation\": \"What was it that I told you I heard from over there? They were wanting\\n                            to go north to Carson, in order to sell something of theirs.\"}, {\"form\": \"'Uhu tü-doogü'-tsi'-okka na-wütaŵa-pü tü-ma-ggu yeishi 'uhu na-waadzi-ti\\n                        'uhu 'u-na-pidügü-wei-shi.\", \"translation\": \"He had his dog secured/tied to his person, and then he hid being that\\n                            he'd get into a fight.\"}, {\"form\": \"Nününü'-uu tei-nakka-gü-wei-shi tei-bei-pihaaŵi-ti.\", \"translation\": \"That white person was beconing each one of us over, in order to give\\n                            us a chance to listen (or be heard?).\"}]}]}, {\"lexical_unit\": \"-pü\", \"senses\": [{\"gloss\": \"PAST\", \"definition\": \"Past tense particle, attaches to end of verbs. Shows an action has been\\n                        done and the results of that action is still felt or evident. The one or\\n                        thing that does the action.\", \"examples\": [{\"form\": \"Nüü muasu koopi'-aa hibi-pü.\", \"translation\": \"I already drank some coffee.\"}, {\"form\": \"Nüü 'üi-dü-gwati-pü-aa tü-zoba-wei.\", \"translation\": \"I'll pick up what you've all shot (bullets/arrows).\"}, {\"form\": \"Tei-ddaduha-pü-ii koobenno-ttü-aa 'ionnoho ma-na-dügü-pü.\", \"translation\": \"The language (we speak) was first to be placed here.\"}, {\"form\": \"Hüügwa-pü-uu nadüüya-ti.\", \"translation\": \"That wind was scary/strong.\"}]}]}, {\"lexical_unit\": \"-ti\", \"senses\": [{\"gloss\": \"ing\", \"definition\": \"Present/Past tense, \\\"This marker does not make a distinction between\\n                        present and past tense. It is a realis marker, and asserts that some\\n                        activity has begun, and may or may not have been brought to completion,\\\"\\n                        from Evan J. Noris A Grammar Sketch and Comparative of Eastern Mono.\", \"examples\": [{\"form\": \"Nüü natügünaa yaduha-ti.\", \"translation\": \"I'm continuously talking.\"}]}]}, {\"lexical_unit\": \"-du'i\", \"senses\": [{\"gloss\": \"PAST\", \"definition\": \"Expression word making phrases in past-tense context.\", \"examples\": [{\"form\": \"Mahu 'i-wüü-kaa-wei-du'i.\", \"translation\": \"He was going to catch me.\"}, {\"form\": \"Kadu' tsügwüda-du'i.\", \"translation\": \"It was not nearly as fast.\"}, {\"form\": \"Tuihii-du'i 'aannaha püünuhu-daagwa ka'a-su 'u-bbumaadzi-dua-pü.\", \"translation\": \"Just about everything was there, however we wouldn't recognize it yet.\"}, {\"form\": \"Süŵübaa nüü-du'i.\", \"translation\": \"I think I can (I just may be able to).\"}, {\"form\": \"Nüü-du'i 'ü-dzakoonohi-gü-dua-pü 'u-subasa-ni-ukka 'üü hupinagwa\\n                        'ü-gwünü-nokka.\", \"translation\": \"I could have openned the door for you had I known you were standing\\n                            outside.\"}, {\"form\": \"Kadu' nüü-du'i yaduha-nna.\", \"translation\": \"Excuse me, I didn't mean it.\"}]}]}]",
+    "tool_call_id": "call_qae58mItdhKxTiroeyLPx74V"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"tibo\", \"senses\": [{\"gloss\": \"table\", \"definition\": \"Table.\", \"examples\": [{\"form\": \"Tibo-neikka 'a-düka-dduna.\", \"translation\": \"Set the table.\"}, {\"form\": \"Wihi-ii tibo-ba' na-dügü-ti.\", \"translation\": \"The knife was placed on the table.\"}, {\"form\": \"Nüügwa nasümü katü-dei-shi tibo-wee-ukka 'oonnoho nüügwa wanaaha'i-ti.\", \"translation\": \"We all sat at the table and we played cards.\"}, {\"form\": \"Tibo-ba'a-ddü-eikka-daagwa tüka-wei müha.\", \"translation\": \"We will now eat what is on the table.\"}]}]}, {\"lexical_unit\": \"mago'otsi'\", \"senses\": [{\"gloss\": \"pocket\", \"definition\": \"Pocket\", \"examples\": []}]}, {\"lexical_unit\": \"wüsaga\", \"senses\": [{\"gloss\": \"cover\", \"definition\": null, \"examples\": []}]}, {\"lexical_unit\": \"pipobü\", \"senses\": [{\"gloss\": \"paper\", \"definition\": null, \"examples\": []}]}, {\"lexical_unit\": \"nahuu'ŵi\", \"senses\": [{\"gloss\": \"shop (buy)\", \"definition\": null, \"examples\": [{\"form\": \"Uhu tauna-wee moo-tuha-dü. (Nahuu'ŵi-tuha) Tüi-düka-wei-nna\\n                        nahuu'ŵi-tuha-dü.\", \"translation\": \"They were traveling back from town. Coming from shopping for\\n                            groceries.\"}, {\"form\": \"Nüü noyobi-na nahuu'ŵi-gaa-wei.\", \"translation\": \"I'm going to go buy some eggs.\"}]}]}]",
+    "tool_call_id": "call_6rHutzdXhuwS5iGfi7lgFrwC"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"katü\", \"senses\": [{\"gloss\": \"sit\", \"definition\": \"To sit down.\", \"examples\": [{\"form\": \"'Io katü-gi nü-baa.\", \"translation\": \"Come sit here by me.\"}]}, {\"gloss\": \"stay\", \"definition\": \"To stay at a certain place, to reside at a place.\", \"examples\": [{\"form\": \"Kadu' nüü katü-baa sugwei-ti pünebü nüü mia-wei.\", \"translation\": \"I don't want to stay around. I should get going.\"}, {\"form\": \"'Uhu-dii-büü 'u-wee katü-ni-ukka na-gia-dua-pü subaa.\", \"translation\": \"Maybe she could indeed be given (that land) if she'd stay there.\"}, {\"form\": \"Subaa 'uhu toya-ŵa katü-dü.\", \"translation\": \"Maybe he lives in the mountains.\"}, {\"form\": \"Nüü 'i-ŵu'a-ŵü-neikka 'ihutsi'i-ŵü-neikka tü-gatü-gü-dü.\", \"translation\": \"I'm going to have my grandchildren stay (so that I can watch them).\"}, {\"form\": \"'Iannaha nüü 'i-gaani'i-naha-neikka tü-gatü-gü-wei 'ü-düwoobü-wee-ukka.\", \"translation\": \"I'm going to keep my cows over there in your field.\"}]}]}, {\"lexical_unit\": \"tsakatügü\", \"senses\": [{\"gloss\": \"sit (something) down\", \"definition\": \"To sit something down (in a sitting position), to have someone stay at a\\n                        certain place or location.\", \"examples\": [{\"form\": null, \"translation\": null}]}]}, {\"lexical_unit\": \"yuuna\", \"senses\": [{\"gloss\": \"put\", \"definition\": null, \"examples\": []}, {\"gloss\": \"put\", \"definition\": null, \"examples\": []}]}, {\"lexical_unit\": \"-yükwi\", \"senses\": [{\"gloss\": \"sit (plural)\", \"definition\": \"To sit (plural) doing something, to stay/reside (plural) while doing\\n                        something.\", \"examples\": [{\"form\": \"U-'aaŵoho-ukka-düa-büü hühüübichi'-uu tüzoo-yükwi-ti.\", \"translation\": \"The next day, the old ladies were sitting around sad/lonely.\"}]}]}, {\"lexical_unit\": \"yükwi\", \"senses\": [{\"gloss\": \"sit (plural)\", \"definition\": \"To sit plural, to sit in a group, to say/reside of a number of people.\", \"examples\": [{\"form\": \"Tu'ihaga-ii kimma-si-ukka 'oonno'oho yükwi-ti tübina.\", \"translation\": \"Once everyone came they sat down on the ground.\"}, {\"form\": \"'Iattü-ii nüümü-ii tünaa-dugu yükwi-tügü-ti kadu' i-düŵaabü'a-dei-shi.\", \"translation\": \"Those people over there are just sitting down and not helping.\"}]}]}]",
+    "tool_call_id": "call_OIekI96XuKsl4nCf60uwAUUA"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"tibo\", \"senses\": [{\"gloss\": \"table\", \"definition\": \"Table.\", \"examples\": [{\"form\": \"Tibo-neikka 'a-düka-dduna.\", \"translation\": \"Set the table.\"}, {\"form\": \"Wihi-ii tibo-ba' na-dügü-ti.\", \"translation\": \"The knife was placed on the table.\"}, {\"form\": \"Nüügwa nasümü katü-dei-shi tibo-wee-ukka 'oonnoho nüügwa wanaaha'i-ti.\", \"translation\": \"We all sat at the table and we played cards.\"}, {\"form\": \"Tibo-ba'a-ddü-eikka-daagwa tüka-wei müha.\", \"translation\": \"We will now eat what is on the table.\"}]}]}, {\"lexical_unit\": \"tüŵa\", \"senses\": [{\"gloss\": \"basket type\", \"definition\": null, \"examples\": []}]}, {\"lexical_unit\": \"tükadduuna\", \"senses\": [{\"gloss\": \"set table\", \"definition\": \"To set the table, to set things out for eating.\", \"examples\": [{\"form\": \"'A-düka-dduuna. Püdü'üsu-daagwa tüka-wei.\", \"translation\": \"Set the table. We are going to eat soon.\"}, {\"form\": \"Nii-düka-dduuna tu'ihiinno'.\", \"translation\": \"Have the table set for us whenever.\"}]}]}, {\"lexical_unit\": \"tüŵanaki\", \"senses\": [{\"gloss\": \"gather\", \"definition\": null, \"examples\": []}]}, {\"lexical_unit\": \"tsaküdüdühi\", \"senses\": [{\"gloss\": \"stand up (row)\", \"definition\": \"To standa number of things up in a row.\", \"examples\": [{\"form\": \"Na-zagwünü-gü-ku-si-ukka na-zaküdüdühi-ti.\", \"translation\": \"Once (they're) stood up, they are stood up in a row (speaking of\\n                            dishes in a dish rack).\"}]}]}]",
+    "tool_call_id": "call_1gUrauvF8VyLZZBrQ5VUPuX2"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"-pa'\", \"senses\": [{\"gloss\": \"on\", \"definition\": \"On top, up, above.\", \"examples\": [{\"form\": \"Mahu tü-hiibü-neikka nobi-ba'a-ddü-eikka 'a-basei-wei-neikka 'a-buhei-ti.\", \"translation\": \"He's looking for the leak on top of the roof of the house.\"}, {\"form\": \"Nüü 'a-ba' katü-wei tübipü-neikka.\", \"translation\": \"I'm going to sit on the dirt.\"}, {\"form\": \"Tübbi-ba'a-ikka 'a-dügü-dei-shi 'a-hani.\", \"translation\": \"Place it on top of that rock, then do it.\"}, {\"form\": \"'Ikkana nüü nana-papa' a-dügü-ti.\", \"translation\": \"I'm putting these on top of one another.\"}]}, {\"gloss\": \"above\", \"definition\": \"Up above.\", \"examples\": [{\"form\": \"Püyü-ii pa'a 'ia na-bakia-ti paya-neikka.\", \"translation\": \"The duck is over there on top the water bathing.\"}, {\"form\": \"Nüü-büü 'u-düüya-'ei pa'a 'ia 'i-dügü-wei-nokka.\", \"translation\": \"I'm afraid each time to place it high above over there.\"}, {\"form\": \"Pa'a-su nüü 'aannaha mia-ni pitü-hu-gaa-wei.\", \"translation\": \"I'll go higher there, then arrive.\"}, {\"form\": \"Nüü pa'a-su 'ia mia-wei 'u-tugu.\", \"translation\": \"I'll go a higher way/route.\"}, {\"form\": \"'Uhuŵa-su pa'a-su nobi-püga.\", \"translation\": \"They used to live higher up on their own.\"}, {\"form\": \"Pa'a'ube.\", \"translation\": \"Up above, back in here.\"}, {\"form\": \"Taagwa tei-kootsi'i-naha-neikka 'aattaga 'a-damühü-wei yeishi-daa\\n                        'a-wee-kku 'a-wükütsü'i-shi-ukka 'oonno'oho 'a-ba'a-nia-su 'a-'üdzü'ü-hu-si\\n                        taagwa tü-batsa-wei.\", \"translation\": \"We'll round up our pigs and confine them in that (pen), and then if\\n                            the cold temperature become more so, we'll butcher one.\"}]}]}, {\"lexical_unit\": \"tabe-\", \"senses\": [{\"gloss\": \"sun (in)\", \"definition\": \"To do (action) in the sun, adverbial prefix, prefixes to verbs.\", \"examples\": [{\"form\": \"Nüü-büü tabe-wünü-dü. Nüü 'üdzü'ü-gaa-ni 'ionnoho kimma-ti\\n                        tabe-wünü-gi-dü.\", \"translation\": \"I'm standing in the sun. Once I became cold, I came right here to\\n                            stand in the sun.\"}]}]}, {\"lexical_unit\": \"-ma\", \"senses\": [{\"gloss\": \"on\", \"definition\": \"On unlevel surface. Postposition suffixes to nouns and pronouns.\", \"examples\": [{\"form\": \"Toya-ma 'ia nüügwa katü-dei-shi yaduha-ti.\", \"translation\": \"We stayed on the mountain and spoke.\"}, {\"form\": \"Nü-ma-ttü-su.\", \"translation\": \"Apart of me.\"}, {\"form\": \"Mahu-dei 'iottü-eikka nana-ma-dugu 'a-wüttaŵa-ku-si tu'ihiibü-na.\", \"translation\": \"Once he ties any of these onto one another.\"}]}]}, {\"lexical_unit\": \"tsanakka\", \"senses\": [{\"gloss\": \"turn on/up\", \"definition\": \"To turn something on (television, radio, motor), to turn something up/down\\n                        (in volume).\", \"examples\": [{\"form\": \"Nüü 'i-weegini-nokka 'u-zanakka-gaa-wei.\", \"translation\": \"I'm going to turn on my car.\"}, {\"form\": \"'Ihi na-zanakka-pü.\", \"translation\": \"This was turned on.\"}, {\"form\": \"'Iottü-ii paba na-zanakka-pü.\", \"translation\": \"This here was turn up high volume.\"}]}]}, {\"lexical_unit\": \"'iiga\", \"senses\": [{\"gloss\": \"enter\", \"definition\": \"To enter, to go inside.\", \"examples\": [{\"form\": \"Tü-zagwünü-gü-si 'üügwa pipaa-ttugu 'iiga.\", \"translation\": \"Park and then enter through the back.\"}]}]}]",
+    "tool_call_id": "call_uNaM9itTi76wgCAo2YJNQkp9"
+  },
+  {
+    "role": "assistant",
+    "content": "[book]-uu tibo-ba' katü-ti."
+  },
+  {
+    "role": "user",
+    "content": "The boy saw it."
+  },
+  {
+    "role": "assistant",
+    "tool_calls": [
+      {
+        "id": "call_PgL7pp35D3EreFRCAuPI7QR1",
+        "function": {
+          "name": "search_sentences",
+          "arguments": "{\"query\": \"The boy saw it.\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_O6O3fjQg8qnNpi4NPPr2VpEz",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"past tense\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_QUJngKk6ypcyRNrWNDKRV5yW",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"see\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_wByUbSlKqZRgFlE2Qu18XQ5D",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"it, object pronoun\"}"
+        },
+        "type": "function"
+      }
+    ]
+  },
+  {
+    "role": "tool",
+    "content": "[{\"sentence\": \"'U-zapusi-ya-gü-ti.\", \"translation\": \"It caught his eye.\"}, {\"sentence\": \"Naatsi'-ii-bünno' pinnattü.\", \"translation\": \"The boy is next.\"}, {\"sentence\": \"Naatsi'-ii-bünno' 'a-dübinuhi-wei-gwee-ikka 'iga-tei-ku-si tei-bitaŵa-ti.\", \"translation\": \"The boy entered the playhouse then look at us.\"}, {\"sentence\": \"Subaa 'uhu tü-buni-nna suga-ti.\", \"translation\": \"Maybe that's what he thought he saw.\"}, {\"sentence\": \"Maattü-ii naatsi'-ii a-ŵabana'i-ti.\", \"translation\": \"That boy is skillful with that.\"}]",
+    "tool_call_id": "call_PgL7pp35D3EreFRCAuPI7QR1"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"-du'i\", \"senses\": [{\"gloss\": \"PAST\", \"definition\": \"Expression word making phrases in past-tense context.\", \"examples\": [{\"form\": \"Mahu 'i-wüü-kaa-wei-du'i.\", \"translation\": \"He was going to catch me.\"}, {\"form\": \"Kadu' tsügwüda-du'i.\", \"translation\": \"It was not nearly as fast.\"}, {\"form\": \"Tuihii-du'i 'aannaha püünuhu-daagwa ka'a-su 'u-bbumaadzi-dua-pü.\", \"translation\": \"Just about everything was there, however we wouldn't recognize it yet.\"}, {\"form\": \"Süŵübaa nüü-du'i.\", \"translation\": \"I think I can (I just may be able to).\"}, {\"form\": \"Nüü-du'i 'ü-dzakoonohi-gü-dua-pü 'u-subasa-ni-ukka 'üü hupinagwa\\n                        'ü-gwünü-nokka.\", \"translation\": \"I could have openned the door for you had I known you were standing\\n                            outside.\"}, {\"form\": \"Kadu' nüü-du'i yaduha-nna.\", \"translation\": \"Excuse me, I didn't mean it.\"}]}]}, {\"lexical_unit\": \"-pü\", \"senses\": [{\"gloss\": \"PAST\", \"definition\": \"Past tense particle, attaches to end of verbs. Shows an action has been\\n                        done and the results of that action is still felt or evident. The one or\\n                        thing that does the action.\", \"examples\": [{\"form\": \"Nüü muasu koopi'-aa hibi-pü.\", \"translation\": \"I already drank some coffee.\"}, {\"form\": \"Nüü 'üi-dü-gwati-pü-aa tü-zoba-wei.\", \"translation\": \"I'll pick up what you've all shot (bullets/arrows).\"}, {\"form\": \"Tei-ddaduha-pü-ii koobenno-ttü-aa 'ionnoho ma-na-dügü-pü.\", \"translation\": \"The language (we speak) was first to be placed here.\"}, {\"form\": \"Hüügwa-pü-uu nadüüya-ti.\", \"translation\": \"That wind was scary/strong.\"}]}]}, {\"lexical_unit\": \"'oonno'ohosu\", \"senses\": [{\"gloss\": \"formerly\", \"definition\": \"Formerly, in times past.\", \"examples\": [{\"form\": \"'Oono'oho-su nawaku-ii subaa kadu'-iddu mani-hu-'ei.\", \"translation\": \"In times past, this money may not have lasted.\"}]}]}, {\"lexical_unit\": \"-wei\", \"senses\": [{\"gloss\": \"will (future tense)\", \"definition\": \"Verb ending for future tense.\", \"examples\": [{\"form\": \"Nüü 'ube mia-wei.\", \"translation\": \"I'll go back in there.\"}, {\"form\": \"Tsaŵu-baa-su tu'ihii mia-wei-dü.\", \"translation\": \"Everything is intended to go well.\"}, {\"form\": \"Hiibü-na nüü 'ü-düükwii-ti 'iattü-okka 'i-nakka-nna? Kwiŵi mia-binaa-ti\\n                        'uhuŵa Carson-wee tü-dühiibü-nokka na-duhu-gaa-wei-shi.\", \"translation\": \"What was it that I told you I heard from over there? They were wanting\\n                            to go north to Carson, in order to sell something of theirs.\"}, {\"form\": \"'Uhu tü-doogü'-tsi'-okka na-wütaŵa-pü tü-ma-ggu yeishi 'uhu na-waadzi-ti\\n                        'uhu 'u-na-pidügü-wei-shi.\", \"translation\": \"He had his dog secured/tied to his person, and then he hid being that\\n                            he'd get into a fight.\"}, {\"form\": \"Nününü'-uu tei-nakka-gü-wei-shi tei-bei-pihaaŵi-ti.\", \"translation\": \"That white person was beconing each one of us over, in order to give\\n                            us a chance to listen (or be heard?).\"}]}]}, {\"lexical_unit\": \"-püga\", \"senses\": [{\"gloss\": \"long ago\", \"definition\": \"Suffixes to verbs inflecting that action happened long ago or in the\\n                        distant past.\", \"examples\": [{\"form\": \"Haga 'ionnoho mani-püga-uu kobenno?\", \"translation\": \"Who was here first, long ago?\"}]}]}]",
+    "tool_call_id": "call_O6O3fjQg8qnNpi4NPPr2VpEz"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"puni\", \"senses\": [{\"gloss\": \"see\", \"definition\": \"To see.\", \"examples\": [{\"form\": \"Tsaŵu-iddu i-buni-ku-nna-ii.\", \"translation\": \"It's good to see you.\"}, {\"form\": \"Tsaŵu naama-ti nüü 'ü-buni-si-ukka ('ü-buni-ku-si-ukka).\", \"translation\": \"I was happy to see you.\"}, {\"form\": \"'Ü-buni-kwaa-ti nüü 'u-binna-tugu-su-ukka.\", \"translation\": \"I'll see you the next time.\"}, {\"form\": \"Nüü 'ionnoho wünü-si-ukka kadu' ui-buni-ti.\", \"translation\": \"When I stood here, I couldn't see them.\"}]}]}, {\"lexical_unit\": \"pitaŵa\", \"senses\": [{\"gloss\": \"look\", \"definition\": \"To look at something.\", \"examples\": [{\"form\": \"Naatsi'-ii-bünno' 'a-dübinuhi-wei-gwee-ikka 'iga-tei-ku-si tei-bitaŵa-ti.\", \"translation\": \"The boy entered the playhouse then look at us.\"}, {\"form\": \"Kadu' üügwa tsaŵu tü-bitaŵa-ti.\", \"translation\": \"You guys aren't looking around good (enough).\"}, {\"form\": \"Tü-baagwa-na na-bitaŵa-gü-gaa-dü.\", \"translation\": \"He's going to get his blood looked at (check up on at the doctors).\"}]}]}, {\"lexical_unit\": \"tsapuni\", \"senses\": [{\"gloss\": \"look\", \"definition\": \"To take a look while using the hand(s) to move something aside to get a\\n                        better look.\", \"examples\": []}]}, {\"lexical_unit\": \"puttabühi\", \"senses\": [{\"gloss\": \"see well\", \"definition\": \"To be able to see something well, to clearly see something.\", \"examples\": [{\"form\": \"'Oonno'oho nüü ka' tü-buttabühi-ni-ukka 'u-ŵan-dugu mia-ddabi-tei-ti\\n                        'oonno'oho na-mutsuku'i-bitü-ga'.\", \"translation\": \"And then, while I couldn't see clearly, I went right into it, and then\\n                            bumped my head.\"}, {\"form\": \"Hanni'i-tugu mahu tü-bittabühi-wei annikku?\", \"translation\": \"How is he going to see it now?\"}]}]}, {\"lexical_unit\": \"tsapitaŵagü\", \"senses\": [{\"gloss\": \"show\", \"definition\": \"To show someone by hand, to showcase something, to cause someone to look\\n                        at something.\", \"examples\": [{\"form\": \"Kadu'u-büü 'ai-zhapitaŵa-gü-dua-pü?\", \"translation\": \"Would you show them?\"}]}]}]",
+    "tool_call_id": "call_QUJngKk6ypcyRNrWNDKRV5yW"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"'ikkahuna\", \"senses\": [{\"gloss\": \"this one (object)\", \"definition\": \"This one (close proximity to speaker) object case demonstrative pronoun,\\n                        used for him, her, and it, also possessive pronouns (his, hers, its).\", \"examples\": [{\"form\": \"'Ikkahuna-su 'üügwa 'ai-ŵui-ti nanaanatsi'-eikka?\", \"translation\": \"Is this the only picture you all took of the boys?\"}, {\"form\": \"'Ikka a-zatüma. 'Üdzü'ü-kaa-daa.\", \"translation\": \"Close this (window). We are going to get cold.\"}, {\"form\": \"'Ikkana nüü wüü-si kimma-ti.\", \"translation\": \"I grabbed this one and came/I brought this one.\"}]}]}, {\"lexical_unit\": \"'ikka\", \"senses\": [{\"gloss\": \"this\", \"definition\": \"This one (object pronoun), used for personal pronouns.\", \"examples\": []}]}, {\"lexical_unit\": \"'ikkana\", \"senses\": [{\"gloss\": \"this one (object)\", \"definition\": \"This one (object case), refers to him, her, and it, also represents\\n                        possessive pronouns (his, hers, and its).\", \"examples\": []}]}, {\"lexical_unit\": \"'u-\", \"senses\": [{\"gloss\": \"him/her/it\", \"definition\": \"To him, to her, to it. Object pronoun that prefixes to a transitive verb\\n                        stem.\", \"examples\": [{\"form\": \"Nüü padda'i-pü-okka 'ui-sudühei-ti.\", \"translation\": \"I feel sorry for those that are thirsty.\"}, {\"form\": \"Nüü 'ui-buni-ti 'aannaka-ha.\", \"translation\": \"I saw them there.\"}, {\"form\": \"'Oonno'oho 'iannaha nüü kimma-ni-ukka nüü 'iannaka tüka-dü-aa 'ui-buni-ti.\", \"translation\": \"And then, as I was there coming along, I saw them there eating.\"}]}, {\"gloss\": \"his/her/its\", \"definition\": \"His, hers, its (furthest from the speaker, or out of sight). Possessive\\n                        pronoun, prefixes to a noun showing possession.\", \"examples\": [{\"form\": \"Naana-uu nasümü-ggu 'ui-nawaku-tsi'-okka wüü-si mia-tei-ku.\", \"translation\": \"That man took all of their little bit of money, and left.\"}]}]}, {\"lexical_unit\": \"makkahuna\", \"senses\": [{\"gloss\": \"that one\", \"definition\": \"That one (object form, short distance from speaker) demonstrative pronoun,\\n                        used for him, her, and it also possessive for these (his, hers, its).\", \"examples\": [{\"form\": \"Miina' makkahuna 'a-wünoo-ni.\", \"translation\": \"Don't wear that one.\"}, {\"form\": \"Nüü 'ikkana 'a-ŵadüga-si-ukka 'oonno'oho nüü makkahuna 'a-hani-wei.\", \"translation\": \"Once I've finished this, then I'll do that.\"}, {\"form\": \"Makkahuna-su-düa 'a-düŵaabüa'a-tüngü.\", \"translation\": \"Ask that one also to help.\"}]}]}]",
+    "tool_call_id": "call_wByUbSlKqZRgFlE2Qu18XQ5D"
+  },
+  {
+    "role": "assistant",
+    "content": "Naatsi'-ii a-buni-ku."
+  },
+  {
+    "role": "user",
+    "content": "I saw two men walking their dogs yesterday at Starbucks while drinking a cup of coffee."
+  },
+  {
+    "role": "assistant",
+    "tool_calls": [
+      {
+        "id": "call_zNAyqFvn0DxJ9ZH5kOYkEGrK",
+        "function": {
+          "name": "search_sentences",
+          "arguments": "{\"query\": \"I saw two men walking their dogs yesterday at Starbucks while drinking a cup of coffee.\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_QWPp4aNNVVRaanvanA33FTvl",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"past tense, complex sentence structure, temporal clauses\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_s1gx95bdE2f0ljwhJuVEjP7r",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"see\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_cJtA8fJxp0l2xSi8PHwDf4lR",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"man, men\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_PP4VYFtL8opbX5ypcSUEJeka",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"walk\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_BKvtKaggbP7KLzY6FxOVdxMs",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"dog\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_P8zjygQZhyy2IjiD9OrAekIG",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"possessive pronoun, their\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_jCAtKchzTsroNEfETKoBrM4S",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"yesterday, temporal adverb\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_CALKsxtLS6T3aC4L7Q2FnmVz",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"while\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_FQHGsg75U8hV5ND3Fhk3mpnz",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"drink\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_bfzxyPRJZ1k3fhEEBLcRV8zU",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"coffee\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_dMRnu3BNyAjqgdoeao40vFG9",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"Starbucks\"}"
+        },
+        "type": "function"
+      }
+    ]
+  },
+  {
+    "role": "tool",
+    "content": "[{\"sentence\": \"Koopi'apo\", \"translation\": \"Coffee cup.\"}, {\"sentence\": \"'Oonno'oho Dwight-okka 'u-buni-kaa-si 'u-ba'a-tugu pümakkagi-tei-ti.\", \"translation\": \"And then once he (his dog) saw Dwight, he moped over to him.\"}, {\"sentence\": \"Nüü muasu koopi'-aa hibi-pü.\", \"translation\": \"I already drank some coffee.\"}, {\"sentence\": \"Nüü koopi'-aa hibi-wei. 'Üügwa-nuhu-büü?\", \"translation\": \"I'm going to drink some coffee. How about you all?\"}, {\"sentence\": \"'Ü-buggu-nokka 'u-ŵakka-gaa.\", \"translation\": \"Go and feed your pet/dog.\"}]",
+    "tool_call_id": "call_zNAyqFvn0DxJ9ZH5kOYkEGrK"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"-du'i\", \"senses\": [{\"gloss\": \"PAST\", \"definition\": \"Expression word making phrases in past-tense context.\", \"examples\": [{\"form\": \"Mahu 'i-wüü-kaa-wei-du'i.\", \"translation\": \"He was going to catch me.\"}, {\"form\": \"Kadu' tsügwüda-du'i.\", \"translation\": \"It was not nearly as fast.\"}, {\"form\": \"Tuihii-du'i 'aannaha püünuhu-daagwa ka'a-su 'u-bbumaadzi-dua-pü.\", \"translation\": \"Just about everything was there, however we wouldn't recognize it yet.\"}, {\"form\": \"Süŵübaa nüü-du'i.\", \"translation\": \"I think I can (I just may be able to).\"}, {\"form\": \"Nüü-du'i 'ü-dzakoonohi-gü-dua-pü 'u-subasa-ni-ukka 'üü hupinagwa\\n                        'ü-gwünü-nokka.\", \"translation\": \"I could have openned the door for you had I known you were standing\\n                            outside.\"}, {\"form\": \"Kadu' nüü-du'i yaduha-nna.\", \"translation\": \"Excuse me, I didn't mean it.\"}]}]}, {\"lexical_unit\": \"-pü\", \"senses\": [{\"gloss\": \"PAST\", \"definition\": \"Past tense particle, attaches to end of verbs. Shows an action has been\\n                        done and the results of that action is still felt or evident. The one or\\n                        thing that does the action.\", \"examples\": [{\"form\": \"Nüü muasu koopi'-aa hibi-pü.\", \"translation\": \"I already drank some coffee.\"}, {\"form\": \"Nüü 'üi-dü-gwati-pü-aa tü-zoba-wei.\", \"translation\": \"I'll pick up what you've all shot (bullets/arrows).\"}, {\"form\": \"Tei-ddaduha-pü-ii koobenno-ttü-aa 'ionnoho ma-na-dügü-pü.\", \"translation\": \"The language (we speak) was first to be placed here.\"}, {\"form\": \"Hüügwa-pü-uu nadüüya-ti.\", \"translation\": \"That wind was scary/strong.\"}]}]}, {\"lexical_unit\": \"-seikka\", \"senses\": [{\"gloss\": \"when\", \"definition\": \"If or when at anytime, suffixes to verbs to create adverbial clause,\\n                        specific fomr. and proximal in time.\", \"examples\": []}]}, {\"lexical_unit\": \"-sokka\", \"senses\": [{\"gloss\": \"when\", \"definition\": \"If or when at anytime, suffixes to verbs to create adverbial clause,\\n                        specific form and distal in time.\", \"examples\": []}]}, {\"lexical_unit\": \"-püga\", \"senses\": [{\"gloss\": \"long ago\", \"definition\": \"Suffixes to verbs inflecting that action happened long ago or in the\\n                        distant past.\", \"examples\": [{\"form\": \"Haga 'ionnoho mani-püga-uu kobenno?\", \"translation\": \"Who was here first, long ago?\"}]}]}]",
+    "tool_call_id": "call_QWPp4aNNVVRaanvanA33FTvl"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"puni\", \"senses\": [{\"gloss\": \"see\", \"definition\": \"To see.\", \"examples\": [{\"form\": \"Tsaŵu-iddu i-buni-ku-nna-ii.\", \"translation\": \"It's good to see you.\"}, {\"form\": \"Tsaŵu naama-ti nüü 'ü-buni-si-ukka ('ü-buni-ku-si-ukka).\", \"translation\": \"I was happy to see you.\"}, {\"form\": \"'Ü-buni-kwaa-ti nüü 'u-binna-tugu-su-ukka.\", \"translation\": \"I'll see you the next time.\"}, {\"form\": \"Nüü 'ionnoho wünü-si-ukka kadu' ui-buni-ti.\", \"translation\": \"When I stood here, I couldn't see them.\"}]}]}, {\"lexical_unit\": \"pitaŵa\", \"senses\": [{\"gloss\": \"look\", \"definition\": \"To look at something.\", \"examples\": [{\"form\": \"Naatsi'-ii-bünno' 'a-dübinuhi-wei-gwee-ikka 'iga-tei-ku-si tei-bitaŵa-ti.\", \"translation\": \"The boy entered the playhouse then look at us.\"}, {\"form\": \"Kadu' üügwa tsaŵu tü-bitaŵa-ti.\", \"translation\": \"You guys aren't looking around good (enough).\"}, {\"form\": \"Tü-baagwa-na na-bitaŵa-gü-gaa-dü.\", \"translation\": \"He's going to get his blood looked at (check up on at the doctors).\"}]}]}, {\"lexical_unit\": \"tsapuni\", \"senses\": [{\"gloss\": \"look\", \"definition\": \"To take a look while using the hand(s) to move something aside to get a\\n                        better look.\", \"examples\": []}]}, {\"lexical_unit\": \"puttabühi\", \"senses\": [{\"gloss\": \"see well\", \"definition\": \"To be able to see something well, to clearly see something.\", \"examples\": [{\"form\": \"'Oonno'oho nüü ka' tü-buttabühi-ni-ukka 'u-ŵan-dugu mia-ddabi-tei-ti\\n                        'oonno'oho na-mutsuku'i-bitü-ga'.\", \"translation\": \"And then, while I couldn't see clearly, I went right into it, and then\\n                            bumped my head.\"}, {\"form\": \"Hanni'i-tugu mahu tü-bittabühi-wei annikku?\", \"translation\": \"How is he going to see it now?\"}]}]}, {\"lexical_unit\": \"tsapitaŵagü\", \"senses\": [{\"gloss\": \"show\", \"definition\": \"To show someone by hand, to showcase something, to cause someone to look\\n                        at something.\", \"examples\": [{\"form\": \"Kadu'u-büü 'ai-zhapitaŵa-gü-dua-pü?\", \"translation\": \"Would you show them?\"}]}]}]",
+    "tool_call_id": "call_s1gx95bdE2f0ljwhJuVEjP7r"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"nanaana\", \"senses\": [{\"gloss\": \"men\", \"definition\": null, \"examples\": []}]}, {\"lexical_unit\": \"naana\", \"senses\": [{\"gloss\": \"man\", \"definition\": \"Man, an adult male person. Man who has child(ren).\", \"examples\": [{\"form\": \"Nanaana-uu 'ia nobi-dü-uu mia-tei-ku.\", \"translation\": \"The men who live there have left.\"}, {\"form\": \"Nüü 'ohodugwa-ti naana-ni.\", \"translation\": \"I have the strength of a man.\"}]}]}, {\"lexical_unit\": \"naanayükwi\", \"senses\": [{\"gloss\": \"man (young)\", \"definition\": \"A young man, ususally characterized as not having children, adolescent\\n                        boy.\", \"examples\": [{\"form\": \"'Iottü-ii 'i-dua naanayükwi-chi' mahu mani-pü.\", \"translation\": \"This is my son who has become a young man.\"}, {\"form\": null, \"translation\": null}]}]}, {\"lexical_unit\": \"tsugu'\", \"senses\": [{\"gloss\": \"elderly man\", \"definition\": \"Elderly man.\", \"examples\": [{\"form\": \"Hühüübi-chi'-ii kobenno mimia-weidü. Tsugu-tsi'-ii kobenno mimia-weidü.\", \"translation\": \"The elder women will go first. The elder men will go first.\"}, {\"form\": \"'Uhuŵa nana-gwa'ani na-buni-wei tsuzugu' mani-ku-si-ukka.\", \"translation\": \"They'll look like one another when they become old men.\"}]}]}, {\"lexical_unit\": \"kuŵabi\", \"senses\": [{\"gloss\": \"husband\", \"definition\": \"Husband (prefixed form).\", \"examples\": [{\"form\": \"Nüü 'i-guŵa-nokka 'u-hiimü-ho-ddo-ukka pasiaana'i-ti.\", \"translation\": \"I am visiting with my husbands family.\"}, {\"form\": \"Subaa mahu-du'i kuŵa-ga anni'i-ggu-hu tü-ŵaappa'i-dü-aa.\", \"translation\": \"Maybe she did have a husband who made that (kind).\"}]}]}]",
+    "tool_call_id": "call_cJtA8fJxp0l2xSi8PHwDf4lR"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"hukkaŵia\", \"senses\": [{\"gloss\": \"walk\", \"definition\": null, \"examples\": []}]}, {\"lexical_unit\": \"huggaŵia\", \"senses\": [{\"gloss\": \"walk\", \"definition\": \"To walk, to on foot.\", \"examples\": [{\"form\": \"Hukka-ŵia-ti nüü.\", \"translation\": \"I am walking.\"}]}]}, {\"lexical_unit\": \"nüŵigü\", \"senses\": [{\"gloss\": \"walk something\", \"definition\": \"To walk something around, to take something for a walk.\", \"examples\": [{\"form\": \"Tüi-bugu-neikka 'a-nüŵi-gü-nüŵi-dü tüboona.\", \"translation\": \"They're out walking their horse around.\"}, {\"form\": \"Sümü' 'u-dü-ŵananna-nna-uu mia-kaa-si yeishi 'u-zaka-si 'iaa pedaŵi 'ia\\n                        'ui-nüŵi-gü-tuha.\", \"translation\": \"Once of the children she raised left and then went and lead (the\\n                            horse) down there.\"}]}]}, {\"lexical_unit\": \"hugganüŵi\", \"senses\": [{\"gloss\": \"walk around\", \"definition\": \"To walk around (with obstructions).\", \"examples\": []}]}, {\"lexical_unit\": \"hukkanüŵi\", \"senses\": [{\"gloss\": \"walk around\", \"definition\": \"To walk around (with obstructions).\", \"examples\": [{\"form\": \"Hukka-nüŵi-ti nüü.\", \"translation\": \"I was just walking around.\"}]}]}]",
+    "tool_call_id": "call_PP4VYFtL8opbX5ypcSUEJeka"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"kwidapugu\", \"senses\": [{\"gloss\": \"dog\", \"definition\": \"Dog\", \"examples\": []}]}, {\"lexical_unit\": \"'ishabugu\", \"senses\": [{\"gloss\": \"dog\", \"definition\": \"Dog (domestic), coyote-pet.\", \"examples\": [{\"form\": \"Ia-düa ü-'ishabugu-uu tsihaaya'i-shi kimma-ddabi-taa'i-dü.\", \"translation\": \"There's your dog again, hungry, coming in a hurry.\"}, {\"form\": \"Hanno 'i-doogü'?\", \"translation\": \"Where is my dog?\"}, {\"form\": \"Hanno-kko 'üü 'i-buni-ggü-ti 'i-doogü-tsi'-aa?\", \"translation\": \"Where did you spot my dog at?\"}, {\"form\": \"Hanno 'ü-gwidapugu-uu?\", \"translation\": \"Where's your dog?\"}, {\"form\": \"'Ishabugu-neikka 'a-ŵaka.\", \"translation\": \"Feed the dog.\"}, {\"form\": \"Toogü'-uu tsihaya'i-shi paya-na 'uhu tü-gwana-mia-bodo-ti.\", \"translation\": \"The dog became hungry, going around smelling for water.\"}, {\"form\": \"Nüü 'i-doogü'-tsi'-eikka noo-pü pipaa-kku.\", \"translation\": \"I brought my dog in the back (of the pickup).\"}]}]}, {\"lexical_unit\": \"toogü'\", \"senses\": [{\"gloss\": \"dog\", \"definition\": \"Dog, from English \\\"dog.\\\"\", \"examples\": []}]}, {\"lexical_unit\": \"pukkupida'\", \"senses\": [{\"gloss\": \"pet\", \"definition\": \"Pet, dog or horse (possibly a worthless pet).\", \"examples\": [{\"form\": null, \"translation\": null}]}]}, {\"lexical_unit\": \"toopi\", \"senses\": [{\"gloss\": \"wolf\", \"definition\": \"wolf\", \"examples\": [{\"form\": null, \"translation\": null}]}]}]",
+    "tool_call_id": "call_BKvtKaggbP7KLzY6FxOVdxMs"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"'a-\", \"senses\": [{\"gloss\": \"his\", \"definition\": \"His, hers, its (possessive pronoun), prefixes to nouns to express\\n                        belonging.\", \"examples\": [{\"form\": \"Nüü a-'apo-man-ddü-aa kooppi'-aa a-wee tuuŵa-ti.\", \"translation\": \"I'm pouring some coffee from her up into it.\"}]}, {\"gloss\": \"hers\", \"definition\": null, \"examples\": []}]}, {\"lexical_unit\": \"mai-\", \"senses\": [{\"gloss\": \"their\", \"definition\": \"Their, possessive pronoun. Plural of ma- prefixes to nouns. Expresses\\n                        distal relevance to speaker being mid-range, or further than possessive\\n                        pronoun ai-.\", \"examples\": []}]}, {\"lexical_unit\": \"teimikkana\", \"senses\": [{\"gloss\": \"our\", \"definition\": \"Ours, possessive pronoun (object form), plural and inclusive.\", \"examples\": [{\"form\": \"Teimikkana-su tei-ddaduha-wei-nna-uu.\", \"translation\": \"It is our own language that we will speak.\"}]}, {\"gloss\": \"us\", \"definition\": \"To us, object pronoun, plural and inclusive.\", \"examples\": []}]}, {\"lexical_unit\": \"ma-\", \"senses\": [{\"gloss\": \"that one's\", \"definition\": \"That one's, possessive pronoun used for his, hers, its. Prefixes to nouns.\\n                        Short distance from the speaker.\", \"examples\": [{\"form\": \"Mai-duamü mahu.\", \"translation\": \"That's their children.\"}]}]}, {\"lexical_unit\": \"tümikkana\", \"senses\": [{\"gloss\": \"his/her own\", \"definition\": \"His, her, or its own, belonging to the subject of the sentence. Logophor\\n                        pronoun. It is co-referential to the subject of the clause.\", \"examples\": [{\"form\": null, \"translation\": null}]}, {\"gloss\": \"him/her\", \"definition\": \"To/for him, her, or it, referring back to the subject of the sentence.\\n                        Logophor pronoun. It is co-referential to the subject of the clause.\", \"examples\": [{\"form\": \"Mahu 'aaŵahusu-ikka kuna-noo-pü-su-düa. Subaa mahu hakka-soo-mana\\n                        kutsa-gü-tuha. Subaa tümikka-sü'.\", \"translation\": \"He brought a load of wood early this morning. Maybe he's getting wood\\n                            for someone. Maybe just for himself.\"}]}, {\"gloss\": null, \"definition\": null, \"examples\": []}]}]",
+    "tool_call_id": "call_P8zjygQZhyy2IjiD9OrAekIG"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"yongo\", \"senses\": [{\"gloss\": \"yesterday\", \"definition\": \"Yesterday, the previous day, the day before.\", \"examples\": [{\"form\": \"Nuhi 'üdzü'ü-tei-ti yongo-ukka. Nüü waha-ggu kuudü-ya-tei-pü.\", \"translation\": \"It was really cold yesterday. I wore two coats.\"}, {\"form\": \"Yongo-ukka 'aaŵahusu.\", \"translation\": \"Early yesterday morning.\"}]}]}, {\"lexical_unit\": \"püdü'\", \"senses\": [{\"gloss\": \"recently\", \"definition\": \"Adverb describing an action taking place recently or in near past.\", \"examples\": [{\"form\": \"Püdü' Gerry-eikka 'a-buni-ti 'a-büdü-bitü-su-ukka.\", \"translation\": \"I just saw Gerry as he was just arriving.\"}]}]}, {\"lexical_unit\": \"-su\", \"senses\": [{\"gloss\": \"yet\", \"definition\": \"Yet, suffixes to adverbs of time, and verb endings.\", \"examples\": [{\"form\": \"Kadu'u-su 'üü naana mani-dü.\", \"translation\": \"You are not yet a man.\"}, {\"form\": \"Tei-düüna-ii na-sawa-weidü-su.\", \"translation\": \"Our food has yet to be cooked.\"}, {\"form\": \"Miina' tüka-ni-shu. Nii-wütui-dei.\", \"translation\": \"Don't eat yet. Wait for us.\"}]}]}, {\"lexical_unit\": \"püdü-\", \"senses\": [{\"gloss\": \"recently\", \"definition\": \"Attaches to a verb describing that action being done recently or in the\\n                        near past.\", \"examples\": [{\"form\": \"'Üi-büdü-mani-nna 'üü-wa' miihi-shu 'ui-'ittaŵa-dü?\", \"translation\": \"Is that what you tell them when you all first start out?\"}, {\"form\": \"Püdü-kimma-dü mahu habü?\", \"translation\": \"He just now coming isn't he?\"}, {\"form\": \"Nüü subaa 'ü-gwee-ukka kadu' tsaŵu nüümü-yaduha-dü. Nüü\\n                        'a-püdü-ddaduha-nna.\", \"translation\": \"Maybe to you I don't speak good Paiute. I'm new to speaking (the\\n                            language).\"}, {\"form\": \"Püdü-dommo-pü.\", \"translation\": \"Start of new year.\"}]}]}, {\"lexical_unit\": \"managwasu\", \"senses\": [{\"gloss\": \"since\", \"definition\": \"Ever since, adverbial postposition. From the time of something.\", \"examples\": [{\"form\": \"Nüü 'i-düüchi'i-managwa-su 'aannihi mani-dü.\", \"translation\": \"I've done that ever since I was small (or been like that).\"}, {\"form\": \"'Uhu-büü nüümü-yaduha-dü tü-düüchi'i-managwa-su.\", \"translation\": \"He's spoke Paiute every since he was small.\"}]}]}]",
+    "tool_call_id": "call_jCAtKchzTsroNEfETKoBrM4S"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"-ni\", \"senses\": [{\"gloss\": \"while\", \"definition\": \"Verb suffix used for while, during the time that.\", \"examples\": [{\"form\": \"Hanno-kko 'üü kamma-ni mii 'üni-ti?\", \"translation\": \"Where do you say you are hurting?\"}, {\"form\": \"Nüü Pearl-okka 'u-buni-ti mia-ni-ukka poyo-dogo-okka.\", \"translation\": \"I saw Pearl while she was going down the road.\"}]}]}, {\"lexical_unit\": \"-honno\", \"senses\": [{\"gloss\": \"with\", \"definition\": null, \"examples\": []}]}, {\"lexical_unit\": \"müna'wi\", \"senses\": [{\"gloss\": \"long while\", \"definition\": \"For a long while or long time.\", \"examples\": [{\"form\": \"Taa kadu' müna'wi katü-wei.\", \"translation\": \"We won't stay long.\"}, {\"form\": \"'Uhu-büü müna'wi 'u-na-düükwii-na-su-düa.\", \"translation\": \"What they had to tell took a long time.\"}, {\"form\": \"Subaa müna'wi-kida' naa-waakü-dü.\", \"translation\": \"Work might take a long time.\"}, {\"form\": \"Kadu'u-du'i müna'wi mii'ukka.\", \"translation\": \"Won't be long now.\"}, {\"form\": \"Tüa nüü subaa müna'wi-nia tü-buhei-wei. Kadu' nüü 'u-wee 'iga-tü'.\", \"translation\": \"Well, I may look around a little while longer. I have never been\\n                            inside there before.\"}, {\"form\": \"Tuihiibü-neikka 'a-'ükkooi-gü-ku-si tabahwa-nokka 'uhu-düa 'ükkooi-wei\\n                        müna'wi-ttugu.\", \"translation\": \"When everything is made to hibernate, the bear, they'll also hibernate\\n                            for a long time.\"}, {\"form\": \"Müna'wi mei-pü i-buni-pü-ii.\", \"translation\": \"It's been long time since I've seen (you).\"}, {\"form\": \"Kadu' nüü müna'wi-ttugu hubia-du-bini. Songanipui-kaa nüü.\", \"translation\": \"I'm not able to sing for a long time. I'll get out of breath.\"}]}]}, {\"lexical_unit\": \"-neikka\", \"senses\": [{\"gloss\": \"subordinating\", \"definition\": \"Attaches to verbs creating subordinating clauses. \\\"While,\\\" shows that verb\\n                        happens during the same time as main clause (specified and proximal form).\", \"examples\": []}]}, {\"lexical_unit\": \"-ho\", \"senses\": [{\"gloss\": \"with\", \"definition\": \"With, accompanied by.\", \"examples\": []}]}]",
+    "tool_call_id": "call_CALKsxtLS6T3aC4L7Q2FnmVz"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"hibi\", \"senses\": [{\"gloss\": \"drink\", \"definition\": \"To drink.\", \"examples\": [{\"form\": \"'Üü tauna-weettü-aa koopi'-aa 'u-duhu-wei 'oonno'oho-daagwa 'ukkahuna\\n                        hibi-wei 'aaŵohosu-eikka.\", \"translation\": \"You buy coffee in town, and then we will drink that this morning.\"}, {\"form\": \"'Uhu hiibü-nokka hihibi-nüümü-nokka 'u-noo-si mia-ddabi-tei-ti.\", \"translation\": \"She left driving those people who were drinking.\"}, {\"form\": \"'Ünaa hibi-tei-pü müha.\", \"translation\": \"My goodness, he's drunk now.\"}, {\"form\": \"Nüü kadu' a-buni-ttü' a-hibi-gwee. Hanni'i-sha mahu... Subaa mahu kamma-ni\\n                        'ai-ho-ddo hibi-ti.\", \"translation\": \"I've never seen him drink for any reason. Why must he... Maybe he's\\n                            drinking with them cause he's ill.\"}, {\"form\": \"Pakaidi'i-bünno' tüda'eda nishuwa'i-dü hibi-shi-ukka.\", \"translation\": \"The cowboys would be laughing once they get a few drinks.\"}]}]}, {\"lexical_unit\": \"tsuugunugi\", \"senses\": [{\"gloss\": \"drink\", \"definition\": \"To drink down, or chug fast.\", \"examples\": [{\"form\": \"'Uhu paya-nokka kimma-hu-si padda'i-sa-shi-ukka 'u-zuugunugi-ti.\", \"translation\": \"He came over, perhaps thirsty, and drank chugged the water.\"}, {\"form\": \"'Uhu 'awa yaduha-dü koopi'i-hibi-noo-si 'ukkahuna tü-zuugunugi-ti.\", \"translation\": \"She talks a lot, drinking coffee, drinking that down fast.\"}, {\"form\": \"'Ü-kookü'-eikka 'a-zuugunugi.\", \"translation\": \"Drink down you coke.\"}]}]}, {\"lexical_unit\": \"panodona\", \"senses\": [{\"gloss\": \"drink down (food)\", \"definition\": \"To drink down with water or other beverage.\", \"examples\": [{\"form\": null, \"translation\": null}]}]}, {\"lexical_unit\": \"paaga\", \"senses\": [{\"gloss\": \"give (water)\", \"definition\": \"To give (someone/something) a drink.\", \"examples\": [{\"form\": \"'Io 'i-baaga-nna.\", \"translation\": \"Here is what I have to give (for drink).\"}, {\"form\": \"Paya-na 'i-baaga.\", \"translation\": \"Give me some water.\"}, {\"form\": \"Hüüchi'i-chi'i-ggu na-baaga-'i-dü mahu.\", \"translation\": \"It's given just a little tiny bit of water.\"}]}]}, {\"lexical_unit\": \"padüma\", \"senses\": [{\"gloss\": \"taste (drink)\", \"definition\": \"To taste drinks.\", \"examples\": [{\"form\": \"Subaa hibi-kaa-si padüma-kaa-si-ukka tsaŵu naama-kaa-si nüga-tei-hu\\n                        mia-bodo-hu-si 'oonno'oho na-zikütsü'i-tei-ku tü-zaküna-nobi-gwee.\", \"translation\": \"Maybe once he tasted his drink, was feeling good, he went about\\n                            dancing and then got locked up in the jail.\"}]}]}]",
+    "tool_call_id": "call_FQHGsg75U8hV5ND3Fhk3mpnz"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"koopi'\", \"senses\": [{\"gloss\": \"coffee\", \"definition\": \"Coffee.\", \"examples\": [{\"form\": \"Koopi'-aa 'i-zhaa'wa-gü-gaa.\", \"translation\": \"Go pour me some coffee.\"}, {\"form\": \"Koopi'apo\", \"translation\": \"Coffee cup.\"}]}]}, {\"lexical_unit\": \"koopi'iwitua\", \"senses\": [{\"gloss\": \"coffee pot\", \"definition\": \"Coffee pot, coffee maker.\", \"examples\": [{\"form\": \"Koopi'i-witua-ii a-yuwi-gü-da' koopi'-eikka tei-hibi-neikka.\", \"translation\": \"This coffee pot is keeping the coffee we'll drink warm.\"}]}]}, {\"lexical_unit\": \"hibi\", \"senses\": [{\"gloss\": \"drink\", \"definition\": \"To drink.\", \"examples\": [{\"form\": \"'Üü tauna-weettü-aa koopi'-aa 'u-duhu-wei 'oonno'oho-daagwa 'ukkahuna\\n                        hibi-wei 'aaŵohosu-eikka.\", \"translation\": \"You buy coffee in town, and then we will drink that this morning.\"}, {\"form\": \"'Uhu hiibü-nokka hihibi-nüümü-nokka 'u-noo-si mia-ddabi-tei-ti.\", \"translation\": \"She left driving those people who were drinking.\"}, {\"form\": \"'Ünaa hibi-tei-pü müha.\", \"translation\": \"My goodness, he's drunk now.\"}, {\"form\": \"Nüü kadu' a-buni-ttü' a-hibi-gwee. Hanni'i-sha mahu... Subaa mahu kamma-ni\\n                        'ai-ho-ddo hibi-ti.\", \"translation\": \"I've never seen him drink for any reason. Why must he... Maybe he's\\n                            drinking with them cause he's ill.\"}, {\"form\": \"Pakaidi'i-bünno' tüda'eda nishuwa'i-dü hibi-shi-ukka.\", \"translation\": \"The cowboys would be laughing once they get a few drinks.\"}]}]}, {\"lexical_unit\": \"waina'\", \"senses\": [{\"gloss\": \"wine\", \"definition\": \"Wine (alcoholic beverage).\", \"examples\": [{\"form\": \"Nüümü-güna-uu-bünno' kadu' waakü-dei-gaa-si tüda'eda waina'-eikka\\n                        hibi-katü-dü.\", \"translation\": \"If those darn people won't go to work, they'll stay and drink wine\\n                            instead.\"}]}]}, {\"lexical_unit\": \"pahükkabü\", \"senses\": [{\"gloss\": \"ice\", \"definition\": null, \"examples\": []}]}]",
+    "tool_call_id": "call_bfzxyPRJZ1k3fhEEBLcRV8zU"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"koopi'\", \"senses\": [{\"gloss\": \"coffee\", \"definition\": \"Coffee.\", \"examples\": [{\"form\": \"Koopi'-aa 'i-zhaa'wa-gü-gaa.\", \"translation\": \"Go pour me some coffee.\"}, {\"form\": \"Koopi'apo\", \"translation\": \"Coffee cup.\"}]}]}, {\"lexical_unit\": \"tazinuba\", \"senses\": [{\"gloss\": \"star\", \"definition\": null, \"examples\": []}]}, {\"lexical_unit\": \"tabüha'\", \"senses\": [{\"gloss\": \"Morning Star\", \"definition\": \"Morning Star\", \"examples\": [{\"form\": null, \"translation\": null}]}]}, {\"lexical_unit\": \"hibinobi\", \"senses\": [{\"gloss\": \"bar (saloon)\", \"definition\": null, \"examples\": []}]}, {\"lexical_unit\": \"koopi'iwitua\", \"senses\": [{\"gloss\": \"coffee pot\", \"definition\": \"Coffee pot, coffee maker.\", \"examples\": [{\"form\": \"Koopi'i-witua-ii a-yuwi-gü-da' koopi'-eikka tei-hibi-neikka.\", \"translation\": \"This coffee pot is keeping the coffee we'll drink warm.\"}]}]}]",
+    "tool_call_id": "call_dMRnu3BNyAjqgdoeao40vFG9"
+  },
+  {
+    "role": "assistant",
+    "content": "Yongo' nüü waha-ggu naana-noka u-buni-ti Starbucks-wae. Uhuŵa tüi-koopi'neika ui-hibi-ti, tüi-isha'pugu-hodokka a-hukaŵia-ti."
+  },
+  {
+    "role": "user",
+    "content": "That runner down the street will eat the one that has fallen."
+  },
+  {
+    "role": "assistant",
+    "tool_calls": [
+      {
+        "id": "call_zTR1YifhwbQaVmAlshzDBRNc",
+        "function": {
+          "name": "search_sentences",
+          "arguments": "{\"query\": \"That runner down the street will eat the one that has fallen.\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_xkcFTjxTNpguGmE8yz2lkJ8K",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"future tense\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_QaTPiH9DOdkP29q3yPG77Cvn",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"nominalization, noun clause, agentive\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_ogwPAxlgtcNQehlNdO91E1az",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"run, runner\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_RmGn7ppD8KaqgqyadfdiaH8G",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"eat\"}"
+        },
+        "type": "function"
+      },
+      {
+        "id": "call_7KXEUQ75OfEq3ZRLKjbxA8fn",
+        "function": {
+          "name": "search_english",
+          "arguments": "{\"query\": \"fall\"}"
+        },
+        "type": "function"
+      }
+    ]
+  },
+  {
+    "role": "tool",
+    "content": "[{\"sentence\": \"Tangahudua-si 'üü nana-'udüshi-wei 'aattü-hoddo-ukka. Haga-uu\\n                        pitü-hu-gaa-dü-uu kobenno 'uhu tü-wüso'a-weidü-uu.\", \"translation\": \"You'll kneel down and race each other with that one. Who will ever\\n                            arrive first will win.\"}, {\"sentence\": \"'U-gwadzangi-shu-ukka 'oonno'oho 'üü-büü 'aannaha tü-zoba-mia-boo-ti.\", \"translation\": \"When they fall down then you can go over there and pick them up.\"}, {\"sentence\": \"'Ui-güŵabaa mia-dü-uu 'ui-wüküna-kaayugi-ti.\", \"translation\": \"The one who went beside them almost ran them over.\"}, {\"sentence\": \"Poono'-ii tübina-dugu 'ia kwatsa'i-wei.\", \"translation\": \"The ball will fall to the ground.\"}, {\"sentence\": \"Poyoha-ttü'.\", \"translation\": \"A skilled runner.\"}]",
+    "tool_call_id": "call_zTR1YifhwbQaVmAlshzDBRNc"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"-wei\", \"senses\": [{\"gloss\": \"will (future tense)\", \"definition\": \"Verb ending for future tense.\", \"examples\": [{\"form\": \"Nüü 'ube mia-wei.\", \"translation\": \"I'll go back in there.\"}, {\"form\": \"Tsaŵu-baa-su tu'ihii mia-wei-dü.\", \"translation\": \"Everything is intended to go well.\"}, {\"form\": \"Hiibü-na nüü 'ü-düükwii-ti 'iattü-okka 'i-nakka-nna? Kwiŵi mia-binaa-ti\\n                        'uhuŵa Carson-wee tü-dühiibü-nokka na-duhu-gaa-wei-shi.\", \"translation\": \"What was it that I told you I heard from over there? They were wanting\\n                            to go north to Carson, in order to sell something of theirs.\"}, {\"form\": \"'Uhu tü-doogü'-tsi'-okka na-wütaŵa-pü tü-ma-ggu yeishi 'uhu na-waadzi-ti\\n                        'uhu 'u-na-pidügü-wei-shi.\", \"translation\": \"He had his dog secured/tied to his person, and then he hid being that\\n                            he'd get into a fight.\"}, {\"form\": \"Nününü'-uu tei-nakka-gü-wei-shi tei-bei-pihaaŵi-ti.\", \"translation\": \"That white person was beconing each one of us over, in order to give\\n                            us a chance to listen (or be heard?).\"}]}]}, {\"lexical_unit\": \"-kwei\", \"senses\": [{\"gloss\": \"most likely\", \"definition\": \"Most likely, in the future (-kaa-wei as a result-future tense)\", \"examples\": [{\"form\": \"'Oonno'oho tu'ihaga-ii 'ionnoho pitü-tügü-dü-ii tsaŵu naama-ni münaa-kwei\\n                        tü-nobi-gwee-ttugu-su.\", \"translation\": \"And those who've arrived here, while feeling well, will return to\\n                            their homes.\"}]}]}, {\"lexical_unit\": \"-du'i\", \"senses\": [{\"gloss\": \"PAST\", \"definition\": \"Expression word making phrases in past-tense context.\", \"examples\": [{\"form\": \"Mahu 'i-wüü-kaa-wei-du'i.\", \"translation\": \"He was going to catch me.\"}, {\"form\": \"Kadu' tsügwüda-du'i.\", \"translation\": \"It was not nearly as fast.\"}, {\"form\": \"Tuihii-du'i 'aannaha püünuhu-daagwa ka'a-su 'u-bbumaadzi-dua-pü.\", \"translation\": \"Just about everything was there, however we wouldn't recognize it yet.\"}, {\"form\": \"Süŵübaa nüü-du'i.\", \"translation\": \"I think I can (I just may be able to).\"}, {\"form\": \"Nüü-du'i 'ü-dzakoonohi-gü-dua-pü 'u-subasa-ni-ukka 'üü hupinagwa\\n                        'ü-gwünü-nokka.\", \"translation\": \"I could have openned the door for you had I known you were standing\\n                            outside.\"}, {\"form\": \"Kadu' nüü-du'i yaduha-nna.\", \"translation\": \"Excuse me, I didn't mean it.\"}]}]}, {\"lexical_unit\": \"-kukaa\", \"senses\": [{\"gloss\": \"progress\", \"definition\": \"Expresses advancement of an action, or moving toward stages doing an\\n                        action, future tense -wei.\", \"examples\": []}]}, {\"lexical_unit\": \"-pü\", \"senses\": [{\"gloss\": \"PAST\", \"definition\": \"Past tense particle, attaches to end of verbs. Shows an action has been\\n                        done and the results of that action is still felt or evident. The one or\\n                        thing that does the action.\", \"examples\": [{\"form\": \"Nüü muasu koopi'-aa hibi-pü.\", \"translation\": \"I already drank some coffee.\"}, {\"form\": \"Nüü 'üi-dü-gwati-pü-aa tü-zoba-wei.\", \"translation\": \"I'll pick up what you've all shot (bullets/arrows).\"}, {\"form\": \"Tei-ddaduha-pü-ii koobenno-ttü-aa 'ionnoho ma-na-dügü-pü.\", \"translation\": \"The language (we speak) was first to be placed here.\"}, {\"form\": \"Hüügwa-pü-uu nadüüya-ti.\", \"translation\": \"That wind was scary/strong.\"}]}]}]",
+    "tool_call_id": "call_xkcFTjxTNpguGmE8yz2lkJ8K"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"-nnu\", \"senses\": [{\"gloss\": \"noun\", \"definition\": \"Used to create nouns using action words, the thing you use for that\\n                        action.\", \"examples\": [{\"form\": \"'A-tugu ta-dü-bitaŵa-nnu'\", \"translation\": \"The thing we use to look through (window).\"}, {\"form\": \"Kwana' tü-bitawa-nnu'\", \"translation\": \"What we use to look far away with (binoculars).\"}]}]}, {\"lexical_unit\": \"-nna\", \"senses\": [{\"gloss\": \"noun\", \"definition\": \"Suffixes to verbs to make nouns.\", \"examples\": [{\"form\": \"Tei-düwoobü-wee-ttugu-su münaa-kaa-pü ta-sünei-nna-ii.\", \"translation\": \"Our thoughts have returned back to Earth.\"}, {\"form\": \"Nüü 'a-ba'a-gwee tei-mia-bodo-neikka 'a-wünatsui-wei.\", \"translation\": \"I'll sweep the floor (that which we walk around on).\"}, {\"form\": \"'I-na-nia-nna-ii.\", \"translation\": \"My name is.\"}]}]}, {\"lexical_unit\": \"-ggu\", \"senses\": [{\"gloss\": \"adjective marker\", \"definition\": null, \"examples\": []}]}, {\"lexical_unit\": \"-kku\", \"senses\": [{\"gloss\": \"adjective marker\", \"definition\": null, \"examples\": []}]}, {\"lexical_unit\": \"-neikka\", \"senses\": [{\"gloss\": \"noun\", \"definition\": \"Suffixes to verbs to make nouns (close to speaker).\", \"examples\": []}]}]",
+    "tool_call_id": "call_QaTPiH9DOdkP29q3yPG77Cvn"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"poyoha\", \"senses\": [{\"gloss\": \"run\", \"definition\": \"To run using the legs.\", \"examples\": [{\"form\": \"Nüü sakwa 'i-nobi-gwee-tugu poyoha-tei-ku.\", \"translation\": \"I should've ran home.\"}, {\"form\": \"Poboyoha-ti 'uhuŵa 'u-duamü-uu.\", \"translation\": \"His children are all running.\"}]}]}, {\"lexical_unit\": \"hünüpi\", \"senses\": [{\"gloss\": \"roadrunner\", \"definition\": \"Roadrunner, scientific name, geococcyx.\", \"examples\": [{\"form\": null, \"translation\": null}]}]}, {\"lexical_unit\": \"huuseinna\", \"senses\": [{\"gloss\": \"run off\", \"definition\": \"Run off (from newly melted snow).\", \"examples\": []}]}, {\"lexical_unit\": \"wüponaa\", \"senses\": [{\"gloss\": \"win\", \"definition\": \"To win, to overcome someone (in a race).\", \"examples\": [{\"form\": \"Süŵüsu nüü 'u-wüponaa-tei-ka'.\", \"translation\": \"I immediately overcame him (passed him up).\"}]}]}, {\"lexical_unit\": \"kossoweegini\", \"senses\": [{\"gloss\": \"train\", \"definition\": \"Train, locomotive.\", \"examples\": [{\"form\": \"Mahu kosso-weegini-wee-ddu-ukka tübina-dugu yotsi-tei-ti.\", \"translation\": \"He jumped off the the train onto the ground.\"}]}]}]",
+    "tool_call_id": "call_ogwPAxlgtcNQehlNdO91E1az"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"tüka\", \"senses\": [{\"gloss\": \"eat\", \"definition\": \"To eat.\", \"examples\": [{\"form\": \"Nüü tsikini'-aa tüka-wei.\", \"translation\": \"I'll eat some chicken.\"}, {\"form\": \"Nüügwa tüka-kaa-maa-pü.\", \"translation\": \"We have finished eating.\"}, {\"form\": \"Tüka-wei nüü müha.\", \"translation\": \"I'm going to eat now.\"}]}]}, {\"lexical_unit\": \"su'a\", \"senses\": [{\"gloss\": \"eat up\", \"definition\": \"To eat up, comsume, or devour.\", \"examples\": [{\"form\": \"Nüü-düa kadu' u-su'a-dua-pü.\", \"translation\": \"I wouldn't be able to eat that up.\"}, {\"form\": \"Nüügwa tünaa-dugu tsikiini'i-chi'i-ga püünuhu toogü-tsi'-uu 'u-su'a-da'.\", \"translation\": \"All we have are chickens, however the dogs have been eating them.\"}]}]}, {\"lexical_unit\": \"nakkamu\", \"senses\": [{\"gloss\": \"eat (gluttonously)\", \"definition\": \"To eat gluttonously, to over eat, to pig out.\", \"examples\": [{\"form\": \"Miina' nakkamu-dei-ni!\", \"translation\": \"Don't eat so much!\"}]}]}, {\"lexical_unit\": \"küttaŵa\", \"senses\": [{\"gloss\": \"eat with bread\", \"definition\": \"To eat using bread or tortillas to grasp food.\", \"examples\": [{\"form\": \"Tü-güttaŵa-ti 'üügwa tüa kaani'i-ho-kko-ukka 'inni' u-yügwi-nna 'oonno'oho\\n                        'u-dotsaa-ni nohoŵa.\", \"translation\": \"You are eating (tortilla) with the meat, doing like this (showing how)\\n                            and then dipping it (into meat juices/stew).\"}]}]}, {\"lexical_unit\": \"makka\", \"senses\": [{\"gloss\": \"feed\", \"definition\": \"To feed (someone/something), to give food.\", \"examples\": [{\"form\": \"Io 'i-ŵakka-nna.\", \"translation\": \"Here is what I have to give (of food).\"}, {\"form\": \"Taagwa 'ai-ŵakka-ku-si koobeno subaa tei-düŵaabü'a-wei.\", \"translation\": \"Maybe if we feed them first, they'll help us out.\"}, {\"form\": \"Nana-makka-ti 'uhuŵa.\", \"translation\": \"They're providing each other food.\"}]}]}]",
+    "tool_call_id": "call_RmGn7ppD8KaqgqyadfdiaH8G"
+  },
+  {
+    "role": "tool",
+    "content": "[{\"lexical_unit\": \"kottohi\", \"senses\": [{\"gloss\": \"fall\", \"definition\": null, \"examples\": []}]}, {\"lexical_unit\": \"kwattuhi\", \"senses\": [{\"gloss\": \"fall\", \"definition\": \"To drop down, to fall off.\", \"examples\": [{\"form\": null, \"translation\": null}]}]}, {\"lexical_unit\": \"nagwünakka\", \"senses\": [{\"gloss\": \"fall\", \"definition\": \"To fall down making a sound of impact.\", \"examples\": [{\"form\": \"Hiinno'-okka nüü... 'aŵoho-ikka nüü nagwünakka-tei-ti Margie'-okka\\n                        u-nobi-gwee-ddu 'aa.\", \"translation\": \"When did I... this morning I fell down in Margie's house there.\"}]}]}, {\"lexical_unit\": \"wü'i\", \"senses\": [{\"gloss\": \"fall\", \"definition\": \"To fall making impact with a surface or the ground.\", \"examples\": [{\"form\": \"Tü-kwahiibü-ŵa wü'i-dua-pü.\", \"translation\": \"He could fall landing on his back.\"}]}]}, {\"lexical_unit\": \"yübano\", \"senses\": [{\"gloss\": \"fall time\", \"definition\": \"Fall time, during the fall.\", \"examples\": [{\"form\": \"Yübano 'oonno'oho-daa tüba'a-ga-gaa-wei.\", \"translation\": \"In the fall, then we go and get pine nuts.\"}]}]}]",
+    "tool_call_id": "call_7KXEUQ75OfEq3ZRLKjbxA8fn"
+  },
+  {
+    "role": "assistant",
+    "content": "Poyoha-dü-ii kwattühi-doka u-düka-wei."
+  }
+]

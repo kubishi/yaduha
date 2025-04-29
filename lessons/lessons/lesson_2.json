@@ -1,0 +1,2746 @@
+{
+  "key": "lesson_2",
+  "title": "Lesson 2: Intransitive Verbs",
+  "description": "Intransitive Verbs",
+  "sentences": [
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "nishua'i-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "nishua'i",
+              "definition": "laugh"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "taagwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "taagwa",
+              "definition": "we (inclusive)"
+            }
+          ]
+        }
+      ],
+      "paiute": "nishua'i-ti taagwa.",
+      "english": "We are laughing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "kwisha'i-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "kwisha'i",
+              "definition": "sneeze"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "taagwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "taagwa",
+              "definition": "we (inclusive)"
+            }
+          ]
+        }
+      ],
+      "paiute": "kwisha'i-ti taagwa.",
+      "english": "We are sneezing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "katü-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "katü",
+              "definition": "sit"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "mahuw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "mahuw̃a",
+              "definition": "they"
+            }
+          ]
+        }
+      ],
+      "paiute": "katü-ti mahuw̃a.",
+      "english": "They are sitting."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "nüga-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "nüga",
+              "definition": "dance"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "ihi",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "ihi",
+              "definition": "this"
+            }
+          ]
+        }
+      ],
+      "paiute": "nüga-ti ihi.",
+      "english": "This is dancing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "kwatsa'i-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "kwatsa'i",
+              "definition": "fall"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "üügwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "üügwa",
+              "definition": "you (plural)"
+            }
+          ]
+        }
+      ],
+      "paiute": "kwatsa'i-ti üügwa.",
+      "english": "You are falling."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tübinohi-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tübinohi",
+              "definition": "play"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "ihi",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "ihi",
+              "definition": "this"
+            }
+          ]
+        }
+      ],
+      "paiute": "tübinohi-ti ihi.",
+      "english": "This is playing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tsibui-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tsibui",
+              "definition": "climb"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "uhu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "uhu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "tsibui-ti uhu.",
+      "english": "He/She/It is climbing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "habi-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "habi",
+              "definition": "lie down"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "taa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "taa",
+              "definition": "you and I"
+            }
+          ]
+        }
+      ],
+      "paiute": "habi-ti taa.",
+      "english": "You and I are lying down."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "yadoha-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "yadoha",
+              "definition": "talk"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "ihi",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "ihi",
+              "definition": "this"
+            }
+          ]
+        }
+      ],
+      "paiute": "yadoha-ti ihi.",
+      "english": "This is talking."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tübinohi-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tübinohi",
+              "definition": "play"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "uhu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "uhu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "tübinohi-ti uhu.",
+      "english": "He/She/It is playing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "habi-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "habi",
+              "definition": "lie down"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "nüügwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "nüügwa",
+              "definition": "we (exclusive)"
+            }
+          ]
+        }
+      ],
+      "paiute": "habi-ti nüügwa.",
+      "english": "We are lying down."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tümui-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tümui",
+              "definition": "write"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "üü",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "üü",
+              "definition": "you"
+            }
+          ]
+        }
+      ],
+      "paiute": "tümui-ti üü.",
+      "english": "You are writing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "katü-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "katü",
+              "definition": "sit"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "nüügwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "nüügwa",
+              "definition": "we (exclusive)"
+            }
+          ]
+        }
+      ],
+      "paiute": "katü-ti nüügwa.",
+      "english": "We are sitting."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "habi-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "habi",
+              "definition": "lie down"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "nüü",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "nüü",
+              "definition": "I"
+            }
+          ]
+        }
+      ],
+      "paiute": "habi-ti nüü.",
+      "english": "I am lying down."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "wükihaa-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "wükihaa",
+              "definition": "smile"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "ihi",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "ihi",
+              "definition": "this"
+            }
+          ]
+        }
+      ],
+      "paiute": "wükihaa-ti ihi.",
+      "english": "This is smiling."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "wünü-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "wünü",
+              "definition": "stand"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "üügwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "üügwa",
+              "definition": "you (plural)"
+            }
+          ]
+        }
+      ],
+      "paiute": "wünü-ti üügwa.",
+      "english": "You are standing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "wükihaa-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "wükihaa",
+              "definition": "smile"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "mahu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "mahu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "wükihaa-ti mahu.",
+      "english": "He/She/It is smiling."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "wünü-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "wünü",
+              "definition": "stand"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "ihi",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "ihi",
+              "definition": "this"
+            }
+          ]
+        }
+      ],
+      "paiute": "wünü-ti ihi.",
+      "english": "This is standing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "hubiadu-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "hubiadu",
+              "definition": "sing"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "ihiw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "ihiw̃a",
+              "definition": "these"
+            }
+          ]
+        }
+      ],
+      "paiute": "hubiadu-ti ihiw̃a.",
+      "english": "These are singing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "wükihaa-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "wükihaa",
+              "definition": "smile"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "üügwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "üügwa",
+              "definition": "you (plural)"
+            }
+          ]
+        }
+      ],
+      "paiute": "wükihaa-ti üügwa.",
+      "english": "You are smiling."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "habi-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "habi",
+              "definition": "lie down"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "mahu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "mahu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "habi-ti mahu.",
+      "english": "He/She/It is lying down."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tünia-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tünia",
+              "definition": "read"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "mahu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "mahu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "tünia-ti mahu.",
+      "english": "He/She/It is reading."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "pahabi-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "pahabi",
+              "definition": "swim"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "uhu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "uhu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "pahabi-ti uhu.",
+      "english": "He/She/It is swimming."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "yadoha-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "yadoha",
+              "definition": "talk"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "uhu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "uhu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "yadoha-ti uhu.",
+      "english": "He/She/It is talking."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "üwi-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "üwi",
+              "definition": "sleep"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "nüügwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "nüügwa",
+              "definition": "we (exclusive)"
+            }
+          ]
+        }
+      ],
+      "paiute": "üwi-ti nüügwa.",
+      "english": "We are sleeping."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "kwisha'i-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "kwisha'i",
+              "definition": "sneeze"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "taa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "taa",
+              "definition": "you and I"
+            }
+          ]
+        }
+      ],
+      "paiute": "kwisha'i-ti taa.",
+      "english": "You and I are sneezing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tünia-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tünia",
+              "definition": "read"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "ihi",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "ihi",
+              "definition": "this"
+            }
+          ]
+        }
+      ],
+      "paiute": "tünia-ti ihi.",
+      "english": "This is reading."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "kwatsa'i-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "kwatsa'i",
+              "definition": "fall"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "taa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "taa",
+              "definition": "you and I"
+            }
+          ]
+        }
+      ],
+      "paiute": "kwatsa'i-ti taa.",
+      "english": "You and I are falling."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tümui-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tümui",
+              "definition": "write"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "mahu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "mahu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "tümui-ti mahu.",
+      "english": "He/She/It is writing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "waakü-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "waakü",
+              "definition": "work"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "taa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "taa",
+              "definition": "you and I"
+            }
+          ]
+        }
+      ],
+      "paiute": "waakü-ti taa.",
+      "english": "You and I are working."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "habi-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "habi",
+              "definition": "lie down"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "ihiw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "ihiw̃a",
+              "definition": "these"
+            }
+          ]
+        }
+      ],
+      "paiute": "habi-ti ihiw̃a.",
+      "english": "These are lying down."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tsiipe'i-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tsiipe'i",
+              "definition": "chirp"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "üügwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "üügwa",
+              "definition": "you (plural)"
+            }
+          ]
+        }
+      ],
+      "paiute": "tsiipe'i-ti üügwa.",
+      "english": "You are chirping."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tsiipe'i-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tsiipe'i",
+              "definition": "chirp"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "nüü",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "nüü",
+              "definition": "I"
+            }
+          ]
+        }
+      ],
+      "paiute": "tsiipe'i-ti nüü.",
+      "english": "I am chirping."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tsibui-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tsibui",
+              "definition": "climb"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "uhuw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "uhuw̃a",
+              "definition": "they"
+            }
+          ]
+        }
+      ],
+      "paiute": "tsibui-ti uhuw̃a.",
+      "english": "They are climbing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "yotsi-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "yotsi",
+              "definition": "fly"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "ihiw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "ihiw̃a",
+              "definition": "these"
+            }
+          ]
+        }
+      ],
+      "paiute": "yotsi-ti ihiw̃a.",
+      "english": "These are flying."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "waakü-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "waakü",
+              "definition": "work"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "ihiw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "ihiw̃a",
+              "definition": "these"
+            }
+          ]
+        }
+      ],
+      "paiute": "waakü-ti ihiw̃a.",
+      "english": "These are working."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tümui-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tümui",
+              "definition": "write"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "uhuw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "uhuw̃a",
+              "definition": "they"
+            }
+          ]
+        }
+      ],
+      "paiute": "tümui-ti uhuw̃a.",
+      "english": "They are writing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tümui-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tümui",
+              "definition": "write"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "mahuw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "mahuw̃a",
+              "definition": "they"
+            }
+          ]
+        }
+      ],
+      "paiute": "tümui-ti mahuw̃a.",
+      "english": "They are writing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "hubiadu-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "hubiadu",
+              "definition": "sing"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "uhu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "uhu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "hubiadu-ti uhu.",
+      "english": "He/She/It is singing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "hukaw̃ia-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "hukaw̃ia",
+              "definition": "walk"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "ihi",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "ihi",
+              "definition": "this"
+            }
+          ]
+        }
+      ],
+      "paiute": "hukaw̃ia-ti ihi.",
+      "english": "This is walking."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "nüga-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "nüga",
+              "definition": "dance"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "üü",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "üü",
+              "definition": "you"
+            }
+          ]
+        }
+      ],
+      "paiute": "nüga-ti üü.",
+      "english": "You are dancing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tümui-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tümui",
+              "definition": "write"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "taagwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "taagwa",
+              "definition": "we (inclusive)"
+            }
+          ]
+        }
+      ],
+      "paiute": "tümui-ti taagwa.",
+      "english": "We are writing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "mia-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "mia",
+              "definition": "go"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "uhu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "uhu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "mia-ti uhu.",
+      "english": "He/She/It is going."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "poyoha-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "poyoha",
+              "definition": "run"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "mahu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "mahu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "poyoha-ti mahu.",
+      "english": "He/She/It is running."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "nüga-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "nüga",
+              "definition": "dance"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "taa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "taa",
+              "definition": "you and I"
+            }
+          ]
+        }
+      ],
+      "paiute": "nüga-ti taa.",
+      "english": "You and I are dancing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tünia-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tünia",
+              "definition": "read"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "mahuw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "mahuw̃a",
+              "definition": "they"
+            }
+          ]
+        }
+      ],
+      "paiute": "tünia-ti mahuw̃a.",
+      "english": "They are reading."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "poyoha-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "poyoha",
+              "definition": "run"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "nüü",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "nüü",
+              "definition": "I"
+            }
+          ]
+        }
+      ],
+      "paiute": "poyoha-ti nüü.",
+      "english": "I am running."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "nüga-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "nüga",
+              "definition": "dance"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "ihiw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "ihiw̃a",
+              "definition": "these"
+            }
+          ]
+        }
+      ],
+      "paiute": "nüga-ti ihiw̃a.",
+      "english": "These are dancing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "hubiadu-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "hubiadu",
+              "definition": "sing"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "mahu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "mahu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "hubiadu-ti mahu.",
+      "english": "He/She/It is singing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "üwi-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "üwi",
+              "definition": "sleep"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "taagwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "taagwa",
+              "definition": "we (inclusive)"
+            }
+          ]
+        }
+      ],
+      "paiute": "üwi-ti taagwa.",
+      "english": "We are sleeping."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tünia-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tünia",
+              "definition": "read"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "uhu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "uhu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "tünia-ti uhu.",
+      "english": "He/She/It is reading."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "poyoha-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "poyoha",
+              "definition": "run"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "üügwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "üügwa",
+              "definition": "you (plural)"
+            }
+          ]
+        }
+      ],
+      "paiute": "poyoha-ti üügwa.",
+      "english": "You are running."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "poyoha-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "poyoha",
+              "definition": "run"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "uhu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "uhu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "poyoha-ti uhu.",
+      "english": "He/She/It is running."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "yotsi-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "yotsi",
+              "definition": "fly"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "mahu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "mahu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "yotsi-ti mahu.",
+      "english": "He/She/It is flying."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "nishua'i-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "nishua'i",
+              "definition": "laugh"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "nüügwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "nüügwa",
+              "definition": "we (exclusive)"
+            }
+          ]
+        }
+      ],
+      "paiute": "nishua'i-ti nüügwa.",
+      "english": "We are laughing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "nishua'i-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "nishua'i",
+              "definition": "laugh"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "ihiw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "ihiw̃a",
+              "definition": "these"
+            }
+          ]
+        }
+      ],
+      "paiute": "nishua'i-ti ihiw̃a.",
+      "english": "These are laughing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "üwi-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "üwi",
+              "definition": "sleep"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "taa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "taa",
+              "definition": "you and I"
+            }
+          ]
+        }
+      ],
+      "paiute": "üwi-ti taa.",
+      "english": "You and I are sleeping."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "yadoha-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "yadoha",
+              "definition": "talk"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "nüügwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "nüügwa",
+              "definition": "we (exclusive)"
+            }
+          ]
+        }
+      ],
+      "paiute": "yadoha-ti nüügwa.",
+      "english": "We are talking."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "katü-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "katü",
+              "definition": "sit"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "uhuw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "uhuw̃a",
+              "definition": "they"
+            }
+          ]
+        }
+      ],
+      "paiute": "katü-ti uhuw̃a.",
+      "english": "They are sitting."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "waakü-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "waakü",
+              "definition": "work"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "ihi",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "ihi",
+              "definition": "this"
+            }
+          ]
+        }
+      ],
+      "paiute": "waakü-ti ihi.",
+      "english": "This is working."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "mia-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "mia",
+              "definition": "go"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "nüü",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "nüü",
+              "definition": "I"
+            }
+          ]
+        }
+      ],
+      "paiute": "mia-ti nüü.",
+      "english": "I am going."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "wükihaa-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "wükihaa",
+              "definition": "smile"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "mahuw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "mahuw̃a",
+              "definition": "they"
+            }
+          ]
+        }
+      ],
+      "paiute": "wükihaa-ti mahuw̃a.",
+      "english": "They are smiling."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tübinohi-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tübinohi",
+              "definition": "play"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "ihiw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "ihiw̃a",
+              "definition": "these"
+            }
+          ]
+        }
+      ],
+      "paiute": "tübinohi-ti ihiw̃a.",
+      "english": "These are playing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tsibui-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tsibui",
+              "definition": "climb"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "nüügwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "nüügwa",
+              "definition": "we (exclusive)"
+            }
+          ]
+        }
+      ],
+      "paiute": "tsibui-ti nüügwa.",
+      "english": "We are climbing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "mia-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "mia",
+              "definition": "go"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "uhuw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "uhuw̃a",
+              "definition": "they"
+            }
+          ]
+        }
+      ],
+      "paiute": "mia-ti uhuw̃a.",
+      "english": "They are going."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "üwi-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "üwi",
+              "definition": "sleep"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "nüü",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "nüü",
+              "definition": "I"
+            }
+          ]
+        }
+      ],
+      "paiute": "üwi-ti nüü.",
+      "english": "I am sleeping."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "kwisha'i-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "kwisha'i",
+              "definition": "sneeze"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "nüü",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "nüü",
+              "definition": "I"
+            }
+          ]
+        }
+      ],
+      "paiute": "kwisha'i-ti nüü.",
+      "english": "I am sneezing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "habi-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "habi",
+              "definition": "lie down"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "ihi",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "ihi",
+              "definition": "this"
+            }
+          ]
+        }
+      ],
+      "paiute": "habi-ti ihi.",
+      "english": "This is lying down."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "poyoha-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "poyoha",
+              "definition": "run"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "uhuw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "uhuw̃a",
+              "definition": "they"
+            }
+          ]
+        }
+      ],
+      "paiute": "poyoha-ti uhuw̃a.",
+      "english": "They are running."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tsibui-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tsibui",
+              "definition": "climb"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "üügwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "üügwa",
+              "definition": "you (plural)"
+            }
+          ]
+        }
+      ],
+      "paiute": "tsibui-ti üügwa.",
+      "english": "You are climbing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "mia-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "mia",
+              "definition": "go"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "nüügwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "nüügwa",
+              "definition": "we (exclusive)"
+            }
+          ]
+        }
+      ],
+      "paiute": "mia-ti nüügwa.",
+      "english": "We are going."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "mia-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "mia",
+              "definition": "go"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "üügwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "üügwa",
+              "definition": "you (plural)"
+            }
+          ]
+        }
+      ],
+      "paiute": "mia-ti üügwa.",
+      "english": "You are going."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "poyoha-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "poyoha",
+              "definition": "run"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "mahuw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "mahuw̃a",
+              "definition": "they"
+            }
+          ]
+        }
+      ],
+      "paiute": "poyoha-ti mahuw̃a.",
+      "english": "They are running."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "hubiadu-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "hubiadu",
+              "definition": "sing"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "üü",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "üü",
+              "definition": "you"
+            }
+          ]
+        }
+      ],
+      "paiute": "hubiadu-ti üü.",
+      "english": "You are singing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tsibui-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tsibui",
+              "definition": "climb"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "nüü",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "nüü",
+              "definition": "I"
+            }
+          ]
+        }
+      ],
+      "paiute": "tsibui-ti nüü.",
+      "english": "I am climbing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "pahabi-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "pahabi",
+              "definition": "swim"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "uhuw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "uhuw̃a",
+              "definition": "they"
+            }
+          ]
+        }
+      ],
+      "paiute": "pahabi-ti uhuw̃a.",
+      "english": "They are swimming."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tsiipe'i-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tsiipe'i",
+              "definition": "chirp"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "üü",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "üü",
+              "definition": "you"
+            }
+          ]
+        }
+      ],
+      "paiute": "tsiipe'i-ti üü.",
+      "english": "You are chirping."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "mia-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "mia",
+              "definition": "go"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "ihi",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "ihi",
+              "definition": "this"
+            }
+          ]
+        }
+      ],
+      "paiute": "mia-ti ihi.",
+      "english": "This is going."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "üwi-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "üwi",
+              "definition": "sleep"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "uhuw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "uhuw̃a",
+              "definition": "they"
+            }
+          ]
+        }
+      ],
+      "paiute": "üwi-ti uhuw̃a.",
+      "english": "They are sleeping."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tsiipe'i-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tsiipe'i",
+              "definition": "chirp"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "mahuw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "mahuw̃a",
+              "definition": "they"
+            }
+          ]
+        }
+      ],
+      "paiute": "tsiipe'i-ti mahuw̃a.",
+      "english": "They are chirping."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "wükihaa-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "wükihaa",
+              "definition": "smile"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "taagwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "taagwa",
+              "definition": "we (inclusive)"
+            }
+          ]
+        }
+      ],
+      "paiute": "wükihaa-ti taagwa.",
+      "english": "We are smiling."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "yadoha-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "yadoha",
+              "definition": "talk"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "üügwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "üügwa",
+              "definition": "you (plural)"
+            }
+          ]
+        }
+      ],
+      "paiute": "yadoha-ti üügwa.",
+      "english": "You are talking."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "pahabi-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "pahabi",
+              "definition": "swim"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "mahu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "mahu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "pahabi-ti mahu.",
+      "english": "He/She/It is swimming."
+    }
+  ]
+}

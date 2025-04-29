@@ -9,9 +9,9 @@ dotenv.load_dotenv()
 thisdir = pathlib.Path(__file__).parent.absolute()
 
 # set logging level to INFO
-# logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.INFO)
 
-def main():
+def generate_messages():
     savedir = thisdir / "agentic"
     savedir.mkdir(exist_ok=True, parents=True)
 
@@ -72,6 +72,21 @@ def main():
 
     (savedir / "results.json").write_text(json.dumps(results, indent=4, ensure_ascii=False))
 
+def test_agentic():
+    translator = AgenticTranslator(model="gpt-4o")
+
+    sentences = [
+        # "The dog is running.",
+        # "I am eating a sandwich and drinking a soda.",
+        "My dog is running",
+    ]
+    for sentence in sentences:
+        translation = translator.translate(sentence)
+        print(translation)
+        
+def main():
+    test_agentic()
+    # generate_messages()
 
 if __name__ == "__main__":
     main()

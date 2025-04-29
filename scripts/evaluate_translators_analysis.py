@@ -8,11 +8,11 @@ import pathlib
 from itertools import combinations
 from functools import lru_cache
 import dotenv
-from yaduha.segment import make_sentence, semantic_similarity_sentence_transformers as semantic_similarity
+from yaduha.segment import semantic_similarity_sentence_transformers as semantic_similarity
 from yaduha.segment import (
     split_sentence, 
 )
-from yaduha.forward.pipeline import split_sentence, comparator_sentence
+from yaduha.forward.pipeline import split_sentence, comparator_sentence, make_sentence
 
 import nltk
 from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
@@ -139,12 +139,9 @@ def load_data(do_save: bool = True,
                     )
                     comparator_sentences = [
                         comparator_sentence(sentence)
-                        for sentence in simple_sentences
+                        for sentence in simple_sentences.sentences
                     ]
-                    comparator = ". ".join([
-                        make_sentence(sentence, model='gpt-4o-mini')
-                        for sentence in comparator_sentences
-                    ]) + '.'
+                    comparator = make_sentence(comparator_sentences, model='gpt-4o-mini')
                     result['comparator'] = comparator
 
                     result['semantic_similarity_comparator'] = semantic_similarity(

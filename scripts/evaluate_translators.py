@@ -5,11 +5,11 @@ from yaduha.base import Translation, Translator
 from yaduha.forward import (
     PipelineTranslator,
     InstructionsTranslator,
-    AgenticTranslator
+    AgenticTranslator,
+    RAGTranslator
 )
 import pandas as pd
 import pathlib
-from itertools import product
 
 from pydantic import BaseModel
 import dotenv
@@ -40,20 +40,18 @@ def main():
     ]
     translators: Dict[str, Dict[str, Translator]] = {
         'gpt-4o-mini': {
-            # 'pipeline': PipelineTranslator(model='gpt-4o-mini'),
-            # 'instructions': InstructionsTranslator(model='gpt-4o-mini'),
-            # 'agentic': AgenticTranslator(model='gpt-4o-mini'),
-            # 'finetuned-simple': FinetunedTranslator(model='ft:gpt-4o-mini-2024-07-18:kubishi:brackets-plus-prompt-merged:AFvrmkic'),
-            # 'finetuned-old': FinetunedTranslator(model='ft:gpt-4o-mini-2024-07-18:kubishi::AHxZJd3A')
-            'finetuned': FinetunedTranslator(model='ft:gpt-4o-mini-2024-07-18:kubishi::AInrzzLW')
+            'pipeline': PipelineTranslator(model='gpt-4o-mini'),
+            'instructions': InstructionsTranslator(model='gpt-4o-mini'),
+            'agentic': AgenticTranslator(model='gpt-4o-mini'),
+            'finetuned': FinetunedTranslator(model='ft:gpt-4o-mini-2024-07-18:kubishi::AInrzzLW'),
+            'rag': RAGTranslator(model='gpt-4o-mini')
         },
         'gpt-4o': {
-            # 'pipeline': PipelineTranslator(model='gpt-4o'),
-            # 'instructions': InstructionsTranslator(model='gpt-4o'),
-            # 'agentic': AgenticTranslator(model='gpt-4o'),
-            # 'finetuned-simple': FinetunedTranslator(model='ft:gpt-4o-2024-08-06:kubishi:brackets-plus-prompt-merged-4o:AGCTD0Ao'),
-            # 'finetuned-old': FinetunedTranslator(model='ft:gpt-4o-2024-08-06:kubishi::AHxjqcsb')
-            'finetuned': FinetunedTranslator(model='ft:gpt-4o-2024-08-06:kubishi::AInyiTpj')
+            'pipeline': PipelineTranslator(model='gpt-4o'),
+            'instructions': InstructionsTranslator(model='gpt-4o'),
+            'agentic': AgenticTranslator(model='gpt-4o'),
+            'finetuned': FinetunedTranslator(model='ft:gpt-4o-2024-08-06:kubishi::AInyiTpj'),
+            'rag': RAGTranslator(model='gpt-4o')
         },
     }
 
