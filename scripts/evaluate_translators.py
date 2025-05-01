@@ -40,20 +40,24 @@ def main():
     ]
     translators: Dict[str, Dict[str, Translator]] = {
         'gpt-4o-mini': {
-            'pipeline': PipelineTranslator(model='gpt-4o-mini'),
-            'instructions': InstructionsTranslator(model='gpt-4o-mini'),
-            'agentic': AgenticTranslator(model='gpt-4o-mini'),
-            'finetuned': FinetunedTranslator(model='ft:gpt-4o-mini-2024-07-18:kubishi::AInrzzLW'),
+            # 'pipeline': PipelineTranslator(model='gpt-4o-mini'),
+            # 'instructions': InstructionsTranslator(model='gpt-4o-mini'),
+            # 'agentic': AgenticTranslator(model='gpt-4o-mini'),
+            # 'finetuned': FinetunedTranslator(model='ft:gpt-4o-mini-2024-07-18:kubishi::AInrzzLW'),
+            'pipeline-new': PipelineTranslator(model='gpt-4o-mini'),
             'rag': RAGTranslator(model='gpt-4o-mini')
         },
         'gpt-4o': {
-            'pipeline': PipelineTranslator(model='gpt-4o'),
-            'instructions': InstructionsTranslator(model='gpt-4o'),
-            'agentic': AgenticTranslator(model='gpt-4o'),
-            'finetuned': FinetunedTranslator(model='ft:gpt-4o-2024-08-06:kubishi::AInyiTpj'),
+            # 'pipeline': PipelineTranslator(model='gpt-4o'),
+            # 'instructions': InstructionsTranslator(model='gpt-4o'),
+            # 'agentic': AgenticTranslator(model='gpt-4o'),
+            # 'finetuned': FinetunedTranslator(model='ft:gpt-4o-2024-08-06:kubishi::AInyiTpj'),
+            'pipeline-new': PipelineTranslator(model='gpt-4o'),
             'rag': RAGTranslator(model='gpt-4o')
         },
     }
+
+    redo = {"pipeline"}
 
     # load results from disk
     resultspath = thisdir / 'results/evaluation_results.json'
@@ -64,6 +68,7 @@ def main():
     finished = {
         (r.translator, r.model, r.translation.source)
         for r in results.results
+        if r.translator not in redo
     }
     for i, (model, _translators) in enumerate(translators.items(), start=1):
         print(f"[RUNNING] model={model} ({i}/{len(translators)})")

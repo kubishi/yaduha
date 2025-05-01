@@ -8,15 +8,14 @@ import pathlib
 from itertools import combinations
 from functools import lru_cache
 import dotenv
-from yaduha.segment import semantic_similarity_sentence_transformers as semantic_similarity
-from yaduha.segment import (
-    split_sentence, 
-)
+from yaduha.semantic_similarity import semantic_similarity_sentence_transformers as semantic_similarity
 from yaduha.forward.pipeline import split_sentence, comparator_sentence, make_sentence
 
 import nltk
 from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
-import sacrebleu # pip install sacrebleu
+import sacrebleu
+
+from yaduha.syntax import SentenceList # pip install sacrebleu
 # Ensure the NLTK package is ready
 # nltk.download(quiet=True)
 
@@ -39,6 +38,8 @@ TRANSLATOR_NAMES = {
     'finetuned': 'Fine-tuned',
     'pipeline': 'Pipeline',
     'agentic': 'Builder',
+    'pipeline-new': 'Pipeline V2',
+    'rag': 'RAG',
 }
 
 CATEGORY_ORDERS = {
@@ -50,12 +51,11 @@ CATEGORY_ORDERS = {
         'complex',
         'nominalization',
     ],
-    'translator': ['Instructions', 'Fine-tuned', 'Pipeline', 'Builder'],
+    'translator': ['Instructions', 'Fine-tuned', 'Pipeline', 'Pipeline V2', 'Builder', 'RAG'],
     'models': ['gpt-4o-mini', 'gpt-4o'],
 }
 
-COLORS = ['#7b3294', '#c2a5cf', '#a6dba0', '#008837']
-import sacrebleu
+COLORS = ['#7b3294', '#c2a5cf', '#a6dba0', '#008837', '#d95f0e', '#fdae61']
 
 def compute_chrf(reference: str, candidate: str, word_order: int = 2):
     """
@@ -104,6 +104,12 @@ def load_data(do_save: bool = True,
     file_path = pathlib.Path('./results/evaluation_results.json')
     data = json.loads(file_path.read_text())
 
+    # save copy of filepath to [name]_[timestamp].json
+    if do_save:
+        timestamp = pd.Timestamp.now().strftime('%Y-%m-%d_%H-%M-%S')
+        copy_path = file_path.parent / f"evaluation_results_{timestamp}.json"
+        copy_path.write_text(json.dumps(data, indent=2, ensure_ascii=False))
+
     # keep only entries with entry["translator"] in TRANSLATOR_NAMES.keys()
     data['results'] = [entry for entry in data['results'] if entry['translator'] in TRANSLATOR_NAMES.keys()]
     print(f"Loaded {len(data['results'])} results")
@@ -137,10 +143,12 @@ def load_data(do_save: bool = True,
                         back_translation,
                         model='gpt-4o-mini'
                     )
-                    comparator_sentences = [
-                        comparator_sentence(sentence)
-                        for sentence in simple_sentences.sentences
-                    ]
+                    comparator_sentences = SentenceList(
+                        sentences=[
+                            comparator_sentence(sentence)
+                            for sentence in simple_sentences.sentences
+                        ]
+                    )
                     comparator = make_sentence(comparator_sentences, model='gpt-4o-mini')
                     result['comparator'] = comparator
 
@@ -357,6 +365,7 @@ def plot_semantic_similarity():
 
             # Plot bars with error bars
             for j, translator in enumerate(CATEGORY_ORDERS['translator']):
+                print(f"Translator {j}: {translator}")
                 data = similarity_data[similarity_data['translator'] == translator]
                 if not data.empty:
                     bars = ax.bar(

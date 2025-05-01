@@ -11,6 +11,8 @@ from yaduha.semantic_similarity import (
     semantic_similarity_spacy, semantic_similarity_bert, 
     semantic_similarity_sentence_transformers, semantic_similarity_openai
 )
+from yaduha.bert_score import get_bertscore
+from yaduha.comet import get_comet_score
 from yaduha.forward.pipeline import make_sentence
 
 thisdir = pathlib.Path(__file__).parent.absolute()
@@ -55,6 +57,10 @@ def test_similarity():
         "text-embedding-3-large": functools.partial(semantic_similarity_openai, model='text-embedding-3-large'),
         "text-embedding-3-small": functools.partial(semantic_similarity_openai, model='text-embedding-3-small'),
         "text-embedding-ada-002": functools.partial(semantic_similarity_openai, model='text-embedding-ada-002'),
+        'bert-score-f1': functools.partial(get_bertscore, metric='f1'),
+        'bert-score-precision': functools.partial(get_bertscore, metric='precision'),
+        'bert-score-recall': functools.partial(get_bertscore, metric='recall'),
+        'comet': functools.partial(get_comet_score),
     }
     
     rows = []
@@ -89,6 +95,6 @@ def test_split_sentence():
     print(simple_nl_sentence)
 
 if __name__ == '__main__':
-    main()
+    # main()
     test_similarity()
-    test_split_sentence()
+    # test_split_sentence()

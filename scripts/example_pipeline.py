@@ -11,7 +11,7 @@ thisdir = pathlib.Path(__file__).parent.absolute()
 def main():
     parser = argparse.ArgumentParser(description="Translate English to Paiute")
 
-    parser.add_argument('sentence', help="The English sentence to translate (if not provided, will enter interactive mode)", nargs='?')
+    parser.add_argument('sentence', help="The English sentence to translate")
     parser.add_argument('--model', help="The model to use for translation", default='gpt-4o-mini')
     parser.set_defaults(func="translate")
 

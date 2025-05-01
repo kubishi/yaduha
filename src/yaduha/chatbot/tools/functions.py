@@ -60,10 +60,12 @@ def search_paiute(query):
     # return words
 
 def search_grammar(query):
-    return _search_grammar(
+    query_result = _search_grammar(
         query=query,
         limit=5
     )
+    relevant_information = [match["metadata"]["text"] for match in query_result["matches"]]
+    return relevant_information
 
 def search_sentences(query):
     response = requests.get(f"{KUBISHI_API_URL}/search/sentence", params={"query": query})
