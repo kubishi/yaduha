@@ -1,8 +1,8 @@
 import json
 import traceback
 from typing import Dict, List, Set, Tuple, Type
-from yaduha.base import Translation, Translator
-from yaduha.forward import (
+from yaduha.translate.base import Translation, Translator
+from yaduha.translate import (
     PipelineTranslator,
     InstructionsTranslator,
     AgenticTranslator,
@@ -15,7 +15,7 @@ from pydantic import BaseModel
 import dotenv
 import logging
 
-from yaduha.forward.finetuned import FinetunedTranslator
+from yaduha.translate.finetuned import FinetunedTranslator
 
 dotenv.load_dotenv()
 

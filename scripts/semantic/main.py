@@ -1,4 +1,4 @@
-from yaduha.forward.semantic import SemanticTranslator
+from yaduha.translate.semantic import SemanticTranslator
 import json
 import pathlib
 

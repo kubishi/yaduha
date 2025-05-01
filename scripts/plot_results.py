@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import pathlib
-from yaduha.semantic_similarity import (
+from yaduha.evaluate.semantic_similarity import (
     semantic_similarity_sentence_transforms_all_combinations,
     semantic_similarity_openai_all_combinations,
     semantic_similarity_spacy, semantic_similarity_bert,

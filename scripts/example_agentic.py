@@ -1,5 +1,5 @@
 import pathlib
-from yaduha.forward.agentic import AgenticTranslator
+from yaduha.translate.agentic import AgenticTranslator
 import logging
 import json
 import dotenv

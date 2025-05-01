@@ -1,4 +1,4 @@
-from yaduha.sentence_builder import get_random_sentence_big, get_random_sentence, get_random_simple_sentence, format_sentence, sentence_to_str
+from yaduha.translate.pipeline_sentence_builder import get_random_sentence_big, get_random_sentence, get_random_simple_sentence, format_sentence, sentence_to_str
 
 
 def main():

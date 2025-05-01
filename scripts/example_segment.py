@@ -3,17 +3,17 @@ import os
 import functools
 import numpy as np
 import pandas as pd
-from yaduha.rbo import RankingSimilarity
+from yaduha.evaluate.rbo import RankingSimilarity
 import pathlib
 
-from yaduha.forward.pipeline import split_sentence
-from yaduha.semantic_similarity import (
+from yaduha.translate.pipeline import split_sentence
+from yaduha.evaluate.semantic_similarity import (
     semantic_similarity_spacy, semantic_similarity_bert, 
     semantic_similarity_sentence_transformers, semantic_similarity_openai
 )
-from yaduha.bert_score import get_bertscore
-from yaduha.comet import get_comet_score
-from yaduha.forward.pipeline import make_sentence
+from yaduha.evaluate.bert_score import get_bertscore
+from yaduha.evaluate.comet import get_comet_score
+from yaduha.translate.pipeline import make_sentence
 
 thisdir = pathlib.Path(__file__).parent.absolute()
 

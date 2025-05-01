@@ -8,14 +8,14 @@ import pathlib
 from itertools import combinations
 from functools import lru_cache
 import dotenv
-from yaduha.semantic_similarity import semantic_similarity_sentence_transformers as semantic_similarity
-from yaduha.forward.pipeline import split_sentence, comparator_sentence, make_sentence
+from yaduha.evaluate.semantic_similarity import semantic_similarity_sentence_transformers as semantic_similarity
+from yaduha.translate.pipeline import split_sentence, comparator_sentence, make_sentence
 
 import nltk
 from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
 import sacrebleu
 
-from yaduha.syntax import SentenceList # pip install sacrebleu
+from yaduha.translate.pipeline_syntax import SentenceList # pip install sacrebleu
 # Ensure the NLTK package is ready
 # nltk.download(quiet=True)
 

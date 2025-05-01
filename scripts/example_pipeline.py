@@ -1,7 +1,7 @@
 import argparse
 import os
 import pathlib
-from yaduha.forward.pipeline import PipelineTranslator
+from yaduha.translate.pipeline import PipelineTranslator
 import dotenv
 
 dotenv.load_dotenv()

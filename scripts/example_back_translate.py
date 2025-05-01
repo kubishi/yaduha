@@ -5,8 +5,8 @@ import random
 import numpy as np
 import pandas as pd
 
-from yaduha.back_translate import translate
-from yaduha.sentence_builder import format_sentence, get_random_sentence, get_random_sentence_big, sentence_to_str
+from yaduha.translate.pipeline_back_translate import translate
+from yaduha.translate.pipeline_sentence_builder import format_sentence, get_random_sentence, get_random_sentence_big, sentence_to_str
 
 
 

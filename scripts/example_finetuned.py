@@ -1,4 +1,4 @@
-from yaduha.forward import FinetunedTranslator
+from yaduha.translate import FinetunedTranslator
 
 def main():
     models = [

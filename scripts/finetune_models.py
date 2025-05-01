@@ -6,7 +6,7 @@ import pathlib
 
 import pandas as pd
 
-from yaduha.forward.finetuned import FinetunedTranslator
+from yaduha.translate.finetuned import FinetunedTranslator
 
 
 dotenv.load_dotenv()

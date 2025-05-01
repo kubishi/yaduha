@@ -3,11 +3,11 @@ import json
 import pathlib
 import random
 from typing import Dict
-from yaduha.sentence_builder import (
+from yaduha.translate.pipeline_sentence_builder import (
     NOUNS, Verb, Object, Subject,
     get_all_choices, format_sentence, sentence_to_str
 )
-from yaduha.back_translate import translate
+from yaduha.translate.pipeline_back_translate import translate
 from dotenv import load_dotenv
 
 load_dotenv()

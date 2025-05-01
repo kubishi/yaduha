@@ -1,4 +1,4 @@
-from yaduha.forward.rag_translator import RAGTranslator
+from yaduha.translate.rag_translator import RAGTranslator
 
 
 def main():
