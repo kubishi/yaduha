@@ -101,17 +101,25 @@ def load_data(do_save: bool = True,
               overwrite: bool = False,
               compute_scores: bool = False,
               skip_errors: bool = False) -> pd.DataFrame:
-    file_path = pathlib.Path('./results/evaluation_results.json')
+    file_path = thisdir / 'results' / 'evaluation_results.json'
+    save_path = thisdir / 'results' / 'evaluation_results_evaluated.json'
     data = json.loads(file_path.read_text())
+    data_evaluated = json.loads(save_path.read_text()) if save_path.exists() else {'results': []}
 
-    # save copy of filepath to [name]_[timestamp].json
-    if do_save:
-        timestamp = pd.Timestamp.now().strftime('%Y-%m-%d_%H-%M-%S')
-        copy_path = file_path.parent / f"evaluation_results_{timestamp}.json"
-        copy_path.write_text(json.dumps(data, indent=2, ensure_ascii=False))
+    all_results = set()
+    results = []
+    # Add completed results to the list
+    for result in data_evaluated['results']:
+        results.append(result)
+        all_results.add((result['translator'], result['model'], result['translation']['source']))
 
-    # keep only entries with entry["translator"] in TRANSLATOR_NAMES.keys()
-    data['results'] = [entry for entry in data['results'] if entry['translator'] in TRANSLATOR_NAMES.keys()]
+    # Add new results to the list
+    for result in data['results']:
+        if (result['translator'], result['model'], result['translation']['source']) not in all_results:
+            results.append(result)
+            all_results.add((result['translator'], result['model'], result['translation']['source']))
+
+    data['results'] = results
     print(f"Loaded {len(data['results'])} results")
 
     if compute_scores:
@@ -163,7 +171,7 @@ def load_data(do_save: bool = True,
                 result['semantic_similarity'] = 0
     
             if do_save and has_changed:
-                file_path.write_text(json.dumps(data, indent=2, ensure_ascii=False))
+                save_path.write_text(json.dumps(data, indent=2, ensure_ascii=False))
         
         print(" " * 100, end='\r')
         print("Semantic similarities computed successfully!")
@@ -198,7 +206,7 @@ def load_data(do_save: bool = True,
                 result['bleu_score_comparator'] = compute_bleu(result['translation']['source'], comparator)
 
             if do_save:
-                file_path.write_text(json.dumps(data, indent=2, ensure_ascii=False))
+                save_path.write_text(json.dumps(data, indent=2, ensure_ascii=False))
         print(" " * 100, end='\r')
         print("BLEU scores computed successfully!")
 
@@ -231,7 +239,7 @@ def load_data(do_save: bool = True,
                 result['chrf_score_comparator'] = compute_chrf(result['translation']['source'], comparator)
                 
             if do_save:
-                file_path.write_text(json.dumps(data, indent=2, ensure_ascii=False))
+                save_path.write_text(json.dumps(data, indent=2, ensure_ascii=False))
         print(" " * 100, end='\r')
         print("chrF++ scores computed successfully!")
 
