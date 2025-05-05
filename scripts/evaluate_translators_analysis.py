@@ -110,17 +110,22 @@ def load_data(do_save: bool = True,
     results = []
     # Add completed results to the list
     for result in data_evaluated['results']:
+        # remove metadata if present
+        if 'metadata' in result['translation']:
+            del result['translation']['metadata']
         results.append(result)
         all_results.add((result['translator'], result['model'], result['translation']['source']))
 
     # Add new results to the list
     for result in data['results']:
+        # remove metadata if present
+        if 'metadata' in result['translation']:
+            del result['translation']['metadata']
         if (result['translator'], result['model'], result['translation']['source']) not in all_results:
             results.append(result)
             all_results.add((result['translator'], result['model'], result['translation']['source']))
 
     data['results'] = results
-    print(f"Loaded {len(data['results'])} results")
 
     if compute_scores:
         print(f"Computing semantic similarities for {len(data['results'])} sentences...")
@@ -301,6 +306,7 @@ import numpy as np
 
 def plot_semantic_similarity():
     df = load_data(compute_scores=True)
+    return
     bar_width = 0.2  # Adjust the width of each bar
     fontsize = 16
     x_positions = np.arange(len(CATEGORY_ORDERS['sentence_type']))  # Create fixed positions for sentence types
@@ -807,9 +813,10 @@ def get_interesting_examples():
 
 
 def main():
+    load_data(compute_scores=True, skip_errors=True)
     # plot_bleu_score()
     # plot_chrf_score()
-    plot_semantic_similarity()
+    # plot_semantic_similarity()
     # plot_translation_time()
     # plot_cost()
     # generate_cost_latex_table()
