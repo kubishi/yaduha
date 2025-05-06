@@ -143,7 +143,7 @@ def load_data(do_save: bool = True,
                 result['semantic_similarity'] = 0
                 result['semantic_similarity_comparator'] = 0
             else:
-                if overwrite or 'semantic_similarity' not in result:
+                if overwrite or 'semantic_similarity' not in result or result['semantic_similarity'] == 0:
                     result['semantic_similarity'] = semantic_similarity(
                         result['translation']['source'],
                         back_translation,
@@ -151,7 +151,7 @@ def load_data(do_save: bool = True,
                     )
                     has_changed = True
 
-                if overwrite or 'semantic_similarity_comparator' not in result:
+                if overwrite or 'semantic_similarity_comparator' not in result or result['semantic_similarity_comparator'] == 0:
                     simple_sentences = split_sentence(
                         back_translation,
                         model='gpt-4o-mini'
@@ -813,10 +813,10 @@ def get_interesting_examples():
 
 
 def main():
-    load_data(compute_scores=True, skip_errors=True)
+    # load_data(compute_scores=True, skip_errors=False)
     # plot_bleu_score()
     # plot_chrf_score()
-    # plot_semantic_similarity()
+    plot_semantic_similarity()
     # plot_translation_time()
     # plot_cost()
     # generate_cost_latex_table()
