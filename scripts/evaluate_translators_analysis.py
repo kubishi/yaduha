@@ -547,97 +547,6 @@ def plot_semantic_similarity():
         plt.savefig(savepath, bbox_inches='tight')  # Ensure everything fits including the legend
         plt.close()
 
-def plot_bleu_score():
-    df = load_data(compute_scores=True)
-    bar_width = 0.175  # Adjust the width of each bar
-    fontsize = 16
-    x_positions = np.arange(len(CATEGORY_ORDERS['sentence_type']))  # Create fixed positions for sentence types
-
-    plots = [
-        {
-            'yval': 'bleu_score_comparator',
-            'title': 'BLEU Score w/ Comparator',
-        },
-        {
-            'yval': 'bleu_score',
-            'title': 'BLEU Score w/ Backwards Translation',
-        },
-    ]
-
-    models = ['gpt-4o-mini', 'gpt-4o']  # Define models to iterate over
-    OFFSET = 0.04
-
-    for plot in plots:
-        yval = plot['yval']
-        title = plot['title']
-
-        # Create a figure with 2 subplots (one on top of the other), sharing the x-axis
-        fig, axes = plt.subplots(2, 1, figsize=(10, 8), sharex=True)
-
-        handles, labels = [], []
-
-        for i, model in enumerate(models):
-            ax: plt.Axes = axes[i]  # Get the corresponding subplot
-            df_model = df[df['model'] == model]
-            df_similarity = df_model[['translator', 'model', 'sentence_type', yval]]
-
-            df_similarity.loc[:, yval] += OFFSET
-
-            similarity_data = df_similarity.groupby(['translator', 'model', 'sentence_type']).agg(
-                median_similarity=(yval, 'median'),
-                q1_similarity=(yval, lambda x: x.quantile(0.25)),
-                q3_similarity=(yval, lambda x: x.quantile(0.75))
-            ).reset_index()
-
-            similarity_data['error_y_plus'] = similarity_data['q3_similarity'] - similarity_data['median_similarity']
-            similarity_data['error_y_minus'] = similarity_data['median_similarity'] - similarity_data['q1_similarity']
-
-            # Plot bars with error bars
-            for j, translator in enumerate(CATEGORY_ORDERS['translator']):
-                data = similarity_data[similarity_data['translator'] == translator]
-                if not data.empty:
-                    bars = ax.bar(
-                        x_positions + j * bar_width,
-                        data['median_similarity'],
-                        width=bar_width,
-                        yerr=[data['error_y_minus'], data['error_y_plus']],
-                        capsize=5,
-                        bottom=-OFFSET,
-                        color=COLORS[j % len(COLORS)]  # Use colors from the list
-                    )
-
-                    # Add the handles and labels from the last plot (avoiding duplicates)
-                    if i == len(models) - 1:
-                        handle = bars[0]
-                        handles.append(handle)
-
-            # Set plot title and axis labels
-            ax.set_ylim(-OFFSET, 1 + OFFSET)
-            ax.set_title(f'Model: {model}', fontsize=fontsize)
-            ax.set_ylabel('Median BLEU Score', fontsize=fontsize)
-
-        # Configure shared x-axis labels and ticks
-        axes[-1].set_xlabel('Sentence Type', fontsize=fontsize)
-        plt.xticks(x_positions + bar_width * (len(CATEGORY_ORDERS['translator']) - 1) / 2,
-                     CATEGORY_ORDERS['sentence_type'], rotation=45, fontsize=fontsize)
-        # plt.legend(title='Translator', bbox_to_anchor=(1.05, 1), loc='upper left')
-
-        # Adjust layout and add the figure-wide legend
-        fig.tight_layout()
-        fig.legend(
-            handles, CATEGORY_ORDERS['translator'],
-            title='Translator',
-            bbox_to_anchor=(1.0, 0.95),
-            loc='upper left',
-            fontsize=fontsize,
-            title_fontsize=fontsize
-        )
-
-        savepath = thisdir / f'plots/{yval}.{FILETYPE}'
-        savepath.parent.mkdir(exist_ok=True, parents=True)
-        plt.savefig(savepath, bbox_inches='tight')  # Ensure everything fits including the legend
-        plt.close()
-
 def plot_cost():
     df = load_data(compute_scores=False)
 
@@ -938,14 +847,11 @@ def get_interesting_examples():
 
 
 def main():
-    # load_data(compute_scores=True, skip_errors=False)
-    # plot_bleu_score()
-    # plot_chrf_score()
-    plot_semantic_similarity()
+    # plot_semantic_similarity()
     # plot_translation_time()
     # plot_cost()
-    # generate_cost_latex_table()
-    # generate_translation_time_latex_table()
+    generate_cost_latex_table()
+    generate_translation_time_latex_table()
     # semantic_similarity_baseline_analysis()
     # get_interesting_examples()
 
