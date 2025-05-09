@@ -742,6 +742,26 @@ def similarity_baseline_analysis(metric: str, overwrite: bool = False) -> Tuple[
 
     return mean, std
 
+def similarity_baseline_latex_table():
+    # create table with the following columns:
+    # metric, mean, std
+    rows = []
+    for metric in METRICS.keys():
+        mean, std = similarity_baseline_analysis(metric=metric)
+        rows.append([metric, f"{mean:.3f}", f"{std:.3f}"])
+    df = pd.DataFrame(rows, columns=["Metric", "Mean", "Standard Deviation"])
+    latex_table = df.to_latex(index=False,
+                              columns=["Metric", "Mean", "Standard Deviation"],
+                              header=["Metric", "Mean", "Standard Deviation"],
+                              float_format="%.3f",
+                              caption='Summary of Baseline Similarity Analysis',
+                              label='tab:baseline_similarity_summary')
+    
+    savepath = thisdir / 'results/baseline_similarity_summary_table.tex'
+    savepath.parent.mkdir(exist_ok=True, parents=True)
+    savepath.write_text(latex_table)
+
+
 def get_interesting_examples():
     # get example where Builder comparator is better than Pipeline
     print(f"=== Examples where Builder is better than Pipeline ===")
@@ -850,8 +870,9 @@ def main():
     # plot_semantic_similarity()
     # plot_translation_time()
     # plot_cost()
-    generate_cost_latex_table()
-    generate_translation_time_latex_table()
+    # generate_cost_latex_table()
+    # generate_translation_time_latex_table()
+    similarity_baseline_latex_table()
     # semantic_similarity_baseline_analysis()
     # get_interesting_examples()
 
