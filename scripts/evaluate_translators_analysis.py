@@ -15,6 +15,7 @@ import nltk
 from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
 import sacrebleu
 
+from yaduha.evaluate.bert_score import get_bertscore
 from yaduha.translate.pipeline_syntax import SentenceList # pip install sacrebleu
 # Ensure the NLTK package is ready
 # nltk.download(quiet=True)
@@ -36,9 +37,9 @@ if FILETYPE == 'pdf':
 TRANSLATOR_NAMES = {
     'instructions': 'Instructions',
     'finetuned': 'Fine-tuned',
-    'pipeline': 'Pipeline',
+    # 'pipeline': 'Pipeline',
     'agentic': 'Builder',
-    'pipeline-new': 'Pipeline V2',
+    'pipeline-new': 'Pipeline',
     'rag': 'RAG',
 }
 
@@ -51,7 +52,14 @@ CATEGORY_ORDERS = {
         'complex',
         'nominalization',
     ],
-    'translator': ['Instructions', 'Fine-tuned', 'Pipeline', 'Pipeline V2', 'Builder', 'RAG'],
+    'translator': [
+        'Instructions', 
+        'Fine-tuned', 
+        'Pipeline', 
+        # 'Pipeline V2', 
+        'Builder', 
+        'RAG'
+    ],
     'models': ['gpt-4o-mini', 'gpt-4o'],
 }
 
@@ -248,6 +256,40 @@ def load_data(do_save: bool = True,
         print(" " * 100, end='\r')
         print("chrF++ scores computed successfully!")
 
+    
+        print(f"Computing BERT scores for {len(data['results'])} sentences...")
+        for i, result in enumerate(data['results'], start=1):
+            print(f"Computing BERT score for sentence {i}/{len(data['results'])} ({i/len(data['results'])*100:.2f}%)", end='\r')
+            # if bleu score is already computed, skip
+            if 'bert_score' in result and 'bert_score_comparator' in result:
+                continue
+            back_translation = result['translation']['back_translation']
+            if not back_translation:
+                if not skip_errors:
+                    raise ValueError(f"Missing back translation for the following result:\n{json.dumps(result, indent=2, ensure_ascii=False)}\n")
+                logging.warning(f"Missing back translation for the following result:\n{json.dumps(result, indent=2, ensure_ascii=False)}\n")
+                result['bert_score'] = 0
+            elif back_translation == "N/A":
+                result['bert_score'] = 0
+            else:
+                result['bert_score'] = get_bertscore(result['translation']['source'], back_translation)
+
+            comparator = 'N/A' if back_translation == "N/A" else result['comparator']
+            if not comparator:
+                if not skip_errors:
+                    raise ValueError(f"Missing comparator for the following result:\n{json.dumps(result, indent=2, ensure_ascii=False)}\n")
+                logging.warning(f"Missing comparator for the following result:\n{json.dumps(result, indent=2, ensure_ascii=False)}\n")
+                result['bert_score_comparator'] = 0
+            elif comparator == "N/A":
+                result['bert_score_comparator'] = 0
+            else:
+                result['bert_score_comparator'] = get_bertscore(result['translation']['source'], comparator)
+                
+            if do_save:
+                save_path.write_text(json.dumps(data, indent=2, ensure_ascii=False))
+        print(" " * 100, end='\r')
+        print("BERT scores computed successfully!")
+
     df = pd.json_normalize(data['results'], sep='_')
     # drop translators not in TRANSLATOR_NAMES.keys()
     df = df[df['translator'].isin(TRANSLATOR_NAMES.keys())]
@@ -267,7 +309,7 @@ def plot_translation_time():
     grouped_data['error_y_plus'] = grouped_data['q3_translation_time'] - grouped_data['median_translation_time']
     grouped_data['error_y_minus'] = grouped_data['median_translation_time'] - grouped_data['q1_translation_time']
 
-    bar_width = 0.2  # Width of each bar
+    bar_width = 0.175  # Width of each bar
     x_positions = np.arange(len(CATEGORY_ORDERS['sentence_type']))  # X-axis positions for the sentence types
 
     for model in grouped_data['model'].unique():
@@ -306,8 +348,7 @@ import numpy as np
 
 def plot_semantic_similarity():
     df = load_data(compute_scores=True)
-    return
-    bar_width = 0.2  # Adjust the width of each bar
+    bar_width = 0.175  # Adjust the width of each bar
     fontsize = 16
     x_positions = np.arange(len(CATEGORY_ORDERS['sentence_type']))  # Create fixed positions for sentence types
 
@@ -444,7 +485,7 @@ def plot_semantic_similarity():
 
 def plot_bleu_score():
     df = load_data(compute_scores=True)
-    bar_width = 0.2  # Adjust the width of each bar
+    bar_width = 0.175  # Adjust the width of each bar
     fontsize = 16
     x_positions = np.arange(len(CATEGORY_ORDERS['sentence_type']))  # Create fixed positions for sentence types
 
@@ -562,7 +603,7 @@ def plot_cost():
     grouped_data['error_y_plus'] = grouped_data['q3_cost'] - grouped_data['median_cost']
     grouped_data['error_y_minus'] = grouped_data['median_cost'] - grouped_data['q1_cost']
 
-    bar_width = 0.2  # Width of each bar
+    bar_width = 0.175  # Width of each bar
     x_positions = np.arange(len(CATEGORY_ORDERS['sentence_type']))  # X-axis positions for the sentence types
 
     for model in grouped_data['model'].unique():
@@ -814,7 +855,7 @@ def get_interesting_examples():
 
 def main():
     # load_data(compute_scores=True, skip_errors=False)
-    # plot_bleu_score()
+    plot_bleu_score()
     # plot_chrf_score()
     plot_semantic_similarity()
     # plot_translation_time()
