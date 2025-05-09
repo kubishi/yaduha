@@ -6,7 +6,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import pathlib
 from itertools import combinations
-from functools import lru_cache
+from functools import lru_cache, partial
 import dotenv
 from yaduha.evaluate.semantic_similarity import semantic_similarity_sentence_transformers as semantic_similarity
 from yaduha.translate.pipeline import split_sentence, comparator_sentence, make_sentence
@@ -16,6 +16,7 @@ from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
 import sacrebleu
 
 from yaduha.evaluate.bert_score import get_bertscore
+from yaduha.evaluate.comet import get_comet_score_batch
 from yaduha.translate.pipeline_syntax import SentenceList # pip install sacrebleu
 # Ensure the NLTK package is ready
 # nltk.download(quiet=True)
@@ -272,7 +273,7 @@ def load_data(do_save: bool = True,
             elif back_translation == "N/A":
                 result['bert_score'] = 0
             else:
-                result['bert_score'] = get_bertscore(result['translation']['source'], back_translation)
+                result['bert_score'] = get_bertscore(result['translation']['source'], back_translation)["f1"]
 
             comparator = 'N/A' if back_translation == "N/A" else result['comparator']
             if not comparator:
@@ -283,12 +284,51 @@ def load_data(do_save: bool = True,
             elif comparator == "N/A":
                 result['bert_score_comparator'] = 0
             else:
-                result['bert_score_comparator'] = get_bertscore(result['translation']['source'], comparator)
+                result['bert_score_comparator'] = get_bertscore(result['translation']['source'], comparator)["f1"]
                 
             if do_save:
                 save_path.write_text(json.dumps(data, indent=2, ensure_ascii=False))
         print(" " * 100, end='\r')
         print("BERT scores computed successfully!")
+
+        print(f"Computing COMET scores for {len(data['results'])} sentences...")
+        missing_any_comet_scores = any(
+            'comet_score' not in result or 'comet_score_comparator' not in result
+            for result in data['results']
+        )
+        if missing_any_comet_scores:
+            predictions = [result['translation']['source'] for result in data['results']]
+            references = [result['translation']['back_translation'] for result in data['results']]
+            print(f"Computing COMET scores for {len(predictions)} sentences...")
+            scores = get_comet_score_batch(
+                predictions=predictions,
+                references=references,
+                sources=predictions
+            )
+            
+            references_comparator = [result.get('comparator', ' ') for result in data['results']]
+            print(f"Computing COMET scores for {len(predictions)} sentences...")
+            scores_comparator = get_comet_score_batch(
+                predictions=predictions,
+                references=references_comparator,
+                sources=predictions
+            )
+
+            for i, result in enumerate(data['results']):
+                if result['translation']['back_translation'] == "N/A":
+                    result['comet_score'] = 0
+                    result['comet_score_comparator'] = 0
+                else:
+                    result['comet_score'] = scores[i]
+                    if 'comparator' in result:
+                        result['comet_score_comparator'] = scores_comparator[i]
+                    else:
+                        result['comet_score_comparator'] = 0
+
+            if do_save:
+                save_path.write_text(json.dumps(data, indent=2, ensure_ascii=False))
+        print(" " * 100, end='\r')
+        print("COMET scores computed successfully!")
 
     df = pd.json_normalize(data['results'], sep='_')
     # drop translators not in TRANSLATOR_NAMES.keys()
@@ -356,38 +396,62 @@ def plot_semantic_similarity():
         {
             'yval': 'semantic_similarity_comparator',
             'ylabel': 'Median Semantic Similarity',
-            'ss_guide': True,
+            'rulers': 'semantic_similarity',
             'offset': 0.04,
         },
         {
             'yval': 'semantic_similarity',
             'ylabel': 'Median Semantic Similarity',
-            'ss_guide': True,
+            'rulers': 'semantic_similarity',
             'offset': 0.04,
         },
         {
             'yval': 'bleu_score_comparator',
             'ylabel': 'Median BLEU Score',
-            'ss_guide': False,
+            'rulers': 'bleu_score',
             'offset': 0.04,
         },
         {
             'yval': 'bleu_score',
             'ylabel': 'Median BLEU Score',
-            'ss_guide': False,
+            'rulers': 'bleu_score',
             'offset': 0.04,
         },
         {
             'yval': 'chrf_score_comparator',
             'ylabel': 'Median chrF++ Score',
-            'ss_guide': False,
+            'rulers': 'chrf_score',
             'offset': 4.0,
         },
         {
             'yval': 'chrf_score',
             'ylabel': 'Median chrF++ Score',
-            'ss_guide': False,
+            'rulers': 'chrf_score',
             'offset': 4.0,
+        },
+        {
+            'yval': 'bert_score_comparator',
+            'ylabel': 'Median BERT Score',
+            'rulers': 'bert_score',
+            'offset': 0.04,
+        },
+        {
+            'yval': 'bert_score',
+            'ylabel': 'Median BERT Score',
+            'rulers': 'bert_score',
+            'offset': 0.04,
+        },
+        {
+            'yval': 'comet_score_comparator',
+            'ylabel': 'Median COMET Score',
+            'rulers': 'comet_score',
+            'offset': 0.04,
+        },
+        {
+            'yval': 'comet_score',
+            'ylabel': 'Median COMET Score',
+            'rulers': 'comet_score',
+            'offset': 0.04,
         },
     ]
 
@@ -440,8 +504,8 @@ def plot_semantic_similarity():
                         labels.append(translator)
 
             # Add baseline horizontal line for the semantic similarity baseline analysis
-            if plot['ss_guide']:
-                ss_mean, ss_std = semantic_similarity_baseline_analysis()
+            if plot['rulers']:
+                ss_mean, ss_std = similarity_baseline_analysis(metric=plot['rulers'])
                 ax.axhline(
                     y=ss_mean,
                     color='black',
@@ -699,11 +763,24 @@ def generate_translation_time_latex_table():
     with open('results/average_translation_time_summary_table.tex', 'w') as file:
         file.write(latex_table)
 
-@lru_cache(maxsize=None)
-def semantic_similarity_baseline_analysis(overwrite: bool = False) -> Tuple[float, float]:
-    """Runs semantic similirity on pairs of sentences to determine baseline similarity"""
 
-    savepath = thisdir / 'results/semantic_similarity_baseline.json'
+METRICS = {
+    "semantic_similarity": partial(semantic_similarity, model="all-MiniLM-L6-v2"),
+    "bleu_score": compute_bleu,
+    "chrf_score": partial(compute_chrf, word_order=2),
+    "bert_score": lambda reference, candidate: get_bertscore(reference, candidate)["f1"],
+    "comet_score": get_comet_score_batch
+}
+
+@lru_cache(maxsize=None)
+def similarity_baseline_analysis(metric: str, overwrite: bool = False) -> Tuple[float, float]:
+    """Runs semantic similirity on pairs of sentences to determine baseline similarity"""
+    if metric not in METRICS:
+        raise ValueError(f"Invalid metric: {metric}. Choose from {list(METRICS.keys())}")
+    
+    eval_func = METRICS[metric]
+
+    savepath = thisdir / f'results/{metric}_baseline.json'
     savepath.parent.mkdir(exist_ok=True, parents=True)
 
     if overwrite or not savepath.exists():
@@ -712,12 +789,20 @@ def semantic_similarity_baseline_analysis(overwrite: bool = False) -> Tuple[floa
         # for all pairs of sentences
         similarities = []
         total_pairs = len(sentences) * (len(sentences) - 1) // 2
-        for i, (s1, s2) in enumerate(combinations(sentences, 2), start=1):
-            print(f"Computing semantic similarity for sentence pair {i}/{total_pairs} ({i/total_pairs*100:.2f}%)", end='\r')
-            similarity = semantic_similarity(s1, s2, model="all-MiniLM-L6-v2")
-            similarities.append(similarity)
+        if metric == "comet_score": # batch comet_score function
+            combos = list(combinations(sentences, 2))
+            similarities = eval_func(
+                predictions=[s1 for s1, _ in combos],
+                references=[s2 for _, s2 in combos],
+                sources=[s1 for s1, _ in combos]
+            )
+        else:
+            for i, (s1, s2) in enumerate(combinations(sentences, 2), start=1):
+                print(f"Computing similarity for sentence pair {i}/{total_pairs} ({i/total_pairs*100:.2f}%)", end='\r')
+                similarity = eval_func(s1, s2)
+                similarities.append(similarity)
         print(" " * 100, end='\r')
-        print("Semantic similarities computed successfully!")
+        print("Similarity computed successfully!")
 
         # save similarities to file
         savepath.write_text(json.dumps(similarities, indent=2, ensure_ascii=False))
@@ -727,22 +812,21 @@ def semantic_similarity_baseline_analysis(overwrite: bool = False) -> Tuple[floa
     mean = np.mean(similarities)
     std = np.std(similarities)
 
-    print(f"Baseline semantic similarity: {mean:.3f} ± {std:.3f}")
+    print(f"Baseline similarity: {mean:.3f} ± {std:.3f}")
 
     # Plot histogram
     plt.figure(figsize=(6, 6))
     plt.hist(similarities, bins=20, color=COLORS[0], edgecolor='black')
     # set font size for all elements to 24
-    plt.title('Semantic Similarity Distribution', fontsize=24)
-    plt.xlabel('Semantic Similarity', fontsize=24)
+    plt.title('Similarity Distribution', fontsize=24)
+    plt.xlabel(metric, fontsize=24)
     plt.ylabel('Frequency', fontsize=24)
     plt.xticks(fontsize=24)
     plt.yticks(fontsize=24)
 
-
     plt.tight_layout()
 
-    savepath = thisdir / f'plots/semantic_similarity_baseline.{FILETYPE}'
+    savepath = thisdir / f'plots/{metric}_baseline.{FILETYPE}'
     savepath.parent.mkdir(exist_ok=True, parents=True)
     plt.savefig(savepath)
     plt.close()
@@ -855,7 +939,7 @@ def get_interesting_examples():
 
 def main():
     # load_data(compute_scores=True, skip_errors=False)
-    plot_bleu_score()
+    # plot_bleu_score()
     # plot_chrf_score()
     plot_semantic_similarity()
     # plot_translation_time()
