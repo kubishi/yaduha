@@ -87,8 +87,7 @@ def search_grammar(query: str, limit: int = 5) -> list:
     """
     q_embeddings = openai_client.embeddings.create(input=query, model=EMBEDDINGS_MODEL).data[0].embedding
     query_result = pc_index.query(vector=q_embeddings, top_k=limit, include_metadata=True)
-    relevant_information = [match["metadata"]["text"] for match in query_result["matches"]]
-    return relevant_information
+    return query_result
 
 def convert_pdf_to_images(pdf_path: pathlib.Path, output_folder: pathlib.Path) -> None:
     """

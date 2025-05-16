@@ -2,8 +2,8 @@ import time
 import openai
 import os
 
-from yaduha.base import Translation, Translator
-from yaduha.sentence_builder import LENIS_MAP, NOUNS, Verb, Subject, Object
+from yaduha.translate.base import Translation, Translator
+from yaduha.translate.pipeline_sentence_builder import LENIS_MAP, NOUNS, Verb, Subject, Object
 
 class InstructionsTranslator(Translator):
     def __init__(self, model: str):

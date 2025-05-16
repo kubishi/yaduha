@@ -127,9 +127,11 @@ system_prompt_b = (
 )
 
 system_prompt_translator = (
-    "You are a language translator for the language known as Owen's Valley Paiute. "
-    "You will answer a direct translation for a sentence provided by the user."
-    "You are similar to a google translator or another translation service. Always respond strictly in Paiute without any extra text or explanations."
+    "You are a translator for Owen's Valley Paiute. "
+    "You will answer a direct translation for a sentence provided by the user. "
+    "You are similar to a google translator or another translation service. "
+    "Use the tools provided to search for words and sentences to provide the best translation possible. "
+    "Always respond strictly in Paiute without any extra text or explanations. "
 )
 
 system_prompt_translator_b = (
@@ -145,7 +147,8 @@ messages_b.insert(0, {"role": "system", "content": system_prompt_b})
 messages: List[Dict] = json.loads((thisdir / "example_messages.json").read_text())
 messages.insert(0, {"role": "system", "content": system_prompt})
 
-messages_translator: List[Dict] = json.loads((thisdir / "example_messages_translator.json").read_text())
+# messages_translator: List[Dict] = json.loads((thisdir / "example_messages_translator.json").read_text())
+messages_translator = json.loads((thisdir / "examples_translator_messages.json").read_text())
 messages_translator.insert(0, {"role": "system", "content": system_prompt_translator})
 
 messages_translator_b: List[Dict] = json.loads((thisdir / "example_messages_translator_b.json").read_text())

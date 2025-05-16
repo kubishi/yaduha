@@ -1,7 +1,7 @@
 import json
 import time
 
-from yaduha.base import Translation, Translator
+from yaduha.translate.base import Translation, Translator
 from yaduha.chatbot import translate
 
 class RAGTranslator(Translator):

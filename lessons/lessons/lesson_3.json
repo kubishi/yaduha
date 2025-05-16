@@ -1,0 +1,3241 @@
+{
+  "key": "lesson_3",
+  "title": "Lesson 3: Verb Tenses",
+  "description": "Verb Tenses",
+  "sentences": [
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "mia-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "mia",
+              "definition": "go"
+            },
+            {
+              "type": "tense",
+              "text": "wei",
+              "definition": "future (will)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "uhuw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "uhuw̃a",
+              "definition": "they"
+            }
+          ]
+        }
+      ],
+      "paiute": "mia-wei uhuw̃a.",
+      "english": "They will go."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "nüga-dü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "nüga",
+              "definition": "dance"
+            },
+            {
+              "type": "tense",
+              "text": "dü",
+              "definition": "present"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "ihiw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "ihiw̃a",
+              "definition": "these"
+            }
+          ]
+        }
+      ],
+      "paiute": "nüga-dü ihiw̃a.",
+      "english": "These are dancing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tsibui-gaa-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tsibui",
+              "definition": "climb"
+            },
+            {
+              "type": "tense",
+              "text": "gaa-wei",
+              "definition": "future (going to)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "mahuw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "mahuw̃a",
+              "definition": "they"
+            }
+          ]
+        }
+      ],
+      "paiute": "tsibui-gaa-wei mahuw̃a.",
+      "english": "They are going to climb."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "kwisha'i-dü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "kwisha'i",
+              "definition": "sneeze"
+            },
+            {
+              "type": "tense",
+              "text": "dü",
+              "definition": "present"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "mahu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "mahu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "kwisha'i-dü mahu.",
+      "english": "He/She/It sneezes."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "habi-ku",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "habi",
+              "definition": "lie down"
+            },
+            {
+              "type": "tense",
+              "text": "ku",
+              "definition": "completive (past)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "uhuw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "uhuw̃a",
+              "definition": "they"
+            }
+          ]
+        }
+      ],
+      "paiute": "habi-ku uhuw̃a.",
+      "english": "They lay down."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "pahabi-dü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "pahabi",
+              "definition": "swim"
+            },
+            {
+              "type": "tense",
+              "text": "dü",
+              "definition": "present"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "ihi",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "ihi",
+              "definition": "this"
+            }
+          ]
+        }
+      ],
+      "paiute": "pahabi-dü ihi.",
+      "english": "This swims."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tsiipe'i-dü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tsiipe'i",
+              "definition": "chirp"
+            },
+            {
+              "type": "tense",
+              "text": "dü",
+              "definition": "present"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "mahu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "mahu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "tsiipe'i-dü mahu.",
+      "english": "He/She/It chirps."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tsibui-dü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tsibui",
+              "definition": "climb"
+            },
+            {
+              "type": "tense",
+              "text": "dü",
+              "definition": "present"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "üügwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "üügwa",
+              "definition": "you (plural)"
+            }
+          ]
+        }
+      ],
+      "paiute": "tsibui-dü üügwa.",
+      "english": "You all climb."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "poyoha-gaa-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "poyoha",
+              "definition": "run"
+            },
+            {
+              "type": "tense",
+              "text": "gaa-wei",
+              "definition": "future (going to)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "nüügwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "nüügwa",
+              "definition": "we (exclusive)"
+            }
+          ]
+        }
+      ],
+      "paiute": "poyoha-gaa-wei nüügwa.",
+      "english": "We are going to run."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "wükihaa-ku",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "wükihaa",
+              "definition": "smile"
+            },
+            {
+              "type": "tense",
+              "text": "ku",
+              "definition": "completive (past)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "ihiw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "ihiw̃a",
+              "definition": "these"
+            }
+          ]
+        }
+      ],
+      "paiute": "wükihaa-ku ihiw̃a.",
+      "english": "These smiled."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "yadoha-ku",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "yadoha",
+              "definition": "talk"
+            },
+            {
+              "type": "tense",
+              "text": "ku",
+              "definition": "completive (past)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "mahu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "mahu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "yadoha-ku mahu.",
+      "english": "He/She/It talked."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "hukaw̃ia-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "hukaw̃ia",
+              "definition": "walk"
+            },
+            {
+              "type": "tense",
+              "text": "wei",
+              "definition": "future (will)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "uhu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "uhu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "hukaw̃ia-wei uhu.",
+      "english": "He/She/It will walk."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "waakü-dü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "waakü",
+              "definition": "work"
+            },
+            {
+              "type": "tense",
+              "text": "dü",
+              "definition": "present"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "üügwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "üügwa",
+              "definition": "you (plural)"
+            }
+          ]
+        }
+      ],
+      "paiute": "waakü-dü üügwa.",
+      "english": "You all work."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "üwi-gaa-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "üwi",
+              "definition": "sleep"
+            },
+            {
+              "type": "tense",
+              "text": "gaa-wei",
+              "definition": "future (going to)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "mahuw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "mahuw̃a",
+              "definition": "they"
+            }
+          ]
+        }
+      ],
+      "paiute": "üwi-gaa-wei mahuw̃a.",
+      "english": "They are going to sleep."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "nüga-ku",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "nüga",
+              "definition": "dance"
+            },
+            {
+              "type": "tense",
+              "text": "ku",
+              "definition": "completive (past)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "nüügwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "nüügwa",
+              "definition": "we (exclusive)"
+            }
+          ]
+        }
+      ],
+      "paiute": "nüga-ku nüügwa.",
+      "english": "We danced."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tünia-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tünia",
+              "definition": "read"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "taa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "taa",
+              "definition": "you and I"
+            }
+          ]
+        }
+      ],
+      "paiute": "tünia-ti taa.",
+      "english": "You and I are reading."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "hukaw̃ia-dü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "hukaw̃ia",
+              "definition": "walk"
+            },
+            {
+              "type": "tense",
+              "text": "dü",
+              "definition": "present"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "üügwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "üügwa",
+              "definition": "you (plural)"
+            }
+          ]
+        }
+      ],
+      "paiute": "hukaw̃ia-dü üügwa.",
+      "english": "You all walk."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "hukaw̃ia-gaa-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "hukaw̃ia",
+              "definition": "walk"
+            },
+            {
+              "type": "tense",
+              "text": "gaa-wei",
+              "definition": "future (going to)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "ihi",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "ihi",
+              "definition": "this"
+            }
+          ]
+        }
+      ],
+      "paiute": "hukaw̃ia-gaa-wei ihi.",
+      "english": "This is going to walk."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "yadoha-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "yadoha",
+              "definition": "talk"
+            },
+            {
+              "type": "tense",
+              "text": "wei",
+              "definition": "future (will)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "mahu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "mahu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "yadoha-wei mahu.",
+      "english": "He/She/It will talk."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "nüga-gaa-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "nüga",
+              "definition": "dance"
+            },
+            {
+              "type": "tense",
+              "text": "gaa-wei",
+              "definition": "future (going to)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "mahu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "mahu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "nüga-gaa-wei mahu.",
+      "english": "He/She/It is going to dance."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "katü-dü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "katü",
+              "definition": "sit"
+            },
+            {
+              "type": "tense",
+              "text": "dü",
+              "definition": "present"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "mahu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "mahu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "katü-dü mahu.",
+      "english": "He/She/It sits."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "hubiadu-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "hubiadu",
+              "definition": "sing"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "nüü",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "nüü",
+              "definition": "I"
+            }
+          ]
+        }
+      ],
+      "paiute": "hubiadu-ti nüü.",
+      "english": "I am singing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "kwisha'i-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "kwisha'i",
+              "definition": "sneeze"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "ihi",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "ihi",
+              "definition": "this"
+            }
+          ]
+        }
+      ],
+      "paiute": "kwisha'i-ti ihi.",
+      "english": "This is sneezing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "wükihaa-gaa-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "wükihaa",
+              "definition": "smile"
+            },
+            {
+              "type": "tense",
+              "text": "gaa-wei",
+              "definition": "future (going to)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "üü",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "üü",
+              "definition": "you"
+            }
+          ]
+        }
+      ],
+      "paiute": "wükihaa-gaa-wei üü.",
+      "english": "You are going to smile."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tümui-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tümui",
+              "definition": "write"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "uhu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "uhu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "tümui-ti uhu.",
+      "english": "He/She/It is writing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "kwisha'i-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "kwisha'i",
+              "definition": "sneeze"
+            },
+            {
+              "type": "tense",
+              "text": "wei",
+              "definition": "future (will)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "mahuw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "mahuw̃a",
+              "definition": "they"
+            }
+          ]
+        }
+      ],
+      "paiute": "kwisha'i-wei mahuw̃a.",
+      "english": "They will sneeze."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tsibui-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tsibui",
+              "definition": "climb"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "uhuw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "uhuw̃a",
+              "definition": "they"
+            }
+          ]
+        }
+      ],
+      "paiute": "tsibui-ti uhuw̃a.",
+      "english": "They are climbing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "nishua'i-ku",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "nishua'i",
+              "definition": "laugh"
+            },
+            {
+              "type": "tense",
+              "text": "ku",
+              "definition": "completive (past)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "uhuw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "uhuw̃a",
+              "definition": "they"
+            }
+          ]
+        }
+      ],
+      "paiute": "nishua'i-ku uhuw̃a.",
+      "english": "They laughed."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "nüga-dü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "nüga",
+              "definition": "dance"
+            },
+            {
+              "type": "tense",
+              "text": "dü",
+              "definition": "present"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "üü",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "üü",
+              "definition": "you"
+            }
+          ]
+        }
+      ],
+      "paiute": "nüga-dü üü.",
+      "english": "You dance."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "üwi-gaa-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "üwi",
+              "definition": "sleep"
+            },
+            {
+              "type": "tense",
+              "text": "gaa-wei",
+              "definition": "future (going to)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "taa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "taa",
+              "definition": "you and I"
+            }
+          ]
+        }
+      ],
+      "paiute": "üwi-gaa-wei taa.",
+      "english": "You and I are going to sleep."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "hukaw̃ia-dü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "hukaw̃ia",
+              "definition": "walk"
+            },
+            {
+              "type": "tense",
+              "text": "dü",
+              "definition": "present"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "taagwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "taagwa",
+              "definition": "we (inclusive)"
+            }
+          ]
+        }
+      ],
+      "paiute": "hukaw̃ia-dü taagwa.",
+      "english": "We are walking."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "pahabi-pü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "pahabi",
+              "definition": "swim"
+            },
+            {
+              "type": "tense",
+              "text": "pü",
+              "definition": "have x-ed, am x-ed"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "nüü",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "nüü",
+              "definition": "I"
+            }
+          ]
+        }
+      ],
+      "paiute": "pahabi-pü nüü.",
+      "english": "I have swum."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "poyoha-dü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "poyoha",
+              "definition": "run"
+            },
+            {
+              "type": "tense",
+              "text": "dü",
+              "definition": "present"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "ihi",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "ihi",
+              "definition": "this"
+            }
+          ]
+        }
+      ],
+      "paiute": "poyoha-dü ihi.",
+      "english": "This runs."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "waakü-gaa-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "waakü",
+              "definition": "work"
+            },
+            {
+              "type": "tense",
+              "text": "gaa-wei",
+              "definition": "future (going to)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "üü",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "üü",
+              "definition": "you"
+            }
+          ]
+        }
+      ],
+      "paiute": "waakü-gaa-wei üü.",
+      "english": "You are going to work."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "wükihaa-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "wükihaa",
+              "definition": "smile"
+            },
+            {
+              "type": "tense",
+              "text": "wei",
+              "definition": "future (will)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "üügwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "üügwa",
+              "definition": "you (plural)"
+            }
+          ]
+        }
+      ],
+      "paiute": "wükihaa-wei üügwa.",
+      "english": "You all will smile."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "kwatsa'i-pü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "kwatsa'i",
+              "definition": "fall"
+            },
+            {
+              "type": "tense",
+              "text": "pü",
+              "definition": "have x-ed, am x-ed"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "ihi",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "ihi",
+              "definition": "this"
+            }
+          ]
+        }
+      ],
+      "paiute": "kwatsa'i-pü ihi.",
+      "english": "This has fallen."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tsibui-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tsibui",
+              "definition": "climb"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "taagwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "taagwa",
+              "definition": "we (inclusive)"
+            }
+          ]
+        }
+      ],
+      "paiute": "tsibui-ti taagwa.",
+      "english": "We are climbing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "kwatsa'i-ku",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "kwatsa'i",
+              "definition": "fall"
+            },
+            {
+              "type": "tense",
+              "text": "ku",
+              "definition": "completive (past)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "nüü",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "nüü",
+              "definition": "I"
+            }
+          ]
+        }
+      ],
+      "paiute": "kwatsa'i-ku nüü.",
+      "english": "I fell."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "katü-ku",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "katü",
+              "definition": "sit"
+            },
+            {
+              "type": "tense",
+              "text": "ku",
+              "definition": "completive (past)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "uhu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "uhu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "katü-ku uhu.",
+      "english": "He/She/It sat."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "nüga-ku",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "nüga",
+              "definition": "dance"
+            },
+            {
+              "type": "tense",
+              "text": "ku",
+              "definition": "completive (past)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "mahuw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "mahuw̃a",
+              "definition": "they"
+            }
+          ]
+        }
+      ],
+      "paiute": "nüga-ku mahuw̃a.",
+      "english": "They danced."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tümui-ku",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tümui",
+              "definition": "write"
+            },
+            {
+              "type": "tense",
+              "text": "ku",
+              "definition": "completive (past)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "taagwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "taagwa",
+              "definition": "we (inclusive)"
+            }
+          ]
+        }
+      ],
+      "paiute": "tümui-ku taagwa.",
+      "english": "We wrote."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "yotsi-dü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "yotsi",
+              "definition": "fly"
+            },
+            {
+              "type": "tense",
+              "text": "dü",
+              "definition": "present"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "nüügwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "nüügwa",
+              "definition": "we (exclusive)"
+            }
+          ]
+        }
+      ],
+      "paiute": "yotsi-dü nüügwa.",
+      "english": "We fly."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "yadoha-dü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "yadoha",
+              "definition": "talk"
+            },
+            {
+              "type": "tense",
+              "text": "dü",
+              "definition": "present"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "uhuw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "uhuw̃a",
+              "definition": "they"
+            }
+          ]
+        }
+      ],
+      "paiute": "yadoha-dü uhuw̃a.",
+      "english": "They are talking."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tümui-gaa-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tümui",
+              "definition": "write"
+            },
+            {
+              "type": "tense",
+              "text": "gaa-wei",
+              "definition": "future (going to)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "uhu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "uhu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "tümui-gaa-wei uhu.",
+      "english": "He/She/It is going to write."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "habi-dü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "habi",
+              "definition": "lie down"
+            },
+            {
+              "type": "tense",
+              "text": "dü",
+              "definition": "present"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "ihi",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "ihi",
+              "definition": "this"
+            }
+          ]
+        }
+      ],
+      "paiute": "habi-dü ihi.",
+      "english": "This lies down."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "yadoha-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "yadoha",
+              "definition": "talk"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "uhu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "uhu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "yadoha-ti uhu.",
+      "english": "He/She/It is talking."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "wünü-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "wünü",
+              "definition": "stand"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "nüü",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "nüü",
+              "definition": "I"
+            }
+          ]
+        }
+      ],
+      "paiute": "wünü-ti nüü.",
+      "english": "I am standing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "wükihaa-pü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "wükihaa",
+              "definition": "smile"
+            },
+            {
+              "type": "tense",
+              "text": "pü",
+              "definition": "have x-ed, am x-ed"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "uhu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "uhu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "wükihaa-pü uhu.",
+      "english": "He/She/It has smiled."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "hukaw̃ia-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "hukaw̃ia",
+              "definition": "walk"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "ihi",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "ihi",
+              "definition": "this"
+            }
+          ]
+        }
+      ],
+      "paiute": "hukaw̃ia-ti ihi.",
+      "english": "This is walking."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "waakü-ku",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "waakü",
+              "definition": "work"
+            },
+            {
+              "type": "tense",
+              "text": "ku",
+              "definition": "completive (past)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "nüügwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "nüügwa",
+              "definition": "we (exclusive)"
+            }
+          ]
+        }
+      ],
+      "paiute": "waakü-ku nüügwa.",
+      "english": "We worked."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "kwatsa'i-dü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "kwatsa'i",
+              "definition": "fall"
+            },
+            {
+              "type": "tense",
+              "text": "dü",
+              "definition": "present"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "taa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "taa",
+              "definition": "you and I"
+            }
+          ]
+        }
+      ],
+      "paiute": "kwatsa'i-dü taa.",
+      "english": "You and I fall."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tsiipe'i-gaa-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tsiipe'i",
+              "definition": "chirp"
+            },
+            {
+              "type": "tense",
+              "text": "gaa-wei",
+              "definition": "future (going to)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "mahuw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "mahuw̃a",
+              "definition": "they"
+            }
+          ]
+        }
+      ],
+      "paiute": "tsiipe'i-gaa-wei mahuw̃a.",
+      "english": "They are going to chirp."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "wünü-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "wünü",
+              "definition": "stand"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "uhu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "uhu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "wünü-ti uhu.",
+      "english": "He/She/It is standing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "poyoha-ku",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "poyoha",
+              "definition": "run"
+            },
+            {
+              "type": "tense",
+              "text": "ku",
+              "definition": "completive (past)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "nüü",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "nüü",
+              "definition": "I"
+            }
+          ]
+        }
+      ],
+      "paiute": "poyoha-ku nüü.",
+      "english": "I ran."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "mia-ku",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "mia",
+              "definition": "go"
+            },
+            {
+              "type": "tense",
+              "text": "ku",
+              "definition": "completive (past)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "üügwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "üügwa",
+              "definition": "you (plural)"
+            }
+          ]
+        }
+      ],
+      "paiute": "mia-ku üügwa.",
+      "english": "You all went."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "nüga-gaa-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "nüga",
+              "definition": "dance"
+            },
+            {
+              "type": "tense",
+              "text": "gaa-wei",
+              "definition": "future (going to)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "nüügwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "nüügwa",
+              "definition": "we (exclusive)"
+            }
+          ]
+        }
+      ],
+      "paiute": "nüga-gaa-wei nüügwa.",
+      "english": "We are going to dance."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "yotsi-ku",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "yotsi",
+              "definition": "fly"
+            },
+            {
+              "type": "tense",
+              "text": "ku",
+              "definition": "completive (past)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "mahuw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "mahuw̃a",
+              "definition": "they"
+            }
+          ]
+        }
+      ],
+      "paiute": "yotsi-ku mahuw̃a.",
+      "english": "They flew."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "kwisha'i-pü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "kwisha'i",
+              "definition": "sneeze"
+            },
+            {
+              "type": "tense",
+              "text": "pü",
+              "definition": "have x-ed, am x-ed"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "üügwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "üügwa",
+              "definition": "you (plural)"
+            }
+          ]
+        }
+      ],
+      "paiute": "kwisha'i-pü üügwa.",
+      "english": "You have sneezed."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "pahabi-pü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "pahabi",
+              "definition": "swim"
+            },
+            {
+              "type": "tense",
+              "text": "pü",
+              "definition": "have x-ed, am x-ed"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "mahu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "mahu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "pahabi-pü mahu.",
+      "english": "He/She/It has swum."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "nüga-pü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "nüga",
+              "definition": "dance"
+            },
+            {
+              "type": "tense",
+              "text": "pü",
+              "definition": "have x-ed, am x-ed"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "taa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "taa",
+              "definition": "you and I"
+            }
+          ]
+        }
+      ],
+      "paiute": "nüga-pü taa.",
+      "english": "You and I have danced."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tübinohi-pü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tübinohi",
+              "definition": "play"
+            },
+            {
+              "type": "tense",
+              "text": "pü",
+              "definition": "have x-ed, am x-ed"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "üügwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "üügwa",
+              "definition": "you (plural)"
+            }
+          ]
+        }
+      ],
+      "paiute": "tübinohi-pü üügwa.",
+      "english": "You have played."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "kwatsa'i-gaa-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "kwatsa'i",
+              "definition": "fall"
+            },
+            {
+              "type": "tense",
+              "text": "gaa-wei",
+              "definition": "future (going to)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "ihi",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "ihi",
+              "definition": "this"
+            }
+          ]
+        }
+      ],
+      "paiute": "kwatsa'i-gaa-wei ihi.",
+      "english": "This is going to fall."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "mia-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "mia",
+              "definition": "go"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "mahuw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "mahuw̃a",
+              "definition": "they"
+            }
+          ]
+        }
+      ],
+      "paiute": "mia-ti mahuw̃a.",
+      "english": "They are going."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tsiipe'i-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tsiipe'i",
+              "definition": "chirp"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "mahu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "mahu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "tsiipe'i-ti mahu.",
+      "english": "He/She/It is chirping."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "yotsi-dü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "yotsi",
+              "definition": "fly"
+            },
+            {
+              "type": "tense",
+              "text": "dü",
+              "definition": "present"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "taa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "taa",
+              "definition": "you and I"
+            }
+          ]
+        }
+      ],
+      "paiute": "yotsi-dü taa.",
+      "english": "You and I fly."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tümui-pü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tümui",
+              "definition": "write"
+            },
+            {
+              "type": "tense",
+              "text": "pü",
+              "definition": "have x-ed, am x-ed"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "ihiw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "ihiw̃a",
+              "definition": "these"
+            }
+          ]
+        }
+      ],
+      "paiute": "tümui-pü ihiw̃a.",
+      "english": "These have been written."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "wükihaa-gaa-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "wükihaa",
+              "definition": "smile"
+            },
+            {
+              "type": "tense",
+              "text": "gaa-wei",
+              "definition": "future (going to)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "taa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "taa",
+              "definition": "you and I"
+            }
+          ]
+        }
+      ],
+      "paiute": "wükihaa-gaa-wei taa.",
+      "english": "You and I are going to smile."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "nüga-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "nüga",
+              "definition": "dance"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "mahuw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "mahuw̃a",
+              "definition": "they"
+            }
+          ]
+        }
+      ],
+      "paiute": "nüga-ti mahuw̃a.",
+      "english": "They are dancing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "kwatsa'i-gaa-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "kwatsa'i",
+              "definition": "fall"
+            },
+            {
+              "type": "tense",
+              "text": "gaa-wei",
+              "definition": "future (going to)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "nüü",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "nüü",
+              "definition": "I"
+            }
+          ]
+        }
+      ],
+      "paiute": "kwatsa'i-gaa-wei nüü.",
+      "english": "I am going to fall."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "mia-ku",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "mia",
+              "definition": "go"
+            },
+            {
+              "type": "tense",
+              "text": "ku",
+              "definition": "completive (past)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "uhuw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "uhuw̃a",
+              "definition": "they"
+            }
+          ]
+        }
+      ],
+      "paiute": "mia-ku uhuw̃a.",
+      "english": "They went."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "pahabi-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "pahabi",
+              "definition": "swim"
+            },
+            {
+              "type": "tense",
+              "text": "wei",
+              "definition": "future (will)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "üü",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "üü",
+              "definition": "you"
+            }
+          ]
+        }
+      ],
+      "paiute": "pahabi-wei üü.",
+      "english": "You will swim."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "kwatsa'i-dü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "kwatsa'i",
+              "definition": "fall"
+            },
+            {
+              "type": "tense",
+              "text": "dü",
+              "definition": "present"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "uhu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "uhu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "kwatsa'i-dü uhu.",
+      "english": "He/She/It falls."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "yadoha-ku",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "yadoha",
+              "definition": "talk"
+            },
+            {
+              "type": "tense",
+              "text": "ku",
+              "definition": "completive (past)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "üü",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "üü",
+              "definition": "you"
+            }
+          ]
+        }
+      ],
+      "paiute": "yadoha-ku üü.",
+      "english": "You talked."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "wünü-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "wünü",
+              "definition": "stand"
+            },
+            {
+              "type": "tense",
+              "text": "wei",
+              "definition": "future (will)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "mahu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "mahu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "wünü-wei mahu.",
+      "english": "He/She/It will stand."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "yadoha-ku",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "yadoha",
+              "definition": "talk"
+            },
+            {
+              "type": "tense",
+              "text": "ku",
+              "definition": "completive (past)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "taagwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "taagwa",
+              "definition": "we (inclusive)"
+            }
+          ]
+        }
+      ],
+      "paiute": "yadoha-ku taagwa.",
+      "english": "We talked."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "kwisha'i-pü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "kwisha'i",
+              "definition": "sneeze"
+            },
+            {
+              "type": "tense",
+              "text": "pü",
+              "definition": "have x-ed, am x-ed"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "uhuw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "uhuw̃a",
+              "definition": "they"
+            }
+          ]
+        }
+      ],
+      "paiute": "kwisha'i-pü uhuw̃a.",
+      "english": "They have sneezed."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "poyoha-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "poyoha",
+              "definition": "run"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "nüügwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "nüügwa",
+              "definition": "we (exclusive)"
+            }
+          ]
+        }
+      ],
+      "paiute": "poyoha-ti nüügwa.",
+      "english": "We are running."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "kwatsa'i-ku",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "kwatsa'i",
+              "definition": "fall"
+            },
+            {
+              "type": "tense",
+              "text": "ku",
+              "definition": "completive (past)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "üügwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "üügwa",
+              "definition": "you (plural)"
+            }
+          ]
+        }
+      ],
+      "paiute": "kwatsa'i-ku üügwa.",
+      "english": "You all fell."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tsiipe'i-ku",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tsiipe'i",
+              "definition": "chirp"
+            },
+            {
+              "type": "tense",
+              "text": "ku",
+              "definition": "completive (past)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "ihiw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "ihiw̃a",
+              "definition": "these"
+            }
+          ]
+        }
+      ],
+      "paiute": "tsiipe'i-ku ihiw̃a.",
+      "english": "These chirped."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "hubiadu-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "hubiadu",
+              "definition": "sing"
+            },
+            {
+              "type": "tense",
+              "text": "wei",
+              "definition": "future (will)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "üü",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "üü",
+              "definition": "you"
+            }
+          ]
+        }
+      ],
+      "paiute": "hubiadu-wei üü.",
+      "english": "You will sing."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tübinohi-ku",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tübinohi",
+              "definition": "play"
+            },
+            {
+              "type": "tense",
+              "text": "ku",
+              "definition": "completive (past)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "üügwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "üügwa",
+              "definition": "you (plural)"
+            }
+          ]
+        }
+      ],
+      "paiute": "tübinohi-ku üügwa.",
+      "english": "You all played."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "üwi-dü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "üwi",
+              "definition": "sleep"
+            },
+            {
+              "type": "tense",
+              "text": "dü",
+              "definition": "present"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "üü",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "üü",
+              "definition": "you"
+            }
+          ]
+        }
+      ],
+      "paiute": "üwi-dü üü.",
+      "english": "You sleep."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "kwisha'i-ku",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "kwisha'i",
+              "definition": "sneeze"
+            },
+            {
+              "type": "tense",
+              "text": "ku",
+              "definition": "completive (past)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "taa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "taa",
+              "definition": "you and I"
+            }
+          ]
+        }
+      ],
+      "paiute": "kwisha'i-ku taa.",
+      "english": "You and I sneezed."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tübinohi-pü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tübinohi",
+              "definition": "play"
+            },
+            {
+              "type": "tense",
+              "text": "pü",
+              "definition": "have x-ed, am x-ed"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "mahu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "mahu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "tübinohi-pü mahu.",
+      "english": "He/She/It has played."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tünia-dü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tünia",
+              "definition": "read"
+            },
+            {
+              "type": "tense",
+              "text": "dü",
+              "definition": "present"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "nüü",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "nüü",
+              "definition": "I"
+            }
+          ]
+        }
+      ],
+      "paiute": "tünia-dü nüü.",
+      "english": "I read."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tübinohi-gaa-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tübinohi",
+              "definition": "play"
+            },
+            {
+              "type": "tense",
+              "text": "gaa-wei",
+              "definition": "future (going to)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "taagwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "taagwa",
+              "definition": "we (inclusive)"
+            }
+          ]
+        }
+      ],
+      "paiute": "tübinohi-gaa-wei taagwa.",
+      "english": "We are going to play."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "katü-ti",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "katü",
+              "definition": "sit"
+            },
+            {
+              "type": "tense",
+              "text": "ti",
+              "definition": "present ongoing (-ing)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "ihiw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "ihiw̃a",
+              "definition": "these"
+            }
+          ]
+        }
+      ],
+      "paiute": "katü-ti ihiw̃a.",
+      "english": "These are sitting."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "nishua'i-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "nishua'i",
+              "definition": "laugh"
+            },
+            {
+              "type": "tense",
+              "text": "wei",
+              "definition": "future (will)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "uhuw̃a",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "uhuw̃a",
+              "definition": "they"
+            }
+          ]
+        }
+      ],
+      "paiute": "nishua'i-wei uhuw̃a.",
+      "english": "They will laugh."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tümui-ku",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tümui",
+              "definition": "write"
+            },
+            {
+              "type": "tense",
+              "text": "ku",
+              "definition": "completive (past)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "nüügwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "nüügwa",
+              "definition": "we (exclusive)"
+            }
+          ]
+        }
+      ],
+      "paiute": "tümui-ku nüügwa.",
+      "english": "We wrote."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tsibui-pü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tsibui",
+              "definition": "climb"
+            },
+            {
+              "type": "tense",
+              "text": "pü",
+              "definition": "have x-ed, am x-ed"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "mahu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "mahu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "tsibui-pü mahu.",
+      "english": "He/She/It has climbed."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "hukaw̃ia-gaa-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "hukaw̃ia",
+              "definition": "walk"
+            },
+            {
+              "type": "tense",
+              "text": "gaa-wei",
+              "definition": "future (going to)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "üügwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "üügwa",
+              "definition": "you (plural)"
+            }
+          ]
+        }
+      ],
+      "paiute": "hukaw̃ia-gaa-wei üügwa.",
+      "english": "You all are going to walk."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "hubiadu-pü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "hubiadu",
+              "definition": "sing"
+            },
+            {
+              "type": "tense",
+              "text": "pü",
+              "definition": "have x-ed, am x-ed"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "mahu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "mahu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "hubiadu-pü mahu.",
+      "english": "He/She/It has sung."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "yotsi-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "yotsi",
+              "definition": "fly"
+            },
+            {
+              "type": "tense",
+              "text": "wei",
+              "definition": "future (will)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "mahu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "mahu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "yotsi-wei mahu.",
+      "english": "He/She/It will fly."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "katü-pü",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "katü",
+              "definition": "sit"
+            },
+            {
+              "type": "tense",
+              "text": "pü",
+              "definition": "have x-ed, am x-ed"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "taa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "taa",
+              "definition": "you and I"
+            }
+          ]
+        }
+      ],
+      "paiute": "katü-pü taa.",
+      "english": "You and I have sat."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "tübinohi-gaa-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "tübinohi",
+              "definition": "play"
+            },
+            {
+              "type": "tense",
+              "text": "gaa-wei",
+              "definition": "future (going to)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "üü",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "üü",
+              "definition": "you"
+            }
+          ]
+        }
+      ],
+      "paiute": "tübinohi-gaa-wei üü.",
+      "english": "You are going to play."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "kwisha'i-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "kwisha'i",
+              "definition": "sneeze"
+            },
+            {
+              "type": "tense",
+              "text": "wei",
+              "definition": "future (will)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "taagwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "taagwa",
+              "definition": "we (inclusive)"
+            }
+          ]
+        }
+      ],
+      "paiute": "kwisha'i-wei taagwa.",
+      "english": "We will sneeze."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "üwi-wei",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "üwi",
+              "definition": "sleep"
+            },
+            {
+              "type": "tense",
+              "text": "wei",
+              "definition": "future (will)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "taagwa",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "taagwa",
+              "definition": "we (inclusive)"
+            }
+          ]
+        }
+      ],
+      "paiute": "üwi-wei taagwa.",
+      "english": "We will sleep."
+    },
+    {
+      "sentence": [
+        {
+          "type": "verb",
+          "text": "pahabi-ku",
+          "parts": [
+            {
+              "type": "verb_stem",
+              "text": "pahabi",
+              "definition": "swim"
+            },
+            {
+              "type": "tense",
+              "text": "ku",
+              "definition": "completive (past)"
+            }
+          ]
+        },
+        {
+          "type": "subject",
+          "text": "uhu",
+          "parts": [
+            {
+              "type": "pronoun",
+              "text": "uhu",
+              "definition": "he/she/it"
+            }
+          ]
+        }
+      ],
+      "paiute": "pahabi-ku uhu.",
+      "english": "He/She/It swam."
+    }
+  ]
+}

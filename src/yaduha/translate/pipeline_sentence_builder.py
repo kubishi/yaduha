@@ -1,5 +1,4 @@
 from copy import deepcopy
-import logging
 import random
 from typing import Any, Dict, List, Optional
 
@@ -40,6 +39,23 @@ NOUNS = {
     "kwadzi": "tail",
 }
 
+POSSESSIVE_PRONOUNS = {
+    'i': 'my',
+    'u': 'his/her/its (distal)',
+    'ui': 'their (distal)',
+    'ma': 'his/her/its (proximal)',
+    'mai': 'their (proximal)',
+    'a': 'his/her/its (proximal)',
+    'ai': 'their (proximal)',
+    'ni': 'our (plural, exclusive)',
+    'tei': 'our (plural, inclusive)',
+    'ta': 'our (dual), you and I',
+    'ü': 'your (singular)',
+    'üi': 'your (plural), you all',
+    'tü': 'his/her/its own',
+    'tüi': 'their own',
+}
+
 class Subject:
     SUFFIXES = {
         'ii': 'proximal',
@@ -59,10 +75,15 @@ class Subject:
         "üü": "you",
         "üügwa": "you (plural)",
     }
-    def __init__(self, noun: str, subject_noun_nominalizer: Optional[str], subject_suffix: Optional[str]):
+    def __init__(self,
+                 noun: str,
+                 subject_noun_nominalizer: Optional[str],
+                 subject_suffix: Optional[str],
+                 possessive_pronoun: Optional[str] = None):
         self.noun = noun
         self.subject_noun_nominalizer = subject_noun_nominalizer
         self.subject_suffix = subject_suffix
+        self.possessive_pronoun = possessive_pronoun
 
         if self.noun in Subject.PRONOUNS and self.subject_suffix is not None:
             raise ValueError("Subject suffix is not allowed with pronouns")
@@ -78,14 +99,25 @@ class Subject:
         
             if subject_suffix not in self.SUFFIXES:
                 raise ValueError(f"Subject suffix must be one of {self.SUFFIXES} (not {subject_suffix})")
+        else:
+            if self.possessive_pronoun is not None:
+                raise ValueError("Possessive pronoun is not allowed with pronouns")
+            
+        if self.possessive_pronoun is not None and self.possessive_pronoun not in POSSESSIVE_PRONOUNS:
+            raise ValueError(f"Possessive pronoun must be one of {POSSESSIVE_PRONOUNS} (not {possessive_pronoun})")
         
     def __str__(self) -> str:
         if self.subject_suffix is None:
-            return self.noun
+            text = self.noun
         elif self.subject_noun_nominalizer is not None:
-            return f"{self.noun}-{self.subject_noun_nominalizer}-{self.subject_suffix}"
+            text = f"{self.noun}-{self.subject_noun_nominalizer}-{self.subject_suffix}"
         else:
-            return f"{self.noun}-{self.subject_suffix}"
+            text = f"{self.noun}-{self.subject_suffix}"
+    
+        if self.possessive_pronoun is not None:
+            text = f"{self.possessive_pronoun}-{text}"
+
+        return text
         
     @property
     def details(self) -> Dict:
@@ -287,10 +319,14 @@ class Object:
         'ü': 'you (singular)',
         'üi': 'you (plural), you all',
     }
-    def __init__(self, noun: str, object_noun_nominalizer: Optional[str], object_suffix: Optional[str]):
+    def __init__(self, noun: str,
+                 object_noun_nominalizer: Optional[str],
+                 object_suffix: Optional[str],
+                 possessive_pronoun: Optional[str] = None):
         self.noun = noun
         self.object_noun_nominalizer = object_noun_nominalizer
         self.object_suffix = object_suffix
+        self.possessive_pronoun = possessive_pronoun
 
         if self.object_suffix is None:
             raise ValueError("Object suffix is required")
@@ -302,6 +338,9 @@ class Object:
         elif self.noun in {*Verb.TRANSITIVE_VERBS.keys(), *Verb.INTRANSITIVE_VERBS.keys()} and self.object_noun_nominalizer is None:
             raise ValueError("Object noun nominalizer is required with verbs")
         
+        if self.possessive_pronoun is not None and self.possessive_pronoun not in POSSESSIVE_PRONOUNS:
+            raise ValueError(f"Possessive pronoun must be one of {POSSESSIVE_PRONOUNS} (not {possessive_pronoun})")
+
     def __str__(self) -> str:
         object_suffix = self.object_suffix
         if self.object_noun_nominalizer is None:
@@ -315,7 +354,10 @@ class Object:
                 object_suffix = f'{self.object_noun_nominalizer[:-1]}eika'
             elif object_suffix == 'oka':
                 object_suffix = f'{self.object_noun_nominalizer[:-1]}oka'
-        return f"{self.noun}-{object_suffix}"
+        text = f"{self.noun}-{object_suffix}"
+        if self.possessive_pronoun is not None:
+            text = f"{self.possessive_pronoun}-{text}"
+        return text
     
     @classmethod
     def check_agreement(self, object_suffix: str, object_pronoun: str) -> bool:
@@ -401,12 +443,14 @@ class Object:
 def get_all_choices(subject_noun: Optional[str] = None,
                     subject_noun_nominalizer: Optional[str] = None,
                     subject_suffix: Optional[str] = None,
+                    subject_possessive_pronoun: Optional[str] = None,
                     verb: Optional[str] = None,
                     verb_tense: Optional[str] = None,
                     object_pronoun: Optional[str] = None,
                     object_noun: Optional[str] = None,
                     object_noun_nominalizer: Optional[str] = None,
-                    object_suffix: Optional[str] = None) -> Dict[str, Any]:
+                    object_suffix: Optional[str] = None,
+                    object_possessive_pronoun: Optional[str] = None) -> Dict[str, Any]:
     is_verb_wild = verb is not None and verb.startswith('[') and verb.endswith(']')
     is_subject_noun_wild = subject_noun is not None and subject_noun.startswith('[') and subject_noun.endswith(']')
     is_object_noun_wild = object_noun is not None and object_noun.startswith('[') and object_noun.endswith(']')
@@ -464,11 +508,21 @@ def get_all_choices(subject_noun: Optional[str] = None,
             'requirement': "disabled"
         }
         subject_suffix = None
+        choices['subject_possessive_pronoun'] = {
+            'choices': {},
+            'value': None,
+            'requirement': "disabled"
+        }
     else:
         choices['subject_suffix'] = {
             'choices': Subject.SUFFIXES,
             'value': subject_suffix,
             'requirement': "required"
+        }
+        choices['subject_possessive_pronoun'] = {
+            'choices': POSSESSIVE_PRONOUNS,
+            'value': subject_possessive_pronoun,
+            'requirement': "optional"
         }
 
     if subject_noun in [*Verb.TRANSITIVE_VERBS.keys(), *Verb.INTRANSITIVE_VERBS.keys()]:
@@ -599,18 +653,35 @@ def get_all_choices(subject_noun: Optional[str] = None,
             'requirement': "required"
         }
 
+    # Object possessive pronoun
+    if object_noun is None:
+        choices['object_possessive_pronoun'] = {
+            'choices': {},
+            'value': None,
+            'requirement': "disabled"
+        }
+        object_possessive_pronoun = None
+    else:
+        choices['object_possessive_pronoun'] = {
+            'choices': POSSESSIVE_PRONOUNS,
+            'value': object_possessive_pronoun,
+            'requirement': "optional"
+        }
+
     return choices
 
 def format_sentence(subject_noun: Optional[str],
                     subject_noun_nominalizer: Optional[str],
                     subject_suffix: Optional[str],
+                    subject_possessive_pronoun: Optional[str],
                     verb: Optional[str],
                     verb_tense: Optional[str],
                     object_pronoun: Optional[str],
                     object_noun: Optional[str],
                     object_noun_nominalizer: Optional[str],
-                    object_suffix: Optional[str]) -> List[Dict]:
-    subject = Subject(subject_noun, subject_noun_nominalizer, subject_suffix)
+                    object_suffix: Optional[str],
+                    object_possessive_pronoun: Optional[str]) -> List[Dict]:
+    subject = Subject(subject_noun, subject_noun_nominalizer, subject_suffix, subject_possessive_pronoun)
     _verb = Verb(verb, verb_tense, object_pronoun)
 
     # check object_pronoun and object_suffix match
@@ -620,7 +691,7 @@ def format_sentence(subject_noun: Optional[str],
 
     object = None
     try:
-        object = Object(object_noun, object_noun_nominalizer, object_suffix)
+        object = Object(object_noun, object_noun_nominalizer, object_suffix, object_possessive_pronoun)
     except ValueError as e: # could not create object
         if object_noun is not None:
             raise e

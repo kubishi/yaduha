@@ -5,12 +5,12 @@ import random
 import dotenv
 import os
 
-from yaduha.sentence_builder import (
+from yaduha.translate.pipeline_sentence_builder import (
     NOUNS, Verb, Subject, Object,
     format_sentence, get_all_choices, get_random_sentence, get_random_simple_sentence, sentence_to_str
 )
-from yaduha.back_translate import translate as translate_ovp2eng
-from yaduha.forward.pipeline import PipelineTranslator
+from yaduha.translate.pipeline_back_translate import translate as translate_ovp2eng
+from yaduha.translate.pipeline import PipelineTranslator
 
 dotenv.load_dotenv()
 

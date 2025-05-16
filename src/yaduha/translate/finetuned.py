@@ -1,5 +1,5 @@
 import time
-from ..base import Translation, Translator
+from yaduha.translate.base import Translation, Translator
 import openai
 import os
 

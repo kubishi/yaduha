@@ -1,21 +1,21 @@
 import json
 import traceback
 from typing import Dict, List, Set, Tuple, Type
-from yaduha.base import Translation, Translator
-from yaduha.forward import (
+from yaduha.translate.base import Translation, Translator
+from yaduha.translate import (
     PipelineTranslator,
     InstructionsTranslator,
-    AgenticTranslator
+    AgenticTranslator,
+    RAGTranslator
 )
 import pandas as pd
 import pathlib
-from itertools import product
 
 from pydantic import BaseModel
 import dotenv
 import logging
 
-from yaduha.forward.finetuned import FinetunedTranslator
+from yaduha.translate.finetuned import FinetunedTranslator
 
 dotenv.load_dotenv()
 
@@ -43,19 +43,21 @@ def main():
             # 'pipeline': PipelineTranslator(model='gpt-4o-mini'),
             # 'instructions': InstructionsTranslator(model='gpt-4o-mini'),
             # 'agentic': AgenticTranslator(model='gpt-4o-mini'),
-            # 'finetuned-simple': FinetunedTranslator(model='ft:gpt-4o-mini-2024-07-18:kubishi:brackets-plus-prompt-merged:AFvrmkic'),
-            # 'finetuned-old': FinetunedTranslator(model='ft:gpt-4o-mini-2024-07-18:kubishi::AHxZJd3A')
-            'finetuned': FinetunedTranslator(model='ft:gpt-4o-mini-2024-07-18:kubishi::AInrzzLW')
+            # 'finetuned': FinetunedTranslator(model='ft:gpt-4o-mini-2024-07-18:kubishi::AInrzzLW'),
+            'pipeline-new': PipelineTranslator(model='gpt-4o-mini'),
+            'rag': RAGTranslator(model='gpt-4o-mini')
         },
         'gpt-4o': {
             # 'pipeline': PipelineTranslator(model='gpt-4o'),
             # 'instructions': InstructionsTranslator(model='gpt-4o'),
             # 'agentic': AgenticTranslator(model='gpt-4o'),
-            # 'finetuned-simple': FinetunedTranslator(model='ft:gpt-4o-2024-08-06:kubishi:brackets-plus-prompt-merged-4o:AGCTD0Ao'),
-            # 'finetuned-old': FinetunedTranslator(model='ft:gpt-4o-2024-08-06:kubishi::AHxjqcsb')
-            'finetuned': FinetunedTranslator(model='ft:gpt-4o-2024-08-06:kubishi::AInyiTpj')
+            # 'finetuned': FinetunedTranslator(model='ft:gpt-4o-2024-08-06:kubishi::AInyiTpj'),
+            'pipeline-new': PipelineTranslator(model='gpt-4o'),
+            'rag': RAGTranslator(model='gpt-4o')
         },
     }
+
+    redo = {"pipeline"}
 
     # load results from disk
     resultspath = thisdir / 'results/evaluation_results.json'
@@ -66,6 +68,7 @@ def main():
     finished = {
         (r.translator, r.model, r.translation.source)
         for r in results.results
+        if r.translator not in redo
     }
     for i, (model, _translators) in enumerate(translators.items(), start=1):
         print(f"[RUNNING] model={model} ({i}/{len(translators)})")

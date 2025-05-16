@@ -3,16 +3,21 @@ import os
 import functools
 import numpy as np
 import pandas as pd
-from yaduha.rbo import RankingSimilarity
+from yaduha.evaluate.rbo import RankingSimilarity
 import pathlib
 
-from yaduha.segment import (
+from yaduha.translate.pipeline import split_sentence
+from yaduha.evaluate.semantic_similarity import (
     semantic_similarity_spacy, semantic_similarity_bert, 
-    semantic_similarity_sentence_transformers, semantic_similarity_openai,
-    split_sentence, make_sentence, nlp
+    semantic_similarity_sentence_transformers, semantic_similarity_openai
 )
+from yaduha.evaluate.bert_score import get_bertscore
+from yaduha.evaluate.comet import get_comet_score
+from yaduha.translate.pipeline import make_sentence
 
 thisdir = pathlib.Path(__file__).parent.absolute()
+
+OPENAI_MODEL = "gpt-4o-mini"
 
 def main(): # pylint: disable=missing-function-docstring
     source_sentences = [
@@ -25,11 +30,9 @@ def main(): # pylint: disable=missing-function-docstring
         "The dog and the cat were running."
     ]
     for source_sentence in source_sentences:
-        simple_sentences = split_sentence(source_sentence, model=os.environ['OPENAI_MODEL'])
-        print(simple_sentences)
-        simple_nl_sentence = '. '.join([make_sentence(sentence) for sentence in simple_sentences]) + '.'
+        simple_sentences = split_sentence(source_sentence, model=OPENAI_MODEL)
+        simple_nl_sentence = make_sentence(simple_sentences, model=OPENAI_MODEL)
 
-        print(f"Source sentence: {source_sentence}")
         print(f"Simple sentences: {simple_nl_sentence}")
         similarity = semantic_similarity_spacy(source_sentence, simple_nl_sentence)
         print(f"Semantic similarity: {similarity:0.3f}")
@@ -44,7 +47,7 @@ def avg_displacement(truth: np.ndarray, arr: np.ndarray) -> float:
     return np.mean(np.abs(np.argsort(truth) - np.argsort(arr)))    
 
 def test_similarity():
-    sentences = json.loads((thisdir.parent / 'data' / 'semantic_sentences.json').read_text())
+    sentences = json.loads((thisdir / 'data' / 'semantic_sentences.json').read_text())
     similarity_funcs = {
         "spacy": semantic_similarity_spacy,
         "bert": semantic_similarity_bert,
@@ -54,6 +57,10 @@ def test_similarity():
         "text-embedding-3-large": functools.partial(semantic_similarity_openai, model='text-embedding-3-large'),
         "text-embedding-3-small": functools.partial(semantic_similarity_openai, model='text-embedding-3-small'),
         "text-embedding-ada-002": functools.partial(semantic_similarity_openai, model='text-embedding-ada-002'),
+        'bert-score-f1': functools.partial(get_bertscore, metric='f1'),
+        'bert-score-precision': functools.partial(get_bertscore, metric='precision'),
+        'bert-score-recall': functools.partial(get_bertscore, metric='recall'),
+        'comet': functools.partial(get_comet_score),
     }
     
     rows = []
@@ -80,13 +87,14 @@ def test_similarity():
         
 
 def test_split_sentence():
-    sentence = "The writer is writing a book."
-    simple_sentences = split_sentence(sentence, model=os.environ['OPENAI_MODEL'])
+    sentence = "The writer is writing his book."
+    print(sentence)
+    simple_sentences = split_sentence(sentence, model=OPENAI_MODEL)
     print(simple_sentences)
-    simple_nl_sentence = '. '.join([make_sentence(sentence) for sentence in simple_sentences]) + '.'
+    simple_nl_sentence = make_sentence(simple_sentences, model=OPENAI_MODEL)
     print(simple_nl_sentence)
 
 if __name__ == '__main__':
     # main()
     test_similarity()
-    test_split_sentence()
+    # test_split_sentence()

@@ -1,4 +1,4 @@
-from yaduha.forward.instructions import InstructionsTranslator
+from yaduha.translate.instructions import InstructionsTranslator
 
 
 def main():

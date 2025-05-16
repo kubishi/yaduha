@@ -4,8 +4,8 @@ import os
 import traceback
 from typing import Dict
 
-from yaduha.forward.pipeline import PipelineTranslator, translate_ovp_to_english
-from yaduha.sentence_builder import NOUNS, Object, Subject, Verb, get_all_choices, format_sentence, get_random_simple_sentence
+from yaduha.translate.pipeline import PipelineTranslator, translate_ovp_to_english
+from yaduha.translate.pipeline_sentence_builder import NOUNS, Object, Subject, Verb, get_all_choices, format_sentence, get_random_simple_sentence
 from yaduha.segment import semantic_similarity_sentence_transformers as plot_semantic_similarity
 
 from flask import jsonify, make_response, request, session

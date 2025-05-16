@@ -4,8 +4,8 @@ import pandas
 import pathlib
 import dotenv
 
-from yaduha.base import Translation, Translator
-from yaduha.forward import AgenticTranslator, PipelineTranslator
+from yaduha.translate.base import Translation, Translator
+from yaduha.translate import AgenticTranslator, PipelineTranslator
 
 dotenv.load_dotenv()
 

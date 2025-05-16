@@ -6,17 +6,18 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import pathlib
 from itertools import combinations
-from functools import lru_cache
+from functools import lru_cache, partial
 import dotenv
-from yaduha.segment import make_sentence, semantic_similarity_sentence_transformers as semantic_similarity
-from yaduha.segment import (
-    split_sentence, 
-)
-from yaduha.forward.pipeline import split_sentence, comparator_sentence
+from yaduha.evaluate.semantic_similarity import semantic_similarity_sentence_transformers as semantic_similarity
+from yaduha.translate.pipeline import split_sentence, comparator_sentence, make_sentence
 
 import nltk
 from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
-import sacrebleu # pip install sacrebleu
+import sacrebleu
+
+from yaduha.evaluate.bert_score import get_bertscore
+from yaduha.evaluate.comet import get_comet_score_batch
+from yaduha.translate.pipeline_syntax import SentenceList # pip install sacrebleu
 # Ensure the NLTK package is ready
 # nltk.download(quiet=True)
 
@@ -37,8 +38,10 @@ if FILETYPE == 'pdf':
 TRANSLATOR_NAMES = {
     'instructions': 'Instructions',
     'finetuned': 'Fine-tuned',
-    'pipeline': 'Pipeline',
+    # 'pipeline': 'Pipeline',
     'agentic': 'Builder',
+    'pipeline-new': 'Pipeline',
+    'rag': 'RAG',
 }
 
 CATEGORY_ORDERS = {
@@ -50,12 +53,18 @@ CATEGORY_ORDERS = {
         'complex',
         'nominalization',
     ],
-    'translator': ['Instructions', 'Fine-tuned', 'Pipeline', 'Builder'],
+    'translator': [
+        'Instructions', 
+        'Fine-tuned', 
+        'Pipeline', 
+        # 'Pipeline V2', 
+        'Builder', 
+        'RAG'
+    ],
     'models': ['gpt-4o-mini', 'gpt-4o'],
 }
 
-COLORS = ['#7b3294', '#c2a5cf', '#a6dba0', '#008837']
-import sacrebleu
+COLORS = ['#7b3294', '#c2a5cf', '#a6dba0', '#008837', '#d95f0e', '#fdae61']
 
 def compute_chrf(reference: str, candidate: str, word_order: int = 2):
     """
@@ -101,12 +110,31 @@ def load_data(do_save: bool = True,
               overwrite: bool = False,
               compute_scores: bool = False,
               skip_errors: bool = False) -> pd.DataFrame:
-    file_path = pathlib.Path('./results/evaluation_results.json')
+    file_path = thisdir / 'results' / 'evaluation_results.json'
+    save_path = thisdir / 'results' / 'evaluation_results_evaluated.json'
     data = json.loads(file_path.read_text())
+    data_evaluated = json.loads(save_path.read_text()) if save_path.exists() else {'results': []}
 
-    # keep only entries with entry["translator"] in TRANSLATOR_NAMES.keys()
-    data['results'] = [entry for entry in data['results'] if entry['translator'] in TRANSLATOR_NAMES.keys()]
-    print(f"Loaded {len(data['results'])} results")
+    all_results = set()
+    results = []
+    # Add completed results to the list
+    for result in data_evaluated['results']:
+        # remove metadata if present
+        if 'metadata' in result['translation']:
+            del result['translation']['metadata']
+        results.append(result)
+        all_results.add((result['translator'], result['model'], result['translation']['source']))
+
+    # Add new results to the list
+    for result in data['results']:
+        # remove metadata if present
+        if 'metadata' in result['translation']:
+            del result['translation']['metadata']
+        if (result['translator'], result['model'], result['translation']['source']) not in all_results:
+            results.append(result)
+            all_results.add((result['translator'], result['model'], result['translation']['source']))
+
+    data['results'] = results
 
     if compute_scores:
         print(f"Computing semantic similarities for {len(data['results'])} sentences...")
@@ -124,7 +152,7 @@ def load_data(do_save: bool = True,
                 result['semantic_similarity'] = 0
                 result['semantic_similarity_comparator'] = 0
             else:
-                if overwrite or 'semantic_similarity' not in result:
+                if overwrite or 'semantic_similarity' not in result or result['semantic_similarity'] == 0:
                     result['semantic_similarity'] = semantic_similarity(
                         result['translation']['source'],
                         back_translation,
@@ -132,19 +160,18 @@ def load_data(do_save: bool = True,
                     )
                     has_changed = True
 
-                if overwrite or 'semantic_similarity_comparator' not in result:
+                if overwrite or 'semantic_similarity_comparator' not in result or result['semantic_similarity_comparator'] == 0:
                     simple_sentences = split_sentence(
                         back_translation,
                         model='gpt-4o-mini'
                     )
-                    comparator_sentences = [
-                        comparator_sentence(sentence)
-                        for sentence in simple_sentences
-                    ]
-                    comparator = ". ".join([
-                        make_sentence(sentence, model='gpt-4o-mini')
-                        for sentence in comparator_sentences
-                    ]) + '.'
+                    comparator_sentences = SentenceList(
+                        sentences=[
+                            comparator_sentence(sentence)
+                            for sentence in simple_sentences.sentences
+                        ]
+                    )
+                    comparator = make_sentence(comparator_sentences, model='gpt-4o-mini')
                     result['comparator'] = comparator
 
                     result['semantic_similarity_comparator'] = semantic_similarity(
@@ -158,7 +185,7 @@ def load_data(do_save: bool = True,
                 result['semantic_similarity'] = 0
     
             if do_save and has_changed:
-                file_path.write_text(json.dumps(data, indent=2, ensure_ascii=False))
+                save_path.write_text(json.dumps(data, indent=2, ensure_ascii=False))
         
         print(" " * 100, end='\r')
         print("Semantic similarities computed successfully!")
@@ -193,7 +220,7 @@ def load_data(do_save: bool = True,
                 result['bleu_score_comparator'] = compute_bleu(result['translation']['source'], comparator)
 
             if do_save:
-                file_path.write_text(json.dumps(data, indent=2, ensure_ascii=False))
+                save_path.write_text(json.dumps(data, indent=2, ensure_ascii=False))
         print(" " * 100, end='\r')
         print("BLEU scores computed successfully!")
 
@@ -226,9 +253,82 @@ def load_data(do_save: bool = True,
                 result['chrf_score_comparator'] = compute_chrf(result['translation']['source'], comparator)
                 
             if do_save:
-                file_path.write_text(json.dumps(data, indent=2, ensure_ascii=False))
+                save_path.write_text(json.dumps(data, indent=2, ensure_ascii=False))
         print(" " * 100, end='\r')
         print("chrF++ scores computed successfully!")
+
+    
+        print(f"Computing BERT scores for {len(data['results'])} sentences...")
+        for i, result in enumerate(data['results'], start=1):
+            print(f"Computing BERT score for sentence {i}/{len(data['results'])} ({i/len(data['results'])*100:.2f}%)", end='\r')
+            # if bleu score is already computed, skip
+            if 'bert_score' in result and 'bert_score_comparator' in result:
+                continue
+            back_translation = result['translation']['back_translation']
+            if not back_translation:
+                if not skip_errors:
+                    raise ValueError(f"Missing back translation for the following result:\n{json.dumps(result, indent=2, ensure_ascii=False)}\n")
+                logging.warning(f"Missing back translation for the following result:\n{json.dumps(result, indent=2, ensure_ascii=False)}\n")
+                result['bert_score'] = 0
+            elif back_translation == "N/A":
+                result['bert_score'] = 0
+            else:
+                result['bert_score'] = get_bertscore(result['translation']['source'], back_translation)["f1"]
+
+            comparator = 'N/A' if back_translation == "N/A" else result['comparator']
+            if not comparator:
+                if not skip_errors:
+                    raise ValueError(f"Missing comparator for the following result:\n{json.dumps(result, indent=2, ensure_ascii=False)}\n")
+                logging.warning(f"Missing comparator for the following result:\n{json.dumps(result, indent=2, ensure_ascii=False)}\n")
+                result['bert_score_comparator'] = 0
+            elif comparator == "N/A":
+                result['bert_score_comparator'] = 0
+            else:
+                result['bert_score_comparator'] = get_bertscore(result['translation']['source'], comparator)["f1"]
+                
+            if do_save:
+                save_path.write_text(json.dumps(data, indent=2, ensure_ascii=False))
+        print(" " * 100, end='\r')
+        print("BERT scores computed successfully!")
+
+        print(f"Computing COMET scores for {len(data['results'])} sentences...")
+        missing_any_comet_scores = any(
+            'comet_score' not in result or 'comet_score_comparator' not in result
+            for result in data['results']
+        )
+        if missing_any_comet_scores:
+            predictions = [result['translation']['source'] for result in data['results']]
+            references = [result['translation']['back_translation'] for result in data['results']]
+            print(f"Computing COMET scores for {len(predictions)} sentences...")
+            scores = get_comet_score_batch(
+                predictions=predictions,
+                references=references,
+                sources=predictions
+            )
+            
+            references_comparator = [result.get('comparator', ' ') for result in data['results']]
+            print(f"Computing COMET scores for {len(predictions)} sentences...")
+            scores_comparator = get_comet_score_batch(
+                predictions=predictions,
+                references=references_comparator,
+                sources=predictions
+            )
+
+            for i, result in enumerate(data['results']):
+                if result['translation']['back_translation'] == "N/A":
+                    result['comet_score'] = 0
+                    result['comet_score_comparator'] = 0
+                else:
+                    result['comet_score'] = scores[i]
+                    if 'comparator' in result:
+                        result['comet_score_comparator'] = scores_comparator[i]
+                    else:
+                        result['comet_score_comparator'] = 0
+
+            if do_save:
+                save_path.write_text(json.dumps(data, indent=2, ensure_ascii=False))
+        print(" " * 100, end='\r')
+        print("COMET scores computed successfully!")
 
     df = pd.json_normalize(data['results'], sep='_')
     # drop translators not in TRANSLATOR_NAMES.keys()
@@ -249,7 +349,7 @@ def plot_translation_time():
     grouped_data['error_y_plus'] = grouped_data['q3_translation_time'] - grouped_data['median_translation_time']
     grouped_data['error_y_minus'] = grouped_data['median_translation_time'] - grouped_data['q1_translation_time']
 
-    bar_width = 0.2  # Width of each bar
+    bar_width = 0.175  # Width of each bar
     x_positions = np.arange(len(CATEGORY_ORDERS['sentence_type']))  # X-axis positions for the sentence types
 
     for model in grouped_data['model'].unique():
@@ -283,12 +383,9 @@ def plot_translation_time():
         plt.savefig(savepath)
         plt.close()
 
-import matplotlib.pyplot as plt
-import numpy as np
-
-def plot_semantic_similarity():
+def plot_translation_quality():
     df = load_data(compute_scores=True)
-    bar_width = 0.2  # Adjust the width of each bar
+    bar_width = 0.175  # Adjust the width of each bar
     fontsize = 16
     x_positions = np.arange(len(CATEGORY_ORDERS['sentence_type']))  # Create fixed positions for sentence types
 
@@ -296,38 +393,62 @@ def plot_semantic_similarity():
         {
             'yval': 'semantic_similarity_comparator',
             'ylabel': 'Median Semantic Similarity',
-            'ss_guide': True,
+            'rulers': 'semantic_similarity',
             'offset': 0.04,
         },
         {
             'yval': 'semantic_similarity',
             'ylabel': 'Median Semantic Similarity',
-            'ss_guide': True,
+            'rulers': 'semantic_similarity',
             'offset': 0.04,
         },
         {
             'yval': 'bleu_score_comparator',
             'ylabel': 'Median BLEU Score',
-            'ss_guide': False,
+            'rulers': 'bleu_score',
             'offset': 0.04,
         },
         {
             'yval': 'bleu_score',
             'ylabel': 'Median BLEU Score',
-            'ss_guide': False,
+            'rulers': 'bleu_score',
             'offset': 0.04,
         },
         {
             'yval': 'chrf_score_comparator',
             'ylabel': 'Median chrF++ Score',
-            'ss_guide': False,
+            'rulers': 'chrf_score',
             'offset': 4.0,
         },
         {
             'yval': 'chrf_score',
             'ylabel': 'Median chrF++ Score',
-            'ss_guide': False,
+            'rulers': 'chrf_score',
             'offset': 4.0,
+        },
+        {
+            'yval': 'bert_score_comparator',
+            'ylabel': 'Median BERT Score',
+            'rulers': 'bert_score',
+            'offset': 0.04,
+        },
+        {
+            'yval': 'bert_score',
+            'ylabel': 'Median BERT Score',
+            'rulers': 'bert_score',
+            'offset': 0.04,
+        },
+        {
+            'yval': 'comet_score_comparator',
+            'ylabel': 'Median COMET Score',
+            'rulers': 'comet_score',
+            'offset': 0.04,
+        },
+        {
+            'yval': 'comet_score',
+            'ylabel': 'Median COMET Score',
+            'rulers': 'comet_score',
+            'offset': 0.04,
         },
     ]
 
@@ -338,7 +459,7 @@ def plot_semantic_similarity():
         offset = plot['offset']
 
         # Create a figure with 2 subplots (one on top of the other), sharing the x-axis
-        fig, axes = plt.subplots(2, 1, figsize=(10, 8), sharex=True)
+        fig, axes = plt.subplots(2, 1, figsize=(10, 6), sharex=True)
 
         handles, labels = [], []  # To collect legend handles and labels
 
@@ -360,6 +481,7 @@ def plot_semantic_similarity():
 
             # Plot bars with error bars
             for j, translator in enumerate(CATEGORY_ORDERS['translator']):
+                print(f"Translator {j}: {translator}")
                 data = similarity_data[similarity_data['translator'] == translator]
                 if not data.empty:
                     bars = ax.bar(
@@ -379,8 +501,8 @@ def plot_semantic_similarity():
                         labels.append(translator)
 
             # Add baseline horizontal line for the semantic similarity baseline analysis
-            if plot['ss_guide']:
-                ss_mean, ss_std = semantic_similarity_baseline_analysis()
+            if plot['rulers']:
+                ss_mean, ss_std = similarity_baseline_analysis(metric=plot['rulers'])
                 ax.axhline(
                     y=ss_mean,
                     color='black',
@@ -397,7 +519,13 @@ def plot_semantic_similarity():
             # Set plot title and axis labels
             ax.set_ylim(-offset, df_similarity[yval].max() + offset)
             ax.set_title(f'Model: {model}', fontsize=fontsize)
-            ax.set_ylabel(plot['ylabel'], fontsize=fontsize)
+            # ax.set_ylabel(plot['ylabel'], fontsize=fontsize)
+            ax.set_ylabel(
+                "PLACEHOLDER",
+                fontsize=fontsize,
+                # set color to white
+                color='white'
+            )
 
         # Configure shared x-axis labels and ticks
         axes[-1].set_xlabel('Sentence Type', fontsize=fontsize)
@@ -406,101 +534,13 @@ def plot_semantic_similarity():
         # plt.legend(title='Translator', bbox_to_anchor=(1.05, 1), loc='upper left')
         # plt.tight_layout()
 
+        # set single y label for both subplots
+        fig.text(0.01, 0.625, plot['ylabel'], va='center', rotation='vertical', fontsize=fontsize)
+
         # Adjust layout and add the figure-wide legend
         fig.tight_layout()
         fig.legend(
             handles, labels,
-            title='Translator',
-            bbox_to_anchor=(1.0, 0.95),
-            loc='upper left',
-            fontsize=fontsize,
-            title_fontsize=fontsize
-        )
-
-        savepath = thisdir / f'plots/{yval}.{FILETYPE}'
-        savepath.parent.mkdir(exist_ok=True, parents=True)
-        plt.savefig(savepath, bbox_inches='tight')  # Ensure everything fits including the legend
-        plt.close()
-
-def plot_bleu_score():
-    df = load_data(compute_scores=True)
-    bar_width = 0.2  # Adjust the width of each bar
-    fontsize = 16
-    x_positions = np.arange(len(CATEGORY_ORDERS['sentence_type']))  # Create fixed positions for sentence types
-
-    plots = [
-        {
-            'yval': 'bleu_score_comparator',
-            'title': 'BLEU Score w/ Comparator',
-        },
-        {
-            'yval': 'bleu_score',
-            'title': 'BLEU Score w/ Backwards Translation',
-        },
-    ]
-
-    models = ['gpt-4o-mini', 'gpt-4o']  # Define models to iterate over
-    OFFSET = 0.04
-
-    for plot in plots:
-        yval = plot['yval']
-        title = plot['title']
-
-        # Create a figure with 2 subplots (one on top of the other), sharing the x-axis
-        fig, axes = plt.subplots(2, 1, figsize=(10, 8), sharex=True)
-
-        handles, labels = [], []
-
-        for i, model in enumerate(models):
-            ax: plt.Axes = axes[i]  # Get the corresponding subplot
-            df_model = df[df['model'] == model]
-            df_similarity = df_model[['translator', 'model', 'sentence_type', yval]]
-
-            df_similarity.loc[:, yval] += OFFSET
-
-            similarity_data = df_similarity.groupby(['translator', 'model', 'sentence_type']).agg(
-                median_similarity=(yval, 'median'),
-                q1_similarity=(yval, lambda x: x.quantile(0.25)),
-                q3_similarity=(yval, lambda x: x.quantile(0.75))
-            ).reset_index()
-
-            similarity_data['error_y_plus'] = similarity_data['q3_similarity'] - similarity_data['median_similarity']
-            similarity_data['error_y_minus'] = similarity_data['median_similarity'] - similarity_data['q1_similarity']
-
-            # Plot bars with error bars
-            for j, translator in enumerate(CATEGORY_ORDERS['translator']):
-                data = similarity_data[similarity_data['translator'] == translator]
-                if not data.empty:
-                    bars = ax.bar(
-                        x_positions + j * bar_width,
-                        data['median_similarity'],
-                        width=bar_width,
-                        yerr=[data['error_y_minus'], data['error_y_plus']],
-                        capsize=5,
-                        bottom=-OFFSET,
-                        color=COLORS[j % len(COLORS)]  # Use colors from the list
-                    )
-
-                    # Add the handles and labels from the last plot (avoiding duplicates)
-                    if i == len(models) - 1:
-                        handle = bars[0]
-                        handles.append(handle)
-
-            # Set plot title and axis labels
-            ax.set_ylim(-OFFSET, 1 + OFFSET)
-            ax.set_title(f'Model: {model}', fontsize=fontsize)
-            ax.set_ylabel('Median BLEU Score', fontsize=fontsize)
-
-        # Configure shared x-axis labels and ticks
-        axes[-1].set_xlabel('Sentence Type', fontsize=fontsize)
-        plt.xticks(x_positions + bar_width * (len(CATEGORY_ORDERS['translator']) - 1) / 2,
-                     CATEGORY_ORDERS['sentence_type'], rotation=45, fontsize=fontsize)
-        # plt.legend(title='Translator', bbox_to_anchor=(1.05, 1), loc='upper left')
-
-        # Adjust layout and add the figure-wide legend
-        fig.tight_layout()
-        fig.legend(
-            handles, CATEGORY_ORDERS['translator'],
             title='Translator',
             bbox_to_anchor=(1.0, 0.95),
             loc='upper left',
@@ -542,7 +582,7 @@ def plot_cost():
     grouped_data['error_y_plus'] = grouped_data['q3_cost'] - grouped_data['median_cost']
     grouped_data['error_y_minus'] = grouped_data['median_cost'] - grouped_data['q1_cost']
 
-    bar_width = 0.2  # Width of each bar
+    bar_width = 0.175  # Width of each bar
     x_positions = np.arange(len(CATEGORY_ORDERS['sentence_type']))  # X-axis positions for the sentence types
 
     for model in grouped_data['model'].unique():
@@ -638,11 +678,24 @@ def generate_translation_time_latex_table():
     with open('results/average_translation_time_summary_table.tex', 'w') as file:
         file.write(latex_table)
 
-@lru_cache(maxsize=None)
-def semantic_similarity_baseline_analysis(overwrite: bool = False) -> Tuple[float, float]:
-    """Runs semantic similirity on pairs of sentences to determine baseline similarity"""
 
-    savepath = thisdir / 'results/semantic_similarity_baseline.json'
+METRICS = {
+    "semantic_similarity": partial(semantic_similarity, model="all-MiniLM-L6-v2"),
+    "bleu_score": compute_bleu,
+    "chrf_score": partial(compute_chrf, word_order=2),
+    "bert_score": lambda reference, candidate: get_bertscore(reference, candidate)["f1"],
+    "comet_score": get_comet_score_batch
+}
+
+@lru_cache(maxsize=None)
+def similarity_baseline_analysis(metric: str, overwrite: bool = False) -> Tuple[float, float]:
+    """Runs semantic similirity on pairs of sentences to determine baseline similarity"""
+    if metric not in METRICS:
+        raise ValueError(f"Invalid metric: {metric}. Choose from {list(METRICS.keys())}")
+    
+    eval_func = METRICS[metric]
+
+    savepath = thisdir / f'results/{metric}_baseline.json'
     savepath.parent.mkdir(exist_ok=True, parents=True)
 
     if overwrite or not savepath.exists():
@@ -651,12 +704,20 @@ def semantic_similarity_baseline_analysis(overwrite: bool = False) -> Tuple[floa
         # for all pairs of sentences
         similarities = []
         total_pairs = len(sentences) * (len(sentences) - 1) // 2
-        for i, (s1, s2) in enumerate(combinations(sentences, 2), start=1):
-            print(f"Computing semantic similarity for sentence pair {i}/{total_pairs} ({i/total_pairs*100:.2f}%)", end='\r')
-            similarity = semantic_similarity(s1, s2, model="all-MiniLM-L6-v2")
-            similarities.append(similarity)
+        if metric == "comet_score": # batch comet_score function
+            combos = list(combinations(sentences, 2))
+            similarities = eval_func(
+                predictions=[s1 for s1, _ in combos],
+                references=[s2 for _, s2 in combos],
+                sources=[s1 for s1, _ in combos]
+            )
+        else:
+            for i, (s1, s2) in enumerate(combinations(sentences, 2), start=1):
+                print(f"Computing similarity for sentence pair {i}/{total_pairs} ({i/total_pairs*100:.2f}%)", end='\r')
+                similarity = eval_func(s1, s2)
+                similarities.append(similarity)
         print(" " * 100, end='\r')
-        print("Semantic similarities computed successfully!")
+        print("Similarity computed successfully!")
 
         # save similarities to file
         savepath.write_text(json.dumps(similarities, indent=2, ensure_ascii=False))
@@ -666,27 +727,46 @@ def semantic_similarity_baseline_analysis(overwrite: bool = False) -> Tuple[floa
     mean = np.mean(similarities)
     std = np.std(similarities)
 
-    print(f"Baseline semantic similarity: {mean:.3f} ± {std:.3f}")
+    print(f"Baseline similarity: {mean:.3f} ± {std:.3f}")
 
     # Plot histogram
     plt.figure(figsize=(6, 6))
     plt.hist(similarities, bins=20, color=COLORS[0], edgecolor='black')
     # set font size for all elements to 24
-    plt.title('Semantic Similarity Distribution', fontsize=24)
-    plt.xlabel('Semantic Similarity', fontsize=24)
+    plt.title('Similarity Distribution', fontsize=24)
+    plt.xlabel(metric, fontsize=24)
     plt.ylabel('Frequency', fontsize=24)
     plt.xticks(fontsize=24)
     plt.yticks(fontsize=24)
 
-
     plt.tight_layout()
 
-    savepath = thisdir / f'plots/semantic_similarity_baseline.{FILETYPE}'
+    savepath = thisdir / f'plots/{metric}_baseline.{FILETYPE}'
     savepath.parent.mkdir(exist_ok=True, parents=True)
     plt.savefig(savepath)
     plt.close()
 
     return mean, std
+
+def similarity_baseline_latex_table():
+    # create table with the following columns:
+    # metric, mean, std
+    rows = []
+    for metric in METRICS.keys():
+        mean, std = similarity_baseline_analysis(metric=metric)
+        rows.append([metric, f"{mean:.3f}", f"{std:.3f}"])
+    df = pd.DataFrame(rows, columns=["Metric", "Mean", "Standard Deviation"])
+    latex_table = df.to_latex(index=False,
+                              columns=["Metric", "Mean", "Standard Deviation"],
+                              header=["Metric", "Mean", "Standard Deviation"],
+                              float_format="%.3f",
+                              caption='Summary of Baseline Similarity Analysis',
+                              label='tab:baseline_similarity_summary')
+    
+    savepath = thisdir / 'results/baseline_similarity_summary_table.tex'
+    savepath.parent.mkdir(exist_ok=True, parents=True)
+    savepath.write_text(latex_table)
+
 
 def get_interesting_examples():
     # get example where Builder comparator is better than Pipeline
@@ -793,13 +873,12 @@ def get_interesting_examples():
 
 
 def main():
-    # plot_bleu_score()
-    # plot_chrf_score()
-    plot_semantic_similarity()
+    plot_translation_quality()
     # plot_translation_time()
     # plot_cost()
     # generate_cost_latex_table()
     # generate_translation_time_latex_table()
+    # similarity_baseline_latex_table()
     # semantic_similarity_baseline_analysis()
     # get_interesting_examples()
 
