@@ -383,10 +383,7 @@ def plot_translation_time():
         plt.savefig(savepath)
         plt.close()
 
-import matplotlib.pyplot as plt
-import numpy as np
-
-def plot_semantic_similarity():
+def plot_translation_quality():
     df = load_data(compute_scores=True)
     bar_width = 0.175  # Adjust the width of each bar
     fontsize = 16
@@ -462,7 +459,7 @@ def plot_semantic_similarity():
         offset = plot['offset']
 
         # Create a figure with 2 subplots (one on top of the other), sharing the x-axis
-        fig, axes = plt.subplots(2, 1, figsize=(10, 8), sharex=True)
+        fig, axes = plt.subplots(2, 1, figsize=(10, 6), sharex=True)
 
         handles, labels = [], []  # To collect legend handles and labels
 
@@ -522,7 +519,13 @@ def plot_semantic_similarity():
             # Set plot title and axis labels
             ax.set_ylim(-offset, df_similarity[yval].max() + offset)
             ax.set_title(f'Model: {model}', fontsize=fontsize)
-            ax.set_ylabel(plot['ylabel'], fontsize=fontsize)
+            # ax.set_ylabel(plot['ylabel'], fontsize=fontsize)
+            ax.set_ylabel(
+                "PLACEHOLDER",
+                fontsize=fontsize,
+                # set color to white
+                color='white'
+            )
 
         # Configure shared x-axis labels and ticks
         axes[-1].set_xlabel('Sentence Type', fontsize=fontsize)
@@ -530,6 +533,9 @@ def plot_semantic_similarity():
                    CATEGORY_ORDERS['sentence_type'], rotation=45, fontsize=fontsize)
         # plt.legend(title='Translator', bbox_to_anchor=(1.05, 1), loc='upper left')
         # plt.tight_layout()
+
+        # set single y label for both subplots
+        fig.text(0.01, 0.625, plot['ylabel'], va='center', rotation='vertical', fontsize=fontsize)
 
         # Adjust layout and add the figure-wide legend
         fig.tight_layout()
@@ -867,12 +873,12 @@ def get_interesting_examples():
 
 
 def main():
-    # plot_semantic_similarity()
+    plot_translation_quality()
     # plot_translation_time()
     # plot_cost()
     # generate_cost_latex_table()
     # generate_translation_time_latex_table()
-    similarity_baseline_latex_table()
+    # similarity_baseline_latex_table()
     # semantic_similarity_baseline_analysis()
     # get_interesting_examples()
 

@@ -504,7 +504,7 @@ def split_sentence(sentence: str, model: str, res_callback: Optional[Callable[[C
         res_callback(response)
 
     sentences = response.choices[0].message.parsed
-
+    print(sentences.model_dump_json())
     return sentences
 
 class PipelineTranslator(Translator):
