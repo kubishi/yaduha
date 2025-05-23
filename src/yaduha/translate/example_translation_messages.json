@@ -1,0 +1,93 @@
+[
+    {
+        "role": "user",
+        "content": "where is my dog"
+    },
+    {
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_A7HDYfGTksNaUnSpBqDEToIB",
+                "function": {
+                    "name": "search_sentences",
+                    "arguments": "{\"query\": \"where is my dog?\"}"
+                },
+                "type": "function"
+            },
+            {
+                "id": "call_W49Y8Bb3uFWAE4pbXNODenUS",
+                "function": {
+                    "name": "search_english",
+                    "arguments": "{\"query\": \"where\"}"
+                },
+                "type": "function"
+            },
+            {
+                "id": "call_8yi4YBKHVR9FrcmUGycXXojc",
+                "function": {
+                    "name": "search_english",
+                    "arguments": "{\"query\": \"dog\"}"
+                },
+                "type": "function"
+            },
+            {
+                "id": "call_dEny5pBHaOJSSPZcZ6k6P8Jt",
+                "function": {
+                    "name": "search_english",
+                    "arguments": "{\"query\": \"to be, is, am, are\"}"
+                },
+                "type": "function"
+            },
+            {
+                "id": "call_dEny5pBHaOJSSPZcZ6k6P8Jl",
+                "function": {
+                    "name": "split_sentence",
+                    "arguments": "{\"query\": \"where is my dog?\"}"
+                },
+                "type": "function"
+            },
+            {
+                "id": "call_dEny5pBHaOJSSPZcZ6k6P8Jd",
+                "function": {
+                    "name": "translate_simple_sentence",
+                    "arguments": "{\"query\": \"where is my dog?\"}"
+                },
+                "type": "function"
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "content": "[{\"Where is my dog?\": \"Hanno 'i-doogü'?\"}, {\"Where's your dog?\": \"Hanno 'ü-gwidapugu-uu?\"}, {\"Where is my rabbit?\": \"Hanno-wa' i-kammü-naha-uu?\"}, {\"Where did you spot my dog at (on my behalf)?\": \"Hanno-kko 'üü 'i-buni-ggü-ti 'i-doogü-tsi'-aa?\"}, {\"My dog is going alongside the house.\": \"'I-doogü'-uu 'a-güŵa-duha nobi-neikka mia-ti.\"}]",
+        "tool_call_id": "call_A7HDYfGTksNaUnSpBqDEToIB"
+    },
+    {
+        "role": "tool",
+        "content": "{\"haŵutta\": \"where\", \"tu'ihanno\": \"anywhere\", \"hanno\": \"where\", \"hannokko\": \"where\", \"'ionnoho\": \"here\"}",
+        "tool_call_id": "call_W49Y8Bb3uFWAE4pbXNODenUS"
+    },
+    {
+        "role": "tool",
+        "content": "{\"'ego\": \"tongue\", \"-dii\": \"indeed\", \"-düa\": \"also\", \"-ddu\": \"from\", \"poi\": \"exceed (in amount)\"}",
+        "tool_call_id": "call_8yi4YBKHVR9FrcmUGycXXojc"
+    },
+    {
+        "role": "tool",
+        "content": "{\"to-\": \"fist\", \"'io\": \"here\", \"-be\": \"in\", \"'ube\": \"in there\", \"ibe\": \"in here\"}",
+        "tool_call_id": "call_dEny5pBHaOJSSPZcZ6k6P8Jt"
+    },
+    {
+        "role": "tool",
+        "content": "{\"sentences\":[{\"subject\":{\"head\":\"dog\",\"possessive_determiner\":{\"person\":\"first\",\"plurality\":\"singular\",\"proximity\":\"proximal\",\"inclusivity\":\"exclusive\",\"reflexive\":false},\"proximity\":\"proximal\",\"plurality\":\"singular\"},\"verb\":{\"lemma\":\"be\",\"tense\":\"present\",\"aspect\":\"simple\"},\"object\":null}]}",
+        "tool_call_id": "call_dEny5pBHaOJSSPZcZ6k6P8Jl"
+    },
+    {
+        "role": "tool",
+        "content": "[be]-dü i-isha'pugu-ii.",
+        "tool_call_id": "call_dEny5pBHaOJSSPZcZ6k6P8Jd"
+    },
+    {
+        "role": "assistant",
+        "content": "Hanno 'i-doogü'?"
+    }
+]
