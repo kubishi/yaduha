@@ -149,86 +149,57 @@ class ClaudeAgent(Agent):
             total_prompt_tokens += response.usage.input_tokens
             total_completion_tokens += response.usage.output_tokens
 
-            # Check for tool use
+            # Extract blocks from response
             tool_use_blocks = [block for block in response.content if isinstance(block, ToolUseBlock)]
             text_blocks = [block for block in response.content if isinstance(block, TextBlock)]
 
-            if tool_use_blocks:
-                # Build assistant message with tool calls for history
-                assistant_content: List[dict] = []
-                for block in response.content:
-                    if isinstance(block, TextBlock):
-                        assistant_content.append({"type": "text", "text": block.text})
-                    elif isinstance(block, ToolUseBlock):
-                        assistant_content.append({
-                            "type": "tool_use",
-                            "id": block.id,
-                            "name": block.name,
-                            "input": block.input
-                        })
-                
-                # Add assistant message in OpenAI-compatible format for our internal tracking
-                tool_calls_for_history = []
-                for block in tool_use_blocks:
-                    tool_calls_for_history.append({
-                        "id": block.id,
-                        "type": "function",
-                        "function": {
-                            "name": block.name,
-                            "arguments": json.dumps(block.input)
-                        }
-                    })
-                messages.append({
-                    "role": "assistant",
-                    "content": text_blocks[0].text if text_blocks else "",
-                    "tool_calls": tool_calls_for_history
+            # Build assistant message in OpenAI-compatible format
+            tool_calls_for_history = []
+            for block in tool_use_blocks:
+                tool_calls_for_history.append({
+                    "id": block.id,
+                    "type": "function",
+                    "function": {
+                        "name": block.name,
+                        "arguments": json.dumps(block.input)
+                    }
                 })
+            text_content = ""
+            for block in text_blocks:
+                text_content += block.text
+            
+            # Append assistant message to history immediately (like OpenAI)
+            message: ChatCompletionMessageParam = {
+                "role": "assistant",
+                "content": text_content,
+            }
+            if tool_calls_for_history:
+                message["tool_calls"] = tool_calls_for_history
+            messages.append(message)
 
-                # Execute tools and add results
-                for block in tool_use_blocks:
-                    name = block.name
-                    args = block.input if isinstance(block.input, dict) else {}
-                    self.log({"event": "tool_call", "tool_name": name, "arguments": args})
-                    result = tool_map[name](**args)
-                    messages.append({
-                        "role": "tool",
-                        "tool_call_id": block.id,
-                        "content": str(result),
-                    })
-                    self.log({"event": "tool_result", "tool_name": name, "result": result})
+            # Check for tool use - early return if none (like OpenAI)
+            if not tool_use_blocks:
+                if not text_content:
+                    raise ValueError("No content in response")
                 
-                # Continue the loop to get next response
-                continue
+                self.log({"event": "get_response_content", "content": text_content})
 
-            # No tool calls - extract text content
-            content = ""
-            for block in response.content:
-                if isinstance(block, TextBlock):
-                    content += block.text
-
-            if not content:
-                raise ValueError("No content in response")
-
-            self.log({"event": "get_response_content", "content": content})
-
-            # Parse structured output if needed
-            if response_format is str:
-                return cast(
-                    AgentResponse[TAgentResponseContentType],
-                    AgentResponse(
-                        content=content,
-                        response_time=time.time() - start_time,
-                        prompt_tokens=total_prompt_tokens,
-                        completion_tokens=total_completion_tokens,
+                # Handle text response
+                if response_format is str:
+                    return cast(
+                        AgentResponse[TAgentResponseContentType],
+                        AgentResponse(
+                            content=text_content,
+                            response_time=time.time() - start_time,
+                            prompt_tokens=total_prompt_tokens,
+                            completion_tokens=total_completion_tokens,
+                        )
                     )
-                )
-            else:
-                # Parse JSON response into the expected format
+                
+                # Handle structured output - parse JSON
                 try:
-                    # Try to extract JSON from the response (handle potential markdown wrapping)
-                    json_content = content.strip()
+                    json_content = text_content.strip()
                     if json_content.startswith("```"):
-                        # Remove markdown code blocks
                         lines = json_content.split("\n")
                         json_lines = []
                         in_block = False
@@ -242,8 +213,8 @@ class ClaudeAgent(Agent):
                     
                     parsed = response_format(**json.loads(json_content))
                 except (json.JSONDecodeError, ValueError) as e:
-                    self.log({"event": "parse_error", "content": content, "error": str(e)})
-                    raise ValueError(f"Failed to parse response as {response_format.__name__}: {e}\nContent: {content}")
+                    self.log({"event": "parse_error", "content": text_content, "error": str(e)})
+                    raise ValueError(f"Failed to parse response as {response_format.__name__}: {e}\nContent: {text_content}")
 
                 self.log({"event": "get_response_parsed", "parsed": parsed})
                 return cast(
@@ -255,3 +226,16 @@ class ClaudeAgent(Agent):
                         completion_tokens=total_completion_tokens,
                     )
                 )
+
+            # Handle tool calls (only reached if tool_use_blocks exist)
+            for block in tool_use_blocks:
+                name = block.name
+                args = block.input if isinstance(block.input, dict) else {}
+                self.log({"event": "tool_call", "tool_name": name, "arguments": args})
+                result = tool_map[name](**args)
+                messages.append({
+                    "role": "tool",
+                    "tool_call_id": block.id,
+                    "content": str(result),
+                })
+                self.log({"event": "tool_result", "tool_name": name, "result": result})
