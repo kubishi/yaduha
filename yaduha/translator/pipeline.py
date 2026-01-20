@@ -21,6 +21,7 @@ class PipelineTranslator(Translator, Generic[TSentenceType]):
     )
 
     agent: Agent
+    back_translation_agent: Optional[Agent] = None
     SentenceType: Type[TSentenceType] | Tuple[Type[Sentence], ...]
 
     def translate(self, text: str) -> Translation:
@@ -37,8 +38,10 @@ class PipelineTranslator(Translator, Generic[TSentenceType]):
             SentenceType=self.SentenceType,
             logger=self.logger
         )
+        # Use back_translation_agent if provided, otherwise fall back to main agent
+        bt_agent = self.back_translation_agent or self.agent
         translate_sentence_to_english = SentenceToEnglishTool(
-            agent=self.agent,
+            agent=bt_agent,
             SentenceType=self.SentenceType,
             logger=self.logger
         )
@@ -103,8 +106,9 @@ class PipelineTranslator(Translator, Generic[TSentenceType]):
             agent=self.agent,
             SentenceType=self.SentenceType
         )
+        bt_agent = self.back_translation_agent or self.agent
         translate_sentence_to_english = SentenceToEnglishTool(
-            agent=self.agent,
+            agent=bt_agent,
             SentenceType=self.SentenceType
         )
 

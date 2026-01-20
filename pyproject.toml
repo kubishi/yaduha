@@ -34,10 +34,13 @@ classifiers = [
     "Topic :: Text Processing :: Linguistic",
 ]
 dependencies = [
+    "anthropic",
     "openai",
+    "pandas",
     "pydantic",
     "python-dotenv",
     "requests",
+    "tabulate",
     "weave",
 ]
 
