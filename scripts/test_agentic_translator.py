@@ -3,7 +3,7 @@ from yaduha.logger import WandbLogger, PrintLogger
 from yaduha.translator.pipeline import PipelineTranslator
 from yaduha.translator.agentic import AgenticTranslator
 from yaduha.agent.openai import OpenAIAgent
-from yaduha.agent.claude import ClaudeAgent
+from yaduha.agent.anthropic import AnthropicAgent
 from yaduha.agent.ollama import OllamaAgent
 from yaduha.language.ovp import SubjectVerbSentence, SubjectVerbObjectSentence
 from yaduha.language.ovp.prompts import get_prompt
@@ -105,7 +105,7 @@ def main():
     #     model="gpt-4o-mini",
     #     api_key=os.environ["OPENAI_API_KEY"]
     # )
-    # agent = ClaudeAgent(
+    # agent = AnthropicAgent(
     #     model="claude-sonnet-4-5",
     #     api_key=os.environ["ANTHROPIC_API_KEY"]
     # )

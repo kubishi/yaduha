@@ -3,7 +3,7 @@ from pydantic import BaseModel, Field
 from yaduha.tool import Tool
 from yaduha.translator.pipeline import PipelineTranslator
 from yaduha.agent.openai import OpenAIAgent
-from yaduha.agent.claude import ClaudeAgent
+from yaduha.agent.anthropic import AnthropicAgent
 from yaduha.language.ovp import SubjectVerbSentence, SubjectVerbObjectSentence
 
 from dotenv import load_dotenv
@@ -66,7 +66,7 @@ def main():
     #     api_key=os.environ["OPENAI_API_KEY"]
     # )
 
-    agent = ClaudeAgent(
+    agent = AnthropicAgent(
         model="claude-sonnet-4-5",
         api_key=os.environ["ANTHROPIC_API_KEY"]
     )

@@ -1,6 +1,11 @@
+"""Test script for the PipelineTranslator.
+
+Tests all models and prints results in a pandas table.
+"""
+
 from yaduha.translator.pipeline import PipelineTranslator
 from yaduha.agent.openai import OpenAIAgent
-from yaduha.agent.claude import ClaudeAgent
+from yaduha.agent.anthropic import AnthropicAgent
 from yaduha.agent.ollama import OllamaAgent
 from yaduha.language.ovp import SubjectVerbSentence, SubjectVerbObjectSentence
 
@@ -10,62 +15,109 @@ import os
 
 load_dotenv()
 
+# Models to test
+MODELS = {
+    "openai": [
+        "gpt-4o",
+        "gpt-4o-mini",
+    ],
+    "anthropic": [
+        "claude-sonnet-4-5",
+        "claude-sonnet-4-20250514",
+        "claude-3-haiku-20240307",
+    ],
+    "ollama": [
+        "deepseek-r1:70b",
+        "mixtral:8x22b",
+        "llama3.1:8b",
+    ],
+}
+
+
+def create_agent(agent_type: str, model: str):
+    """Create an agent of the specified type."""
+    if agent_type == "openai":
+        return OpenAIAgent(
+            model=model,  # type: ignore[arg-type]
+            api_key=os.environ["OPENAI_API_KEY"],
+        )
+    elif agent_type == "anthropic":
+        return AnthropicAgent(
+            model=model,  # type: ignore[arg-type]
+            api_key=os.environ["ANTHROPIC_API_KEY"],
+        )
+    elif agent_type == "ollama":
+        return OllamaAgent(model=model)
+    else:
+        raise ValueError(f"Unknown agent type: {agent_type}")
+
+
 def main():
-    agent = OllamaAgent(
-        model="llama3.2:3b",
-    )
-
-    agents = {
-        "openai": OpenAIAgent,
-        "ollama": OllamaAgent,
-    }
-    models = {
-        "openai": [
-            "gpt-4o",
-            "gpt-4o-mini",
-        ],
-        "ollama": [
-            "llama3.1:8b",
-            "llama3.2:3b",
-            "qwen2.5:7b"
-        ]
-    }
-
-    back_translation_agent = OpenAIAgent(
-        model="gpt-4o-mini",
-        api_key=os.environ["OPENAI_API_KEY"]
-    )
+    # ============================================================
+    # CONFIGURATION
+    # ============================================================
 
     source = "The dog is sitting at the lakeside, drinking some water."
-    print(f"Source text: {source}\n")
-    rows = []
-    for agent_name, agent_class in agents.items():
-        for model_name in models[agent_name]:
-            # print(f"Testing {agent_name} model {model_name}...")
-            agent = agent_class(
-                model=model_name,
-                api_key=os.environ.get(f"{agent_name.upper()}_API_KEY")
-            )
 
-            translator = PipelineTranslator(
-                agent=agent,
-                back_translation_agent=back_translation_agent,
-                SentenceType=(SubjectVerbObjectSentence, SubjectVerbSentence)
-            )
+    # Back-translation always uses gpt-4o
+    back_agent = OpenAIAgent(
+        model="gpt-4o",
+        api_key=os.environ["OPENAI_API_KEY"],
+    )
 
-            translation = translator(source)
-            back_translation = translation.back_translation.source if translation.back_translation else "N/A"
-            # print(f"MODEL[{agent_name}:{model_name}]: {translation.target} -> {back_translation}")
-            rows.append({
-                "agent": agent_name,
-                "model": model_name,
-                "translation": translation.target,
-                "back_translation": back_translation
-            })
+    # ============================================================
 
-    df = pd.DataFrame(rows)
+    print(f"Source: {source}")
+    print(f"Back-translation: openai/gpt-4o")
+    print("=" * 80)
+
+    results = []
+
+    for agent_type, models in MODELS.items():
+        for model in models:
+            print(f"Testing {agent_type}/{model}...")
+
+            try:
+                agent = create_agent(agent_type, model)
+
+                translator = PipelineTranslator(
+                    agent=agent,
+                    back_translation_agent=back_agent,
+                    SentenceType=(SubjectVerbObjectSentence, SubjectVerbSentence),
+                )
+
+                translation = translator(source)
+                back_translation = (
+                    translation.back_translation.source
+                    if translation.back_translation
+                    else "N/A"
+                )
+
+                results.append({
+                    "agent": agent_type,
+                    "model": model,
+                    "translation": translation.target,
+                    "back_translation": back_translation,
+                })
+                print(f"  OK")
+
+            except Exception as e:
+                print(f"  ERROR: {e}")
+                results.append({
+                    "agent": agent_type,
+                    "model": model,
+                    "translation": f"ERROR",
+                    "back_translation": "N/A",
+                })
+
+    # Print results as a table
+    print("\n" + "=" * 80)
+    print("RESULTS")
+    print("=" * 80 + "\n")
+
+    df = pd.DataFrame(results)
     print(df.to_markdown(index=False))
+
 
 if __name__ == "__main__":
     main()
-

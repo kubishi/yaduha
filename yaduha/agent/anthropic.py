@@ -10,10 +10,10 @@ from yaduha.agent import Agent, AgentResponse, TAgentResponseContentType
 from yaduha.tool import Tool
 
 
-class ClaudeAgent(Agent):
+class AnthropicAgent(Agent):
     model: Literal["claude-sonnet-4-5", "claude-sonnet-4-20250514", "claude-3-5-sonnet-20241022", "claude-3-haiku-20240307"]
-    name: ClassVar[str] = "claude_agent"
-    api_key: str = Field(..., description="The Claude API key.", exclude=True)
+    name: ClassVar[str] = "anthropic_agent"
+    api_key: str = Field(..., description="The Anthropic API key.", exclude=True)
     temperature: float = Field(default=0.0, description="The temperature for the model's responses.")
     max_tokens: int = Field(default=4096, description="Maximum tokens in the response.")
 
