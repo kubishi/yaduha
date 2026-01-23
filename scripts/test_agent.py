@@ -3,6 +3,7 @@ from pydantic import BaseModel, Field
 from yaduha.tool import Tool
 from yaduha.translator.pipeline import PipelineTranslator
 from yaduha.agent.openai import OpenAIAgent
+from yaduha.agent.claude import ClaudeAgent
 from yaduha.language.ovp import SubjectVerbSentence, SubjectVerbObjectSentence
 
 from dotenv import load_dotenv
@@ -37,6 +38,7 @@ class SearchPeople(Tool):
     description: ClassVar[str] = "Search for people in our game."
 
     def _run(self, person: Person) -> list["Person"]:
+        #Is this an error? I'm pretty sure this needs to filter out a person from the list of people
         print(f"SearchPeople called with person={person}")
         results = [
             person for person in PEOPLE 
@@ -59,9 +61,14 @@ class SearchPeople(Tool):
         
     
 def main():
-    agent = OpenAIAgent(
-        model="gpt-4o",
-        api_key=os.environ["OPENAI_API_KEY"]
+    # agent = OpenAIAgent(
+    #     model="gpt-4o",
+    #     api_key=os.environ["OPENAI_API_KEY"]
+    # )
+
+    agent = ClaudeAgent(
+        model="claude-sonnet-4-5",
+        api_key=os.environ["ANTHROPIC_API_KEY"]
     )
 
     response = agent.get_response(

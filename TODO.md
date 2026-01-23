@@ -20,7 +20,7 @@
   ```
 
 ## 4. Experiment Tracking & Cloud Storage
-
+(Weights & Biases)
 * [ ] Design a **unified experiment runner** (e.g. `ExperimentManager`).
 * [ ] Log translations, prompts, metadata (latency, tokens, model, confidence, etc.).
 * [ ] Support **cloud persistence** somehow.

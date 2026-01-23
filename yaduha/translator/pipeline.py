@@ -1,8 +1,11 @@
 import random
 import re
 import time
-from typing import ClassVar, Dict, Generic, List, Type, Tuple
+from uuid import uuid4
+from typing import ClassVar, Dict, Generic, List, Optional, Type, Tuple
 
+from yaduha import logger
+from yaduha.logger import inject_logs
 from yaduha.translator import Translator, Translation, BackTranslation
 from yaduha.tool.english_to_sentences import EnglishToSentencesTool, TSentenceType
 from yaduha.tool.sentence_to_english import SentenceToEnglishTool
@@ -18,9 +21,10 @@ class PipelineTranslator(Translator, Generic[TSentenceType]):
     )
 
     agent: Agent
+    back_translation_agent: Optional[Agent] = None
     SentenceType: Type[TSentenceType] | Tuple[Type[Sentence], ...]
 
-    def _run(self, text: str) -> Translation:
+    def translate(self, text: str) -> Translation:
         """Translate the text using a pipeline of translators.
         
         Args:
@@ -31,11 +35,15 @@ class PipelineTranslator(Translator, Generic[TSentenceType]):
         start_time = time.time()
         translate_input_to_sentences = EnglishToSentencesTool(
             agent=self.agent,
-            SentenceType=self.SentenceType
+            SentenceType=self.SentenceType,
+            logger=self.logger
         )
+        # Use back_translation_agent if provided, otherwise fall back to main agent
+        bt_agent = self.back_translation_agent or self.agent
         translate_sentence_to_english = SentenceToEnglishTool(
-            agent=self.agent,
-            SentenceType=self.SentenceType
+            agent=bt_agent,
+            SentenceType=self.SentenceType,
+            logger=self.logger
         )
 
         def clean_text(s: str) -> str:
@@ -66,6 +74,17 @@ class PipelineTranslator(Translator, Generic[TSentenceType]):
             completion_tokens_bt += back_translation.completion_tokens
         end_time_bt = time.time()
 
+        self.logger.log(data={
+            "response": " ".join(targets), 
+            "source": text,
+            "translation_time": end_time - start_time,
+            "prompt_tokens": prompt_tokens,
+            "completion_tokens": completion_tokens,
+            "back_translation_time": end_time_bt - start_time_bt,
+            "back_translation_prompt_tokens": prompt_tokens_bt,
+            "back_translation_completion_tokens": completion_tokens_bt
+        })
+
         return Translation(
             source=text,
             target=" ".join(targets),
@@ -87,8 +106,9 @@ class PipelineTranslator(Translator, Generic[TSentenceType]):
             agent=self.agent,
             SentenceType=self.SentenceType
         )
+        bt_agent = self.back_translation_agent or self.agent
         translate_sentence_to_english = SentenceToEnglishTool(
-            agent=self.agent,
+            agent=bt_agent,
             SentenceType=self.SentenceType
         )
 

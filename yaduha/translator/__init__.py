@@ -1,5 +1,8 @@
+from abc import ABC, abstractmethod
 from typing import ClassVar
+from uuid import uuid4
 from pydantic import BaseModel, Field
+from yaduha.logger import inject_logs
 from yaduha.tool import Tool
 
 
@@ -21,7 +24,7 @@ class Translation(BaseModel):
     )
     metadata: dict = Field(default_factory=dict, description="Additional metadata about the translation.")
 
-class Translator(Tool[Translation]):
+class Translator(Tool[Translation], ABC):
     """Base class for translators that translate text to a target language and back to the source language."""
     name: ClassVar[str] = "translator"
     description: ClassVar[str] = "Translate text to the target language and back to the source language."
@@ -34,4 +37,8 @@ class Translator(Tool[Translation]):
         Returns:
             Translation: The translation
         """
-        raise NotImplementedError
+        return self.translate(text)   
+
+    @abstractmethod
+    def translate(self, text: str) -> Translation:
+        pass

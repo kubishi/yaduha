@@ -44,6 +44,8 @@ class OpenAIAgent(Agent):
         chat_tools = [tool.get_tool_call_schema() for tool in (tools or [])]
         tool_map = {tool.name: tool for tool in (tools or [])}
 
+        self.log({"event": "get_response_start", "messages": messages, "tools": [tool.name for tool in (tools or [])]})
+
         while True:
             if response_format is str:
                 response = client.chat.completions.create(
@@ -52,6 +54,7 @@ class OpenAIAgent(Agent):
                     tools=chat_tools,
                     temperature=self.temperature
                 )
+                self.log({"event": "get_response_received", "response": response})
                 msg = json.loads(response.choices[0].message.model_dump_json())
                 messages.append(msg)
 
@@ -59,7 +62,7 @@ class OpenAIAgent(Agent):
                     content = response.choices[0].message.content
                     if not content:
                         raise ValueError("No content in response")
-                    # Cast needed because type checker can't narrow TAgentResponseContentType to str
+                    self.log({"event": "get_response_content", "content": content})
                     return cast(
                         AgentResponse[TAgentResponseContentType],
                         AgentResponse(
@@ -77,6 +80,7 @@ class OpenAIAgent(Agent):
                     response_format=response_format,
                     temperature=self.temperature
                 )
+                self.log({"event": "get_response_received", "response": response})
                 msg = json.loads(response.choices[0].message.model_dump_json())
                 messages.append(msg)
 
@@ -84,7 +88,7 @@ class OpenAIAgent(Agent):
                     parsed = response.choices[0].message.parsed
                     if not parsed:
                         raise ValueError("No content in response")
-                    # Cast needed because type checker can't verify parsed matches TAgentResponseContentType
+                    self.log({"event": "get_response_parsed", "parsed": parsed})
                     return cast(
                         AgentResponse[TAgentResponseContentType],
                         AgentResponse(
@@ -99,6 +103,7 @@ class OpenAIAgent(Agent):
                 if tool_call.type == "function":
                     name = tool_call.function.name
                     args = json.loads(tool_call.function.arguments)
+                    self.log({"event": "tool_call", "tool_name": name, "arguments": args})
                     result = tool_map[name](**args)
                     messages.append(
                         {
@@ -107,3 +112,4 @@ class OpenAIAgent(Agent):
                             "content": str(result),
                         }
                     )
+                    self.log({"event": "tool_result", "tool_name": name, "result": result})

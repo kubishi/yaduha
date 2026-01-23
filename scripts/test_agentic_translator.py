@@ -1,7 +1,10 @@
 import requests
+from yaduha.logger import WandbLogger, PrintLogger
 from yaduha.translator.pipeline import PipelineTranslator
 from yaduha.translator.agentic import AgenticTranslator
 from yaduha.agent.openai import OpenAIAgent
+from yaduha.agent.claude import ClaudeAgent
+from yaduha.agent.ollama import OllamaAgent
 from yaduha.language.ovp import SubjectVerbSentence, SubjectVerbObjectSentence
 from yaduha.language.ovp.prompts import get_prompt
 from yaduha.tool import Tool
@@ -9,6 +12,7 @@ from yaduha.tool import Tool
 from typing import ClassVar, List, Dict, Tuple
 from dotenv import load_dotenv
 import os
+
 
 load_dotenv()
 
@@ -46,6 +50,11 @@ class SearchEnglishTool(Tool):
             } for item in res_json
         ]
 
+        self.log({
+            "tool/search_english/query": query,
+            "tool/search_english/results": results
+        })
+
         return results
         
 class SearchPaiuteTool(Tool):
@@ -58,6 +67,8 @@ class SearchPaiuteTool(Tool):
         response = requests.get(f"{SearchPaiuteTool.KUBISHI_API_URL}/search/paiute", params={"query": query, "limit": limit})
         response.raise_for_status()
         res_json: List[Dict] = response.json()
+
+        
         return format_word(res_json)
 
 class SearchSentencesTool(Tool):
@@ -76,13 +87,32 @@ class SearchSentencesTool(Tool):
                 "sentence": sentence["sentence"],
                 "translation": sentence["translation"]
             })
+        
+        self.log({
+            "tool/search_sentences/query": query,
+            "tool/search_sentences/results": infos
+        })
         return infos
 
 def main():
-    agent = OpenAIAgent(
-        model="gpt-4o-mini",
-        api_key=os.environ["OPENAI_API_KEY"]
+    # logger = WandbLogger(
+    #     project="kubishi",
+    #     name="test-agentic-translator",
+    # )
+    logger = PrintLogger()
+
+    # agent = OpenAIAgent(
+    #     model="gpt-4o-mini",
+    #     api_key=os.environ["OPENAI_API_KEY"]
+    # )
+    # agent = ClaudeAgent(
+    #     model="claude-sonnet-4-5",
+    #     api_key=os.environ["ANTHROPIC_API_KEY"]
+    # )
+    agent = OllamaAgent(
+        model="llama3.1:8b",
     )
+    
     translator = AgenticTranslator(
         agent=agent,
         system_prompt=get_prompt(
@@ -98,11 +128,14 @@ def main():
                 agent=agent,
                 SentenceType=(SubjectVerbObjectSentence, SubjectVerbSentence)
             )
-        ]
+        ],
+        logger=logger
     )
 
-    print(translator("I am going to the store."))
+    translation = translator("I am going to the store.")
+    print(translation)
 
+    # logger.stop()
 
 if __name__ == "__main__":
     main()

@@ -1,9 +1,11 @@
 from typing import ClassVar, List
 from enum import Enum
+from uuid import uuid4
 from pydantic import Field, BaseModel
 import time
 
 from yaduha.agent import Agent
+from yaduha.logger import inject_logs
 from yaduha.translator import Translation, Translator
 from yaduha.tool import Tool
 
@@ -42,8 +44,7 @@ class AgenticTranslator(Translator):
         description="A list of tools that the agent can use for translation.",
     )
 
-    def _run(self, text: str) -> Translation:
-        
+    def translate(self, text: str) -> Translation:
         start_time = time.time()
         response = self.agent.get_response(
             messages=[

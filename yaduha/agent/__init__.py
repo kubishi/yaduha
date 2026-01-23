@@ -1,7 +1,9 @@
 from abc import abstractmethod
-from typing import TYPE_CHECKING, Any, List, ClassVar, Type, TypeVar, overload, Generic
+from typing import TYPE_CHECKING, Any, Dict, List, ClassVar, Type, TypeVar, overload, Generic
 from openai.types.chat.chat_completion_message_param import ChatCompletionMessageParam
 from pydantic import BaseModel, Field
+
+from yaduha.logger import Logger, get_global_logger
 
 if TYPE_CHECKING:
     from yaduha.tool import Tool
@@ -19,6 +21,10 @@ class AgentResponse(BaseModel, Generic[TAgentResponseContentType]):
 class Agent(BaseModel, Generic[TStringType]):
     model: TStringType
     name: ClassVar[str] = Field(..., description="The name of the agent.")
+    logger: Logger = Field(default_factory=get_global_logger, description="The logger to use for logging.")
+
+    def log(self, data: Dict[str, Any]) -> None:
+        self.logger.log(data={**data, "agent_model": self.model, "agent_name": self.name})
 
     @overload
     def get_response(
