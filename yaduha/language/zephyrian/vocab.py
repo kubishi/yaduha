@@ -1,0 +1,76 @@
+from yaduha.language import VocabEntry
+
+# Zephyrian vocabulary - a VSO language with tonal markers and prefix morphology
+# Phonology uses: vowels (a, e, i, o, u, y), consonants (z, f, r, l, n, v, th, sh, k, m)
+# Tone marks: á (high), à (low), ā (mid/neutral)
+
+NOUNS = [
+    VocabEntry("wolf", "zāfir"),
+    VocabEntry("cat", "mīla"),
+    VocabEntry("bird", "thyra"),
+    VocabEntry("fish", "nāvu"),
+    VocabEntry("tree", "fēlon"),
+    VocabEntry("river", "shīra"),
+    VocabEntry("mountain", "kōrath"),
+    VocabEntry("stone", "vēlum"),
+    VocabEntry("fire", "zārek"),
+    VocabEntry("water", "ālu"),
+    VocabEntry("sky", "thyēn"),
+    VocabEntry("star", "lūmir"),
+    VocabEntry("moon", "sēvra"),
+    VocabEntry("sun", "kāleth"),
+    VocabEntry("house", "nōrim"),
+    VocabEntry("food", "fāra"),
+    VocabEntry("book", "thōven"),
+    VocabEntry("path", "rēla"),
+    VocabEntry("wind", "zēfyr"),
+    VocabEntry("cloud", "mūtha"),
+    VocabEntry("rain", "shēva"),
+    VocabEntry("snow", "frīla"),
+    VocabEntry("forest", "vōren"),
+    VocabEntry("flower", "lītha"),
+    VocabEntry("grass", "nēva"),
+    VocabEntry("horse", "kīran"),
+    VocabEntry("dog", "fūral"),
+    VocabEntry("bear", "thōrak"),
+    VocabEntry("deer", "sīlen"),
+    VocabEntry("snake", "vīshra"),
+]
+
+TRANSITIVE_VERBS = [
+    VocabEntry("see", "vēl"),
+    VocabEntry("hear", "thān"),
+    VocabEntry("eat", "fār"),
+    VocabEntry("drink", "shīl"),
+    VocabEntry("take", "kēr"),
+    VocabEntry("give", "nōv"),
+    VocabEntry("find", "zēth"),
+    VocabEntry("chase", "rāv"),
+    VocabEntry("carry", "mūl"),
+    VocabEntry("read", "thōv"),
+    VocabEntry("write", "skrīv"),
+    VocabEntry("love", "āmor"),
+    VocabEntry("help", "fēl"),
+    VocabEntry("teach", "lōren"),
+]
+
+INTRANSITIVE_VERBS = [
+    VocabEntry("sleep", "sōm"),
+    VocabEntry("run", "rēn"),
+    VocabEntry("walk", "vān"),
+    VocabEntry("fly", "thyr"),
+    VocabEntry("swim", "nāv"),
+    VocabEntry("fall", "kāl"),
+    VocabEntry("rise", "sūr"),
+    VocabEntry("sit", "sēt"),
+    VocabEntry("stand", "stān"),
+    VocabEntry("laugh", "rīth"),
+    VocabEntry("cry", "lām"),
+    VocabEntry("sing", "mēl"),
+    VocabEntry("dance", "zīr"),
+    VocabEntry("dream", "ōnir"),
+    VocabEntry("shine", "lūm"),
+    VocabEntry("grow", "krēv"),
+    VocabEntry("die", "mōrt"),
+    VocabEntry("live", "vīv"),
+]
