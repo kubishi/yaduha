@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from pydantic.dataclasses import dataclass
+from dataclasses import dataclass
 from typing import Generic, List, Tuple, TypeVar, Type
 from abc import ABC, abstractmethod
 
@@ -14,7 +14,7 @@ class Sentence(BaseModel, ABC, Generic[S]):
     @abstractmethod
     def get_examples(cls: Type[S]) -> List[Tuple[str, S]]:
         """Return example structured sentences and their English translations.
-        
+
         Returns:
             List[Tuple[str, SentenceType]]: A list of tuples containing English translations
             and their corresponding structured sentences.
