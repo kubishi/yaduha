@@ -26,3 +26,43 @@ class VocabEntry:
     """Immutable vocabulary entry linking English and the target language"""
     english: str
     target: str
+
+
+# Import loader functions for external language loading
+from yaduha.language.loader import (
+    load_language_from_path,
+    validate_language_path,
+    LoadedLanguage,
+    LanguageLoadError,
+)
+
+# Import git loader functions
+from yaduha.language.git_loader import (
+    load_language_from_git,
+    test_language,
+    get_repo_name,
+    get_lang_path,
+    remove_cached_language,
+    list_cached_languages,
+    GitLoadError,
+    DEFAULT_CACHE_DIR,
+)
+
+__all__ = [
+    "Sentence",
+    "VocabEntry",
+    # Path-based loading
+    "load_language_from_path",
+    "validate_language_path",
+    "LoadedLanguage",
+    "LanguageLoadError",
+    # Git-based loading
+    "load_language_from_git",
+    "test_language",
+    "get_repo_name",
+    "get_lang_path",
+    "remove_cached_language",
+    "list_cached_languages",
+    "GitLoadError",
+    "DEFAULT_CACHE_DIR",
+]

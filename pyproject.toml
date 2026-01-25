@@ -45,11 +45,27 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+platform = [
+    "fastapi>=0.109.0",
+    "uvicorn[standard]>=0.27.0",
+    "sqlmodel>=0.0.14",
+    "pydantic-settings>=2.1.0",
+    "python-jose[cryptography]>=3.3.0",
+    "passlib[bcrypt]>=1.7.4",
+    "python-multipart>=0.0.6",
+    "websockets>=12.0",
+]
+mcp = [
+    "mcp>=1.0.0",
+]
 dev = [
     "pytest>=7.0",
     "black",
     "isort",
     "mypy",
+]
+all = [
+    "yaduha[platform,mcp,dev]",
 ]
 
 [project.urls]
@@ -58,8 +74,9 @@ Documentation = "https://github.com/kubishi/yaduha-2/tree/main/docs"
 Repository = "https://github.com/kubishi/yaduha-2"
 "Bug Tracker" = "https://github.com/kubishi/yaduha-2/issues"
 
-[tool.setuptools]
-packages = ["yaduha"]
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["yaduha*", "conlang_platform*"]
 
 [tool.setuptools.package-data]
 yaduha = ["py.typed"]
