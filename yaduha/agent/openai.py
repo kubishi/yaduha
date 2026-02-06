@@ -54,7 +54,7 @@ class OpenAIAgent(Agent):
                     tools=chat_tools,
                     temperature=self.temperature
                 )
-                self.log({"event": "get_response_received", "response": response})
+                self.log({"event": "get_response_received", "response": response.model_dump_json()})
                 msg = json.loads(response.choices[0].message.model_dump_json())
                 messages.append(msg)
 
@@ -80,7 +80,7 @@ class OpenAIAgent(Agent):
                     response_format=response_format,
                     temperature=self.temperature
                 )
-                self.log({"event": "get_response_received", "response": response})
+                self.log({"event": "get_response_received", "response": response.model_dump_json()})
                 msg = json.loads(response.choices[0].message.model_dump_json())
                 messages.append(msg)
 
@@ -88,7 +88,7 @@ class OpenAIAgent(Agent):
                     parsed = response.choices[0].message.parsed
                     if not parsed:
                         raise ValueError("No content in response")
-                    self.log({"event": "get_response_parsed", "parsed": parsed})
+                    self.log({"event": "get_response_parsed", "parsed": parsed.model_dump_json()})
                     return cast(
                         AgentResponse[TAgentResponseContentType],
                         AgentResponse(

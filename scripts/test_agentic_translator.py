@@ -1,5 +1,5 @@
 import requests
-from yaduha.logger import WandbLogger, PrintLogger
+from yaduha.logger import JsonLogger, WandbLogger, PrintLogger
 from yaduha.translator.pipeline import PipelineTranslator
 from yaduha.translator.agentic import AgenticTranslator
 from yaduha.agent.openai import OpenAIAgent
@@ -99,19 +99,21 @@ def main():
     #     project="kubishi",
     #     name="test-agentic-translator",
     # )
-    logger = PrintLogger()
+    logger = JsonLogger(filename="test-5")
 
-    # agent = OpenAIAgent(
-    #     model="gpt-4o-mini",
-    #     api_key=os.environ["OPENAI_API_KEY"]
-    # )
+    agent = OpenAIAgent(
+        model="gpt-4o-mini",
+        api_key=os.environ["OPENAI_API_KEY"],
+        logger=logger
+    )
     # agent = AnthropicAgent(
     #     model="claude-sonnet-4-5",
     #     api_key=os.environ["ANTHROPIC_API_KEY"]
     # )
-    agent = OllamaAgent(
-        model="llama3.1:8b",
-    )
+    # agent = OllamaAgent(
+    #     model="llama3.1:8b",
+    #     logger=logger
+    # )
     
     translator = AgenticTranslator(
         agent=agent,

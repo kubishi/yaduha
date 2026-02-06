@@ -22,9 +22,13 @@ class Agent(BaseModel, Generic[TStringType]):
     model: TStringType
     name: ClassVar[str] = Field(..., description="The name of the agent.")
     logger: Logger = Field(default_factory=get_global_logger, description="The logger to use for logging.")
+    functionality: str = Field(
+        default="default",
+        description="What are you using the agent for? Either back_agent or default?"
+    )
 
     def log(self, data: Dict[str, Any]) -> None:
-        self.logger.log(data={**data, "agent_model": self.model, "agent_name": self.name})
+        self.logger.log(data={"agent_model": self.model, "agent_name": self.name, "functionality": self.functionality, **data})
 
     @overload
     def get_response(

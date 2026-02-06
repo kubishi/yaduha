@@ -1,5 +1,8 @@
 from contextlib import contextmanager
+from ctypes.wintypes import tagSIZE
+import json
 from re import A
+from token import OP
 from pydantic import BaseModel, ConfigDict, Field, PrivateAttr
 from abc import abstractmethod, ABC
 from typing import Any, Dict, List, Mapping, Optional, Generic, TypeVar, cast
@@ -64,7 +67,7 @@ class Logger(BaseModel, ABC):
     def _log(self, data: Dict[str, Any]):
         pass
 
-    def log(self, data: Dict[str, Any]):
+    def log(self, data: Dict[str, Any], **kwargs: Any):
         """
         Log a dictionary of metrics with the current path prefix.
 
@@ -76,7 +79,7 @@ class Logger(BaseModel, ABC):
             if key.startswith("LOGGER_METADATA_"):
                 env_key = key[len("LOGGER_METADATA_") :]
                 env_metadata[env_key] = value
-        self._log({**self.metadata, **env_metadata, **data})
+        self._log({**self.metadata, **env_metadata, **data}, **kwargs)
 
     def get_sublogger(self, **metadata: str | int | float) -> "Logger":
         """
@@ -90,12 +93,28 @@ class Logger(BaseModel, ABC):
         """
         combined_metadata = {**self.metadata, **metadata}
         return self.model_copy(update={"metadata": combined_metadata})
+    
+
+class JsonLogger(Logger):
+    filename: str
+    path: str = Field(default="", exclude=True)  
+
+    def model_post_init(self, __context: Any):
+        os.makedirs("json_logger", exist_ok=True)
+        self.path = os.path.join("json_logger", f"{self.filename}.jsonl")
+
+    def _log(self, data: Dict[str, Any]):
+        with open(self.path, "a", encoding="utf-8") as f:
+            f.write(json.dumps(data, default=str) + "\n")
+
 
 class WandbLogger(Logger):
     model_config = ConfigDict(populate_by_name=True)
 
     project_name: str = Field(..., description="The W&B project name.", alias="project")
     name: str
+    tags: Optional[List[str]] = None
+    notes: Optional[str] = None
     config_items: Dict[str, Any] = Field(default_factory=dict, description="The W&B config items.", alias="config")
     
     _run: wandb.Run | None = PrivateAttr(default=None)
@@ -109,6 +128,8 @@ class WandbLogger(Logger):
             project=self.project_name,
             config=self.config_items,
             name=self.name,
+            tags=self.tags,
+            notes=self.notes
         )
 
     def _log(self, data: Mapping[str, Any], **kwargs: Any) -> None:
@@ -122,6 +143,8 @@ class WandbLogger(Logger):
         """
         if self._run is None:
             raise RuntimeError("Cannot log: W&B run is not active.")
+
+        print("\n\nEvent: ", data["event"], "\n Data: ", dict(data))
 
         self._run.log(dict(data), **kwargs)
 

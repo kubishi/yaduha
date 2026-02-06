@@ -3,6 +3,7 @@
 Tests all models and prints results in a pandas table.
 """
 
+from yaduha.logger import JsonLogger, Logger, WandbLogger
 from yaduha.translator.pipeline import PipelineTranslator
 from yaduha.agent.openai import OpenAIAgent
 from yaduha.agent.anthropic import AnthropicAgent
@@ -11,21 +12,22 @@ from yaduha.language.ovp import SubjectVerbSentence, SubjectVerbObjectSentence
 
 import pandas as pd
 from dotenv import load_dotenv
+import weave
 import os
 
 load_dotenv()
 
 # Models to test
 MODELS = {
-    "openai": [
-        "gpt-4o",
-        "gpt-4o-mini",
-    ],
-    "anthropic": [
-        "claude-sonnet-4-5",
-        "claude-sonnet-4-20250514",
-        "claude-3-haiku-20240307",
-    ],
+    # "openai": [
+    #     "gpt-4o",
+    #     "gpt-4o-mini",
+    # ],
+    # "anthropic": [
+    #     "claude-sonnet-4-5",
+    #     "claude-sonnet-4-20250514",
+    #     "claude-3-haiku-20240307",
+    # ],
     "ollama": [
         "deepseek-r1:70b",
         "mixtral:8x22b",
@@ -34,17 +36,19 @@ MODELS = {
 }
 
 
-def create_agent(agent_type: str, model: str):
+def create_agent(agent_type: str, model: str, logger: Logger):
     """Create an agent of the specified type."""
     if agent_type == "openai":
         return OpenAIAgent(
             model=model,  # type: ignore[arg-type]
             api_key=os.environ["OPENAI_API_KEY"],
+            logger=logger
         )
     elif agent_type == "anthropic":
         return AnthropicAgent(
             model=model,  # type: ignore[arg-type]
             api_key=os.environ["ANTHROPIC_API_KEY"],
+            # logger=logger
         )
     elif agent_type == "ollama":
         return OllamaAgent(model=model)
@@ -59,11 +63,19 @@ def main():
 
     source = "The dog is sitting at the lakeside, drinking some water."
 
+    # logger = WandbLogger(name="Pipline Test - ALL - 2", project_name="Pipeline Test", tags=["Ollama", "logger"], notes="Testing logger functionality")
+
+    logger = JsonLogger(filename="test-3")
+
+
     # Back-translation always uses gpt-4o
-    back_agent = OpenAIAgent(
-        model="gpt-4o",
-        api_key=os.environ["OPENAI_API_KEY"],
-    )
+    # back_agent = OpenAIAgent(
+    #     model="gpt-4o",
+    #     api_key=os.environ["OPENAI_API_KEY"],
+    #     logger=logger
+    # )
+    
+    back_agent = OllamaAgent(model="llama3.1:8b", logger=logger, functionality="back_agent")
 
     # ============================================================
 
@@ -78,12 +90,13 @@ def main():
             print(f"Testing {agent_type}/{model}...")
 
             try:
-                agent = create_agent(agent_type, model)
+                agent = create_agent(agent_type, model, logger)
 
                 translator = PipelineTranslator(
                     agent=agent,
                     back_translation_agent=back_agent,
                     SentenceType=(SubjectVerbObjectSentence, SubjectVerbSentence),
+                    logger=logger
                 )
 
                 translation = translator(source)
@@ -99,6 +112,7 @@ def main():
                     "translation": translation.target,
                     "back_translation": back_translation,
                 })
+
                 print(f"  OK")
 
             except Exception as e:

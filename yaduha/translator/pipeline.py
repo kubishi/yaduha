@@ -74,16 +74,37 @@ class PipelineTranslator(Translator, Generic[TSentenceType]):
             completion_tokens_bt += back_translation.completion_tokens
         end_time_bt = time.time()
 
-        self.logger.log(data={
-            "response": " ".join(targets), 
-            "source": text,
-            "translation_time": end_time - start_time,
-            "prompt_tokens": prompt_tokens,
-            "completion_tokens": completion_tokens,
-            "back_translation_time": end_time_bt - start_time_bt,
-            "back_translation_prompt_tokens": prompt_tokens_bt,
-            "back_translation_completion_tokens": completion_tokens_bt
-        })
+        if self.back_translation_agent:
+                
+            self.logger.log(data={
+                "event": "translation_completed",
+                "agent_name": self.agent.name,
+                "agent_model": self.agent.model,
+                "back_translation_agent_name": self.back_translation_agent.name,
+                "back_translation_agent_model": self.back_translation_agent.model,
+                "response": " ".join(targets), 
+                "source": text,
+                "translation_time": end_time - start_time,
+                "prompt_tokens": prompt_tokens,
+                "completion_tokens": completion_tokens,
+                "back_translation_time": end_time_bt - start_time_bt,
+                "back_translation_prompt_tokens": prompt_tokens_bt,
+                "back_translation_completion_tokens": completion_tokens_bt
+            })
+        else:
+            self.logger.log(data={
+                "event": "translation_completed",
+                "agent_name": self.agent.name,
+                "agent_model": self.agent.model,
+                "response": " ".join(targets), 
+                "source": text,
+                "translation_time": end_time - start_time,
+                "prompt_tokens": prompt_tokens,
+                "completion_tokens": completion_tokens,
+                "back_translation_time": end_time_bt - start_time_bt,
+                "back_translation_prompt_tokens": prompt_tokens_bt,
+                "back_translation_completion_tokens": completion_tokens_bt
+            })
 
         return Translation(
             source=text,

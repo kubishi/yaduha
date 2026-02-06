@@ -254,7 +254,12 @@ class OllamaAgent(Agent):
                 request_kwargs["response_format"] = {"type": "json_object"}
 
             response = client.chat.completions.create(**request_kwargs)
-            self.log({"event": "get_response_received", "response": response})
+            self.log({
+                "event": "get_response_received", 
+                "agent_name":self.name, 
+                "agent_model": self.model, 
+                "response": response.model_dump()
+            })
 
             # Track token usage
             if response.usage:
@@ -271,7 +276,12 @@ class OllamaAgent(Agent):
                 if not content:
                     raise ValueError("No content in response")
 
-                self.log({"event": "get_response_content", "content": content})
+                self.log({
+                    "event": "get_response_content",  
+                    "agent_name":self.name, 
+                    "agent_model": self.model,
+                    "content": content
+                })
 
                 # Handle text response
                 if response_format is str:
@@ -319,6 +329,8 @@ class OllamaAgent(Agent):
                         # Model provided incorrect arguments - log and re-raise with more context
                         self.log({
                             "event": "tool_call_error",
+                            "agent_name":self.name, 
+                            "agent_model": self.model, 
                             "tool_name": name,
                             "arguments": args,
                             "error": str(e),
