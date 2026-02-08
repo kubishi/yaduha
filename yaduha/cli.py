@@ -6,6 +6,7 @@ from typing import Any, List
 
 from yaduha.language import LanguageNotFoundError
 from yaduha.loader import LanguageLoader
+from yaduha.mcp_server import LanguageDevelopmentServer
 
 
 def cmd_list(_args: Any) -> int:
@@ -65,6 +66,17 @@ def cmd_search(args: Any) -> int:
     return 0
 
 
+def cmd_dev_server(args: Any) -> int:
+    """Start the MCP language development server."""
+    try:
+        server = LanguageDevelopmentServer(args.path)
+        server.run(host=args.host, port=args.port)
+        return 0
+    except Exception as e:
+        print(f"Error starting server: {e}")
+        return 1
+
+
 def main(argv: List[str] | None = None) -> int:
     """Main CLI entry point."""
     parser = argparse.ArgumentParser(
@@ -104,6 +116,28 @@ def main(argv: List[str] | None = None) -> int:
         "--query", "-q", help="Search query", default=None
     )
     search_parser.set_defaults(func=cmd_search)
+
+    # dev-server command
+    dev_server_parser = subparsers.add_parser(
+        "dev-server",
+        help="Start MCP language development server",
+    )
+    dev_server_parser.add_argument(
+        "path",
+        help="Path to language package directory",
+    )
+    dev_server_parser.add_argument(
+        "--host",
+        default="localhost",
+        help="Server host (default: localhost)",
+    )
+    dev_server_parser.add_argument(
+        "--port",
+        type=int,
+        default=5000,
+        help="Server port (default: 5000)",
+    )
+    dev_server_parser.set_defaults(func=cmd_dev_server)
 
     args = parser.parse_args(argv)
 
