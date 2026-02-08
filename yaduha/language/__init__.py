@@ -1,8 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Generic, List, Tuple, Type, TypeVar
 
-from pydantic import BaseModel
-from pydantic.dataclasses import dataclass
+from pydantic import BaseModel, ConfigDict
 
 from yaduha.language.exceptions import LanguageNotFoundError, LanguageValidationError
 from yaduha.language.language import Language
@@ -33,9 +32,10 @@ class Sentence(BaseModel, ABC, Generic[S]):
         pass
 
 
-@dataclass(frozen=True)
-class VocabEntry:
-    """Immutable vocabulary entry linking English and the target language."""
+class VocabEntry(BaseModel):
+    """Vocabulary entry linking English and the target language."""
+
+    model_config = ConfigDict(frozen=True)
 
     english: str
     target: str
