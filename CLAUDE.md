@@ -43,18 +43,19 @@ This phase implements the core infrastructure for Yaduha language packages, allo
 - ✅ `yaduha languages validate CODE` - Validate language implementation
 - ✅ `yaduha languages search` - Search registry placeholder
 
-### Step 3: Move OVP to Separate Repository
-- Create `kubishi/yaduha-ovp` repository
-- Migrate `yaduha/language/ovp/` code
-- Add entrypoint in `pyproject.toml`
-- Remove OVP from main repo
+### Step 3: Move OVP to Separate Repository ✅ DONE
+- ✅ Created `kubishi/yaduha-ovp` repository (https://github.com/kubishi/yaduha-ovp)
+- ✅ Migrated `yaduha/language/ovp/` code to separate package with proper structure
+- ✅ Added entrypoint in `yaduha-ovp/pyproject.toml`: `ovp = "yaduha_ovp:language"`
+- ✅ Removed OVP from main yaduha repository
+- ✅ Verified OVP is discoverable via `yaduha languages list` and validation works
 
-### Step 4: Integration Testing
-- Test OVP as installed package
-- End-to-end translation tests
-- Verify `yaduha languages list` discovers OVP
+### Step 4: Integration Testing (IN PROGRESS)
+- Test OVP as installed package ✅ (verified with `yaduha languages list`, info, validate)
+- End-to-end translation tests ⏳
+- Verify `yaduha languages list` discovers OVP ✅
 
-### Step 5: Documentation & Registry
+### Step 5: Documentation & Registry (TODO)
 - Write "Creating a Language Package" guide
 - Create language registry YAML
 - Update existing docs
@@ -103,3 +104,36 @@ uv run yaduha languages info --help
 - **Entrypoints**: Using standard Python entrypoints enables flexibility (languages from any package, not just `yaduha-*` naming)
 - **LanguageLoader validation**: Comprehensive but focused on structural correctness (has __str__, get_examples, valid Pydantic models)
 - **PipelineTranslator.from_language()**: Convenience method that loads language and creates translator in one call
+
+## Step 3 Details: yaduha-ovp Repository
+
+The yaduha-ovp repository demonstrates the pattern for creating external language packages:
+
+### Repository Structure
+```
+kubishi/yaduha-ovp/
+├── pyproject.toml                    # Package config with entrypoint
+├── README.md                         # Package documentation
+├── LICENSE.md                        # License file
+├── .gitignore                        # Git ignore patterns
+├── yaduha_ovp/
+│   ├── __init__.py                   # Main module exporting Language instance
+│   ├── vocab.py                      # Vocabulary data (NOUNS, VERBS)
+│   └── prompts.py                    # Prompt generation utilities
+```
+
+### Key Configuration
+- **Entrypoint**: `ovp = "yaduha_ovp:language"` in `[project.entry-points."yaduha.languages"]`
+- **Module Export**: `yaduha_ovp/__init__.py` exports a Language instance: `language = Language(code="ovp", ...)`
+- **Dependencies**: Depends on yaduha>=0.3 and pydantic
+
+### Testing the Package
+```bash
+# Install the package (editable mode for development)
+pip install -e path/to/yaduha-ovp
+
+# Verify discovery
+yaduha languages list           # Should show "ovp"
+yaduha languages info ovp       # Show OVP details
+yaduha languages validate ovp   # Verify implementation
+```
