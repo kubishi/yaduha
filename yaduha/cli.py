@@ -7,7 +7,6 @@ from typing import Any, List
 from yaduha.language import LanguageNotFoundError
 from yaduha.loader import LanguageLoader
 from yaduha.mcp_server import LanguageDevelopmentServer
-from yaduha.mcp_server.http_server import app
 
 
 def cmd_list(_args: Any) -> int:
@@ -68,26 +67,24 @@ def cmd_search(args: Any) -> int:
 
 
 def cmd_dev_server(args: Any) -> int:
-    """Start the MCP language development server (HTTP)."""
+    """Start the MCP language development server using stdio transport."""
     try:
-        import uvicorn
+        import asyncio
+        from yaduha.mcp_server.http_server import YaduhaLanguageDevelopmentServer
 
-        # Initialize the server with the language path
-        http_server = LanguageDevelopmentServer(args.path)
+        # Create the MCP server
+        mcp_server = YaduhaLanguageDevelopmentServer(args.path)
 
         print(f"🚀 Starting Yaduha MCP Server")
-        print(f"   Language: {http_server.language_code} - {http_server.language_name}")
-        print(f"   Path: {http_server.language_path}")
-        print(f"   Listening on {args.host}:{args.port}")
-        print(f"\n📍 API Endpoint: http://{args.host}:{args.port}")
-        print(f"📍 Health Check: http://{args.host}:{args.port}/health")
-        print(f"📍 API Docs: http://{args.host}:{args.port}/docs")
+        print(f"   Language: {mcp_server.language_server.language_code} - {mcp_server.language_server.language_name}")
+        print(f"   Path: {mcp_server.language_server.language_path}")
         print(f"\n✓ Available tools: 10")
-        print(f"✓ Server ready for MCP connections")
-        print(f"\nPress Ctrl+C to stop the server.\n")
+        print(f"✓ Server ready for MCP connections via stdio transport")
+        print(f"\nConnect with: claude mcp add yaduha-dev-server ./your-script.py")
+        print(f"Press Ctrl+C to stop the server.\n")
 
-        # Start the HTTP server
-        uvicorn.run(app, host=args.host, port=args.port, log_level="info")
+        # Run the MCP server
+        asyncio.run(mcp_server.run())
         return 0
     except Exception as e:
         print(f"Error starting server: {e}")
