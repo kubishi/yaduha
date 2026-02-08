@@ -3699,6 +3699,9 @@ dev = [
     { name = "pytest", version = "8.4.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10'" },
     { name = "pytest", version = "9.0.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
 ]
+languages = [
+    { name = "yaduha-ovp" },
+]
 
 [package.metadata]
 requires-dist = [
@@ -3714,8 +3717,24 @@ requires-dist = [
     { name = "requests" },
     { name = "tabulate" },
     { name = "weave" },
+    { name = "yaduha-ovp", marker = "extra == 'languages'", directory = "../yaduha-ovp" },
 ]
-provides-extras = ["dev"]
+provides-extras = ["dev", "languages"]
+
+[[package]]
+name = "yaduha-ovp"
+version = "0.1"
+source = { directory = "../yaduha-ovp" }
+dependencies = [
+    { name = "pydantic" },
+    { name = "yaduha" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "pydantic" },
+    { name = "yaduha", specifier = ">=0.3" },
+]
 
 [[package]]
 name = "yarl"

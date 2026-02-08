@@ -65,7 +65,7 @@ Repository = "https://github.com/kubishi/yaduha-2"
 "Bug Tracker" = "https://github.com/kubishi/yaduha-2/issues"
 
 [tool.setuptools]
-packages = ["yaduha", "yaduha.language", "yaduha.agent", "yaduha.translator"]
+packages = ["yaduha", "yaduha.language", "yaduha.agent", "yaduha.translator", "yaduha.logger", "yaduha.tool"]
 
 [tool.setuptools.package-data]
 yaduha = ["py.typed"]
