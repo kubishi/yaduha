@@ -52,7 +52,7 @@ dev = [
     "mypy",
 ]
 languages = [
-    "yaduha-ovp @ git+https://github.com/kubishi/yaduha-ovp.git@main",
+    "yaduha-ovp @ file:///home/jared/projects/language-maker/yaduha-ovp",
 ]
 
 [project.scripts]
