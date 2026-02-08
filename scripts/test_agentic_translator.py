@@ -5,8 +5,8 @@ from yaduha.translator.agentic import AgenticTranslator
 from yaduha.agent.openai import OpenAIAgent
 from yaduha.agent.anthropic import AnthropicAgent
 from yaduha.agent.ollama import OllamaAgent
-from yaduha.language.ovp import SubjectVerbSentence, SubjectVerbObjectSentence
-from yaduha.language.ovp.prompts import get_prompt
+from yaduha_ovp import SubjectVerbSentence, SubjectVerbObjectSentence
+from yaduha_ovp.prompts import get_prompt
 from yaduha.tool import Tool
 
 from typing import ClassVar, List, Dict, Tuple

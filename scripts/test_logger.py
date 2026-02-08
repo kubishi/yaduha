@@ -5,7 +5,7 @@ from openai import project
 from yaduha import agent
 from yaduha.agent.openai import OpenAIAgent
 from yaduha.translator.pipeline import PipelineTranslator
-from yaduha.language.ovp import SubjectVerbSentence, SubjectVerbObjectSentence
+from yaduha_ovp import SubjectVerbSentence, SubjectVerbObjectSentence
 from yaduha.logger import PrintLogger, WandbLogger, set_global_logger
 
 import weave

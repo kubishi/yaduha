@@ -7,7 +7,7 @@ from yaduha.translator.pipeline import PipelineTranslator
 from yaduha.agent.openai import OpenAIAgent
 from yaduha.agent.anthropic import AnthropicAgent
 from yaduha.agent.ollama import OllamaAgent
-from yaduha.language.ovp import SubjectVerbSentence, SubjectVerbObjectSentence
+from yaduha_ovp import SubjectVerbSentence, SubjectVerbObjectSentence
 
 import pandas as pd
 from dotenv import load_dotenv

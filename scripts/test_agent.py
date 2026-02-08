@@ -4,7 +4,7 @@ from yaduha.tool import Tool
 from yaduha.translator.pipeline import PipelineTranslator
 from yaduha.agent.openai import OpenAIAgent
 from yaduha.agent.anthropic import AnthropicAgent
-from yaduha.language.ovp import SubjectVerbSentence, SubjectVerbObjectSentence
+from yaduha_ovp import SubjectVerbSentence, SubjectVerbObjectSentence
 
 from dotenv import load_dotenv
 import os
