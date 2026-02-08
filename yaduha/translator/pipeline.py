@@ -5,6 +5,7 @@ from uuid import uuid4
 from typing import ClassVar, Dict, Generic, List, Optional, Type, Tuple
 
 from yaduha import logger
+from yaduha.loader import LanguageLoader
 from yaduha.logger import inject_logs
 from yaduha.translator import Translator, Translation, BackTranslation
 from yaduha.tool.english_to_sentences import EnglishToSentencesTool, TSentenceType
@@ -23,6 +24,33 @@ class PipelineTranslator(Translator, Generic[TSentenceType]):
     agent: Agent
     back_translation_agent: Optional[Agent] = None
     SentenceType: Type[TSentenceType] | Tuple[Type[Sentence], ...]
+
+    @classmethod
+    def from_language(
+        cls,
+        language_code: str,
+        agent: Agent,
+        back_translation_agent: Optional[Agent] = None,
+    ) -> "PipelineTranslator":
+        """Create a PipelineTranslator from an installed language package.
+
+        Args:
+            language_code: Language code (e.g., 'ovp')
+            agent: Agent to use for translation
+            back_translation_agent: Optional agent for back-translation verification
+
+        Returns:
+            PipelineTranslator instance
+
+        Raises:
+            LanguageNotFoundError: If language is not installed
+        """
+        language = LanguageLoader.load_language(language_code)
+        return cls(
+            agent=agent,
+            back_translation_agent=back_translation_agent,
+            SentenceType=language.sentence_types,
+        )
 
     def translate(self, text: str) -> Translation:
         """Translate the text using a pipeline of translators.

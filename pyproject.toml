@@ -7,7 +7,7 @@ name = "yaduha"
 version = "0.3"
 description = "A type-safe, AI-powered framework for structured language translation"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 license = {file = "LICENSE.md"}
 authors = [
     {name = "Jared Coleman", email = "jared.coleman@lmu.edu"},
@@ -51,6 +51,9 @@ dev = [
     "isort",
     "mypy",
 ]
+
+[project.scripts]
+yaduha = "yaduha.cli:main"
 
 [project.urls]
 Homepage = "https://github.com/kubishi/yaduha-2"
