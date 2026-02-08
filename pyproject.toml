@@ -35,12 +35,14 @@ classifiers = [
 ]
 dependencies = [
     "anthropic",
+    "fastapi",
     "openai",
     "pandas",
     "pydantic",
     "python-dotenv",
     "requests",
     "tabulate",
+    "uvicorn",
     "weave",
 ]
 
