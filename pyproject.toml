@@ -51,6 +51,9 @@ dev = [
     "isort",
     "mypy",
 ]
+languages = [
+    "yaduha-ovp @ git+https://github.com/kubishi/yaduha-ovp.git@main",
+]
 
 [project.scripts]
 yaduha = "yaduha.cli:main"
