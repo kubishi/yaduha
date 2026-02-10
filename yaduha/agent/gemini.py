@@ -4,7 +4,6 @@ from typing import ClassVar, List, Literal, Type, overload, cast
 from openai import OpenAI
 from openai.types.chat.chat_completion_message_param import ChatCompletionMessageParam
 from pydantic import Field, BaseModel
-from regex import T
 
 from yaduha.agent import Agent, AgentResponse, TAgentResponseContentType
 from yaduha.tool import Tool

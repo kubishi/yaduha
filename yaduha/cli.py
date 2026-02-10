@@ -56,6 +56,16 @@ def cmd_validate(args: Any) -> int:
 
 
 
+def cmd_serve(args: Any) -> int:
+    """Start the Yaduha API server."""
+    import uvicorn
+    from yaduha.api import create_app
+
+    app = create_app()
+    uvicorn.run(app, host=args.host, port=args.port)
+    return 0
+
+
 def main(argv: List[str] | None = None) -> int:
     """Main CLI entry point."""
     parser = argparse.ArgumentParser(
@@ -88,6 +98,12 @@ def main(argv: List[str] | None = None) -> int:
     validate_parser = languages_subparsers.add_parser("validate", help="Validate language")
     validate_parser.add_argument("code", help="Language code (e.g., 'ovp')")
     validate_parser.set_defaults(func=cmd_validate)
+
+    # serve command
+    serve_parser = subparsers.add_parser("serve", help="Start the REST API server")
+    serve_parser.add_argument("--host", default="0.0.0.0", help="Bind host (default: 0.0.0.0)")
+    serve_parser.add_argument("--port", type=int, default=8000, help="Bind port (default: 8000)")
+    serve_parser.set_defaults(func=cmd_serve)
 
     args = parser.parse_args(argv)
 
