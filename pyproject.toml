@@ -34,7 +34,6 @@ classifiers = [
 dependencies = [
     "anthropic",
     "fastapi",
-    "mcp",
     "openai",
     "pandas",
     "pydantic",
@@ -73,7 +72,6 @@ packages = [
     "yaduha.translator",
     "yaduha.logger",
     "yaduha.tool",
-    "yaduha.mcp_server",
 ]
 
 [tool.setuptools.package-data]

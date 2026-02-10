@@ -6,7 +6,6 @@ from typing import Any, List
 
 from yaduha.language import LanguageNotFoundError
 from yaduha.loader import LanguageLoader
-from yaduha.mcp_server import LanguageDevelopmentServer
 
 
 def cmd_list(_args: Any) -> int:
@@ -56,42 +55,6 @@ def cmd_validate(args: Any) -> int:
     return 1
 
 
-def cmd_search(args: Any) -> int:
-    """Search the language registry (not yet implemented)."""
-    print("\nLanguage registry search not yet implemented.\n")
-    print("To install a language package:")
-    print("  pip install yaduha-LANG_CODE")
-    print("  or")
-    print("  pip install git+https://github.com/user/yaduha-lang-code\n")
-    return 0
-
-
-def cmd_dev_server(args: Any) -> int:
-    """Start the MCP language development server using stdio transport."""
-    try:
-        import asyncio
-        from yaduha.mcp_server.http_server import YaduhaLanguageDevelopmentServer
-
-        # Create the MCP server
-        mcp_server = YaduhaLanguageDevelopmentServer(args.path)
-
-        print(f"🚀 Starting Yaduha MCP Server")
-        print(f"   Language: {mcp_server.language_server.language_code} - {mcp_server.language_server.language_name}")
-        print(f"   Path: {mcp_server.language_server.language_path}")
-        print(f"\n✓ Available tools: 10")
-        print(f"✓ Server ready for MCP connections via stdio transport")
-        print(f"\nConnect with: claude mcp add yaduha-dev-server ./your-script.py")
-        print(f"Press Ctrl+C to stop the server.\n")
-
-        # Run the MCP server
-        asyncio.run(mcp_server.run())
-        return 0
-    except Exception as e:
-        print(f"Error starting server: {e}")
-        import traceback
-        traceback.print_exc()
-        return 1
-
 
 def main(argv: List[str] | None = None) -> int:
     """Main CLI entry point."""
@@ -125,35 +88,6 @@ def main(argv: List[str] | None = None) -> int:
     validate_parser = languages_subparsers.add_parser("validate", help="Validate language")
     validate_parser.add_argument("code", help="Language code (e.g., 'ovp')")
     validate_parser.set_defaults(func=cmd_validate)
-
-    # languages search
-    search_parser = languages_subparsers.add_parser("search", help="Search registry")
-    search_parser.add_argument(
-        "--query", "-q", help="Search query", default=None
-    )
-    search_parser.set_defaults(func=cmd_search)
-
-    # dev-server command
-    dev_server_parser = subparsers.add_parser(
-        "dev-server",
-        help="Start MCP language development server",
-    )
-    dev_server_parser.add_argument(
-        "path",
-        help="Path to language package directory",
-    )
-    dev_server_parser.add_argument(
-        "--host",
-        default="localhost",
-        help="Server host (default: localhost)",
-    )
-    dev_server_parser.add_argument(
-        "--port",
-        type=int,
-        default=5000,
-        help="Server port (default: 5000)",
-    )
-    dev_server_parser.set_defaults(func=cmd_dev_server)
 
     args = parser.parse_args(argv)
 
