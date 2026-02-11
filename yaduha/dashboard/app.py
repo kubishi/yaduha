@@ -1,7 +1,9 @@
 """Yaduha Streamlit Dashboard — explore languages, schemas, and translate."""
 
-import json
-from typing import Any, Dict, List, Literal, Optional, Tuple, Type, get_args, get_origin
+import inspect
+import textwrap
+from enum import Enum
+from typing import Any, Callable, Dict, List, Literal, Optional, Tuple, Type, get_args, get_origin
 
 import streamlit as st
 from pydantic import BaseModel
@@ -11,9 +13,17 @@ from yaduha.language.language import Language
 from yaduha.language import Sentence
 
 # ---------------------------------------------------------------------------
-# Page config
+# Page config + compact CSS
 # ---------------------------------------------------------------------------
 st.set_page_config(page_title="Yaduha", page_icon="Y", layout="wide")
+
+st.markdown("""
+<style>
+    .block-container { padding-top: 1rem; padding-bottom: 0; }
+    .stTabs [data-baseweb="tab-panel"] { padding-top: 0.5rem; }
+    h3 { margin-top: 0.5rem !important; margin-bottom: 0.25rem !important; }
+</style>
+""", unsafe_allow_html=True)
 
 # ---------------------------------------------------------------------------
 # Sidebar navigation
@@ -43,7 +53,6 @@ def _schema_to_dot(schema: Dict[str, Any]) -> str:
         return name.replace(" ", "_").replace("-", "_")
 
     def _field_label(name: str, prop: Dict[str, Any]) -> str:
-        """Summarize a field's type for the node label."""
         if "$ref" in prop:
             return _resolve_ref(prop["$ref"])
         if "anyOf" in prop:
@@ -67,13 +76,11 @@ def _schema_to_dot(schema: Dict[str, Any]) -> str:
         if nid in visited:
             return
         visited.add(nid)
-
         field_rows = []
         for fname, fprop in props.items():
             opt = "" if fname in required else "?"
             ftype = _field_label(fname, fprop)
             field_rows.append(f"<{fname}> {fname}{opt}: {ftype}")
-
         label = "{" + name + "|" + "\\l".join(field_rows) + "\\l}"
         lines.append(f'  {nid} [label="{label}", style=filled, fillcolor="{color}"];')
 
@@ -100,14 +107,12 @@ def _schema_to_dot(schema: Dict[str, Any]) -> str:
                 tid = _node_id(target)
                 lines.append(f'  {pid}:{fname} -> {tid};')
 
-    # Process root
     root_name = schema.get("title", "Root")
     root_props = schema.get("properties", {})
     root_required = schema.get("required", [])
     _add_model_node(root_name, root_props, "#dbeafe", root_required)
     _add_edges(root_name, root_props)
 
-    # Process $defs
     for def_name, def_schema in defs.items():
         if "enum" in def_schema:
             _add_enum_node(def_name, def_schema["enum"])
@@ -119,6 +124,238 @@ def _schema_to_dot(schema: Dict[str, Any]) -> str:
 
     lines.append("}")
     return "\n".join(lines)
+
+
+# ---------------------------------------------------------------------------
+# Helpers — generic component discovery
+# ---------------------------------------------------------------------------
+
+def _discover_components(sentence_cls: Type[Sentence]) -> Dict[str, Any]:
+    """Walk model_fields annotations to find all referenced classes and module functions."""
+    classes: Dict[str, type] = {}
+
+    def _walk_annotation(ann: Any) -> None:
+        origin = get_origin(ann)
+        args = get_args(ann)
+        if isinstance(ann, type) and issubclass(ann, (BaseModel, Enum)):
+            if ann.__name__ not in classes:
+                classes[ann.__name__] = ann
+                if issubclass(ann, BaseModel):
+                    for field_info in ann.model_fields.values():
+                        _walk_annotation(field_info.annotation)
+        if args:
+            for arg in args:
+                _walk_annotation(arg)
+
+    classes[sentence_cls.__name__] = sentence_cls
+    for field_info in sentence_cls.model_fields.values():
+        _walk_annotation(field_info.annotation)
+
+    # Module-level functions from the sentence's defining module
+    module = inspect.getmodule(sentence_cls)
+    functions: Dict[str, Callable] = {}
+    if module:
+        for name, func in inspect.getmembers(module, inspect.isfunction):
+            if getattr(func, "__module__", None) == module.__name__:
+                functions[name] = func
+
+    return {"classes": classes, "functions": functions}
+
+
+_PYDANTIC_SKIP = {
+    "copy", "dict", "json", "model_copy", "model_dump", "model_dump_json",
+    "model_post_init", "model_validate", "model_validate_json", "parse_obj",
+    "parse_raw", "schema", "validate", "construct", "from_orm",
+    "update_forward_refs", "model_rebuild", "model_json_schema",
+    "model_parametrized_name", "model_construct",
+}
+
+
+def _get_interesting_methods(cls: type) -> List[Tuple[str, Any]]:
+    """Return methods defined directly on cls, filtering out Pydantic boilerplate."""
+    results = []
+    for name in sorted(cls.__dict__):
+        if name in _PYDANTIC_SKIP:
+            continue
+        if name.startswith("_") and name != "__str__":
+            continue
+        # Skip __str__ inherited from str on str-based Enums (not useful to show)
+        if name == "__str__" and issubclass(cls, (str, int)) and issubclass(cls, Enum):
+            continue
+        obj = cls.__dict__[name]
+        # Accept regular functions, classmethods, staticmethods
+        if callable(obj) or isinstance(obj, (classmethod, staticmethod)):
+            results.append((name, obj))
+    return results
+
+
+def _build_source_options(
+    sentence_cls: Type[Sentence],
+    components: Dict[str, Any],
+) -> List[Tuple[str, Any, Optional[str]]]:
+    """Build (label, target, method_name) tuples for the source code selectbox."""
+    options: List[Tuple[str, Any, Optional[str]]] = []
+
+    # Sentence class methods first
+    for method_name, _ in _get_interesting_methods(sentence_cls):
+        options.append((f"{sentence_cls.__name__}.{method_name}()", sentence_cls, method_name))
+
+    # Other classes
+    for cls_name, cls in components["classes"].items():
+        if cls is sentence_cls:
+            continue
+        methods = _get_interesting_methods(cls)
+        for method_name, _ in methods:
+            options.append((f"{cls_name}.{method_name}()", cls, method_name))
+        # Full class source
+        options.append((f"{cls_name} (full class)", cls, None))
+
+    # Module-level functions
+    for func_name, func in components["functions"].items():
+        options.append((f"{func_name}()", func, None))
+
+    return options
+
+
+# ---------------------------------------------------------------------------
+# Helpers — rendering trace
+# ---------------------------------------------------------------------------
+
+def _collect_intermediates(
+    instance: Sentence,
+    sentence_cls: Type[Sentence],
+) -> List[Tuple[str, str, str]]:
+    """Collect intermediate rendering values from an instance.
+
+    Returns list of (call_expression, result, method_source) tuples.
+    """
+    module = inspect.getmodule(sentence_cls)
+    results: List[Tuple[str, str, str]] = []
+    seen: set = set()
+
+    def _try_get_source(obj: Any) -> str:
+        try:
+            return textwrap.dedent(inspect.getsource(obj))
+        except (OSError, TypeError):
+            return ""
+
+    def _call_zero_arg_methods(path: str, value: Any, cls: type) -> None:
+        for name in sorted(dir(value)):
+            if not name.startswith("get_"):
+                continue
+            method = getattr(value, name, None)
+            if method is None or not callable(method):
+                continue
+            try:
+                sig = inspect.signature(method)
+            except (ValueError, TypeError):
+                continue
+            if any(
+                p.default is inspect.Parameter.empty
+                for p in sig.parameters.values()
+            ):
+                continue
+            call_key = f"{path}.{name}"
+            if call_key in seen:
+                continue
+            seen.add(call_key)
+            try:
+                result = method()
+                source = _try_get_source(getattr(cls, name))
+                results.append((f"{call_key}()", repr(result), source))
+            except Exception:
+                pass
+
+    def _try_vocab_lookup(path: str, attr_name: str, value: str, func_names: List[str]) -> None:
+        if not module:
+            return
+        for fn_name in func_names:
+            func = getattr(module, fn_name, None)
+            if func is None:
+                continue
+            call_key = f'{fn_name}("{value}")'
+            if call_key in seen:
+                continue
+            try:
+                result = func(value)
+                seen.add(call_key)
+                source = _try_get_source(func)
+                results.append((call_key, repr(result), source))
+                return
+            except (KeyError, ValueError):
+                continue
+
+    def _process(path: str, value: Any) -> None:
+        if isinstance(value, BaseModel):
+            for fname, fval in value:
+                _process(f"{path}.{fname}", fval)
+            _call_zero_arg_methods(path, value, type(value))
+            # Vocab lookups
+            if hasattr(value, "lemma") and isinstance(value.lemma, str):
+                _try_vocab_lookup(
+                    path, "lemma", value.lemma,
+                    ["get_verb_target", "get_transitive_verb_target",
+                     "get_intransitive_verb_target"],
+                )
+            if hasattr(value, "head") and isinstance(value.head, str):
+                _try_vocab_lookup(path, "head", value.head, ["get_noun_target"])
+        elif isinstance(value, Enum):
+            _call_zero_arg_methods(path, value, type(value))
+
+    for fname, fval in instance:
+        _process(fname, fval)
+
+    return results
+
+
+def _render_trace(instance: Sentence, sentence_cls: Type[Sentence]) -> None:
+    """Display a step-by-step rendering trace for a sentence instance."""
+    st.code(str(instance), language=None)
+
+    try:
+        str_source = textwrap.dedent(inspect.getsource(sentence_cls.__str__))
+    except OSError:
+        str_source = "# source not available"
+
+    with st.expander("__str__ source", expanded=True):
+        st.code(str_source, language="python")
+
+    intermediates = _collect_intermediates(instance, sentence_cls)
+    if not intermediates:
+        return
+
+    st.markdown("**Intermediate values**")
+    for i, (call_expr, result, source) in enumerate(intermediates, 1):
+        with st.expander(f"`{call_expr}` = `{result}`"):
+            if source:
+                st.code(source, language="python")
+
+
+def _render_structured_view(instance: Sentence) -> None:
+    """Compact field-by-field view of a sentence instance."""
+    for field_name, field_value in instance:
+        if isinstance(field_value, BaseModel):
+            st.markdown(f"**{field_name}** (`{type(field_value).__name__}`)")
+            sub_items = list(field_value)
+            if sub_items:
+                cols = st.columns(min(len(sub_items), 4))
+                for col, (sub_name, sub_val) in zip(cols, sub_items):
+                    with col:
+                        display = sub_val.value if isinstance(sub_val, Enum) else sub_val
+                        st.caption(sub_name)
+                        st.code(str(display), language=None)
+                # Handle overflow if more than 4 sub-fields
+                if len(sub_items) > 4:
+                    cols2 = st.columns(min(len(sub_items) - 4, 4))
+                    for col, (sub_name, sub_val) in zip(cols2, sub_items[4:]):
+                        with col:
+                            display = sub_val.value if isinstance(sub_val, Enum) else sub_val
+                            st.caption(sub_name)
+                            st.code(str(display), language=None)
+        elif isinstance(field_value, Enum):
+            st.markdown(f"**{field_name}**: `{field_value.value}`")
+        else:
+            st.markdown(f"**{field_name}**: `{field_value}`")
 
 
 # ---------------------------------------------------------------------------
@@ -163,7 +400,7 @@ def _get_models_for_provider(provider: str) -> List[str]:
     origin = get_origin(ann)
     if origin is Literal:
         return list(get_args(ann))
-    return []  # ollama — free-form string
+    return []
 
 
 def _create_agent(provider: str, model: str, api_key: Optional[str]):
@@ -206,32 +443,70 @@ def page_languages():
 
 def _render_sentence_type(st_cls: Type[Sentence]):
     schema = st_cls.model_json_schema()
+    components = _discover_components(st_cls)
+    options = _build_source_options(st_cls, components)
 
-    col1, col2 = st.columns([3, 2])
+    # --- Top row: schema graph + source code explorer ---
+    col_graph, col_source = st.columns([2, 3])
 
-    with col1:
-        st.subheader("Schema Graph")
+    with col_graph:
+        st.markdown("##### Schema")
         dot = _schema_to_dot(schema)
         st.graphviz_chart(dot)
 
-    with col2:
-        st.subheader("JSON Schema")
-        st.json(schema)
+    with col_source:
+        st.markdown("##### Source Code")
 
-    st.subheader("Examples")
+        labels = [opt[0] for opt in options]
+        default_idx = next(
+            (i for i, lbl in enumerate(labels) if lbl == f"{st_cls.__name__}.__str__()"),
+            0,
+        )
+
+        selected_label = st.selectbox(
+            "Inspect",
+            labels,
+            index=default_idx,
+            key=f"source_{st_cls.__name__}",
+            label_visibility="collapsed",
+        )
+
+        _, target, method_name = options[labels.index(selected_label)]
+
+        try:
+            if method_name:
+                raw = inspect.getsource(getattr(target, method_name))
+            else:
+                raw = inspect.getsource(target)
+            source = textwrap.dedent(raw)
+        except OSError:
+            source = "# source not available"
+
+        st.code(source, language="python", line_numbers=True)
+
+        with st.expander("JSON Schema"):
+            st.json(schema)
+
+    # --- Bottom row: examples ---
+    st.markdown("##### Examples")
     examples = st_cls.get_examples()
     if not examples:
         st.info("No examples defined for this sentence type.")
         return
 
-    for english, instance in examples:
-        with st.expander(f'"{english}" → {str(instance)}'):
-            c1, c2 = st.columns(2)
-            with c1:
-                st.markdown("**Rendered**")
-                st.code(str(instance), language=None)
-            with c2:
-                st.markdown("**Structured**")
+    for i, (english, instance) in enumerate(examples):
+        with st.expander(
+            f'"{english}" \u2192 **{str(instance)}**',
+            expanded=(i == 0),
+        ):
+            tab_trace, tab_struct, tab_json = st.tabs(
+                ["Rendering Trace", "Structured", "JSON"]
+            )
+            with tab_trace:
+                _render_trace(instance, st_cls)
+            with tab_struct:
+                _render_structured_view(instance)
+            with tab_json:
                 st.json(instance.model_dump(mode="json"))
 
 
