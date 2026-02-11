@@ -244,6 +244,13 @@ class Tool(BaseModel, Generic[_T]):
                 if isinstance(expected_type, TypeVar):
                     continue
 
+                # Pydantic parametrized generics don't expose origin via
+                # typing.get_origin; fall back to Pydantic's own metadata.
+                if origin is None:
+                    pydantic_meta = getattr(expected_type, '__pydantic_generic_metadata__', None)
+                    if pydantic_meta:
+                        origin = pydantic_meta.get('origin')
+
                 # For generic types like list[Person], check the origin
                 if origin is not None:
                     if not isinstance(value, origin):
@@ -265,6 +272,13 @@ class Tool(BaseModel, Generic[_T]):
                 # Skip validation for TypeVars (they're validated at definition time)
                 if isinstance(return_type, TypeVar):
                     continue
+
+                # Pydantic parametrized generics don't expose origin via
+                # typing.get_origin; fall back to Pydantic's own metadata.
+                if origin is None:
+                    pydantic_meta = getattr(return_type, '__pydantic_generic_metadata__', None)
+                    if pydantic_meta:
+                        origin = pydantic_meta.get('origin')
 
                 # For generic types like list[Person], check the origin
                 if origin is not None:
