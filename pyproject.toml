@@ -39,6 +39,7 @@ dependencies = [
     "pydantic",
     "python-dotenv",
     "requests",
+    "streamlit",
     "tabulate",
     "uvicorn",
     "weave",
@@ -52,7 +53,7 @@ dev = [
     "mypy",
 ]
 languages = [
-    "yaduha-ovp @ file:///home/jared/projects/language-maker/yaduha-ovp",
+    "yaduha-ovp @ file:///home/jared/projects/llms_and_language/yaduha-ovp",
 ]
 
 [project.scripts]
@@ -74,6 +75,7 @@ packages = [
     "yaduha.tool",
     "yaduha.api",
     "yaduha.api.routes",
+    "yaduha.dashboard",
 ]
 
 [tool.setuptools.package-data]
