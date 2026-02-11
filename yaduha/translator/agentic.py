@@ -75,4 +75,16 @@ class AgenticTranslator(Translator):
             }
         )
 
+        self.log(data={
+            "event": "translation_completed",
+            "agent_name": self.agent.name,
+            "agent_model": self.agent.model,
+            "source": text,
+            "response": response.content.translation,
+            "confidence": response.content.confidence.value,
+            "translation_time": end_time - start_time,
+            "prompt_tokens": response.prompt_tokens,
+            "completion_tokens": response.completion_tokens,
+        })
+
         return translation

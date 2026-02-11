@@ -46,6 +46,7 @@ class SentenceToEnglishTool(Tool[AgentResponse[str]], Generic[TSentenceType]):
             )
 
             self.log(data={
+                "event": "sentence_to_english_complete",
                 "sentence": sentence.model_dump_json(),
                 "response": response.content,
                 "response_time": response.response_time,

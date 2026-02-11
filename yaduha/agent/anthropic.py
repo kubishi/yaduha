@@ -1,5 +1,6 @@
 import time
 import json
+from uuid import uuid4
 from typing import ClassVar, List, Literal, Type, overload, cast, Any
 from anthropic import Anthropic
 from anthropic.types import MessageParam, ToolParam, ToolUseBlock, TextBlock, ToolResultBlockParam
@@ -109,20 +110,22 @@ class AnthropicAgent(Agent):
         tools: List["Tool"] | None = None,
     ) -> AgentResponse[TAgentResponseContentType]:
         start_time = time.time()
+        request_id = str(uuid4())
 
         client = Anthropic(api_key=self.api_key)
         anthropic_tools = self._convert_tools(tools) if tools else []
         tool_map = {tool.name: tool for tool in (tools or [])}
 
-        self.log({"event": "get_response_start", "messages": messages, "tools": [tool.name for tool in (tools or [])]})
+        self.log({"event": "get_response_start", "request_id": request_id, "messages": messages, "tools": [tool.name for tool in (tools or [])]})
 
         # Track total tokens across the conversation
         total_prompt_tokens = 0
         total_completion_tokens = 0
+        api_call_index = 0
 
         while True:
             system_prompt, anthropic_messages = self._convert_messages(messages)
-            
+
             # For structured output without tools, inject JSON instruction
             effective_system = system_prompt or ""
             if response_format is not str and not anthropic_tools and issubclass(response_format, BaseModel):
@@ -143,7 +146,7 @@ class AnthropicAgent(Agent):
                 request_kwargs["tools"] = anthropic_tools
 
             response = client.messages.create(**request_kwargs)
-            self.log({"event": "get_response_received", "response": response.model_dump()})
+            self.log({"event": "get_response_received", "request_id": request_id, "api_call_index": api_call_index, "response": response.model_dump()})
 
             # Track token usage
             total_prompt_tokens += response.usage.input_tokens
@@ -167,7 +170,7 @@ class AnthropicAgent(Agent):
             text_content = ""
             for block in text_blocks:
                 text_content += block.text
-            
+
             # Append assistant message to history immediately (like OpenAI)
             message: ChatCompletionMessageParam = {
                 "role": "assistant",
@@ -176,16 +179,18 @@ class AnthropicAgent(Agent):
             if tool_calls_for_history:
                 message["tool_calls"] = tool_calls_for_history
             messages.append(message)
+            api_call_index += 1
 
             # Check for tool use - early return if none (like OpenAI)
             if not tool_use_blocks:
                 if not text_content:
                     raise ValueError("No content in response")
-                
-                self.log({"event": "get_response_content", "content": text_content})
+
+                self.log({"event": "get_response_content", "request_id": request_id, "content": text_content})
 
                 # Handle text response
                 if response_format is str:
+                    self.log({"event": "get_response_complete", "request_id": request_id, "api_calls": api_call_index, "total_prompt_tokens": total_prompt_tokens, "total_completion_tokens": total_completion_tokens, "response_time": time.time() - start_time})
                     return cast(
                         AgentResponse[TAgentResponseContentType],
                         AgentResponse(
@@ -195,7 +200,7 @@ class AnthropicAgent(Agent):
                             completion_tokens=total_completion_tokens,
                         )
                     )
-                
+
                 # Handle structured output - parse JSON
                 try:
                     json_content = text_content.strip()
@@ -210,13 +215,14 @@ class AnthropicAgent(Agent):
                             if in_block or not line.startswith("```"):
                                 json_lines.append(line)
                         json_content = "\n".join(json_lines).strip()
-                    
+
                     parsed = response_format(**json.loads(json_content))
                 except (json.JSONDecodeError, ValueError) as e:
-                    self.log({"event": "parse_error", "content": text_content, "error": str(e)})
+                    self.log({"event": "parse_error", "request_id": request_id, "content": text_content, "error": str(e)})
                     raise ValueError(f"Failed to parse response as {response_format.__name__}: {e}\nContent: {text_content}")
 
-                self.log({"event": "get_response_parsed", "parsed": parsed})
+                self.log({"event": "get_response_parsed", "request_id": request_id, "parsed": parsed})
+                self.log({"event": "get_response_complete", "request_id": request_id, "api_calls": api_call_index, "total_prompt_tokens": total_prompt_tokens, "total_completion_tokens": total_completion_tokens, "response_time": time.time() - start_time})
                 return cast(
                     AgentResponse[TAgentResponseContentType],
                     AgentResponse(
@@ -231,11 +237,11 @@ class AnthropicAgent(Agent):
             for block in tool_use_blocks:
                 name = block.name
                 args = block.input if isinstance(block.input, dict) else {}
-                self.log({"event": "tool_call", "tool_name": name, "arguments": args})
+                self.log({"event": "tool_call", "request_id": request_id, "api_call_index": api_call_index - 1, "tool_name": name, "arguments": args})
                 result = tool_map[name](**args)
                 messages.append({
                     "role": "tool",
                     "tool_call_id": block.id,
                     "content": str(result),
                 })
-                self.log({"event": "tool_result", "tool_name": name, "result": result})
+                self.log({"event": "tool_result", "request_id": request_id, "api_call_index": api_call_index - 1, "tool_name": name, "result": result})

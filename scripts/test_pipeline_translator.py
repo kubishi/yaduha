@@ -19,20 +19,20 @@ load_dotenv()
 
 # Models to test
 MODELS = {
-    # "openai": [
-    #     "gpt-4o",
-    #     "gpt-4o-mini",
-    # ],
+    "openai": [
+        "gpt-4o",
+        "gpt-4o-mini",
+    ],
     # "anthropic": [
     #     "claude-sonnet-4-5",
     #     "claude-sonnet-4-20250514",
     #     "claude-3-haiku-20240307",
     # ],
-    "ollama": [
-        "deepseek-r1:70b",
-        "mixtral:8x22b",
-        "llama3.1:8b",
-    ],
+    # "ollama": [
+    #     "deepseek-r1:70b",
+    #     "mixtral:8x22b",
+    #     "llama3.1:8b",
+    # ],
 }
 
 
@@ -65,17 +65,17 @@ def main():
 
     # logger = WandbLogger(name="Pipline Test - ALL - 2", project_name="Pipeline Test", tags=["Ollama", "logger"], notes="Testing logger functionality")
 
-    logger = JsonLogger(filename="test-3")
+    logger = JsonLogger(filename="test-7")
 
 
     # Back-translation always uses gpt-4o
-    # back_agent = OpenAIAgent(
-    #     model="gpt-4o",
-    #     api_key=os.environ["OPENAI_API_KEY"],
-    #     logger=logger
-    # )
+    back_agent = OpenAIAgent(
+        model="gpt-4o",
+        api_key=os.environ["OPENAI_API_KEY"],
+        logger=logger.get_sublogger(functionality="back-agent")
+    )
     
-    back_agent = OllamaAgent(model="llama3.1:8b", logger=logger, functionality="back_agent")
+    # back_agent = OllamaAgent(model="llama3.1:8b", logger=logger)
 
     # ============================================================
 

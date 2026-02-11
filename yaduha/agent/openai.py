@@ -1,5 +1,6 @@
 import time
 import json
+from uuid import uuid4
 from typing import ClassVar, List, Literal, Type, overload, cast
 from openai import OpenAI
 from openai.types.chat.chat_completion_message_param import ChatCompletionMessageParam
@@ -39,12 +40,18 @@ class OpenAIAgent(Agent):
         tools: List["Tool"] | None = None,
     ) -> AgentResponse[TAgentResponseContentType]:
         start_time = time.time()
+        request_id = str(uuid4())
 
         client = OpenAI(api_key=self.api_key)
         chat_tools = [tool.get_tool_call_schema() for tool in (tools or [])]
         tool_map = {tool.name: tool for tool in (tools or [])}
 
-        self.log({"event": "get_response_start", "messages": messages, "tools": [tool.name for tool in (tools or [])]})
+        self.log({"event": "get_response_start", "request_id": request_id, "messages": messages, "tools": [tool.name for tool in (tools or [])]})
+
+        # Track total tokens across all API calls in the loop
+        total_prompt_tokens = 0
+        total_completion_tokens = 0
+        api_call_index = 0
 
         while True:
             if response_format is str:
@@ -54,22 +61,30 @@ class OpenAIAgent(Agent):
                     tools=chat_tools,
                     temperature=self.temperature
                 )
-                self.log({"event": "get_response_received", "response": response.model_dump_json()})
+                self.log({"event": "get_response_received", "request_id": request_id, "api_call_index": api_call_index, "response": response.model_dump()})
+
+                # Accumulate tokens
+                if response.usage:
+                    total_prompt_tokens += response.usage.prompt_tokens
+                    total_completion_tokens += response.usage.completion_tokens
+
                 msg = json.loads(response.choices[0].message.model_dump_json())
                 messages.append(msg)
+                api_call_index += 1
 
                 if not response.choices[0].message.tool_calls:
                     content = response.choices[0].message.content
                     if not content:
                         raise ValueError("No content in response")
-                    self.log({"event": "get_response_content", "content": content})
+                    self.log({"event": "get_response_content", "request_id": request_id, "content": content})
+                    self.log({"event": "get_response_complete", "request_id": request_id, "api_calls": api_call_index, "total_prompt_tokens": total_prompt_tokens, "total_completion_tokens": total_completion_tokens, "response_time": time.time() - start_time})
                     return cast(
                         AgentResponse[TAgentResponseContentType],
                         AgentResponse(
                             content=content,
                             response_time=time.time() - start_time,
-                            prompt_tokens=response.usage.prompt_tokens if response.usage else 0,
-                            completion_tokens=response.usage.completion_tokens if response.usage else 0,
+                            prompt_tokens=total_prompt_tokens,
+                            completion_tokens=total_completion_tokens,
                         )
                     )
             else:
@@ -80,22 +95,30 @@ class OpenAIAgent(Agent):
                     response_format=response_format,
                     temperature=self.temperature
                 )
-                self.log({"event": "get_response_received", "response": response.model_dump_json()})
+                self.log({"event": "get_response_received", "request_id": request_id, "api_call_index": api_call_index, "response": response.model_dump()})
+
+                # Accumulate tokens
+                if response.usage:
+                    total_prompt_tokens += response.usage.prompt_tokens
+                    total_completion_tokens += response.usage.completion_tokens
+
                 msg = json.loads(response.choices[0].message.model_dump_json())
                 messages.append(msg)
+                api_call_index += 1
 
                 if not response.choices[0].message.tool_calls:
                     parsed = response.choices[0].message.parsed
                     if not parsed:
                         raise ValueError("No content in response")
-                    self.log({"event": "get_response_parsed", "parsed": parsed.model_dump_json()})
+                    self.log({"event": "get_response_parsed", "request_id": request_id, "parsed": parsed.model_dump_json()})
+                    self.log({"event": "get_response_complete", "request_id": request_id, "api_calls": api_call_index, "total_prompt_tokens": total_prompt_tokens, "total_completion_tokens": total_completion_tokens, "response_time": time.time() - start_time})
                     return cast(
                         AgentResponse[TAgentResponseContentType],
                         AgentResponse(
                             content=parsed,
                             response_time=time.time() - start_time,
-                            prompt_tokens=response.usage.prompt_tokens if response.usage else 0,
-                            completion_tokens=response.usage.completion_tokens if response.usage else 0,
+                            prompt_tokens=total_prompt_tokens,
+                            completion_tokens=total_completion_tokens,
                         )
                     )
 
@@ -103,7 +126,7 @@ class OpenAIAgent(Agent):
                 if tool_call.type == "function":
                     name = tool_call.function.name
                     args = json.loads(tool_call.function.arguments)
-                    self.log({"event": "tool_call", "tool_name": name, "arguments": args})
+                    self.log({"event": "tool_call", "request_id": request_id, "api_call_index": api_call_index - 1, "tool_name": name, "arguments": args})
                     result = tool_map[name](**args)
                     messages.append(
                         {
@@ -112,4 +135,4 @@ class OpenAIAgent(Agent):
                             "content": str(result),
                         }
                     )
-                    self.log({"event": "tool_result", "tool_name": name, "result": result})
+                    self.log({"event": "tool_result", "request_id": request_id, "api_call_index": api_call_index - 1, "tool_name": name, "result": result})
