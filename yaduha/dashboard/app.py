@@ -6,11 +6,12 @@ from enum import Enum
 from typing import Any, Callable, Dict, List, Literal, Optional, Tuple, Type, get_args, get_origin
 
 import streamlit as st
-from pydantic import BaseModel
+from pydantic import BaseModel, PrivateAttr
 
 from yaduha.loader import LanguageLoader
 from yaduha.language.language import Language
 from yaduha.language import Sentence
+from yaduha.logger import Logger
 
 # ---------------------------------------------------------------------------
 # Page config + compact CSS
@@ -415,6 +416,197 @@ def _create_agent(provider: str, model: str, api_key: Optional[str]):
 
 
 # ---------------------------------------------------------------------------
+# Helpers — pipeline logging
+# ---------------------------------------------------------------------------
+
+class ListLogger(Logger):
+    """Logger that captures all entries into a list for dashboard display."""
+    _entries: list = PrivateAttr(default_factory=list)
+
+    def _log(self, data: Dict[str, Any]) -> None:
+        self._entries.append(dict(data))
+
+    @property
+    def entries(self) -> List[Dict[str, Any]]:
+        return self._entries
+
+
+def _group_log_entries(entries: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    """Group log entries into pipeline steps by TOOLCHAIN."""
+    steps: List[Dict[str, Any]] = []
+    chain_to_step: Dict[str, int] = {}
+
+    for entry in entries:
+        toolchain = entry.get("TOOLCHAIN", "")
+        tool = entry.get("TOOL", "")
+        if not toolchain:
+            continue
+
+        if toolchain not in chain_to_step:
+            chain_to_step[toolchain] = len(steps)
+            steps.append({"tool": tool, "toolchain": toolchain, "entries": []})
+
+        steps[chain_to_step[toolchain]]["entries"].append(entry)
+
+    return steps
+
+
+def _format_message(msg: Dict[str, Any]) -> None:
+    """Render a single chat message in the dashboard."""
+    role = msg.get("role", "unknown")
+    content = msg.get("content", "")
+
+    if role == "system":
+        st.markdown("**System**")
+        st.code(content, language=None)
+    elif role == "user":
+        st.markdown("**User**")
+        # Try to detect JSON content
+        if isinstance(content, str) and content.startswith(('"', "{", "[")):
+            try:
+                import json as _json
+                parsed = _json.loads(content)
+                if isinstance(parsed, str):
+                    # Double-encoded JSON (e.g. model_dump_json wrapped in json.dumps)
+                    try:
+                        inner = _json.loads(parsed)
+                        st.json(inner)
+                    except (ValueError, TypeError):
+                        st.code(parsed, language=None)
+                else:
+                    st.json(parsed)
+            except (ValueError, TypeError):
+                st.code(content, language=None)
+        else:
+            st.code(content, language=None)
+    elif role == "assistant":
+        st.markdown("**Assistant**")
+        if content:
+            st.code(content, language=None)
+        tool_calls = msg.get("tool_calls") or []
+        for tc in tool_calls:
+            func = tc.get("function", {})
+            st.caption(f"Tool call: `{func.get('name', '?')}`")
+            try:
+                import json as _json
+                st.json(_json.loads(func.get("arguments", "{}")))
+            except (ValueError, TypeError):
+                st.code(func.get("arguments", ""), language=None)
+    elif role == "tool":
+        st.markdown(f"**Tool result** (`{msg.get('tool_call_id', '')[:12]}...`)")
+        st.code(content, language=None)
+
+
+def _render_pipeline_log(entries: List[Dict[str, Any]]) -> None:
+    """Render pipeline log entries as expandable steps."""
+    import json as _json
+
+    steps = _group_log_entries(entries)
+    if not steps:
+        return
+
+    st.markdown("##### Pipeline Details")
+
+    for i, step in enumerate(steps, 1):
+        tool = step["tool"]
+        step_entries = step["entries"]
+
+        # Determine step label
+        if tool == "english_to_sentences":
+            label = f"Step {i}: English \u2192 Structured Sentences"
+        elif tool == "sentence_to_english":
+            label = f"Step {i}: Sentence \u2192 Back-translation"
+        else:
+            label = f"Step {i}: {tool}"
+
+        # Extract key info for the header
+        model_name = ""
+        timing = ""
+        tokens = ""
+        for entry in step_entries:
+            if entry.get("agent_model"):
+                model_name = entry["agent_model"]
+            if "response_time" in entry and "event" not in entry:
+                t = entry["response_time"]
+                timing = f"{t:.2f}s"
+                pt = entry.get("prompt_tokens", 0)
+                ct = entry.get("completion_tokens", 0)
+                tokens = f"{pt + ct} tokens"
+
+        header_parts = [label]
+        if model_name:
+            header_parts.append(f"`{model_name}`")
+        if timing:
+            header_parts.append(timing)
+        if tokens:
+            header_parts.append(tokens)
+
+        with st.expander(" · ".join(header_parts)):
+            tab_msgs, tab_resp, tab_raw = st.tabs(["Messages", "Response", "Raw"])
+
+            with tab_msgs:
+                # Find get_response_start to show messages
+                for entry in step_entries:
+                    if entry.get("event") == "get_response_start":
+                        messages = entry.get("messages", [])
+                        for msg in messages:
+                            if isinstance(msg, dict):
+                                _format_message(msg)
+                                st.divider()
+                        tools_used = entry.get("tools", [])
+                        if tools_used:
+                            st.caption(f"Tools available: {', '.join(tools_used)}")
+                        break
+                else:
+                    st.info("No message data captured.")
+
+            with tab_resp:
+                for entry in step_entries:
+                    event = entry.get("event", "")
+                    if event == "get_response_parsed":
+                        parsed = entry.get("parsed")
+                        if hasattr(parsed, "model_dump"):
+                            st.json(parsed.model_dump(mode="json"))
+                        elif isinstance(parsed, (dict, list)):
+                            st.json(parsed)
+                        else:
+                            st.code(str(parsed), language=None)
+                        break
+                    elif event == "get_response_content":
+                        st.code(entry.get("content", ""), language=None)
+                        break
+                else:
+                    # Fallback: look for tool-level log with response
+                    for entry in step_entries:
+                        if "response" in entry and "event" not in entry:
+                            resp = entry["response"]
+                            if isinstance(resp, str):
+                                try:
+                                    st.json(_json.loads(resp))
+                                except (ValueError, TypeError):
+                                    st.code(resp, language=None)
+                            else:
+                                st.code(str(resp), language=None)
+                            break
+                    else:
+                        st.info("No response data captured.")
+
+            with tab_raw:
+                # Show all entries, serializing non-JSON-safe values
+                safe_entries = []
+                for entry in step_entries:
+                    safe = {}
+                    for k, v in entry.items():
+                        try:
+                            _json.dumps(v)
+                            safe[k] = v
+                        except (TypeError, ValueError):
+                            safe[k] = str(v)
+                    safe_entries.append(safe)
+                st.json(safe_entries)
+
+
+# ---------------------------------------------------------------------------
 # Languages page
 # ---------------------------------------------------------------------------
 
@@ -557,37 +749,42 @@ def page_translate():
 
         translate_btn = st.button("Translate", type="primary", disabled=not text.strip())
 
-    with col_right:
-        if translate_btn and text.strip():
-            api_key = st.session_state.get(f"api_key_{provider}", "")
-            if PROVIDERS[provider]["needs_key"] and not api_key:
-                st.error(f"Please set your {provider.title()} API key in the sidebar.")
-                return
+    if translate_btn and text.strip():
+        api_key = st.session_state.get(f"api_key_{provider}", "")
+        if PROVIDERS[provider]["needs_key"] and not api_key:
+            st.error(f"Please set your {provider.title()} API key in the sidebar.")
+            return
 
+        try:
+            agent = _create_agent(provider, model, api_key or None)
+        except Exception as e:
+            st.error(f"Failed to create agent: {e}")
+            return
+
+        from yaduha.translator.pipeline import PipelineTranslator
+
+        # Inject ListLogger to capture all pipeline events
+        log = ListLogger()
+        agent.logger = log
+
+        try:
+            translator = PipelineTranslator(
+                agent=agent,
+                SentenceType=lang.sentence_types,
+                logger=log,
+            )
+        except Exception as e:
+            st.error(f"Failed to create translator: {e}")
+            return
+
+        with st.spinner("Translating..."):
             try:
-                agent = _create_agent(provider, model, api_key or None)
+                result = translator.translate(text.strip())
             except Exception as e:
-                st.error(f"Failed to create agent: {e}")
+                st.error(f"Translation failed: {e}")
                 return
 
-            from yaduha.translator.pipeline import PipelineTranslator
-
-            try:
-                translator = PipelineTranslator(
-                    agent=agent,
-                    SentenceType=lang.sentence_types,
-                )
-            except Exception as e:
-                st.error(f"Failed to create translator: {e}")
-                return
-
-            with st.spinner("Translating..."):
-                try:
-                    result = translator.translate(text.strip())
-                except Exception as e:
-                    st.error(f"Translation failed: {e}")
-                    return
-
+        with col_right:
             st.subheader("Result")
 
             st.markdown("**Translation**")
@@ -612,6 +809,9 @@ def page_translate():
 
             with st.expander("Raw response"):
                 st.json(result.model_dump(mode="json"))
+
+        # Pipeline details below both columns
+        _render_pipeline_log(log.entries)
 
 
 # ---------------------------------------------------------------------------
