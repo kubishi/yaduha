@@ -16,7 +16,6 @@ def create_app() -> FastAPI:
         version="0.3.0",
     )
 
-    # Mount all API routes under /api
     api = APIRouter(prefix="/api")
     api.include_router(health.router)
     api.include_router(languages.router)

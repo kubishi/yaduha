@@ -32,26 +32,35 @@ classifiers = [
     "Topic :: Text Processing :: Linguistic",
 ]
 dependencies = [
-    "anthropic",
-    "fastapi",
-    "openai",
-    "pandas",
     "pydantic",
-    "python-dotenv",
-    "requests",
-    "streamlit",
-    "tabulate",
-    "uvicorn",
-    "weave",
+    "tomli>=2.0; python_version < '3.11'",
 ]
 
 [project.optional-dependencies]
+api = [
+    "fastapi",
+    "uvicorn",
+    "python-dotenv",
+    "requests",
+]
+agents = [
+    "anthropic",
+    "openai",
+]
+all = [
+    "yaduha[api,agents]",
+    "graphviz>=0.20",
+    "pandas",
+    "tabulate",
+    "weave",
+]
 dev = [
     "pytest>=7.0",
     "black",
     "isort",
     "mypy",
 ]
+
 [project.scripts]
 yaduha = "yaduha.cli:main"
 
@@ -71,7 +80,6 @@ packages = [
     "yaduha.tool",
     "yaduha.api",
     "yaduha.api.routes",
-    "yaduha.dashboard",
 ]
 
 [tool.setuptools.package-data]
