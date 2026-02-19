@@ -3,7 +3,7 @@
 from fastapi import APIRouter, Request
 
 from yaduha.api.models import TranslateRequest, AgenticTranslateRequest
-from yaduha.api.dependencies import create_agent, get_language
+from yaduha.api.dependencies import create_agent, create_evaluator, get_language
 from yaduha.translator import Translation
 from yaduha.translator.pipeline import PipelineTranslator
 from yaduha.translator.agentic import AgenticTranslator
@@ -31,12 +31,17 @@ async def translate_pipeline(body: TranslateRequest, request: Request):
     if body.back_translation_agent:
         bt_agent = create_agent(body.back_translation_agent, headers)
 
+    evaluator = None
+    if body.evaluator:
+        evaluator = create_evaluator(body.evaluator, headers)
+
     lang = get_language(body.language_code)
 
     translator = PipelineTranslator(
         agent=agent,
         back_translation_agent=bt_agent,
         SentenceType=lang.sentence_types,
+        evaluator=evaluator,
     )
 
     return translator.translate(body.text)

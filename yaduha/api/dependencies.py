@@ -13,7 +13,8 @@ from yaduha.language.language import Language
 from yaduha.language.exceptions import LanguageNotFoundError
 from yaduha.loader import LanguageLoader
 
-from yaduha.api.models import AgentConfig
+from yaduha.api.models import AgentConfig, EvaluatorConfig
+from yaduha.evaluator import Evaluator, OpenAIEvaluator
 
 _PROVIDERS = {
     "openai": {
@@ -99,6 +100,33 @@ def create_agent(config: AgentConfig, headers: dict[str, str]):
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail=f"Invalid agent configuration: {e}",
             )
+
+
+_EVALUATORS = {
+    "openai_embedding": {
+        "cls": OpenAIEvaluator,
+        "key_provider": "openai",
+    },
+}
+
+
+def create_evaluator(config: EvaluatorConfig, headers: dict[str, str]) -> Evaluator:
+    if config.type not in _EVALUATORS:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Unknown evaluator type '{config.type}'. Available: {list(_EVALUATORS)}",
+        )
+
+    info = _EVALUATORS[config.type]
+    api_key = _resolve_api_key(info["key_provider"], headers)
+
+    kwargs: dict = {}
+    if config.model:
+        kwargs["model"] = config.model
+    if api_key:
+        kwargs["api_key"] = api_key
+
+    return info["cls"](**kwargs)
 
 
 def get_language(language_code: str) -> Language:

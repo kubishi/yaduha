@@ -59,6 +59,21 @@ class SentenceExamplesResponse(BaseModel):
     examples: List[ExamplePair]
 
 
+# -- Evaluator config --
+
+
+class EvaluatorConfig(BaseModel):
+    """Configuration for an optional translation quality evaluator."""
+
+    type: str = Field(
+        ..., description="Evaluator type: 'openai_embedding'"
+    )
+    model: Optional[str] = Field(
+        default=None,
+        description="Model name for the evaluator (e.g., 'text-embedding-3-small')",
+    )
+
+
 # -- Translation requests --
 
 
@@ -67,6 +82,7 @@ class TranslateRequest(BaseModel):
     language_code: str = Field(..., description="Target language code (e.g., 'ovp')")
     agent: AgentConfig
     back_translation_agent: Optional[AgentConfig] = None
+    evaluator: Optional[EvaluatorConfig] = None
 
 
 class AgenticTranslateRequest(BaseModel):

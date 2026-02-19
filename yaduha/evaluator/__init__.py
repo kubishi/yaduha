@@ -1,8 +1,7 @@
 from abc import ABC
 
 from pydantic import BaseModel, Field
-from typing import List, Dict, Any, Literal
-import pathlib
+from typing import Dict, Any, Literal, Optional
 from openai import OpenAI
 
 from yaduha.agent import Agent
@@ -21,9 +20,10 @@ class Evaluator(BaseModel, ABC):
 class OpenAIEvaluator(Evaluator):
     name: str = "openai_embedding_evaluator"
     model: Literal["text-embedding-3-small", "text-embedding-3-large"] = "text-embedding-3-small"
+    api_key: Optional[str] = None
 
     def evaluate(self, source: str, target: str) -> float:
-        client = OpenAI()
+        client = OpenAI(api_key=self.api_key) if self.api_key else OpenAI()
         response = client.embeddings.create(
             model=self.model,
             input=[source, target]
