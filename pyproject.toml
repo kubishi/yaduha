@@ -78,6 +78,7 @@ packages = [
     "yaduha.translator",
     "yaduha.logger",
     "yaduha.tool",
+    "yaduha.evaluator",
     "yaduha.api",
     "yaduha.api.routes",
 ]
