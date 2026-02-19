@@ -59,6 +59,13 @@ class SentenceExamplesResponse(BaseModel):
     examples: List[ExamplePair]
 
 
+class RenderResponse(BaseModel):
+    language_code: str
+    sentence_type: str
+    rendered: str
+    structured: Dict[str, Any]
+
+
 # -- Evaluator config --
 
 

@@ -1,13 +1,15 @@
-"""Routes for sentence type schemas and examples."""
+"""Routes for sentence type schemas, examples, and rendering."""
 
-from typing import List
+from typing import Any, Dict, List
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Body, HTTPException, status
+from pydantic import ValidationError
 
 from yaduha.api.models import (
     SentenceSchemaResponse,
     SentenceExamplesResponse,
     ExamplePair,
+    RenderResponse,
 )
 from yaduha.api.dependencies import get_language, get_sentence_type
 
@@ -61,4 +63,35 @@ async def get_sentence_examples(language_code: str, sentence_type_name: str):
             )
             for english, instance in examples
         ],
+    )
+
+
+@router.post("/{sentence_type_name}/render", response_model=RenderResponse)
+async def render_sentence(
+    language_code: str,
+    sentence_type_name: str,
+    data: Dict[str, Any] = Body(...),
+):
+    """Render a structured sentence in the target language.
+
+    Accepts a JSON body matching the sentence type's schema and returns
+    the rendered target-language string.
+    """
+    lang = get_language(language_code)
+    st = get_sentence_type(lang, sentence_type_name)
+    try:
+        instance = st.model_validate(data)
+    except ValidationError as e:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail=[
+                {"loc": err["loc"], "msg": err["msg"], "type": err["type"]}
+                for err in e.errors()
+            ],
+        )
+    return RenderResponse(
+        language_code=language_code,
+        sentence_type=sentence_type_name,
+        rendered=str(instance),
+        structured=instance.model_dump(),
     )
