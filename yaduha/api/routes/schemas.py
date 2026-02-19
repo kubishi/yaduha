@@ -2,7 +2,7 @@
 
 from typing import Any, Dict, List
 
-from fastapi import APIRouter, Body, HTTPException, status
+from fastapi import APIRouter, Body, HTTPException, Request, status
 from pydantic import ValidationError
 
 from yaduha.api.models import (
@@ -10,8 +10,11 @@ from yaduha.api.models import (
     SentenceExamplesResponse,
     ExamplePair,
     RenderResponse,
+    ToEnglishRequest,
+    ToEnglishResponse,
 )
-from yaduha.api.dependencies import get_language, get_sentence_type
+from yaduha.api.dependencies import create_agent, get_language, get_sentence_type
+from yaduha.tool.sentence_to_english import SentenceToEnglishTool
 
 router = APIRouter(prefix="/languages/{language_code}/sentence-types", tags=["schemas"])
 
@@ -93,5 +96,49 @@ async def render_sentence(
         language_code=language_code,
         sentence_type=sentence_type_name,
         rendered=str(instance),
+        structured=instance.model_dump(),
+    )
+
+
+def _headers_dict(request: Request) -> dict[str, str]:
+    return {k.lower(): v for k, v in request.headers.items()}
+
+
+@router.post("/{sentence_type_name}/to-english", response_model=ToEnglishResponse)
+async def sentence_to_english(
+    language_code: str,
+    sentence_type_name: str,
+    body: ToEnglishRequest,
+    request: Request,
+):
+    """Translate a structured sentence to English.
+
+    Accepts structured sentence data and an agent config. Uses the agent to
+    translate the sentence to natural English.
+    """
+    lang = get_language(language_code)
+    st = get_sentence_type(lang, sentence_type_name)
+    try:
+        instance = st.model_validate(body.data)
+    except ValidationError as e:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail=[
+                {"loc": err["loc"], "msg": err["msg"], "type": err["type"]}
+                for err in e.errors()
+            ],
+        )
+
+    headers = _headers_dict(request)
+    agent = create_agent(body.agent, headers)
+
+    tool = SentenceToEnglishTool(agent=agent, SentenceType=lang.sentence_types)
+    response = tool(instance)
+
+    return ToEnglishResponse(
+        language_code=language_code,
+        sentence_type=sentence_type_name,
+        rendered=str(instance),
+        english=response.content,
         structured=instance.model_dump(),
     )

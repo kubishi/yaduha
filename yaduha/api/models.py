@@ -66,6 +66,19 @@ class RenderResponse(BaseModel):
     structured: Dict[str, Any]
 
 
+class ToEnglishRequest(BaseModel):
+    data: Dict[str, Any] = Field(..., description="Structured sentence data matching the sentence type schema")
+    agent: "AgentConfig"
+
+
+class ToEnglishResponse(BaseModel):
+    language_code: str
+    sentence_type: str
+    rendered: str
+    english: str
+    structured: Dict[str, Any]
+
+
 # -- Evaluator config --
 
 

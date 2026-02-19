@@ -40,6 +40,21 @@ class EnglishToSentencesTool(Tool[AgentResponse[SentenceList[TSentenceType]]]):
                     __base__=SentenceList[self.SentenceType]
                 )
 
+            examples = []
+            SentenceTypes = self.SentenceType if isinstance(self.SentenceType, tuple) else (self.SentenceType,)
+            for SentenceType in SentenceTypes:
+                for example_english, example_sentence in SentenceType.get_examples():
+                    examples.extend([
+                        {
+                            "role": "user",
+                            "content": example_english
+                        },
+                        {
+                            "role": "assistant",
+                            "content": SentenceList[TSentenceType](sentences=[example_sentence]).model_dump_json()
+                        }
+                    ])
+
             response = self.agent.get_response(
                 messages=[
                     {
@@ -50,6 +65,7 @@ class EnglishToSentencesTool(Tool[AgentResponse[SentenceList[TSentenceType]]]):
                             "but you must capture as much as meaning as possible. "
                         )
                     },
+                    *examples,
                     {
                         "role": "user",
                         "content": english

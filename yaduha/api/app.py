@@ -1,6 +1,7 @@
 """FastAPI application factory."""
 
 from fastapi import APIRouter, FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from yaduha.api.routes import health, languages, schemas, translate
 
@@ -14,6 +15,13 @@ def create_app() -> FastAPI:
             "Works with any installed language package."
         ),
         version="0.3.0",
+    )
+
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_methods=["*"],
+        allow_headers=["*"],
     )
 
     api = APIRouter(prefix="/api")
