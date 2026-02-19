@@ -60,7 +60,6 @@ def get_global_logger() -> "Logger":
 class Logger(BaseModel, ABC):
     metadata: Dict[str, str | int | float] = Field(default_factory=dict, description="Metadata for the logger.")
 
-    @abstractmethod
     def _log(self, data: Dict[str, Any]):
         pass
 

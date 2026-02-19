@@ -1,12 +1,10 @@
 import random
 import re
 import time
-from uuid import uuid4
 from typing import ClassVar, Dict, Generic, List, Optional, Type, Tuple
 
-from yaduha import logger
+from yaduha.evaluator import Evaluator
 from yaduha.loader import LanguageLoader
-from yaduha.logger import inject_logs
 from yaduha.translator import Translator, Translation, BackTranslation
 from yaduha.tool.english_to_sentences import EnglishToSentencesTool, TSentenceType
 from yaduha.tool.sentence_to_english import SentenceToEnglishTool
@@ -24,6 +22,7 @@ class PipelineTranslator(Translator, Generic[TSentenceType]):
     agent: Agent
     back_translation_agent: Optional[Agent] = None
     SentenceType: Type[TSentenceType] | Tuple[Type[Sentence], ...]
+    evaluator: Optional[Evaluator] = None
 
     @classmethod
     def from_language(
@@ -31,6 +30,7 @@ class PipelineTranslator(Translator, Generic[TSentenceType]):
         language_code: str,
         agent: Agent,
         back_translation_agent: Optional[Agent] = None,
+        evaluator: Optional[Evaluator] = None,
     ) -> "PipelineTranslator":
         """Create a PipelineTranslator from an installed language package.
 
@@ -38,6 +38,7 @@ class PipelineTranslator(Translator, Generic[TSentenceType]):
             language_code: Language code (e.g., 'ovp')
             agent: Agent to use for translation
             back_translation_agent: Optional agent for back-translation verification
+            evaluator: Optional evaluator for translation quality
 
         Returns:
             PipelineTranslator instance
@@ -50,6 +51,7 @@ class PipelineTranslator(Translator, Generic[TSentenceType]):
             agent=agent,
             back_translation_agent=back_translation_agent,
             SentenceType=language.sentence_types,
+            evaluator=evaluator
         )
 
     def translate(self, text: str) -> Translation:
@@ -113,19 +115,24 @@ class PipelineTranslator(Translator, Generic[TSentenceType]):
             "back_translation_completion_tokens": completion_tokens_bt
         })
 
+        target_str = " ".join(targets)
+        back_translation_str = " ".join(back_translations)
         return Translation(
             source=text,
-            target=" ".join(targets),
+            target=target_str,
             prompt_tokens=prompt_tokens,
             completion_tokens=completion_tokens,
             translation_time=end_time - start_time,
             back_translation=BackTranslation(
-                source=" ".join(back_translations),
-                target=" ".join(targets),
+                source=back_translation_str,
+                target=target_str,
                 prompt_tokens=prompt_tokens_bt,
                 completion_tokens=completion_tokens_bt,
                 translation_time=end_time_bt - start_time_bt
             ),
+            metadata={
+                "evaluator_score": self.evaluator.evaluate(text, back_translation_str) if self.evaluator else None
+            }
         )
 
     def get_examples(self) -> List[Tuple[Dict[str, str], Translation]]:
