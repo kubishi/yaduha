@@ -1,38 +1,37 @@
 from contextlib import contextmanager
-from re import A
-from pydantic import BaseModel, ConfigDict, Field, PrivateAttr
-from abc import abstractmethod, ABC
-from typing import Any, Dict, List, Mapping, Optional, Generic, TypeVar, cast
-from dotenv import load_dotenv
-
+from contextvars import ContextVar
+import json
+import pathlib
+import threading
+import time
+from pydantic import BaseModel, ConfigDict, Field, PrivateAttr, model_validator
+from abc import ABC
+from typing import Any, Dict
 import wandb
-import os
 
-load_dotenv()
+# Thread-safe context for log metadata (uses contextvars, safe for threads and async)
+_log_context: ContextVar[Dict[str, str | int | float]] = ContextVar('_log_context', default={})
 
-# context manager to add metadata via environment variables
 @contextmanager
 def inject_logs(**data: str | int | float):
     """
-    Context manager to inject metadata into loggers via environment variables.
+    Context manager to inject metadata into loggers via context variables.
+    Thread-safe and async-safe. Supports nesting — inner contexts overlay outer ones.
 
     Args:
-        **data: Key-value pairs to inject as metadata.
+        **data: Key-value pairs to inject as metadata. Keys are uppercased.
     """
-    old_env = {}
+    current = _log_context.get()
+    merged = {**current, **{k.upper(): v for k, v in data.items()}}
+    token = _log_context.set(merged)
     try:
-        for key, value in data.items():
-            env_key = f"LOGGER_METADATA_{key.upper()}"
-            old_env[env_key] = os.environ.get(env_key)
-            os.environ[env_key] = str(value)
         yield
     finally:
-        for key in data.keys():
-            env_key = f"LOGGER_METADATA_{key.upper()}"
-            if old_env[env_key] is None:
-                del os.environ[env_key]
-            else:
-                os.environ[env_key] = old_env[env_key]
+        _log_context.reset(token)
+
+def get_log_context() -> Dict[str, str | int | float]:
+    """Get the current log context metadata (thread-safe)."""
+    return _log_context.get()
 
 global_logger = None
 def set_global_logger(logger: "Logger") -> None:
@@ -66,16 +65,18 @@ class Logger(BaseModel, ABC):
     def log(self, data: Dict[str, Any]):
         """
         Log a dictionary of metrics with the current path prefix.
+        Automatically includes a timestamp and any context injected via inject_logs.
 
         Args:
             data: Metrics to log.
         """
-        env_metadata = {}
-        for key, value in os.environ.items():
-            if key.startswith("LOGGER_METADATA_"):
-                env_key = key[len("LOGGER_METADATA_") :]
-                env_metadata[env_key] = value
-        self._log({**self.metadata, **env_metadata, **data})
+        ctx_metadata = get_log_context()
+        self._log({
+            "timestamp": time.time(),
+            **self.metadata,
+            **ctx_metadata,
+            **data,
+        })
 
     def get_sublogger(self, **metadata: str | int | float) -> "Logger":
         """
@@ -110,19 +111,10 @@ class WandbLogger(Logger):
             name=self.name,
         )
 
-    def _log(self, data: Mapping[str, Any], **kwargs: Any) -> None:
-        """
-        Log a dictionary of metrics to this W&B run.
-
-        Args:
-            data: Metrics to log.
-            step: Optional global step (epoch, iteration, etc.).
-            **kwargs: Forwarded to Run.log (e.g., commit=False).
-        """
+    def _log(self, data: Dict[str, Any]) -> None:
         if self._run is None:
             raise RuntimeError("Cannot log: W&B run is not active.")
-
-        self._run.log(dict(data), **kwargs)
+        self._run.log(dict(data))
 
     def stop(self) -> None:
         """Finish the W&B run if it is still active."""
@@ -133,6 +125,22 @@ class WandbLogger(Logger):
 class PrintLogger(Logger):
     def _log(self, data: Dict[str, Any]):
         print(data)
+
+class JsonLogger(Logger):
+    file_path: pathlib.Path
+    _lock: threading.Lock = PrivateAttr(default_factory=threading.Lock)
+
+    @model_validator(mode="after")
+    def _validate_jsonl_extension(self) -> "JsonLogger":
+        if self.file_path.suffix != ".jsonl":
+            raise ValueError("file_path must have .jsonl extension")
+        return self
+
+    def _log(self, data: Dict[str, Any]):
+        line = json.dumps(data, default=str, ensure_ascii=False) + "\n"
+        with self._lock:
+            with self.file_path.open("a", encoding="utf-8") as f:
+                f.write(line)
 
 class NoLogger(Logger):
     def _log(self, data: Dict[str, Any]):

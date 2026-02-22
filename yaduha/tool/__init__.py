@@ -1,5 +1,4 @@
 from functools import lru_cache
-import os
 from uuid import uuid4
 from pydantic import BaseModel, Field, create_model
 from typing import Any, ClassVar, Dict, Generic, List, Optional, Tuple, TypeVar, get_origin, get_args, Union
@@ -10,7 +9,7 @@ import inspect
 
 from openai.types.chat.chat_completion_tool_param import ChatCompletionToolParam
 
-from yaduha.logger import Logger, get_global_logger, inject_logs
+from yaduha.logger import Logger, get_global_logger, get_log_context, inject_logs
 
 def _add_additional_properties_false(schema: Dict | List) -> None:
     """Recursively add 'additionalProperties': False to all object schemas."""
@@ -54,7 +53,7 @@ class Tool(BaseModel, Generic[_T]):
                 not isinstance(value, param.annotation)):
                 bound_args.arguments[name] = param.annotation(**value)
 
-        toolchain = os.environ.get("LOGGER_METADATA_TOOLCHAIN", "")
+        toolchain = get_log_context().get("TOOLCHAIN", "")
         if not toolchain:
             toolchain = str(uuid4())
         else:

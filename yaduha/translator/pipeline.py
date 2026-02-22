@@ -104,19 +104,27 @@ class PipelineTranslator(Translator, Generic[TSentenceType]):
             completion_tokens_bt += back_translation.completion_tokens
         end_time_bt = time.time()
 
+        target_str = " ".join(targets)
+        back_translation_str = " ".join(back_translations)
+        evaluator_score = self.evaluator.evaluate(text, back_translation_str) if self.evaluator else None
+
         self.logger.log(data={
-            "response": " ".join(targets), 
+            "event": "translation_complete",
+            "translator": self.name,
             "source": text,
+            "target": target_str,
+            "back_translation": back_translation_str,
             "translation_time": end_time - start_time,
             "prompt_tokens": prompt_tokens,
             "completion_tokens": completion_tokens,
             "back_translation_time": end_time_bt - start_time_bt,
             "back_translation_prompt_tokens": prompt_tokens_bt,
-            "back_translation_completion_tokens": completion_tokens_bt
+            "back_translation_completion_tokens": completion_tokens_bt,
+            "evaluator_score": evaluator_score,
+            "num_sentences": len(targets),
+            "sentences": [{"target": t, "back_translation": bt} for t, bt in zip(targets, back_translations)],
         })
 
-        target_str = " ".join(targets)
-        back_translation_str = " ".join(back_translations)
         return Translation(
             source=text,
             target=target_str,
@@ -131,7 +139,7 @@ class PipelineTranslator(Translator, Generic[TSentenceType]):
                 translation_time=end_time_bt - start_time_bt
             ),
             metadata={
-                "evaluator_score": self.evaluator.evaluate(text, back_translation_str) if self.evaluator else None
+                "evaluator_score": evaluator_score
             }
         )
 

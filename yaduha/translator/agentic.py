@@ -5,7 +5,6 @@ from pydantic import Field, BaseModel
 import time
 
 from yaduha.agent import Agent
-from yaduha.logger import inject_logs
 from yaduha.translator import Translation, Translator
 from yaduha.tool import Tool
 
@@ -62,6 +61,22 @@ class AgenticTranslator(Translator):
         )
         end_time = time.time()
 
+        confidence = response.content.confidence
+        evidence = [item.model_dump() for item in response.content.evidence]
+
+        self.logger.log(data={
+            "event": "translation_complete",
+            "translator": self.name,
+            "source": text,
+            "target": response.content.translation,
+            "translation_time": end_time - start_time,
+            "prompt_tokens": response.prompt_tokens,
+            "completion_tokens": response.completion_tokens,
+            "confidence": confidence.value,
+            "evidence": evidence,
+            "num_tool_calls": len(evidence),
+        })
+
         translation = Translation(
             source=text,
             target=response.content.translation,
@@ -70,8 +85,8 @@ class AgenticTranslator(Translator):
             completion_tokens=response.completion_tokens,
             back_translation=None,
             metadata={
-                "confidence_level": response.content.confidence,
-                "evidence": [item.model_dump() for item in response.content.evidence],
+                "confidence_level": confidence,
+                "evidence": evidence,
             }
         )
 

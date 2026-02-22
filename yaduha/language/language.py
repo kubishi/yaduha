@@ -50,7 +50,7 @@ class Language:
 
         self.code: str = code
         self.name: str = name
-        self.sentence_types: Tuple[Type[Any], ...] = sentence_types
+        self.sentence_types: Tuple[Type[Sentence], ...] = sentence_types
 
     def __repr__(self) -> str:
         """Return a string representation of the Language."""

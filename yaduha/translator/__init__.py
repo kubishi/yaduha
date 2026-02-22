@@ -1,8 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import ClassVar
-from uuid import uuid4
 from pydantic import BaseModel, Field
-from yaduha.logger import inject_logs
 from yaduha.tool import Tool
 
 
@@ -12,6 +10,7 @@ class BackTranslation(BaseModel):
     translation_time: float = Field(..., description="The time taken for back translation.")
     prompt_tokens: int = Field(0, description="The number of prompt tokens used for back translation.")
     completion_tokens: int = Field(0, description="The number of completion tokens used for back translation.")
+    metadata: dict = Field(default_factory=dict, description="Additional metadata about the back translation.")
 
 class Translation(BaseModel):
     source: str = Field(..., description="The source-language text.")
