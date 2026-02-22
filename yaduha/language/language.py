@@ -1,9 +1,9 @@
 """Language class for wrapping sentence types and metadata."""
 
-from typing import TYPE_CHECKING, Any, Tuple, Type
+from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
-    from yaduha.language import Sentence as SentenceType
+    pass
 
 
 class Language:
@@ -19,7 +19,7 @@ class Language:
         self,
         code: str,
         name: str,
-        sentence_types: Tuple[Type[Any], ...],
+        sentence_types: tuple[type[Any], ...],
     ) -> None:
         """Initialize a Language instance.
 
@@ -44,13 +44,11 @@ class Language:
 
         for sentence_type in sentence_types:
             if not (isinstance(sentence_type, type) and issubclass(sentence_type, Sentence)):
-                raise TypeError(
-                    f"{sentence_type} is not a Sentence subclass"
-                )
+                raise TypeError(f"{sentence_type} is not a Sentence subclass")
 
         self.code: str = code
         self.name: str = name
-        self.sentence_types: Tuple[Type[Sentence], ...] = sentence_types
+        self.sentence_types: tuple[type[Sentence], ...] = sentence_types
 
     def __repr__(self) -> str:
         """Return a string representation of the Language."""

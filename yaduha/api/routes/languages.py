@@ -2,14 +2,14 @@
 
 from fastapi import APIRouter
 
-from yaduha.loader import LanguageLoader
+from yaduha.api.dependencies import get_language
 from yaduha.api.models import (
+    LanguageDetail,
     LanguageListResponse,
     LanguageSummary,
-    LanguageDetail,
     SentenceTypeInfo,
 )
-from yaduha.api.dependencies import get_language
+from yaduha.loader import LanguageLoader
 
 router = APIRouter(prefix="/languages", tags=["languages"])
 

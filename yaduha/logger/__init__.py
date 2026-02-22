@@ -1,16 +1,18 @@
-from contextlib import contextmanager
-from contextvars import ContextVar
 import json
 import pathlib
 import threading
 import time
-from pydantic import BaseModel, ConfigDict, Field, PrivateAttr, model_validator
 from abc import ABC
-from typing import Any, Dict
+from contextlib import contextmanager
+from contextvars import ContextVar
+from typing import Any
+
 import wandb
+from pydantic import BaseModel, ConfigDict, Field, PrivateAttr, model_validator
 
 # Thread-safe context for log metadata (uses contextvars, safe for threads and async)
-_log_context: ContextVar[Dict[str, str | int | float]] = ContextVar('_log_context', default={})
+_log_context: ContextVar[dict[str, str | int | float]] = ContextVar("_log_context", default={})
+
 
 @contextmanager
 def inject_logs(**data: str | int | float):
@@ -29,11 +31,15 @@ def inject_logs(**data: str | int | float):
     finally:
         _log_context.reset(token)
 
-def get_log_context() -> Dict[str, str | int | float]:
+
+def get_log_context() -> dict[str, str | int | float]:
     """Get the current log context metadata (thread-safe)."""
     return _log_context.get()
 
+
 global_logger = None
+
+
 def set_global_logger(logger: "Logger") -> None:
     """
     Set the global logger.
@@ -43,6 +49,7 @@ def set_global_logger(logger: "Logger") -> None:
     """
     global global_logger
     global_logger = logger
+
 
 def get_global_logger() -> "Logger":
     """
@@ -56,13 +63,16 @@ def get_global_logger() -> "Logger":
         global_logger = NoLogger()
     return global_logger
 
-class Logger(BaseModel, ABC):
-    metadata: Dict[str, str | int | float] = Field(default_factory=dict, description="Metadata for the logger.")
 
-    def _log(self, data: Dict[str, Any]):
+class Logger(BaseModel, ABC):
+    metadata: dict[str, str | int | float] = Field(
+        default_factory=dict, description="Metadata for the logger."
+    )
+
+    def _log(self, data: dict[str, Any]):
         pass
 
-    def log(self, data: Dict[str, Any]):
+    def log(self, data: dict[str, Any]):
         """
         Log a dictionary of metrics with the current path prefix.
         Automatically includes a timestamp and any context injected via inject_logs.
@@ -71,12 +81,14 @@ class Logger(BaseModel, ABC):
             data: Metrics to log.
         """
         ctx_metadata = get_log_context()
-        self._log({
-            "timestamp": time.time(),
-            **self.metadata,
-            **ctx_metadata,
-            **data,
-        })
+        self._log(
+            {
+                "timestamp": time.time(),
+                **self.metadata,
+                **ctx_metadata,
+                **data,
+            }
+        )
 
     def get_sublogger(self, **metadata: str | int | float) -> "Logger":
         """
@@ -91,13 +103,16 @@ class Logger(BaseModel, ABC):
         combined_metadata = {**self.metadata, **metadata}
         return self.model_copy(update={"metadata": combined_metadata})
 
+
 class WandbLogger(Logger):
     model_config = ConfigDict(populate_by_name=True)
 
     project_name: str = Field(..., description="The W&B project name.", alias="project")
     name: str
-    config_items: Dict[str, Any] = Field(default_factory=dict, description="The W&B config items.", alias="config")
-    
+    config_items: dict[str, Any] = Field(
+        default_factory=dict, description="The W&B config items.", alias="config"
+    )
+
     _run: wandb.Run | None = PrivateAttr(default=None)
 
     def model_post_init(self, __context: Any) -> None:
@@ -111,7 +126,7 @@ class WandbLogger(Logger):
             name=self.name,
         )
 
-    def _log(self, data: Dict[str, Any]) -> None:
+    def _log(self, data: dict[str, Any]) -> None:
         if self._run is None:
             raise RuntimeError("Cannot log: W&B run is not active.")
         self._run.log(dict(data))
@@ -122,9 +137,11 @@ class WandbLogger(Logger):
             self._run.finish()
             self._run = None
 
+
 class PrintLogger(Logger):
-    def _log(self, data: Dict[str, Any]):
+    def _log(self, data: dict[str, Any]):
         print(data)
+
 
 class JsonLogger(Logger):
     file_path: pathlib.Path
@@ -136,12 +153,13 @@ class JsonLogger(Logger):
             raise ValueError("file_path must have .jsonl extension")
         return self
 
-    def _log(self, data: Dict[str, Any]):
+    def _log(self, data: dict[str, Any]):
         line = json.dumps(data, default=str, ensure_ascii=False) + "\n"
         with self._lock:
             with self.file_path.open("a", encoding="utf-8") as f:
                 f.write(line)
 
+
 class NoLogger(Logger):
-    def _log(self, data: Dict[str, Any]):
+    def _log(self, data: dict[str, Any]):
         pass

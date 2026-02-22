@@ -1,9 +1,10 @@
-import time
 import json
-from typing import ClassVar, List, Literal, Type, overload, cast
+import time
+from typing import ClassVar, Literal, cast, overload
+
 from openai import OpenAI
 from openai.types.chat.chat_completion_message_param import ChatCompletionMessageParam
-from pydantic import Field, BaseModel
+from pydantic import Field
 
 from yaduha.agent import Agent, AgentResponse, TAgentResponseContentType
 from yaduha.tool import Tool
@@ -13,30 +14,32 @@ class OpenAIAgent(Agent):
     model: Literal["gpt-4o", "gpt-4o-mini", "gpt-5"]
     name: ClassVar[str] = "openai_agent"
     api_key: str = Field(..., description="The OpenAI API key.", exclude=True)
-    temperature: float = Field(default=0.0, description="The temperature for the model's responses.")
+    temperature: float = Field(
+        default=0.0, description="The temperature for the model's responses."
+    )
 
     # overload: text
     @overload
     def get_response(
         self,
-        messages: List[ChatCompletionMessageParam],
-        response_format: Type[str] = str,
-        tools: List["Tool"] | None = None,
+        messages: list[ChatCompletionMessageParam],
+        response_format: type[str] = str,
+        tools: list["Tool"] | None = None,
     ) -> AgentResponse[str]: ...
     # overload: model
     @overload
     def get_response(
         self,
-        messages: List[ChatCompletionMessageParam],
-        response_format: Type[TAgentResponseContentType],
-        tools: List["Tool"] | None = None,
+        messages: list[ChatCompletionMessageParam],
+        response_format: type[TAgentResponseContentType],
+        tools: list["Tool"] | None = None,
     ) -> AgentResponse[TAgentResponseContentType]: ...
 
     def get_response(
         self,
-        messages: List[ChatCompletionMessageParam],
-        response_format: Type[TAgentResponseContentType] = str,
-        tools: List["Tool"] | None = None,
+        messages: list[ChatCompletionMessageParam],
+        response_format: type[TAgentResponseContentType] = str,
+        tools: list["Tool"] | None = None,
     ) -> AgentResponse[TAgentResponseContentType]:
         start_time = time.time()
 
@@ -44,7 +47,13 @@ class OpenAIAgent(Agent):
         chat_tools = [tool.get_tool_call_schema() for tool in (tools or [])]
         tool_map = {tool.name: tool for tool in (tools or [])}
 
-        self.log({"event": "get_response_start", "messages": messages, "tools": [tool.name for tool in (tools or [])]})
+        self.log(
+            {
+                "event": "get_response_start",
+                "messages": messages,
+                "tools": [tool.name for tool in (tools or [])],
+            }
+        )
 
         while True:
             if response_format is str:
@@ -52,7 +61,7 @@ class OpenAIAgent(Agent):
                     model=self.model,
                     messages=messages,
                     tools=chat_tools,
-                    temperature=self.temperature
+                    temperature=self.temperature,
                 )
                 self.log({"event": "get_response_received", "response": response})
                 msg = json.loads(response.choices[0].message.model_dump_json())
@@ -69,8 +78,10 @@ class OpenAIAgent(Agent):
                             content=content,
                             response_time=time.time() - start_time,
                             prompt_tokens=response.usage.prompt_tokens if response.usage else 0,
-                            completion_tokens=response.usage.completion_tokens if response.usage else 0,
-                        )
+                            completion_tokens=response.usage.completion_tokens
+                            if response.usage
+                            else 0,
+                        ),
                     )
             else:
                 response = client.beta.chat.completions.parse(
@@ -78,7 +89,7 @@ class OpenAIAgent(Agent):
                     messages=messages,
                     tools=chat_tools,
                     response_format=response_format,
-                    temperature=self.temperature
+                    temperature=self.temperature,
                 )
                 self.log({"event": "get_response_received", "response": response})
                 msg = json.loads(response.choices[0].message.model_dump_json())
@@ -95,8 +106,10 @@ class OpenAIAgent(Agent):
                             content=parsed,
                             response_time=time.time() - start_time,
                             prompt_tokens=response.usage.prompt_tokens if response.usage else 0,
-                            completion_tokens=response.usage.completion_tokens if response.usage else 0,
-                        )
+                            completion_tokens=response.usage.completion_tokens
+                            if response.usage
+                            else 0,
+                        ),
                     )
 
             for tool_call in response.choices[0].message.tool_calls or []:

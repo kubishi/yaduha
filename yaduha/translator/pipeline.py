@@ -1,15 +1,19 @@
 import random
 import re
 import time
-from typing import ClassVar, Dict, Generic, List, Optional, Type, Tuple
+from collections.abc import Sequence
+from typing import ClassVar, Generic
 
+from pydantic import Field
+
+from yaduha.agent import Agent
 from yaduha.evaluator import Evaluator
+from yaduha.language import Sentence
 from yaduha.loader import LanguageLoader
-from yaduha.translator import Translator, Translation, BackTranslation
 from yaduha.tool.english_to_sentences import EnglishToSentencesTool, TSentenceType
 from yaduha.tool.sentence_to_english import SentenceToEnglishTool
-from yaduha.agent import Agent
-from yaduha.language import Sentence
+from yaduha.translator import BackTranslation, Translation, Translator
+
 
 class PipelineTranslator(Translator, Generic[TSentenceType]):
     name: ClassVar[str] = "pipeline_translator"
@@ -20,17 +24,17 @@ class PipelineTranslator(Translator, Generic[TSentenceType]):
     )
 
     agent: Agent
-    back_translation_agent: Optional[Agent] = None
-    SentenceType: Type[TSentenceType] | Tuple[Type[Sentence], ...]
-    evaluator: Optional[Evaluator] = None
+    back_translation_agent: Agent | None = None
+    SentenceType: type[TSentenceType] | tuple[type[Sentence], ...]
+    evaluators: Sequence[Evaluator] = Field(default_factory=list)
 
     @classmethod
     def from_language(
         cls,
         language_code: str,
         agent: Agent,
-        back_translation_agent: Optional[Agent] = None,
-        evaluator: Optional[Evaluator] = None,
+        back_translation_agent: Agent | None = None,
+        evaluators: Sequence[Evaluator] | None = None,
     ) -> "PipelineTranslator":
         """Create a PipelineTranslator from an installed language package.
 
@@ -38,7 +42,7 @@ class PipelineTranslator(Translator, Generic[TSentenceType]):
             language_code: Language code (e.g., 'ovp')
             agent: Agent to use for translation
             back_translation_agent: Optional agent for back-translation verification
-            evaluator: Optional evaluator for translation quality
+            evaluators: Optional list of evaluators for translation quality
 
         Returns:
             PipelineTranslator instance
@@ -51,12 +55,12 @@ class PipelineTranslator(Translator, Generic[TSentenceType]):
             agent=agent,
             back_translation_agent=back_translation_agent,
             SentenceType=language.sentence_types,
-            evaluator=evaluator
+            evaluators=evaluators or [],
         )
 
     def translate(self, text: str) -> Translation:
         """Translate the text using a pipeline of translators.
-        
+
         Args:
             text (str): The text to translate.
         Returns:
@@ -64,23 +68,19 @@ class PipelineTranslator(Translator, Generic[TSentenceType]):
         """
         start_time = time.time()
         translate_input_to_sentences = EnglishToSentencesTool(
-            agent=self.agent,
-            SentenceType=self.SentenceType,
-            logger=self.logger
+            agent=self.agent, SentenceType=self.SentenceType, logger=self.logger
         )
         # Use back_translation_agent if provided, otherwise fall back to main agent
         bt_agent = self.back_translation_agent or self.agent
         translate_sentence_to_english = SentenceToEnglishTool(
-            agent=bt_agent,
-            SentenceType=self.SentenceType,
-            logger=self.logger
+            agent=bt_agent, SentenceType=self.SentenceType, logger=self.logger
         )
 
         def clean_text(s: str) -> str:
             s = s.strip()
             # add a period if it doesn't end with punctuation
-            if not re.search(r'[.!?]$', s):
-                s += '.'
+            if not re.search(r"[.!?]$", s):
+                s += "."
             # capitalize the first letter
             s = s[0].upper() + s[1:]
             return s
@@ -106,24 +106,29 @@ class PipelineTranslator(Translator, Generic[TSentenceType]):
 
         target_str = " ".join(targets)
         back_translation_str = " ".join(back_translations)
-        evaluator_score = self.evaluator.evaluate(text, back_translation_str) if self.evaluator else None
+        evaluations = {e.name: e.evaluate(text, back_translation_str) for e in self.evaluators}
 
-        self.logger.log(data={
-            "event": "translation_complete",
-            "translator": self.name,
-            "source": text,
-            "target": target_str,
-            "back_translation": back_translation_str,
-            "translation_time": end_time - start_time,
-            "prompt_tokens": prompt_tokens,
-            "completion_tokens": completion_tokens,
-            "back_translation_time": end_time_bt - start_time_bt,
-            "back_translation_prompt_tokens": prompt_tokens_bt,
-            "back_translation_completion_tokens": completion_tokens_bt,
-            "evaluator_score": evaluator_score,
-            "num_sentences": len(targets),
-            "sentences": [{"target": t, "back_translation": bt} for t, bt in zip(targets, back_translations)],
-        })
+        self.logger.log(
+            data={
+                "event": "translation_complete",
+                "translator": self.name,
+                "source": text,
+                "target": target_str,
+                "back_translation": back_translation_str,
+                "translation_time": end_time - start_time,
+                "prompt_tokens": prompt_tokens,
+                "completion_tokens": completion_tokens,
+                "back_translation_time": end_time_bt - start_time_bt,
+                "back_translation_prompt_tokens": prompt_tokens_bt,
+                "back_translation_completion_tokens": completion_tokens_bt,
+                "evaluations": evaluations,
+                "num_sentences": len(targets),
+                "sentences": [
+                    {"target": t, "back_translation": bt}
+                    for t, bt in zip(targets, back_translations)
+                ],
+            }
+        )
 
         return Translation(
             source=text,
@@ -136,23 +141,19 @@ class PipelineTranslator(Translator, Generic[TSentenceType]):
                 target=target_str,
                 prompt_tokens=prompt_tokens_bt,
                 completion_tokens=completion_tokens_bt,
-                translation_time=end_time_bt - start_time_bt
+                translation_time=end_time_bt - start_time_bt,
             ),
-            metadata={
-                "evaluator_score": evaluator_score
-            }
+            evaluations=evaluations,
         )
 
-    def get_examples(self) -> List[Tuple[Dict[str, str], Translation]]:
+    def get_examples(self) -> list[tuple[dict[str, str], Translation]]:
         examples = []
         translate_input_to_sentences = EnglishToSentencesTool(
-            agent=self.agent,
-            SentenceType=self.SentenceType
+            agent=self.agent, SentenceType=self.SentenceType
         )
         bt_agent = self.back_translation_agent or self.agent
         translate_sentence_to_english = SentenceToEnglishTool(
-            agent=bt_agent,
-            SentenceType=self.SentenceType
+            agent=bt_agent, SentenceType=self.SentenceType
         )
 
         for input_example, sentence_list in translate_input_to_sentences.get_examples():
@@ -175,7 +176,7 @@ class PipelineTranslator(Translator, Generic[TSentenceType]):
                     target=" ".join(targets),
                     prompt_tokens=random.randint(10, 300),
                     completion_tokens=random.randint(10, 100),
-                    translation_time=random.uniform(0.5, 2.0)
+                    translation_time=random.uniform(0.5, 2.0),
                 ),
             )
             examples.append(({"text": text_input}, translation))

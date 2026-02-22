@@ -47,6 +47,11 @@ agents = [
     "anthropic",
     "openai",
 ]
+eval = [
+    "sacrebleu>=2.0",
+    "bert-score>=0.3",
+    "unbabel-comet>=2.0",
+]
 all = [
     "yaduha[api,agents]",
     "graphviz>=0.20",
@@ -56,9 +61,9 @@ all = [
 ]
 dev = [
     "pytest>=7.0",
-    "black",
-    "isort",
     "mypy",
+    "ruff",
+    "pyright",
 ]
 
 [project.scripts]
@@ -86,16 +91,30 @@ packages = [
 [tool.setuptools.package-data]
 yaduha = ["py.typed"]
 
-[tool.black]
+[tool.ruff]
 line-length = 100
-target-version = ["py310", "py311", "py312"]
+target-version = "py310"
 
-[tool.isort]
-profile = "black"
-line_length = 100
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+ignore = ["E501"]  # line length handled by ruff format
+
+[tool.pyright]
+pythonVersion = "3.10"
+typeCheckingMode = "basic"
+reportMissingImports = "warning"
 
 [tool.mypy]
 python_version = "3.10"
-warn_return_any = true
+warn_return_any = false
 warn_unused_configs = true
 disallow_untyped_defs = false
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = [
+    "yaduha.agent.*",
+    "yaduha.api.*",
+    "yaduha.tool.*",
+]
+ignore_errors = true

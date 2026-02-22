@@ -2,7 +2,7 @@
 
 import argparse
 import sys
-from typing import Any, List
+from typing import Any
 
 from yaduha.language import LanguageNotFoundError
 from yaduha.loader import LanguageLoader
@@ -55,10 +55,10 @@ def cmd_validate(args: Any) -> int:
     return 1
 
 
-
 def cmd_serve(args: Any) -> int:
     """Start the Yaduha server (API + dashboard)."""
     import uvicorn
+
     from yaduha.api import create_app
 
     app = create_app()
@@ -66,7 +66,7 @@ def cmd_serve(args: Any) -> int:
     return 0
 
 
-def main(argv: List[str] | None = None) -> int:
+def main(argv: list[str] | None = None) -> int:
     """Main CLI entry point."""
     parser = argparse.ArgumentParser(
         prog="yaduha",
@@ -100,9 +100,7 @@ def main(argv: List[str] | None = None) -> int:
     validate_parser.set_defaults(func=cmd_validate)
 
     # serve command (starts both API and dashboard)
-    serve_parser = subparsers.add_parser(
-        "serve", help="Start the server (API + dashboard)"
-    )
+    serve_parser = subparsers.add_parser("serve", help="Start the server (API + dashboard)")
     serve_parser.add_argument("--host", default="0.0.0.0", help="Bind host (default: 0.0.0.0)")
     serve_parser.add_argument("--port", type=int, default=8000, help="Bind port (default: 8000)")
     serve_parser.set_defaults(func=cmd_serve)

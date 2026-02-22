@@ -1,6 +1,6 @@
 """Pydantic models for API request and response bodies."""
 
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from pydantic import BaseModel, Field
 
@@ -25,17 +25,17 @@ class LanguageSummary(BaseModel):
     code: str
     name: str
     sentence_type_count: int
-    sentence_types: List[str]
+    sentence_types: list[str]
 
 
 class LanguageDetail(BaseModel):
     code: str
     name: str
-    sentence_types: List[SentenceTypeInfo]
+    sentence_types: list[SentenceTypeInfo]
 
 
 class LanguageListResponse(BaseModel):
-    languages: List[LanguageSummary]
+    languages: list[LanguageSummary]
 
 
 # -- Schema / example responses --
@@ -44,30 +44,32 @@ class LanguageListResponse(BaseModel):
 class SentenceSchemaResponse(BaseModel):
     language_code: str
     sentence_type: str
-    json_schema: Dict[str, Any]
+    json_schema: dict[str, Any]
 
 
 class ExamplePair(BaseModel):
     english: str
-    structured: Dict[str, Any]
+    structured: dict[str, Any]
     rendered: str
 
 
 class SentenceExamplesResponse(BaseModel):
     language_code: str
     sentence_type: str
-    examples: List[ExamplePair]
+    examples: list[ExamplePair]
 
 
 class RenderResponse(BaseModel):
     language_code: str
     sentence_type: str
     rendered: str
-    structured: Dict[str, Any]
+    structured: dict[str, Any]
 
 
 class ToEnglishRequest(BaseModel):
-    data: Dict[str, Any] = Field(..., description="Structured sentence data matching the sentence type schema")
+    data: dict[str, Any] = Field(
+        ..., description="Structured sentence data matching the sentence type schema"
+    )
     agent: "AgentConfig"
 
 
@@ -76,19 +78,19 @@ class ToEnglishResponse(BaseModel):
     sentence_type: str
     rendered: str
     english: str
-    structured: Dict[str, Any]
+    structured: dict[str, Any]
 
 
 # -- Evaluator config --
 
 
 class EvaluatorConfig(BaseModel):
-    """Configuration for an optional translation quality evaluator."""
+    """Configuration for a translation quality evaluator."""
 
     type: str = Field(
-        ..., description="Evaluator type: 'openai_embedding'"
+        ..., description="Evaluator type: 'openai_embedding', 'chrf', 'bleu', 'bertscore', 'comet'"
     )
-    model: Optional[str] = Field(
+    model: str | None = Field(
         default=None,
         description="Model name for the evaluator (e.g., 'text-embedding-3-small')",
     )
@@ -101,12 +103,12 @@ class TranslateRequest(BaseModel):
     text: str = Field(..., min_length=1, description="English text to translate")
     language_code: str = Field(..., description="Target language code (e.g., 'ovp')")
     agent: AgentConfig
-    back_translation_agent: Optional[AgentConfig] = None
-    evaluator: Optional[EvaluatorConfig] = None
+    back_translation_agent: AgentConfig | None = None
+    evaluators: list[EvaluatorConfig] | None = None
 
 
 class AgenticTranslateRequest(BaseModel):
     text: str = Field(..., min_length=1)
     language_code: str
     agent: AgentConfig
-    system_prompt: Optional[str] = None
+    system_prompt: str | None = None

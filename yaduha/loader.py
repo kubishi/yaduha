@@ -4,10 +4,9 @@ import importlib
 import importlib.metadata
 import sys
 from pathlib import Path
-from typing import Any, List
 
 from yaduha.language import Sentence
-from yaduha.language.exceptions import LanguageNotFoundError, LanguageValidationError
+from yaduha.language.exceptions import LanguageNotFoundError
 from yaduha.language.language import Language
 
 try:
@@ -48,20 +47,16 @@ class LanguageLoader:
                     if isinstance(language, Language) and language.code == language_code:
                         return language
                 except Exception as e:
-                    raise LanguageNotFoundError(
-                        f"Failed to load entry point {ep.name}: {e}"
-                    )
+                    raise LanguageNotFoundError(f"Failed to load entry point {ep.name}: {e}")
 
             raise LanguageNotFoundError(f"Language '{language_code}' not found")
         except LanguageNotFoundError:
             raise
         except Exception as e:
-            raise LanguageNotFoundError(
-                f"Failed to load language '{language_code}': {e}"
-            )
+            raise LanguageNotFoundError(f"Failed to load language '{language_code}': {e}")
 
     @staticmethod
-    def list_installed_languages() -> List[Language]:
+    def list_installed_languages() -> list[Language]:
         """List all installed language packages via entrypoints.
 
         Returns:
@@ -75,7 +70,7 @@ class LanguageLoader:
             else:
                 yaduha_languages = entry_points.get("yaduha.languages", [])  # type: ignore
 
-            languages: List[Language] = []
+            languages: list[Language] = []
             for ep in yaduha_languages:
                 try:
                     language = ep.load()
@@ -89,7 +84,7 @@ class LanguageLoader:
             return []
 
     @staticmethod
-    def validate_language(language_code: str) -> tuple[bool, List[str]]:
+    def validate_language(language_code: str) -> tuple[bool, list[str]]:
         """Validate that a language package is properly implemented.
 
         Checks:
@@ -106,7 +101,7 @@ class LanguageLoader:
         Returns:
             Tuple of (is_valid, error_messages)
         """
-        errors: List[str] = []
+        errors: list[str] = []
 
         try:
             language = LanguageLoader.load_language(language_code)
@@ -120,13 +115,9 @@ class LanguageLoader:
             # Check 1: Has custom __str__ method
             try:
                 if not hasattr(sentence_type, "__str__"):
-                    errors.append(
-                        f"{sentence_type.__name__} missing __str__ method"
-                    )
+                    errors.append(f"{sentence_type.__name__} missing __str__ method")
                 elif sentence_type.__str__ is Sentence.__str__:
-                    errors.append(
-                        f"{sentence_type.__name__} missing custom __str__ method"
-                    )
+                    errors.append(f"{sentence_type.__name__} missing custom __str__ method")
             except Exception as e:
                 errors.append(f"{sentence_type.__name__} __str__ check failed: {e}")
 
@@ -139,9 +130,7 @@ class LanguageLoader:
             try:
                 examples = sentence_type.get_examples()
                 if not isinstance(examples, list):
-                    errors.append(
-                        f"{sentence_type.__name__}.get_examples() must return list"
-                    )
+                    errors.append(f"{sentence_type.__name__}.get_examples() must return list")
                     continue
 
                 for i, item in enumerate(examples):
@@ -153,13 +142,9 @@ class LanguageLoader:
 
                     english, instance = item
                     if not isinstance(english, str):
-                        errors.append(
-                            f"{sentence_type.__name__} example {i} English must be str"
-                        )
+                        errors.append(f"{sentence_type.__name__} example {i} English must be str")
                     if not isinstance(instance, sentence_type):
-                        errors.append(
-                            f"{sentence_type.__name__} example {i} has wrong type"
-                        )
+                        errors.append(f"{sentence_type.__name__} example {i} has wrong type")
                     else:
                         # Verify __str__ works
                         try:
@@ -173,17 +158,13 @@ class LanguageLoader:
                                 f"{sentence_type.__name__} example {i} __str__ failed: {e}"
                             )
             except Exception as e:
-                errors.append(
-                    f"{sentence_type.__name__} get_examples() failed: {e}"
-                )
+                errors.append(f"{sentence_type.__name__} get_examples() failed: {e}")
 
             # Check 4: Is valid Pydantic model
             try:
                 _ = sentence_type.model_fields
             except Exception as e:
-                errors.append(
-                    f"{sentence_type.__name__} is not valid Pydantic model: {e}"
-                )
+                errors.append(f"{sentence_type.__name__} is not valid Pydantic model: {e}")
 
         return (len(errors) == 0, errors)
 
@@ -213,14 +194,10 @@ class LanguageLoader:
         with open(pyproject_path, "rb") as f:
             config = tomllib.load(f)
 
-        entrypoints = (
-            config.get("project", {})
-            .get("entry-points", {})
-            .get("yaduha.languages", {})
-        )
+        entrypoints = config.get("project", {}).get("entry-points", {}).get("yaduha.languages", {})
         if not entrypoints:
             raise LanguageNotFoundError(
-                f"No [project.entry-points.\"yaduha.languages\"] in {pyproject_path}"
+                f'No [project.entry-points."yaduha.languages"] in {pyproject_path}'
             )
 
         # Take the first entrypoint (e.g., ovp = "yaduha_ovp:language")
@@ -246,17 +223,14 @@ class LanguageLoader:
 
             if not isinstance(language, Language):
                 raise LanguageNotFoundError(
-                    f"Attribute '{attr_name}' in module '{module_name}' "
-                    f"is not a Language instance"
+                    f"Attribute '{attr_name}' in module '{module_name}' is not a Language instance"
                 )
 
             return language
         except LanguageNotFoundError:
             raise
         except Exception as e:
-            raise LanguageNotFoundError(
-                f"Failed to load language from {source_path}: {e}"
-            )
+            raise LanguageNotFoundError(f"Failed to load language from {source_path}: {e}")
         finally:
             if inserted:
                 try:
@@ -265,7 +239,7 @@ class LanguageLoader:
                     pass
 
     @staticmethod
-    def validate_language_from_source(source_dir: str) -> tuple[bool, List[str]]:
+    def validate_language_from_source(source_dir: str) -> tuple[bool, list[str]]:
         """Validate a language loaded from source files.
 
         Same checks as validate_language but loads from source directory
@@ -277,7 +251,7 @@ class LanguageLoader:
         Returns:
             Tuple of (is_valid, error_messages)
         """
-        errors: List[str] = []
+        errors: list[str] = []
 
         try:
             language = LanguageLoader.load_language_from_source(source_dir)

@@ -1,10 +1,11 @@
-import time
 import json
+import time
+from typing import Any, ClassVar, cast, overload
+
 import requests
-from typing import ClassVar, List, Type, overload, cast, Any
 from openai import OpenAI
 from openai.types.chat.chat_completion_message_param import ChatCompletionMessageParam
-from pydantic import Field, BaseModel
+from pydantic import BaseModel, Field
 
 from yaduha.agent import Agent, AgentResponse, TAgentResponseContentType
 from yaduha.tool import Tool
@@ -46,8 +47,8 @@ class OllamaAgent(Agent):
 
     def _call_native_api(
         self,
-        messages: List[ChatCompletionMessageParam],
-        response_format: Type[BaseModel],
+        messages: list[ChatCompletionMessageParam],
+        response_format: type[BaseModel],
     ) -> tuple[str, int, int]:
         """Call Ollama's native API with grammar-constrained structured output.
 
@@ -94,10 +95,10 @@ class OllamaAgent(Agent):
 
     def _inject_json_schema(
         self,
-        messages: List[ChatCompletionMessageParam],
-        response_format: Type[BaseModel],
+        messages: list[ChatCompletionMessageParam],
+        response_format: type[BaseModel],
         has_tools: bool = False,
-    ) -> List[ChatCompletionMessageParam]:
+    ) -> list[ChatCompletionMessageParam]:
         """Inject JSON schema instruction into the system prompt."""
         schema = response_format.model_json_schema()
         schema_str = json.dumps(schema, indent=2)
@@ -144,7 +145,7 @@ class OllamaAgent(Agent):
         messages.insert(0, {"role": "system", "content": json_instruction.strip()})
         return messages
 
-    def _parse_json_response(self, content: str, response_format: Type[BaseModel]) -> BaseModel:
+    def _parse_json_response(self, content: str, response_format: type[BaseModel]) -> BaseModel:
         """Parse JSON from model response, handling markdown code blocks."""
         json_content = content.strip()
 
@@ -166,37 +167,39 @@ class OllamaAgent(Agent):
     @overload
     def get_response(
         self,
-        messages: List[ChatCompletionMessageParam],
-        response_format: Type[str] = str,
-        tools: List["Tool"] | None = None,
+        messages: list[ChatCompletionMessageParam],
+        response_format: type[str] = str,
+        tools: list["Tool"] | None = None,
     ) -> AgentResponse[str]: ...
 
     @overload
     def get_response(
         self,
-        messages: List[ChatCompletionMessageParam],
-        response_format: Type[TAgentResponseContentType],
-        tools: List["Tool"] | None = None,
+        messages: list[ChatCompletionMessageParam],
+        response_format: type[TAgentResponseContentType],
+        tools: list["Tool"] | None = None,
     ) -> AgentResponse[TAgentResponseContentType]: ...
 
     def get_response(
         self,
-        messages: List[ChatCompletionMessageParam],
-        response_format: Type[TAgentResponseContentType] = str,
-        tools: List["Tool"] | None = None,
+        messages: list[ChatCompletionMessageParam],
+        response_format: type[TAgentResponseContentType] = str,
+        tools: list["Tool"] | None = None,
     ) -> AgentResponse[TAgentResponseContentType]:
         start_time = time.time()
 
-        self.log({
-            "event": "get_response_start",
-            "messages": messages,
-            "tools": [tool.name for tool in (tools or [])],
-        })
+        self.log(
+            {
+                "event": "get_response_start",
+                "messages": messages,
+                "tools": [tool.name for tool in (tools or [])],
+            }
+        )
 
         # For structured output WITHOUT tools, use Ollama's native API with
         # grammar-constrained generation. This guarantees valid JSON.
         if response_format is not str and not tools and issubclass(response_format, BaseModel):
-            response_format_model = cast(Type[BaseModel], response_format)
+            response_format_model = cast(type[BaseModel], response_format)
             try:
                 content, prompt_tokens, completion_tokens = self._call_native_api(
                     messages, response_format_model
@@ -287,7 +290,7 @@ class OllamaAgent(Agent):
 
                 # Handle structured output - parse JSON
                 # At this point we know response_format is a BaseModel subclass (not str)
-                response_format_model = cast(Type[BaseModel], response_format)
+                response_format_model = cast(type[BaseModel], response_format)
                 try:
                     parsed = self._parse_json_response(content, response_format_model)
                 except (json.JSONDecodeError, ValueError) as e:
@@ -317,19 +320,23 @@ class OllamaAgent(Agent):
                         result = tool_map[name](**args)
                     except TypeError as e:
                         # Model provided incorrect arguments - log and re-raise with more context
-                        self.log({
-                            "event": "tool_call_error",
-                            "tool_name": name,
-                            "arguments": args,
-                            "error": str(e),
-                        })
+                        self.log(
+                            {
+                                "event": "tool_call_error",
+                                "tool_name": name,
+                                "arguments": args,
+                                "error": str(e),
+                            }
+                        )
                         raise TypeError(
                             f"Tool '{name}' called with incorrect arguments. "
                             f"Received: {args}. Error: {e}"
                         ) from e
-                    working_messages.append({
-                        "role": "tool",
-                        "tool_call_id": tool_call.id,
-                        "content": str(result),
-                    })
+                    working_messages.append(
+                        {
+                            "role": "tool",
+                            "tool_call_id": tool_call.id,
+                            "content": str(result),
+                        }
+                    )
                     self.log({"event": "tool_result", "tool_name": name, "result": result})

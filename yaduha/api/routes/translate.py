@@ -2,13 +2,13 @@
 
 from fastapi import APIRouter, Request
 
-from yaduha.api.models import TranslateRequest, AgenticTranslateRequest
 from yaduha.api.dependencies import create_agent, create_evaluator, get_language
-from yaduha.translator import Translation
-from yaduha.translator.pipeline import PipelineTranslator
-from yaduha.translator.agentic import AgenticTranslator
+from yaduha.api.models import AgenticTranslateRequest, TranslateRequest
 from yaduha.tool.english_to_sentences import EnglishToSentencesTool
 from yaduha.tool.sentence_to_english import SentenceToEnglishTool
+from yaduha.translator import Translation
+from yaduha.translator.agentic import AgenticTranslator
+from yaduha.translator.pipeline import PipelineTranslator
 
 router = APIRouter(prefix="/translate", tags=["translate"])
 
@@ -31,9 +31,9 @@ async def translate_pipeline(body: TranslateRequest, request: Request):
     if body.back_translation_agent:
         bt_agent = create_agent(body.back_translation_agent, headers)
 
-    evaluator = None
-    if body.evaluator:
-        evaluator = create_evaluator(body.evaluator, headers)
+    evaluators = []
+    if body.evaluators:
+        evaluators = [create_evaluator(ec, headers) for ec in body.evaluators]
 
     lang = get_language(body.language_code)
 
@@ -41,7 +41,7 @@ async def translate_pipeline(body: TranslateRequest, request: Request):
         agent=agent,
         back_translation_agent=bt_agent,
         SentenceType=lang.sentence_types,
-        evaluator=evaluator,
+        evaluators=evaluators,
     )
 
     return translator.translate(body.text)
@@ -52,7 +52,7 @@ async def translate_agentic(body: AgenticTranslateRequest, request: Request):
     """Translate text using the agentic translator.
 
     The agentic translator uses LLM reasoning with tool assistance for
-    flexible translation. Returns confidence levels and evidence in metadata.
+    flexible translation. Confidence levels and evidence are logged.
     """
     headers = _headers_dict(request)
     agent = create_agent(body.agent, headers)

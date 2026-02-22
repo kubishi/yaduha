@@ -150,8 +150,6 @@ def test_validate_language_not_found() -> None:
         assert len(errors) > 0
 
 
-
-
 def test_validate_language_missing_str_method() -> None:
     """Test validating a language with sentence type missing __str__."""
 
@@ -196,9 +194,7 @@ def test_validate_language_missing_get_examples() -> None:
         def get_examples(cls) -> list[tuple[str, "NoExamplesSentence"]]:
             return []
 
-    lang = Language(
-        code="noexamples", name="No Examples", sentence_types=(NoExamplesSentence,)
-    )
+    lang = Language(code="noexamples", name="No Examples", sentence_types=(NoExamplesSentence,))
 
     # Remove get_examples
     delattr(NoExamplesSentence, "get_examples")

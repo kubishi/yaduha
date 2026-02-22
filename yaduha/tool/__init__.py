@@ -1,17 +1,26 @@
-from functools import lru_cache
-from uuid import uuid4
-from pydantic import BaseModel, Field, create_model
-from typing import Any, ClassVar, Dict, Generic, List, Optional, Tuple, TypeVar, get_origin, get_args, Union
-from abc import abstractmethod
+import inspect
 import random
 import string
-import inspect
+from abc import abstractmethod
+from functools import cache
+from typing import (
+    Any,
+    ClassVar,
+    Generic,
+    TypeVar,
+    Union,
+    get_args,
+    get_origin,
+)
+from uuid import uuid4
 
 from openai.types.chat.chat_completion_tool_param import ChatCompletionToolParam
+from pydantic import BaseModel, Field, create_model
 
 from yaduha.logger import Logger, get_global_logger, get_log_context, inject_logs
 
-def _add_additional_properties_false(schema: Dict | List) -> None:
+
+def _add_additional_properties_false(schema: dict | list) -> None:
     """Recursively add 'additionalProperties': False to all object schemas."""
     if isinstance(schema, dict):
         if schema.get("type") == "object":
@@ -22,19 +31,37 @@ def _add_additional_properties_false(schema: Dict | List) -> None:
         for item in schema:
             _add_additional_properties_false(item)
 
+
 _T = TypeVar("_T")
+
+
 class Tool(BaseModel, Generic[_T]):
     name: ClassVar[str] = Field(..., description="The name of the tool.")
     description: ClassVar[str] = Field(..., description="A description of what the tool does.")
-    logger: Logger = Field(default_factory=get_global_logger, description="The logger to use for logging tool actions.")
+    logger: Logger = Field(
+        default_factory=get_global_logger, description="The logger to use for logging tool actions."
+    )
 
     def __init__(self, **data: Any):
         super().__init__(**data)
         if not self.name.isidentifier():
             raise ValueError(f"Tool name '{self.name}' is not a valid Python identifier.")
-        if self.name in {"print", "input", "len", "str", "int", "float", "list", "dict", "set", "tuple"}:
-            raise ValueError(f"Tool name '{self.name}' is a reserved Python keyword or built-in function name.")
-        
+        if self.name in {
+            "print",
+            "input",
+            "len",
+            "str",
+            "int",
+            "float",
+            "list",
+            "dict",
+            "set",
+            "tuple",
+        }:
+            raise ValueError(
+                f"Tool name '{self.name}' is a reserved Python keyword or built-in function name."
+            )
+
         self._validate_run()
         self._validate_examples()
 
@@ -48,9 +75,11 @@ class Tool(BaseModel, Generic[_T]):
         for name, value in bound_args.arguments.items():
             param = signature.parameters[name]
             # Check if annotation is a class and a BaseModel before attempting parsing
-            if (inspect.isclass(param.annotation) and
-                issubclass(param.annotation, BaseModel) and
-                not isinstance(value, param.annotation)):
+            if (
+                inspect.isclass(param.annotation)
+                and issubclass(param.annotation, BaseModel)
+                and not isinstance(value, param.annotation)
+            ):
                 bound_args.arguments[name] = param.annotation(**value)
 
         toolchain = get_log_context().get("TOOLCHAIN", "")
@@ -65,7 +94,7 @@ class Tool(BaseModel, Generic[_T]):
     def _run(self, *args, **kwargs) -> _T:
         pass
 
-    def get_examples(self) -> List[Tuple[Any, _T]]:
+    def get_examples(self) -> list[tuple[Any, _T]]:
         """Return a list of example inputs and outputs for this tool.
 
         Subclasses can override with more specific types (covariant return types).
@@ -80,12 +109,12 @@ class Tool(BaseModel, Generic[_T]):
         """
         return []
 
-    def log(self, data: Dict[str, Any]):
+    def log(self, data: dict[str, Any]):
         if self.logger is not None:
             self.logger.log(data)
 
     @classmethod
-    @lru_cache(maxsize=None)
+    @cache
     def _validate_run(cls) -> None:
         """Validate that the _run method conforms to rules:
         - All parameters must have type annotations.
@@ -126,13 +155,13 @@ class Tool(BaseModel, Generic[_T]):
                     return all(_check_type(arg) for arg in args) if args else True
 
                 # Handle List and Dict generics
-                if origin in {list, List}:
+                if origin in {list, list}:
                     if len(args) == 1:
                         return _check_type(args[0])
                     elif len(args) == 0:
                         # List without type parameter (e.g., List or list) - accept it
                         return True
-                if origin in {dict, Dict}:
+                if origin in {dict, dict}:
                     if len(args) == 2:
                         return _check_type(args[0]) and _check_type(args[1])
                     elif len(args) == 0:
@@ -156,7 +185,7 @@ class Tool(BaseModel, Generic[_T]):
                 if param.annotation != inspect._empty:
                     type_hints[name] = param.annotation
             if signature.return_annotation != inspect._empty:
-                type_hints['return'] = signature.return_annotation
+                type_hints["return"] = signature.return_annotation
 
         # Validate parameters
         signature = inspect.signature(cls._run)
@@ -173,9 +202,9 @@ class Tool(BaseModel, Generic[_T]):
                 )
 
         # Validate return type
-        if 'return' not in type_hints:
+        if "return" not in type_hints:
             raise ValueError(f"Return type of tool '{cls.name}' has no type annotation.")
-        return_type = type_hints['return']
+        return_type = type_hints["return"]
         if not _check_type(return_type):
             raise ValueError(
                 f"Return type of tool '{cls.name}' has unsupported type annotation '{return_type}'. "
@@ -200,13 +229,12 @@ class Tool(BaseModel, Generic[_T]):
                 if param.annotation != inspect._empty:
                     type_hints[name] = param.annotation
             if signature.return_annotation != inspect._empty:
-                type_hints['return'] = signature.return_annotation
+                type_hints["return"] = signature.return_annotation
 
         signature = inspect.signature(self._run)
         # Create a new signature without 'self'
         params_without_self = [
-            param for name, param in signature.parameters.items()
-            if name != 'self'
+            param for name, param in signature.parameters.items() if name != "self"
         ]
         signature_without_self = signature.replace(parameters=params_without_self)
 
@@ -246,9 +274,9 @@ class Tool(BaseModel, Generic[_T]):
                 # Pydantic parametrized generics don't expose origin via
                 # typing.get_origin; fall back to Pydantic's own metadata.
                 if origin is None:
-                    pydantic_meta = getattr(expected_type, '__pydantic_generic_metadata__', None)
+                    pydantic_meta = getattr(expected_type, "__pydantic_generic_metadata__", None)
                     if pydantic_meta:
-                        origin = pydantic_meta.get('origin')
+                        origin = pydantic_meta.get("origin")
 
                 # For generic types like list[Person], check the origin
                 if origin is not None:
@@ -264,8 +292,8 @@ class Tool(BaseModel, Generic[_T]):
                     )
 
             # Validate output type
-            if 'return' in type_hints:
-                return_type = type_hints['return']
+            if "return" in type_hints:
+                return_type = type_hints["return"]
                 origin = get_origin(return_type)
 
                 # Skip validation for TypeVars (they're validated at definition time)
@@ -275,9 +303,9 @@ class Tool(BaseModel, Generic[_T]):
                 # Pydantic parametrized generics don't expose origin via
                 # typing.get_origin; fall back to Pydantic's own metadata.
                 if origin is None:
-                    pydantic_meta = getattr(return_type, '__pydantic_generic_metadata__', None)
+                    pydantic_meta = getattr(return_type, "__pydantic_generic_metadata__", None)
                     if pydantic_meta:
-                        origin = pydantic_meta.get('origin')
+                        origin = pydantic_meta.get("origin")
 
                 # For generic types like list[Person], check the origin
                 if origin is not None:
@@ -295,7 +323,7 @@ class Tool(BaseModel, Generic[_T]):
     @staticmethod
     def get_random_tool_call_id():
         """Generate a random tool call id of the form call_aSENunZCF31ob7zV89clvL4n"""
-        return "call_" + ''.join(random.choices(string.ascii_letters + string.digits, k=24))
+        return "call_" + "".join(random.choices(string.ascii_letters + string.digits, k=24))
 
     def get_tool_call_schema(self) -> ChatCompletionToolParam:
         signature = inspect.signature(self._run)
@@ -325,11 +353,11 @@ class Tool(BaseModel, Generic[_T]):
                 "description": self.description,
                 "parameters": parameters_schema,
                 "strict": True,
-            }
+            },
         }
         return ChatCompletionToolParam(**schema)
-    
-    def get_tool_call_output_schema(self) -> Dict:
+
+    def get_tool_call_output_schema(self) -> dict:
         signature = inspect.signature(self._run)
         return_type = signature.return_annotation
         if return_type == inspect._empty:
@@ -337,5 +365,3 @@ class Tool(BaseModel, Generic[_T]):
         model = create_model(f"{self.name}_output", output=(return_type, ...))
         schema = model.model_json_schema()
         return schema
-    
-

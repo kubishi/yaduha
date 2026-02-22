@@ -1,20 +1,18 @@
 """FastAPI dependency injection: agent factory, API key resolution, language lookup."""
 
 import os
-from typing import Optional
 
 from fastapi import HTTPException, status
 
-from yaduha.agent.openai import OpenAIAgent
 from yaduha.agent.anthropic import AnthropicAgent
 from yaduha.agent.gemini import GeminiAgent
 from yaduha.agent.ollama import OllamaAgent
-from yaduha.language.language import Language
-from yaduha.language.exceptions import LanguageNotFoundError
-from yaduha.loader import LanguageLoader
-
+from yaduha.agent.openai import OpenAIAgent
 from yaduha.api.models import AgentConfig, EvaluatorConfig
 from yaduha.evaluator import Evaluator, OpenAIEvaluator
+from yaduha.language.exceptions import LanguageNotFoundError
+from yaduha.language.language import Language
+from yaduha.loader import LanguageLoader
 
 _PROVIDERS = {
     "openai": {
@@ -44,7 +42,7 @@ _PROVIDERS = {
 }
 
 
-def _resolve_api_key(provider: str, headers: dict[str, str]) -> Optional[str]:
+def _resolve_api_key(provider: str, headers: dict[str, str]) -> str | None:
     info = _PROVIDERS[provider]
     if not info["requires_key"]:
         return None
@@ -109,6 +107,35 @@ _EVALUATORS = {
     },
 }
 
+# Register evaluators that don't need API keys (available when optional deps installed)
+try:
+    from yaduha.evaluator.chrf import ChrfEvaluator
+
+    _EVALUATORS["chrf"] = {"cls": ChrfEvaluator, "key_provider": None}
+except ImportError:
+    pass
+
+try:
+    from yaduha.evaluator.bleu import BleuEvaluator
+
+    _EVALUATORS["bleu"] = {"cls": BleuEvaluator, "key_provider": None}
+except ImportError:
+    pass
+
+try:
+    from yaduha.evaluator.bertscore import BertScoreEvaluator
+
+    _EVALUATORS["bertscore"] = {"cls": BertScoreEvaluator, "key_provider": None}
+except ImportError:
+    pass
+
+try:
+    from yaduha.evaluator.comet import CometEvaluator
+
+    _EVALUATORS["comet"] = {"cls": CometEvaluator, "key_provider": None}
+except ImportError:
+    pass
+
 
 def create_evaluator(config: EvaluatorConfig, headers: dict[str, str]) -> Evaluator:
     if config.type not in _EVALUATORS:
@@ -118,13 +145,14 @@ def create_evaluator(config: EvaluatorConfig, headers: dict[str, str]) -> Evalua
         )
 
     info = _EVALUATORS[config.type]
-    api_key = _resolve_api_key(info["key_provider"], headers)
 
     kwargs: dict = {}
     if config.model:
         kwargs["model"] = config.model
-    if api_key:
-        kwargs["api_key"] = api_key
+    if info["key_provider"]:
+        api_key = _resolve_api_key(info["key_provider"], headers)
+        if api_key:
+            kwargs["api_key"] = api_key
 
     return info["cls"](**kwargs)
 

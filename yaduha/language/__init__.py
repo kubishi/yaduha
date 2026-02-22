@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Generic, List, Tuple, Type, TypeVar
+from typing import Generic, TypeVar
 
 from pydantic import BaseModel, ConfigDict
 
@@ -22,7 +22,7 @@ class Sentence(BaseModel, ABC, Generic[S]):
 
     @classmethod
     @abstractmethod
-    def get_examples(cls: Type[S]) -> List[Tuple[str, S]]:
+    def get_examples(cls: type[S]) -> list[tuple[str, S]]:
         """Return example structured sentences and their English translations.
 
         Returns:

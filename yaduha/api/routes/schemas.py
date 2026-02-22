@@ -1,25 +1,25 @@
 """Routes for sentence type schemas, examples, and rendering."""
 
-from typing import Any, Dict, List
+from typing import Any
 
 from fastapi import APIRouter, Body, HTTPException, Request, status
 from pydantic import ValidationError
 
+from yaduha.api.dependencies import create_agent, get_language, get_sentence_type
 from yaduha.api.models import (
-    SentenceSchemaResponse,
-    SentenceExamplesResponse,
     ExamplePair,
     RenderResponse,
+    SentenceExamplesResponse,
+    SentenceSchemaResponse,
     ToEnglishRequest,
     ToEnglishResponse,
 )
-from yaduha.api.dependencies import create_agent, get_language, get_sentence_type
 from yaduha.tool.sentence_to_english import SentenceToEnglishTool
 
 router = APIRouter(prefix="/languages/{language_code}/sentence-types", tags=["schemas"])
 
 
-@router.get("", response_model=List[SentenceSchemaResponse])
+@router.get("", response_model=list[SentenceSchemaResponse])
 async def list_sentence_type_schemas(language_code: str):
     """List all sentence type schemas for a language."""
     lang = get_language(language_code)
@@ -73,7 +73,7 @@ async def get_sentence_examples(language_code: str, sentence_type_name: str):
 async def render_sentence(
     language_code: str,
     sentence_type_name: str,
-    data: Dict[str, Any] = Body(...),
+    data: dict[str, Any] = Body(...),
 ):
     """Render a structured sentence in the target language.
 
@@ -88,8 +88,7 @@ async def render_sentence(
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
             detail=[
-                {"loc": err["loc"], "msg": err["msg"], "type": err["type"]}
-                for err in e.errors()
+                {"loc": err["loc"], "msg": err["msg"], "type": err["type"]} for err in e.errors()
             ],
         )
     return RenderResponse(
@@ -124,8 +123,7 @@ async def sentence_to_english(
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
             detail=[
-                {"loc": err["loc"], "msg": err["msg"], "type": err["type"]}
-                for err in e.errors()
+                {"loc": err["loc"], "msg": err["msg"], "type": err["type"]} for err in e.errors()
             ],
         )
 

@@ -2,7 +2,7 @@ import importlib
 import inspect
 import pkgutil
 import time
-from typing import ClassVar, Optional
+from typing import ClassVar
 
 from pydantic import BaseModel, Field
 
@@ -19,6 +19,7 @@ class BackTranslationResponse(BaseModel):
     Fields are ordered so that `reasoning` comes first — since structured output
     generates fields sequentially, this forces chain-of-thought before the answer.
     """
+
     reasoning: str = Field(
         ...,
         description=(
@@ -35,7 +36,7 @@ class BackTranslationResponse(BaseModel):
             "is consistent with the code's output patterns."
         ),
     )
-    english_translation: Optional[str] = Field(
+    english_translation: str | None = Field(
         None,
         description=(
             "A natural English translation of the sentence. "
@@ -78,9 +79,7 @@ def _get_package_sources(language: Language) -> dict[str, str]:
     sentence_type = language.sentence_types[0]
     module = inspect.getmodule(sentence_type)
     if module is None:
-        raise ValueError(
-            f"Cannot find module for sentence type {sentence_type.__name__}"
-        )
+        raise ValueError(f"Cannot find module for sentence type {sentence_type.__name__}")
 
     package_name = module.__package__
     sources: dict[str, str] = {}
@@ -119,7 +118,7 @@ def _build_examples_section(language: Language, n_examples: int) -> str:
         # Use sample_iter if available (language-specific), otherwise get_examples
         if hasattr(sentence_type, "sample_iter"):
             per_type = max(1, n_examples // len(language.sentence_types))
-            sentences = list(sentence_type.sample_iter(per_type))
+            sentences = list(sentence_type.sample_iter(per_type))  # type: ignore[attr-defined]
         else:
             sentences = [ex[1] for ex in sentence_type.get_examples()]
 
@@ -133,9 +132,7 @@ def _build_examples_section(language: Language, n_examples: int) -> str:
     return "\n".join(lines)
 
 
-def _build_source_code_instructions(
-    language: Language, n_examples: int = 10
-) -> str:
+def _build_source_code_instructions(language: Language, n_examples: int = 10) -> str:
     """Build the full system prompt from language source code and examples."""
     sources = _get_package_sources(language)
 
@@ -157,6 +154,7 @@ class InstructionsBackTranslator(BackTranslator):
     and uses it to reverse-engineer sentences, determining both grammaticality
     and meaning.
     """
+
     name: ClassVar[str] = "instructions_back_translator"
     description: ClassVar[str] = (
         "Translate text from the target language back to the source language "
@@ -204,17 +202,19 @@ class InstructionsBackTranslator(BackTranslator):
 
         result: BackTranslationResponse = response.content
 
-        self.log(data={
-            "event": "back_translation_complete",
-            "back_translator": self.name,
-            "target": text,
-            "source": result.english_translation or "",
-            "grammatical": result.grammatical,
-            "reasoning": result.reasoning,
-            "translation_time": translation_time,
-            "prompt_tokens": response.prompt_tokens,
-            "completion_tokens": response.completion_tokens,
-        })
+        self.log(
+            data={
+                "event": "back_translation_complete",
+                "back_translator": self.name,
+                "target": text,
+                "source": result.english_translation or "",
+                "grammatical": result.grammatical,
+                "reasoning": result.reasoning,
+                "translation_time": translation_time,
+                "prompt_tokens": response.prompt_tokens,
+                "completion_tokens": response.completion_tokens,
+            }
+        )
 
         return BackTranslation(
             source=result.english_translation or "",
@@ -222,8 +222,4 @@ class InstructionsBackTranslator(BackTranslator):
             translation_time=translation_time,
             prompt_tokens=response.prompt_tokens,
             completion_tokens=response.completion_tokens,
-            metadata={
-                "grammatical": result.grammatical,
-                "reasoning": result.reasoning,
-            },
         )
