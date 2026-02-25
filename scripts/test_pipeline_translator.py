@@ -23,16 +23,16 @@ MODELS = {
         "gpt-4o",
         "gpt-4o-mini",
     ],
-    # "anthropic": [
-    #     "claude-sonnet-4-5",
-    #     "claude-sonnet-4-20250514",
-    #     "claude-3-haiku-20240307",
-    # ],
-    # "ollama": [
-    #     "deepseek-r1:70b",
-    #     "mixtral:8x22b",
-    #     "llama3.1:8b",
-    # ],
+    "anthropic": [
+        "claude-sonnet-4-5",
+        "claude-sonnet-4-20250514",
+        "claude-3-haiku-20240307",
+    ],
+    "ollama": [
+        "deepseek-r1:70b",
+        "mixtral:8x22b",
+        "llama3.1:8b",
+    ],
 }
 
 
@@ -42,16 +42,19 @@ def create_agent(agent_type: str, model: str, logger: Logger):
         return OpenAIAgent(
             model=model,  # type: ignore[arg-type]
             api_key=os.environ["OPENAI_API_KEY"],
-            logger=logger
+            logger=logger.get_sublogger(functionality="translation")
         )
     elif agent_type == "anthropic":
         return AnthropicAgent(
             model=model,  # type: ignore[arg-type]
             api_key=os.environ["ANTHROPIC_API_KEY"],
-            # logger=logger
+            logger=logger.get_sublogger(functionality="translation")
         )
     elif agent_type == "ollama":
-        return OllamaAgent(model=model)
+        return OllamaAgent(
+            model=model, 
+            logger=logger.get_sublogger(functionality="translation")
+        )
     else:
         raise ValueError(f"Unknown agent type: {agent_type}")
 
@@ -61,11 +64,11 @@ def main():
     # CONFIGURATION
     # ============================================================
 
-    source = "The dog is sitting at the lakeside, drinking some water."
+    source = "The cat is drinking some water, and walking around"
 
     # logger = WandbLogger(name="Pipline Test - ALL - 2", project_name="Pipeline Test", tags=["Ollama", "logger"], notes="Testing logger functionality")
 
-    logger = JsonLogger(filename="test-7")
+    logger = JsonLogger(filename="test-1.3")
 
 
     # Back-translation always uses gpt-4o
@@ -96,7 +99,7 @@ def main():
                     agent=agent,
                     back_translation_agent=back_agent,
                     SentenceType=(SubjectVerbObjectSentence, SubjectVerbSentence),
-                    logger=logger
+                    logger=logger.get_sublogger(functionality="pipeline")
                 )
 
                 translation = translator(source)

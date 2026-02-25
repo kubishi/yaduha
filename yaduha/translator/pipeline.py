@@ -84,6 +84,7 @@ class PipelineTranslator(Translator, Generic[TSentenceType]):
                 "back_translation_agent_model": self.back_translation_agent.model,
                 "response": " ".join(targets), 
                 "source": text,
+                "back_translation_result": " ".join(back_translations),
                 "translation_time": end_time - start_time,
                 "prompt_tokens": prompt_tokens,
                 "completion_tokens": completion_tokens,

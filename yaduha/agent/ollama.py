@@ -1,7 +1,6 @@
 import time
 import json
 import requests
-from uuid import uuid4
 from typing import ClassVar, List, Type, overload, cast, Any
 from openai import OpenAI
 from openai.types.chat.chat_completion_message_param import ChatCompletionMessageParam
@@ -187,11 +186,10 @@ class OllamaAgent(Agent):
         tools: List["Tool"] | None = None,
     ) -> AgentResponse[TAgentResponseContentType]:
         start_time = time.time()
-        request_id = str(uuid4())
 
         self.log({
             "event": "get_response_start",
-            "request_id": request_id,
+        
             "messages": messages,
             "tools": [tool.name for tool in (tools or [])],
         })
@@ -204,12 +202,12 @@ class OllamaAgent(Agent):
                 content, prompt_tokens, completion_tokens = self._call_native_api(
                     messages, response_format_model
                 )
-                self.log({"event": "get_response_received", "request_id": request_id, "api_call_index": 0, "api_path": "native", "response_content": content, "prompt_tokens": prompt_tokens, "completion_tokens": completion_tokens})
-                self.log({"event": "get_response_content", "request_id": request_id, "content": content})
+                self.log({"event": "get_response_received", "api_call_index": 0, "api_path": "native", "response_content": content, "prompt_tokens": prompt_tokens, "completion_tokens": completion_tokens})
+                self.log({"event": "get_response_content", "content": content})
 
                 parsed = response_format_model(**json.loads(content))
-                self.log({"event": "get_response_parsed", "request_id": request_id, "parsed": parsed})
-                self.log({"event": "get_response_complete", "request_id": request_id, "api_calls": 1, "api_path": "native", "total_prompt_tokens": prompt_tokens, "total_completion_tokens": completion_tokens, "response_time": time.time() - start_time})
+                self.log({"event": "get_response_parsed", "parsed": parsed})
+                self.log({"event": "get_response_complete", "api_calls": 1, "api_path": "native", "total_prompt_tokens": prompt_tokens, "total_completion_tokens": completion_tokens, "response_time": time.time() - start_time})
 
                 return cast(
                     AgentResponse[TAgentResponseContentType],
@@ -221,7 +219,7 @@ class OllamaAgent(Agent):
                     ),
                 )
             except (json.JSONDecodeError, ValueError, requests.RequestException) as e:
-                self.log({"event": "native_api_error", "request_id": request_id, "error": str(e)})
+                self.log({"event": "native_api_error", "error": str(e)})
                 raise ValueError(f"Failed to get structured response: {e}")
 
         # For text responses or when tools are involved, use OpenAI-compatible API
@@ -262,7 +260,7 @@ class OllamaAgent(Agent):
             response = client.chat.completions.create(**request_kwargs)
             self.log({
                 "event": "get_response_received",
-                "request_id": request_id,
+            
                 "api_call_index": api_call_index,
                 "api_path": "openai_compatible",
                 "response": response.model_dump()
@@ -286,13 +284,13 @@ class OllamaAgent(Agent):
 
                 self.log({
                     "event": "get_response_content",
-                    "request_id": request_id,
+                
                     "content": content
                 })
 
                 # Handle text response
                 if response_format is str:
-                    self.log({"event": "get_response_complete", "request_id": request_id, "api_calls": api_call_index, "api_path": "openai_compatible", "total_prompt_tokens": total_prompt_tokens, "total_completion_tokens": total_completion_tokens, "response_time": time.time() - start_time})
+                    self.log({"event": "get_response_complete", "api_calls": api_call_index, "api_path": "openai_compatible", "total_prompt_tokens": total_prompt_tokens, "total_completion_tokens": total_completion_tokens, "response_time": time.time() - start_time})
                     return cast(
                         AgentResponse[TAgentResponseContentType],
                         AgentResponse(
@@ -309,13 +307,13 @@ class OllamaAgent(Agent):
                 try:
                     parsed = self._parse_json_response(content, response_format_model)
                 except (json.JSONDecodeError, ValueError) as e:
-                    self.log({"event": "parse_error", "request_id": request_id, "content": content, "error": str(e)})
+                    self.log({"event": "parse_error", "content": content, "error": str(e)})
                     raise ValueError(
                         f"Failed to parse response as {response_format_model.__name__}: {e}\nContent: {content}"
                     )
 
-                self.log({"event": "get_response_parsed", "request_id": request_id, "parsed": parsed})
-                self.log({"event": "get_response_complete", "request_id": request_id, "api_calls": api_call_index, "api_path": "openai_compatible", "total_prompt_tokens": total_prompt_tokens, "total_completion_tokens": total_completion_tokens, "response_time": time.time() - start_time})
+                self.log({"event": "get_response_parsed", "parsed": parsed})
+                self.log({"event": "get_response_complete", "api_calls": api_call_index, "api_path": "openai_compatible", "total_prompt_tokens": total_prompt_tokens, "total_completion_tokens": total_completion_tokens, "response_time": time.time() - start_time})
                 return cast(
                     AgentResponse[TAgentResponseContentType],
                     AgentResponse(
@@ -331,14 +329,14 @@ class OllamaAgent(Agent):
                 if tool_call.type == "function":
                     name = tool_call.function.name
                     args = json.loads(tool_call.function.arguments)
-                    self.log({"event": "tool_call", "request_id": request_id, "api_call_index": api_call_index - 1, "tool_name": name, "arguments": args})
+                    self.log({"event": "tool_call", "api_call_index": api_call_index - 1, "tool_name": name, "arguments": args})
                     try:
                         result = tool_map[name](**args)
                     except TypeError as e:
                         # Model provided incorrect arguments - log and re-raise with more context
                         self.log({
                             "event": "tool_call_error",
-                            "request_id": request_id,
+                        
                             "api_call_index": api_call_index - 1,
                             "tool_name": name,
                             "arguments": args,
@@ -353,4 +351,4 @@ class OllamaAgent(Agent):
                         "tool_call_id": tool_call.id,
                         "content": str(result),
                     })
-                    self.log({"event": "tool_result", "request_id": request_id, "api_call_index": api_call_index - 1, "tool_name": name, "result": result})
+                    self.log({"event": "tool_result", "api_call_index": api_call_index - 1, "tool_name": name, "result": result})
