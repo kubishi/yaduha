@@ -7,8 +7,7 @@ from contextlib import contextmanager
 from contextvars import ContextVar
 from typing import Any
 
-import wandb
-from pydantic import BaseModel, ConfigDict, Field, PrivateAttr, model_validator
+from pydantic import BaseModel, Field, PrivateAttr, model_validator
 
 # Thread-safe context for log metadata (uses contextvars, safe for threads and async)
 _log_context: ContextVar[dict[str, str | int | float]] = ContextVar("_log_context", default={})
@@ -102,40 +101,6 @@ class Logger(BaseModel, ABC):
         """
         combined_metadata = {**self.metadata, **metadata}
         return self.model_copy(update={"metadata": combined_metadata})
-
-
-class WandbLogger(Logger):
-    model_config = ConfigDict(populate_by_name=True)
-
-    project_name: str = Field(..., description="The W&B project name.", alias="project")
-    name: str
-    config_items: dict[str, Any] = Field(
-        default_factory=dict, description="The W&B config items.", alias="config"
-    )
-
-    _run: wandb.Run | None = PrivateAttr(default=None)
-
-    def model_post_init(self, __context: Any) -> None:
-        """
-        Called by Pydantic *after* the model has been initialized and validated.
-        This is the right place for side effects like wandb.init().
-        """
-        self._run = wandb.init(
-            project=self.project_name,
-            config=self.config_items,
-            name=self.name,
-        )
-
-    def _log(self, data: dict[str, Any]) -> None:
-        if self._run is None:
-            raise RuntimeError("Cannot log: W&B run is not active.")
-        self._run.log(dict(data))
-
-    def stop(self) -> None:
-        """Finish the W&B run if it is still active."""
-        if self._run is not None:
-            self._run.finish()
-            self._run = None
 
 
 class PrintLogger(Logger):

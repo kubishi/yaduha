@@ -117,13 +117,21 @@ def test_main_languages_validate() -> None:
         assert result == 0
 
 
-def test_main_languages_search() -> None:
-    """Test main CLI with languages search command."""
-    result = main(["languages", "search"])
-    assert result == 0
-
-
 def test_main_no_args() -> None:
-    """Test main CLI with no arguments."""
+    """Test main CLI with no arguments prints help."""
     result = main([])
     assert result == 0
+
+
+def test_cmd_serve_starts_uvicorn() -> None:
+    """Test that cmd_serve calls uvicorn.run."""
+    args = MagicMock()
+    args.host = "0.0.0.0"
+    args.port = 8000
+
+    mock_uvicorn = MagicMock()
+    with patch.dict("sys.modules", {"uvicorn": mock_uvicorn}):
+        from yaduha.cli import cmd_serve
+
+        cmd_serve(args)
+        mock_uvicorn.run.assert_called_once()

@@ -37,29 +37,20 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-api = [
+full = [
     "fastapi",
     "uvicorn",
     "python-dotenv",
     "requests",
-]
-agents = [
     "anthropic",
     "openai",
-]
-eval = [
+    "httpx",
     "sacrebleu>=2.0",
     "bert-score>=0.3",
     "unbabel-comet>=2.0",
 ]
-all = [
-    "yaduha[api,agents]",
-    "graphviz>=0.20",
-    "pandas",
-    "tabulate",
-    "weave",
-]
 dev = [
+    "yaduha[full]",
     "pytest>=7.0",
     "mypy",
     "ruff",
@@ -90,6 +81,9 @@ packages = [
 
 [tool.setuptools.package-data]
 yaduha = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
 
 [tool.ruff]
 line-length = 100

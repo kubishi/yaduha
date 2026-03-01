@@ -52,6 +52,15 @@ class InstructionsTranslator(Translator):
                 "translation_time": translation_time,
                 "prompt_tokens": response.prompt_tokens,
                 "completion_tokens": response.completion_tokens,
+                "back_translation_time": back_translation.translation_time
+                if back_translation
+                else None,
+                "back_translation_prompt_tokens": back_translation.prompt_tokens
+                if back_translation
+                else None,
+                "back_translation_completion_tokens": back_translation.completion_tokens
+                if back_translation
+                else None,
                 "evaluations": evaluations,
             }
         )

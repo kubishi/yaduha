@@ -56,7 +56,7 @@ def _make_mock_embedding(vector: list[float]) -> MagicMock:
 
 def test_openai_evaluator_identical_vectors() -> None:
     """Cosine similarity of identical vectors should be 1.0."""
-    with patch("yaduha.evaluator.OpenAI") as mock_openai_cls:
+    with patch("openai.OpenAI") as mock_openai_cls:
         mock_client = MagicMock()
         mock_openai_cls.return_value = mock_client
 
@@ -74,7 +74,7 @@ def test_openai_evaluator_identical_vectors() -> None:
 
 def test_openai_evaluator_orthogonal_vectors() -> None:
     """Cosine similarity of orthogonal vectors should be 0.0."""
-    with patch("yaduha.evaluator.OpenAI") as mock_openai_cls:
+    with patch("openai.OpenAI") as mock_openai_cls:
         mock_client = MagicMock()
         mock_openai_cls.return_value = mock_client
 
@@ -92,7 +92,7 @@ def test_openai_evaluator_orthogonal_vectors() -> None:
 
 
 def test_openai_evaluator_uses_correct_model() -> None:
-    with patch("yaduha.evaluator.OpenAI") as mock_openai_cls:
+    with patch("openai.OpenAI") as mock_openai_cls:
         mock_client = MagicMock()
         mock_openai_cls.return_value = mock_client
 

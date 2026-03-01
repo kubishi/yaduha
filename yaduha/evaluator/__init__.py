@@ -3,7 +3,6 @@ from __future__ import annotations
 from abc import ABC
 from typing import TYPE_CHECKING, Literal
 
-from openai import OpenAI
 from pydantic import BaseModel, Field
 
 from yaduha.logger import Logger
@@ -26,6 +25,13 @@ class OpenAIEvaluator(Evaluator):
     api_key: str | None = None
 
     def evaluate(self, source: str, target: str) -> float:
+        from openai import OpenAI
+
+        if not source or not target:
+            self.logger.log(
+                data={"source": source, "target": target, "similarity_score": 0.0, "skipped": True}
+            )
+            return 0.0
         client = OpenAI(api_key=self.api_key) if self.api_key else OpenAI()
         response = client.embeddings.create(model=self.model, input=[source, target])
         source_embedding = response.data[0].embedding
