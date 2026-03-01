@@ -30,6 +30,9 @@ class Agent(BaseModel, Generic[TStringType]):
     logger: Logger = Field(
         default_factory=get_global_logger, description="The logger to use for logging."
     )
+    max_rounds: int = Field(
+        default=5, description="Maximum number of tool-calling round-trips before forcing a final response."
+    )
 
     def log(self, data: dict[str, Any]) -> None:
         self.logger.log(data={**data, "agent_model": self.model, "agent_name": self.name})

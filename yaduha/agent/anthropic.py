@@ -146,6 +146,7 @@ class AnthropicAgent(Agent):
         total_prompt_tokens = 0
         total_completion_tokens = 0
 
+        tool_round = 0
         while True:
             system_prompt, anthropic_messages = self._convert_messages(messages)
 
@@ -169,7 +170,7 @@ class AnthropicAgent(Agent):
             }
             if effective_system:
                 request_kwargs["system"] = effective_system
-            if anthropic_tools:
+            if anthropic_tools and tool_round < self.max_rounds:
                 request_kwargs["tools"] = anthropic_tools
 
             response = client.messages.create(**request_kwargs)
@@ -274,3 +275,5 @@ class AnthropicAgent(Agent):
                     }
                 )
                 self.log({"event": "tool_result", "tool_name": name, "result": result})
+
+            tool_round += 1

@@ -55,12 +55,16 @@ class OpenAIAgent(Agent):
             }
         )
 
+        tool_round = 0
         while True:
+            # On the final round, drop tools to force a text response
+            active_tools = chat_tools if tool_round < self.max_rounds else []
+
             if response_format is str:
                 response = client.chat.completions.create(
                     model=self.model,
                     messages=messages,
-                    tools=chat_tools,
+                    tools=active_tools,
                     temperature=self.temperature,
                 )
                 self.log({"event": "get_response_received", "response": response})
@@ -87,7 +91,7 @@ class OpenAIAgent(Agent):
                 response = client.beta.chat.completions.parse(
                     model=self.model,
                     messages=messages,
-                    tools=chat_tools,
+                    tools=active_tools,
                     response_format=response_format,
                     temperature=self.temperature,
                 )
@@ -126,3 +130,5 @@ class OpenAIAgent(Agent):
                         }
                     )
                     self.log({"event": "tool_result", "tool_name": name, "result": result})
+
+            tool_round += 1
