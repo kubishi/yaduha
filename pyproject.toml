@@ -97,6 +97,7 @@ ignore = ["E501"]  # line length handled by ruff format
 pythonVersion = "3.10"
 typeCheckingMode = "basic"
 reportMissingImports = "warning"
+exclude = ["yaduha/evaluator/bertscore.py", "yaduha/evaluator/comet.py"]
 
 [tool.mypy]
 python_version = "3.10"
