@@ -1,4 +1,4 @@
-"""Shared test fixtures for yaduha-2 tests."""
+"""Shared test fixtures for yaduha tests."""
 
 from __future__ import annotations
 

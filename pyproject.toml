@@ -61,10 +61,10 @@ dev = [
 yaduha = "yaduha.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/kubishi/yaduha-2"
-Documentation = "https://github.com/kubishi/yaduha-2/tree/main/docs"
-Repository = "https://github.com/kubishi/yaduha-2"
-"Bug Tracker" = "https://github.com/kubishi/yaduha-2/issues"
+Homepage = "https://github.com/kubishi/yaduha"
+Documentation = "https://github.com/kubishi/yaduha/tree/main/docs"
+Repository = "https://github.com/kubishi/yaduha"
+"Bug Tracker" = "https://github.com/kubishi/yaduha/issues"
 
 [tool.setuptools]
 packages = [

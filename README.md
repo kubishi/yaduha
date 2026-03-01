@@ -323,7 +323,7 @@ print(f"Total cost (approx): ${(result.prompt_tokens * 0.15 + result.completion_
 ## Project Structure
 
 ```
-yaduha-2/
+yaduha/
 ├── yaduha/                    # Main package
 │   ├── agent/                 # AI agent abstraction
 │   │   ├── __init__.py

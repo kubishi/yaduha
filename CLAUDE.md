@@ -1,4 +1,4 @@
-# yaduha-2
+# yaduha
 
 Type-safe, AI-powered framework for structured language translation using Pydantic models as grammar constraints with LLM structured output.
 
