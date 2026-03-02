@@ -1,5 +1,6 @@
 """Language class for wrapping sentence types and metadata."""
 
+from collections.abc import Callable
 from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
@@ -20,6 +21,7 @@ class Language:
         code: str,
         name: str,
         sentence_types: tuple[type[Any], ...],
+        get_instructions: Callable[[], str] | None = None,
     ) -> None:
         """Initialize a Language instance.
 
@@ -27,6 +29,9 @@ class Language:
             code: Language code identifier
             name: Human-readable language name
             sentence_types: Tuple of Sentence subclasses
+            get_instructions: Optional callable that returns natural language
+                grammar instructions (vocabulary, rules, examples) suitable
+                for use as an LLM system prompt.
 
         Raises:
             ValueError: If code or name is empty, or sentence_types is empty
@@ -49,6 +54,21 @@ class Language:
         self.code: str = code
         self.name: str = name
         self.sentence_types: tuple[type[Sentence], ...] = sentence_types
+        self._get_instructions = get_instructions
+
+    def get_instructions(self) -> str | None:
+        """Return natural language grammar instructions for this language.
+
+        Language packages should provide a callable via the get_instructions
+        constructor parameter that returns vocabulary, grammar rules, and
+        examples as a text prompt suitable for an LLM system message.
+
+        Returns:
+            Instructions string, or None if not provided.
+        """
+        if self._get_instructions:
+            return self._get_instructions()
+        return None
 
     def __repr__(self) -> str:
         """Return a string representation of the Language."""

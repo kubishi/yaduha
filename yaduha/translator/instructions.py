@@ -6,6 +6,7 @@ from pydantic import Field
 
 from yaduha.agent import Agent
 from yaduha.evaluator import Evaluator
+from yaduha.loader import LanguageLoader
 from yaduha.translator import Translation, Translator
 from yaduha.translator.back_translator import BackTranslator
 
@@ -19,6 +20,44 @@ class InstructionsTranslator(Translator):
     instructions: str
     back_translator: BackTranslator | None = None
     evaluators: Sequence[Evaluator] = Field(default_factory=list)
+
+    @classmethod
+    def from_language(
+        cls,
+        language_code: str,
+        agent: Agent,
+        back_translator: BackTranslator | None = None,
+        evaluators: Sequence[Evaluator] | None = None,
+        **kwargs,
+    ) -> "InstructionsTranslator":
+        """Create an InstructionsTranslator from an installed language package.
+
+        Args:
+            language_code: Language code (e.g., 'ovp')
+            agent: Agent to use for translation
+            back_translator: Optional back-translator for verification
+            evaluators: Optional list of evaluators for translation quality
+
+        Returns:
+            InstructionsTranslator instance
+
+        Raises:
+            ValueError: If the language does not provide instructions
+        """
+        language = LanguageLoader.load_language(language_code)
+        instructions = language.get_instructions()
+        if not instructions:
+            raise ValueError(
+                f"Language '{language_code}' does not provide instructions. "
+                "Pass a get_instructions callable to the Language constructor."
+            )
+        return cls(
+            agent=agent,
+            instructions=instructions,
+            back_translator=back_translator,
+            evaluators=evaluators or [],
+            **kwargs,
+        )
 
     def translate(self, text: str) -> Translation:
         start_time = time.time()
