@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "yaduha"
-version = "0.3.3"
+version = "0.3.4"
 description = "A type-safe, AI-powered framework for structured language translation"
 readme = "README.md"
 requires-python = ">=3.10"
