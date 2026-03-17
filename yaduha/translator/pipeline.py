@@ -68,12 +68,16 @@ class PipelineTranslator(Translator, Generic[TSentenceType]):
         """
         start_time = time.time()
         translate_input_to_sentences = EnglishToSentencesTool(
-            agent=self.agent, SentenceType=self.SentenceType, logger=self.logger
+            agent=self.agent,
+            SentenceType=self.SentenceType,
+            logger=self.logger.get_sublogger(functionality="translator"),
         )
         # Use back_translation_agent if provided, otherwise fall back to main agent
         bt_agent = self.back_translation_agent or self.agent
         translate_sentence_to_english = SentenceToEnglishTool(
-            agent=bt_agent, SentenceType=self.SentenceType, logger=self.logger
+            agent=bt_agent,
+            SentenceType=self.SentenceType,
+            logger=self.logger.get_sublogger(functionality="back_translation"),
         )
 
         def clean_text(s: str) -> str:

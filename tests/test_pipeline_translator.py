@@ -7,7 +7,6 @@ from yaduha.agent import AgentResponse
 from yaduha.language import Language
 from yaduha.translator.pipeline import PipelineTranslator
 
-
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
@@ -25,10 +24,10 @@ def _make_agent_for_pipeline():
 
 
 def test_from_language_loads():
-    mock_language = Language(
-        code="test", name="Test Language", sentence_types=(SimpleSentence,)
-    )
-    with patch("yaduha.translator.pipeline.LanguageLoader.load_language", return_value=mock_language):
+    mock_language = Language(code="test", name="Test Language", sentence_types=(SimpleSentence,))
+    with patch(
+        "yaduha.translator.pipeline.LanguageLoader.load_language", return_value=mock_language
+    ):
         agent = FakeAgent()
         translator = PipelineTranslator.from_language("test", agent)
         assert translator.SentenceType == (SimpleSentence,)

@@ -8,7 +8,6 @@ from pydantic import BaseModel
 
 from yaduha.agent import AgentResponse
 
-
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
@@ -62,15 +61,19 @@ def _openai_tool_call_response(tool_name: str, tool_args: dict, tool_call_id: st
     mock.choices = [MagicMock()]
     mock.choices[0].message.content = None
     mock.choices[0].message.tool_calls = [tool_call]
-    mock.choices[0].message.model_dump_json.return_value = json.dumps({
-        "role": "assistant",
-        "content": None,
-        "tool_calls": [{
-            "id": tool_call_id,
-            "type": "function",
-            "function": {"name": tool_name, "arguments": json.dumps(tool_args)},
-        }],
-    })
+    mock.choices[0].message.model_dump_json.return_value = json.dumps(
+        {
+            "role": "assistant",
+            "content": None,
+            "tool_calls": [
+                {
+                    "id": tool_call_id,
+                    "type": "function",
+                    "function": {"name": tool_name, "arguments": json.dumps(tool_args)},
+                }
+            ],
+        }
+    )
     mock.usage = MagicMock()
     mock.usage.prompt_tokens = 10
     mock.usage.completion_tokens = 5
@@ -131,9 +134,10 @@ class TestOpenAIAgent:
                 _openai_text_response("done"),
             ]
 
+            from typing import ClassVar
+
             from yaduha.agent.openai import OpenAIAgent
             from yaduha.tool import Tool
-            from typing import ClassVar
 
             class EchoTool(Tool[str]):
                 name: ClassVar[str] = "echo"
@@ -197,11 +201,13 @@ class TestAnthropicAgent:
             {
                 "role": "assistant",
                 "content": "",
-                "tool_calls": [{
-                    "id": "call_123",
-                    "type": "function",
-                    "function": {"name": "echo", "arguments": '{"text": "hi"}'},
-                }],
+                "tool_calls": [
+                    {
+                        "id": "call_123",
+                        "type": "function",
+                        "function": {"name": "echo", "arguments": '{"text": "hi"}'},
+                    }
+                ],
             },
             {"role": "tool", "tool_call_id": "call_123", "content": "echo: hi"},
         ]
@@ -243,7 +249,9 @@ class TestAnthropicAgent:
             mock_response.content = [TextBlock(type="text", text="bonjour")]
             mock_response.usage.input_tokens = 15
             mock_response.usage.output_tokens = 3
-            mock_response.model_dump.return_value = {"content": [{"type": "text", "text": "bonjour"}]}
+            mock_response.model_dump.return_value = {
+                "content": [{"type": "text", "text": "bonjour"}]
+            }
             mock_client.messages.create.return_value = mock_response
 
             from yaduha.agent.anthropic import AnthropicAgent
@@ -267,7 +275,9 @@ class TestAnthropicAgent:
             mock_response.content = [TextBlock(type="text", text=json_text)]
             mock_response.usage.input_tokens = 20
             mock_response.usage.output_tokens = 10
-            mock_response.model_dump.return_value = {"content": [{"type": "text", "text": json_text}]}
+            mock_response.model_dump.return_value = {
+                "content": [{"type": "text", "text": json_text}]
+            }
             mock_client.messages.create.return_value = mock_response
 
             from yaduha.agent.anthropic import AnthropicAgent

@@ -33,6 +33,7 @@ classifiers = [
 ]
 dependencies = [
     "pydantic",
+    "python-dotenv>=1.2.1",
     "tomli>=2.0; python_version < '3.11'",
 ]
 

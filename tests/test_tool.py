@@ -5,9 +5,8 @@ from typing import ClassVar
 import pytest
 from pydantic import BaseModel
 
-from yaduha.logger import get_log_context, inject_logs
+from yaduha.logger import get_log_context
 from yaduha.tool import Tool
-
 
 # ---------------------------------------------------------------------------
 # Concrete test tools

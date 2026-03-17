@@ -21,7 +21,9 @@ class FakeAgent(Agent[str]):
 
     model_config = {"arbitrary_types_allowed": True}
 
-    def set_response(self, content: str, prompt_tokens: int = 10, completion_tokens: int = 5) -> None:
+    def set_response(
+        self, content: str, prompt_tokens: int = 10, completion_tokens: int = 5
+    ) -> None:
         self._response = AgentResponse(
             content=content,
             response_time=0.5,
@@ -32,7 +34,9 @@ class FakeAgent(Agent[str]):
     def get_response(self, messages, response_format=str, tools=None) -> AgentResponse:
         if self._response is not None:
             return self._response
-        return AgentResponse(content="default", response_time=0.1, prompt_tokens=0, completion_tokens=0)
+        return AgentResponse(
+            content="default", response_time=0.1, prompt_tokens=0, completion_tokens=0
+        )
 
 
 class FakeBackTranslator(BackTranslator):

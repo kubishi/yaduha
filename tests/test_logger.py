@@ -7,7 +7,6 @@ import pytest
 
 from yaduha.logger import (
     JsonLogger,
-    Logger,
     NoLogger,
     PrintLogger,
     get_global_logger,
@@ -15,7 +14,6 @@ from yaduha.logger import (
     inject_logs,
     set_global_logger,
 )
-
 
 # -- PrintLogger --
 
@@ -144,6 +142,7 @@ def test_inject_logs_appears_in_log_output(tmp_jsonl):
 
 def test_get_global_logger_default_is_nologger():
     import yaduha.logger as mod
+
     old = mod.global_logger
     try:
         mod.global_logger = None
@@ -155,6 +154,7 @@ def test_get_global_logger_default_is_nologger():
 
 def test_set_and_get_global_logger():
     import yaduha.logger as mod
+
     old = mod.global_logger
     try:
         custom = PrintLogger()

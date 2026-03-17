@@ -38,7 +38,9 @@ class FakeAgent(Agent[str]):
         }
         if self._response is not None:
             return self._response
-        return AgentResponse(content="default", response_time=0.1, prompt_tokens=0, completion_tokens=0)
+        return AgentResponse(
+            content="default", response_time=0.1, prompt_tokens=0, completion_tokens=0
+        )
 
 
 def _make_back_translation_response(
@@ -183,9 +185,7 @@ class TestFromLanguage:
         mock_language.sentence_types = []
 
         with (
-            patch(
-                "yaduha.translator.instructions_back.LanguageLoader"
-            ) as mock_loader,
+            patch("yaduha.translator.instructions_back.LanguageLoader") as mock_loader,
             patch(
                 "yaduha.translator.instructions_back._build_source_code_instructions"
             ) as mock_build,
@@ -206,9 +206,7 @@ class TestFromLanguage:
         mock_language.sentence_types = []
 
         with (
-            patch(
-                "yaduha.translator.instructions_back.LanguageLoader"
-            ) as mock_loader,
+            patch("yaduha.translator.instructions_back.LanguageLoader") as mock_loader,
             patch(
                 "yaduha.translator.instructions_back._build_source_code_instructions"
             ) as mock_build,

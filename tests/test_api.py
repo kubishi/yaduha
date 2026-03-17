@@ -6,6 +6,7 @@ import pytest
 from fastapi import HTTPException
 from fastapi.testclient import TestClient
 
+from tests.conftest import SimpleSentence
 from yaduha.api.app import create_app
 from yaduha.api.dependencies import (
     _resolve_api_key,
@@ -15,9 +16,6 @@ from yaduha.api.dependencies import (
 )
 from yaduha.api.models import AgentConfig
 from yaduha.language import Language
-
-from tests.conftest import SimpleSentence
-
 
 # ---------------------------------------------------------------------------
 # Dependencies unit tests
@@ -71,12 +69,14 @@ class TestCreateAgent:
         config = AgentConfig(provider="openai", model="gpt-4o")
         agent = create_agent(config, {"x-openai-key": "sk-test"})
         from yaduha.agent.openai import OpenAIAgent
+
         assert isinstance(agent, OpenAIAgent)
 
     def test_ollama_no_key_needed(self):
         config = AgentConfig(provider="ollama", model="llama3")
         agent = create_agent(config, {})
         from yaduha.agent.ollama import OllamaAgent
+
         assert isinstance(agent, OllamaAgent)
 
 
@@ -89,6 +89,7 @@ class TestGetLanguage:
 
     def test_not_found_raises_404(self):
         from yaduha.language import LanguageNotFoundError
+
         with patch(
             "yaduha.api.dependencies.LanguageLoader.load_language",
             side_effect=LanguageNotFoundError("test"),
@@ -133,14 +134,18 @@ def test_health_endpoint(client):
 
 def test_health_with_languages(client):
     lang = Language(code="test", name="Test", sentence_types=(SimpleSentence,))
-    with patch("yaduha.api.routes.health.LanguageLoader.list_installed_languages", return_value=[lang]):
+    with patch(
+        "yaduha.api.routes.health.LanguageLoader.list_installed_languages", return_value=[lang]
+    ):
         response = client.get("/api/health")
         assert response.json()["languages_available"] == 1
 
 
 def test_list_languages(client):
     lang = Language(code="test", name="Test Language", sentence_types=(SimpleSentence,))
-    with patch("yaduha.api.routes.languages.LanguageLoader.list_installed_languages", return_value=[lang]):
+    with patch(
+        "yaduha.api.routes.languages.LanguageLoader.list_installed_languages", return_value=[lang]
+    ):
         response = client.get("/api/languages")
         assert response.status_code == 200
         data = response.json()
@@ -151,7 +156,9 @@ def test_list_languages(client):
 
 
 def test_list_languages_empty(client):
-    with patch("yaduha.api.routes.languages.LanguageLoader.list_installed_languages", return_value=[]):
+    with patch(
+        "yaduha.api.routes.languages.LanguageLoader.list_installed_languages", return_value=[]
+    ):
         response = client.get("/api/languages")
         assert response.status_code == 200
         assert response.json()["languages"] == []

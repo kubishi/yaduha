@@ -3,7 +3,14 @@
 from fastapi import APIRouter, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from yaduha.api.routes import health, languages, schemas, translate
+try:
+    from dotenv import load_dotenv
+
+    load_dotenv()
+except ImportError:
+    pass
+
+from yaduha.api.routes import experiments, health, languages, schemas, translate
 
 
 def create_app() -> FastAPI:
@@ -29,6 +36,7 @@ def create_app() -> FastAPI:
     api.include_router(languages.router)
     api.include_router(schemas.router)
     api.include_router(translate.router)
+    api.include_router(experiments.router)
     app.include_router(api)
 
     return app

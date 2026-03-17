@@ -8,7 +8,6 @@ from yaduha.translator.agentic import (
     TranslationResponse,
 )
 
-
 # ---------------------------------------------------------------------------
 # TranslationResponse model
 # ---------------------------------------------------------------------------

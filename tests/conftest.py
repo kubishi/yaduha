@@ -11,7 +11,6 @@ from pydantic import BaseModel, Field
 from yaduha.agent import Agent, AgentResponse
 from yaduha.language import Language, Sentence
 
-
 # ---------------------------------------------------------------------------
 # FakeAgent — deterministic Agent for testing translators/tools without mocks
 # ---------------------------------------------------------------------------
@@ -28,7 +27,9 @@ class FakeAgent(Agent):
     _prompt_tokens: int = 5
     _completion_tokens: int = 10
 
-    def set_response(self, content: str | BaseModel, *, prompt_tokens: int = 5, completion_tokens: int = 10):
+    def set_response(
+        self, content: str | BaseModel, *, prompt_tokens: int = 5, completion_tokens: int = 10
+    ):
         """Configure the next response this agent will return."""
         self._response_content = content
         self._prompt_tokens = prompt_tokens

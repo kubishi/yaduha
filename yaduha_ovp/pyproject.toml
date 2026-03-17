@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "yaduha-ovp"
+version = "0.1.0"
+description = "Owens Valley Paiute language package for yaduha"
+requires-python = ">=3.10"
+dependencies = ["yaduha"]
+
+[project.entry-points."yaduha.languages"]
+ovp = "yaduha_ovp:language"
+
+[tool.setuptools.packages.find]
+where = [".."]
+include = ["yaduha_ovp*"]
