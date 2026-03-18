@@ -3,6 +3,7 @@ import re
 import time
 from collections.abc import Sequence
 from typing import ClassVar, Generic
+from uuid import uuid4
 
 from pydantic import Field
 
@@ -10,6 +11,7 @@ from yaduha.agent import Agent
 from yaduha.evaluator import Evaluator
 from yaduha.language import Sentence
 from yaduha.loader import LanguageLoader
+from yaduha.logger import inject_logs
 from yaduha.tool.english_to_sentences import EnglishToSentencesTool, TSentenceType
 from yaduha.tool.sentence_to_english import SentenceToEnglishTool
 from yaduha.translator import BackTranslation, Translation, Translator
@@ -66,89 +68,92 @@ class PipelineTranslator(Translator, Generic[TSentenceType]):
         Returns:
             Translation: The translation
         """
-        start_time = time.time()
-        translate_input_to_sentences = EnglishToSentencesTool(
-            agent=self.agent,
-            SentenceType=self.SentenceType,
-            logger=self.logger.get_sublogger(functionality="translator"),
-        )
-        # Use back_translation_agent if provided, otherwise fall back to main agent
-        bt_agent = self.back_translation_agent or self.agent
-        translate_sentence_to_english = SentenceToEnglishTool(
-            agent=bt_agent,
-            SentenceType=self.SentenceType,
-            logger=self.logger.get_sublogger(functionality="back_translation"),
-        )
+        with inject_logs(tool=self.name, toolchain=str(uuid4())):
+            start_time = time.time()
+            translate_input_to_sentences = EnglishToSentencesTool(
+                agent=self.agent,
+                SentenceType=self.SentenceType,
+                logger=self.logger.get_sublogger(functionality="translator"),
+            )
+            # Use back_translation_agent if provided, otherwise fall back to main agent
+            bt_agent = self.back_translation_agent or self.agent
+            translate_sentence_to_english = SentenceToEnglishTool(
+                agent=bt_agent,
+                SentenceType=self.SentenceType,
+                logger=self.logger.get_sublogger(functionality="back_translation"),
+            )
 
-        def clean_text(s: str) -> str:
-            s = s.strip()
-            # add a period if it doesn't end with punctuation
-            if not re.search(r"[.!?]$", s):
-                s += "."
-            # capitalize the first letter
-            s = s[0].upper() + s[1:]
-            return s
+            def clean_text(s: str) -> str:
+                s = s.strip()
+                # add a period if it doesn't end with punctuation
+                if not re.search(r"[.!?]$", s):
+                    s += "."
+                # capitalize the first letter
+                s = s[0].upper() + s[1:]
+                return s
 
-        sentences_response = translate_input_to_sentences(text)
-        end_time = time.time()
+            sentences_response = translate_input_to_sentences(text)
+            end_time = time.time()
 
-        targets = []
-        back_translations = []
-        prompt_tokens = sentences_response.prompt_tokens
-        completion_tokens = sentences_response.completion_tokens
-        prompt_tokens_bt = 0
-        completion_tokens_bt = 0
+            targets = []
+            back_translations = []
+            prompt_tokens = sentences_response.prompt_tokens
+            completion_tokens = sentences_response.completion_tokens
+            prompt_tokens_bt = 0
+            completion_tokens_bt = 0
 
-        start_time_bt = time.time()
-        for sentence in sentences_response.content.sentences:
-            targets.append(clean_text(str(sentence)))
-            back_translation = translate_sentence_to_english(sentence)
-            back_translations.append(clean_text(back_translation.content))
-            prompt_tokens_bt += back_translation.prompt_tokens
-            completion_tokens_bt += back_translation.completion_tokens
-        end_time_bt = time.time()
+            start_time_bt = time.time()
+            for sentence in sentences_response.content.sentences:
+                targets.append(clean_text(str(sentence)))
+                back_translation = translate_sentence_to_english(sentence)
+                back_translations.append(clean_text(back_translation.content))
+                prompt_tokens_bt += back_translation.prompt_tokens
+                completion_tokens_bt += back_translation.completion_tokens
+            end_time_bt = time.time()
 
-        target_str = " ".join(targets)
-        back_translation_str = " ".join(back_translations)
-        evaluations = {e.name: e.evaluate(text, back_translation_str) for e in self.evaluators}
+            target_str = " ".join(targets)
+            back_translation_str = " ".join(back_translations)
+            evaluations = {e.name: e.evaluate(text, back_translation_str) for e in self.evaluators}
 
-        self.logger.log(
-            data={
-                "event": "translation_complete",
-                "translator": self.name,
-                "source": text,
-                "target": target_str,
-                "back_translation": back_translation_str,
-                "translation_time": end_time - start_time,
-                "prompt_tokens": prompt_tokens,
-                "completion_tokens": completion_tokens,
-                "back_translation_time": end_time_bt - start_time_bt,
-                "back_translation_prompt_tokens": prompt_tokens_bt,
-                "back_translation_completion_tokens": completion_tokens_bt,
-                "evaluations": evaluations,
-                "num_sentences": len(targets),
-                "sentences": [
-                    {"target": t, "back_translation": bt}
-                    for t, bt in zip(targets, back_translations)
-                ],
-            }
-        )
+            self.logger.log(
+                data={
+                    "event": "translation_complete",
+                    "agent_name": self.agent.name,
+                    "agent_model": self.agent.model,
+                    "translator": self.name,
+                    "source": text,
+                    "target": target_str,
+                    "back_translation": back_translation_str,
+                    "translation_time": end_time - start_time,
+                    "prompt_tokens": prompt_tokens,
+                    "completion_tokens": completion_tokens,
+                    "back_translation_time": end_time_bt - start_time_bt,
+                    "back_translation_prompt_tokens": prompt_tokens_bt,
+                    "back_translation_completion_tokens": completion_tokens_bt,
+                    "evaluations": evaluations,
+                    "num_sentences": len(targets),
+                    "sentences": [
+                        {"target": t, "back_translation": bt}
+                        for t, bt in zip(targets, back_translations)
+                    ],
+                }
+            )
 
-        return Translation(
-            source=text,
-            target=target_str,
-            prompt_tokens=prompt_tokens,
-            completion_tokens=completion_tokens,
-            translation_time=end_time - start_time,
-            back_translation=BackTranslation(
-                source=back_translation_str,
+            return Translation(
+                source=text,
                 target=target_str,
-                prompt_tokens=prompt_tokens_bt,
-                completion_tokens=completion_tokens_bt,
-                translation_time=end_time_bt - start_time_bt,
-            ),
-            evaluations=evaluations,
-        )
+                prompt_tokens=prompt_tokens,
+                completion_tokens=completion_tokens,
+                translation_time=end_time - start_time,
+                back_translation=BackTranslation(
+                    source=back_translation_str,
+                    target=target_str,
+                    prompt_tokens=prompt_tokens_bt,
+                    completion_tokens=completion_tokens_bt,
+                    translation_time=end_time_bt - start_time_bt,
+                ),
+                evaluations=evaluations,
+            )
 
     def get_examples(self) -> list[tuple[dict[str, str], Translation]]:
         examples = []

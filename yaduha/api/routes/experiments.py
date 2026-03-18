@@ -3,6 +3,7 @@
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import PlainTextResponse
 
+from yaduha.evaluator import OpenAIEvaluator
 from yaduha.experiments import RESULTS_DIR, ExperimentConfig, ExperimentResult, run_experiment
 
 router = APIRouter(prefix="/experiments", tags=["experiments"])
@@ -15,8 +16,11 @@ async def run_experiment_endpoint(config: ExperimentConfig):
     All events are logged to ``results/<name>.jsonl``. The response includes
     per-sentence results for every (provider, model) combination.
     """
+    config_with_evaluator = config.model_copy(
+        update={"evaluators": [*config.evaluators, OpenAIEvaluator()]}
+    )
     try:
-        return run_experiment(config)
+        return run_experiment(config_with_evaluator)
     except FileExistsError as e:
         raise HTTPException(status_code=409, detail=str(e))
     except ValueError as e:

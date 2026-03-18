@@ -39,8 +39,7 @@ dependencies = [
 
 [project.optional-dependencies]
 full = [
-    "fastapi",
-    "uvicorn",
+    "fastapi[standard]",
     "python-dotenv",
     "requests",
     "anthropic",

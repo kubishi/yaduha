@@ -3,13 +3,15 @@
 from __future__ import annotations
 
 import pathlib
+from collections.abc import Sequence
 from typing import Any, Literal
 
 from pydantic import BaseModel, Field
 
+from yaduha.evaluator import Evaluator
 from yaduha.language.exceptions import LanguageNotFoundError
 from yaduha.loader import LanguageLoader
-from yaduha.logger import JsonLogger
+from yaduha.logger import JsonLogger, inject_logs
 from yaduha.tool.english_to_sentences import EnglishToSentencesTool
 from yaduha.tool.sentence_to_english import SentenceToEnglishTool
 from yaduha.translator import Translation
@@ -67,6 +69,10 @@ class ExperimentConfig(BaseModel):
     savedir: pathlib.Path | None = Field(
         default=None,
         description="Directory to write JSONL logs. Defaults to RESULTS_DIR.",
+    )
+    evaluators: Sequence[Evaluator] = Field(
+        default_factory=list,
+        description="Evaluators to score each translation. Optional.",
     )
 
 
@@ -129,9 +135,7 @@ def _create_agent(provider: str, model: str, temperature: float, api_key: str | 
     else:
         return cls(model=model, temperature=temperature)
 
-
 # Experiment runner
-
 
 def run_experiment(config: ExperimentConfig, overwrite: bool = True) -> ExperimentResult:
     """Run a batch translation experiment across all provider/model/sentence combinations.
@@ -185,17 +189,9 @@ def run_experiment(config: ExperimentConfig, overwrite: bool = True) -> Experime
                     prov_cfg.api_key,
                 )
             except Exception as e:
-                # Record failure for every sentence under this provider/model
-                for sentence in config.sentences:
-                    all_results.append(
-                        SentenceResult(
-                            sentence=sentence,
-                            provider=prov_cfg.provider,
-                            model=model_cfg.model,
-                            error=str(e),
-                        )
-                    )
-                continue
+                raise ValueError(
+                    f"Failed to create agent for {prov_cfg.provider}/{model_cfg.model}: {e}"
+                ) from e
 
             agent = agent.model_copy(update={"logger": logger})
 
@@ -205,6 +201,7 @@ def run_experiment(config: ExperimentConfig, overwrite: bool = True) -> Experime
                     agent=agent,
                     SentenceType=language.sentence_types,
                     logger=logger,
+                    evaluators=config.evaluators,
                 )
             else:
                 e2s = EnglishToSentencesTool(
@@ -214,14 +211,16 @@ def run_experiment(config: ExperimentConfig, overwrite: bool = True) -> Experime
                     agent=agent, SentenceType=language.sentence_types, logger=logger
                 )
                 pipe = PipelineTranslator(
-                    agent=agent, SentenceType=language.sentence_types, logger=logger
+                    agent=agent, SentenceType=language.sentence_types, logger=logger,
+                    evaluators=config.evaluators,
                 )
                 translator = AgenticTranslator(agent=agent, tools=[e2s, s2e, pipe], logger=logger)
 
             # --- translate each sentence ---
             for sentence in config.sentences:
                 try:
-                    translation = translator.translate(sentence.text)
+                    with inject_logs(**sentence.metadata):
+                        translation = translator.translate(sentence.text)
                     all_results.append(
                         SentenceResult(
                             sentence=sentence,

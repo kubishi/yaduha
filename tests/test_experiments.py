@@ -20,6 +20,7 @@ from yaduha.experiments import (
 from yaduha.language import Language
 from yaduha.translator import Translation
 
+
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
@@ -129,7 +130,9 @@ def test_experiment_config_requires_sentences():
             name="test",
             language_code="ovp",
             providers=[
-                ProviderConfig(provider="openai", models=[ModelConfig(model="gpt-4o-mini")])
+                ProviderConfig(
+                    provider="openai", models=[ModelConfig(model="gpt-4o-mini")]
+                )
             ],
             sentences=[],
         )
@@ -234,8 +237,8 @@ def test_run_experiment_writes_jsonl(mock_create_agent, mock_loader, tmp_path):
     with patch("yaduha.experiments.PipelineTranslator", return_value=mock_translator):
         result = run_experiment(config)
 
-    assert result.filename == "test.jsonl"
-    assert (tmp_path / result.filename).parent == tmp_path
+    log_file = tmp_path / result.filename
+    assert log_file.exists()
 
 
 # run_experiment — failure paths
@@ -389,9 +392,7 @@ def test_run_experiment_partial_failure(mock_create_agent, mock_loader, tmp_path
     assert anthropic_r.error == "Anthropic key missing"
 
 
-# ---------------------------------------------------------------------------
 # SentenceResult model
-# ---------------------------------------------------------------------------
 
 
 def test_sentence_result_requires_sentence():

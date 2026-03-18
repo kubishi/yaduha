@@ -80,6 +80,7 @@ class EnglishToSentencesTool(Tool[AgentResponse[SentenceList[TSentenceType]]]):
 
             self.log(
                 data={
+                    "event": "english_to_sentences",
                     "content": english,
                     "response": response.content.model_dump_json(),
                     "response_time": response.response_time,
